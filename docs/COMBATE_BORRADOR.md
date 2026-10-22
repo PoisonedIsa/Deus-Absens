@@ -39,7 +39,7 @@ Estado: BORRADOR DE DISEÑO 0.3. No modificar las reglas oficiales sin aprobaci�
 ### Resolución de ataques
 - Tirada = 2d6 + atributo aplicable + modificadores.
 - Un ataque impacta si iguala o supera la Defensa.
-- Defensa propuesta = 8 + CENIZA (sustituiría a la fórmula antigua 10 + CENIZA únicamente si se aprueba).
+- **Defensa CONFIRMADA = 8 + techo(CENIZA / 2)**. El redondeo hacia arriba se aplica a la mitad de CENIZA, no a toda la expresión. Reemplaza las fórmulas antiguas 10 + CENIZA y 8 + CENIZA.
 - Ataque con ACERO: cuerpo a cuerpo; CENIZA: disparos; DOGMA: ataques ocultistas, con excepciones por habilidad.
 - Daño sigue siendo el dado indicado por el arma y sus propiedades, menos el Blindaje aplicable.
 - 12 natural (6+6): crítico, propuesta de duplicar los dados de daño.
@@ -91,7 +91,7 @@ Estas reglas se ofrecen para pruebas y **no sustituyen** los acuerdos confirmado
 ### Tiradas de ataque (continúan como propuesta)
 
 - Tirada = 2d6 + ACERO (melee), CENIZA (armas a distancia) o DOGMA (efecto sobrenatural), salvo excepciones.
-- Defensa de prueba: 8 + CENIZA; cobertura ligera añade 1, pesada añade 2.
+- **Defensa base confirmada: 8 + techo(CENIZA / 2)**. Las bonificaciones propuestas de cobertura ligera (+1) y pesada (+2) todavía NO están aprobadas.
 - Daño: dados propios de cada arma y luego reducción por Blindaje; el Blindaje no da bonificación a la tirada de ataque.
 - 12 natural (6 y 6): crítico; propuesta de duplicar los **dados** de daño, no todos los modificadores.
 - 2 natural (1 y 1): fallo automático.
@@ -176,7 +176,7 @@ Los mapas incluyen una mezcla de trampas visibles y ocultas. Su visibilidad no c
 - Esta aprobación **no equivale** a aprobar automáticamente la fórmula completa de bonificaciones, los valores de Defensa, los críticos ni el Ataque Preciso. Estos requieren pruebas de equilibrio.
 - Los dados de **daño** propios de las armas (d4, d6, d8, d10, d12) se mantienen de momento, al igual que el daño de trampas (d4 a d8).
 - Propuesta a probar: `2d6 + atributo aplicable + modificadores >= Defensa`. Para cuerpo a cuerpo se propone ACERO; disparos, CENIZA; milagros, DOGMA; SANGRE conserva su papel en PV y resistencia.
-- **Defensa experimental:** `8 + CENIZA`, no aprobada. Los ataques igualan o superan la Defensa; un muro completo impide atacar aunque la tirada sea suficiente.
+- **Defensa aprobada:** `8 + techo(CENIZA / 2)`. Los ataques que igualan o superan la Defensa impactarían según la fórmula de acierto actualmente propuesta; un muro completo impide atacar aunque se alcance el valor.
 - **Crítico experimental:** 6+6 natural (2,78 % de las tiradas) duplica dados de daño del ataque, sin duplicar modificadores fijos.
 - **Fallo experimental:** 1+1 natural (2,78 %) falla siempre.
 - **Ataque preciso experimental:** modificador -2; los efectos sobre Puntos Débiles se definirán por enemigo.
@@ -205,3 +205,12 @@ Las probabilidades incluyen dobles 1 y 6: el doble 1 no llegaría a Defensa 9 co
 ### Próxima decisión
 
 Definir **Defensa base** y progresión por CENIZA, luego fijar críticos y Ataques Precisos tras pruebas.
+
+
+## Actualización v2.3 · Defensa (CONFIRMADA)
+
+- **Fórmula oficial:** `Defensa base = 8 + ⌈CENIZA / 2⌉` (redondear la mitad hacia arriba).
+- Distribución habitual de atributos iniciales: CENIZA +0 → Defensa 8; +1 → 9; +2 → 9; +3 → 10.
+- La misma regla se aplica a personajes y enemigos con atributo CENIZA definido; bonos de coberturas, equipamiento o estados se resolverán aparte.
+- Se confirma la Defensa, **no** todavía la fórmula definitiva de impacto, el efecto de los críticos o la penalización del Ataque Preciso. El dado de ataque 2d6 sí está confirmado.
+- Las referencias previas a `8 + CENIZA` en versiones anteriores quedan anuladas por este acuerdo.

@@ -140,3 +140,13 @@ Este documento separa acuerdos reales de funcionalidades pendientes.
 - **Aún no confirmado:** valor base de Defensa, fórmula exacta de ataque, frecuencia y efecto de críticos, tratamiento de dobles 1, penalización a Ataques Precisos, modificación de las habilidades originales para 2d6.
 - Ninguna regla numérica provisional en `docs/COMBATE_BORRADOR.md` debe tratarse como definitiva sin la aprobación del creador.
 - No se han cambiado los archivos JSON de personajes ni la lógica de juego en JavaScript.
+
+
+## Actualización v2.3 · Fórmula de Defensa (CONFIRMADO)
+
+- **Defensa base = 8 + redondear hacia arriba (CENIZA / 2).**
+- CENIZA +0/+1/+2/+3 equivale a Defensa base **8/9/9/10**, respectivamente.
+- Sustituye todas las fórmulas anteriores de Defensa que estaban pendientes o eran experimentales.
+- El ataque se basa en **2d6** (confirmado); su fórmula completa y las reglas de críticos y Ataques Precisos continúan en revisión.
+- Las coberturas +1/+2 y la fórmula de movimiento `2 + CENIZA` siguen como propuestas, no reglas aprobadas.
+- Esta actualización es documental; el sistema de combate web aún no está implementado.

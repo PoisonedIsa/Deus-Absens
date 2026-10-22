@@ -24,10 +24,10 @@ La web **no sustituye ni dirige la narrativa**. Su función es administrar mecá
 - El director puede iniciar sorteos de recompensas cuando los considere narrativamente pertinentes.
 - El número de sorteos es configurable por el director.
 - Los resultados se obtienen de un catálogo de objetos de juego, sin escribir su definición dentro de la ruleta.
-- La ruleta debe registrar los premios y permitir al director asignarlos al jugador o inventario correspondiente.
+- La ruleta debe registrar los premios **primero en el inventario grupal**. Después los jugadores acuerdan el reparto y la aplicación transfiere los objetos elegidos a fichas individuales, sin duplicar cantidades.
 - El sorteo debe usar tablas/pesos configurables según la **zona y/o tipo de evento**, sin selector artificial de dificultad.
 
-**Pendiente de decidir:** probabilidades exactas, rarezas, duplicados, si las recompensas se asignan al grupo o individualmente, y elegibilidad de objetos todavía bloqueados.
+**Pendiente de decidir:** probabilidades exactas, rarezas, duplicados, y elegibilidad de objetos todavía bloqueados.
 
 **Separación necesaria:** `objeto obtenido durante la expedición` no implica `objeto desbloqueado de manera permanente`. Ambas acciones se registrarán independientemente. El director podrá otorgar un desbloqueo permanente como recompensa narrativa específica cuando corresponda.
 
@@ -68,3 +68,14 @@ No duplicar `data/objetos.json`: continuará siendo el catálogo de objetos; las
 ## 7. Alcance de esta actualización
 
 **Solo documentación**. No hay ruleta conectada al inventario, interfaz de director ni motor de penalizaciones en la web actual. No actualizar `index.html` ni sus módulos todavía: primero resolver parámetros de botín y efectos con el creador.
+
+## 8. Reparto de botín confirmado (22/10/2026)
+
+1. El director concede una recompensa, por ejemplo, **dos giros** de ruleta.
+2. Los objetos sorteados aparecen en el **inventario grupal de la expedición**.
+3. Los jugadores acuerdan quién recibirá cada objeto.
+4. Cada asignación debe descontar del inventario grupal y sumar al inventario individual, como **una sola operación**.
+5. Los objetos todavía no repartidos permanecen en el inventario grupal mientras la expedición continúe.
+6. Los desbloqueos permanentes se manejan aparte y no cambian al transferir objetos.
+
+Quedan por definir: redistribución entre jugadores, capacidad de carga, qué ocurre con el inventario temporal al morir o acabar la expedición, y quién puede aprobar transacciones en la interfaz. Este flujo aún no está implementado en la web.

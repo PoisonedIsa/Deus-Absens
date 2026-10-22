@@ -53,3 +53,11 @@ Este documento separa acuerdos reales de funcionalidades pendientes.
 - Si el director autoriza botín aleatorio, una **ruleta de objetos** permitirá sortear premios e incorporarlos al inventario. Ejemplo del creador: una decisión favorable concede **dos objetos** antes del combate; no implica que toda escena dé siempre dos.
 - Ganar un objeto durante una expedición y desbloquearlo de forma permanente son registros separados.
 - Mecánicas, probabilidades, cantidades y duraciones específicas de la ruleta y los efectos aún no están implementadas ni balanceadas. Véase `docs/NARRATIVA_RECOMPENSAS.md`.
+
+## Inventario grupal y reparto (acuerdo posterior)
+- Los objetos obtenidos por la ruleta ingresan **primero al inventario grupal** de la expedición.
+- Los jugadores deciden conjuntamente qué objetos asignar a qué fichas individuales.
+- La aplicación deberá permitir transferir una unidad de objeto del inventario grupal al individual sin duplicar cantidades.
+- Recibir o repartir un objeto no constituye desbloqueo permanente automático.
+- Reglas de intercambios posteriores, límites de capacidad y destino de objetos no repartidos al cerrar la expedición: **pendientes**.
+- **Todavía no implementado** en el prototipo web.

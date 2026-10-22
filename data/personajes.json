@@ -18,7 +18,92 @@
     ],
     "passiveId": "pasiva-san-longinos",
     "martyrId": "martirio-san-longinos",
-    "review": "pendiente_balance"
+    "review": "pendiente_balance",
+    "titulo": "El Penitente de la IRA",
+    "pecado": "Ira",
+    "categoria": "capital",
+    "rolCompleto": "Berserker de Trinchera / Asalto Sangriento",
+    "narrativa": {
+      "lema": "Si el cielo calla, el hierro hablará.",
+      "origen": "La orden de San Longinos nació alrededor de la lanza que, según la tradición, atravesó el costado de Cristo. Antes de la Ausencia, sus guerreros custodiaban reliquias y trincheras sagradas. Cuando las plegarias dejaron de recibir respuesta, fueron de los primeros en contemplar la transformación de los ejércitos celestiales: aquellos a quienes habían venerado comenzaron a tratarlos como enemigos.",
+      "caida": "La Ira convirtió su disciplina en una promesa de guerra. Cada Penitente lleva esquirlas de hierro bendito sobre los ojos, recuerdo de un juramento terrible: no mirar atrás mientras quede un enemigo frente a él. Las tropas los llaman los hombres de Gólgota, porque avanzan incluso cuando la esperanza retrocede. Para ellos, la herida es una señal de desafío y no una invitación a rendirse.",
+      "presente": "Longinos empuña una lanza de trinchera y una pistola de clavos de crucifixión. Busca a los ángeles con una obstinación que raya en la plegaria. Está convencido de que, si su orden consigue desafiar suficientemente al Cielo, el propio Dios deberá regresar para poner fin a la guerra. Su pregunta más íntima es qué hará si descubre que nadie vendrá a detenerlo.",
+      "parrafos": [
+        "La orden de San Longinos nació alrededor de la lanza que, según la tradición, atravesó el costado de Cristo. Antes de la Ausencia, sus guerreros custodiaban reliquias y trincheras sagradas. Cuando las plegarias dejaron de recibir respuesta, fueron de los primeros en contemplar la transformación de los ejércitos celestiales: aquellos a quienes habían venerado comenzaron a tratarlos como enemigos.",
+        "La Ira convirtió su disciplina en una promesa de guerra. Cada Penitente lleva esquirlas de hierro bendito sobre los ojos, recuerdo de un juramento terrible: no mirar atrás mientras quede un enemigo frente a él. Las tropas los llaman los hombres de Gólgota, porque avanzan incluso cuando la esperanza retrocede. Para ellos, la herida es una señal de desafío y no una invitación a rendirse.",
+        "Longinos empuña una lanza de trinchera y una pistola de clavos de crucifixión. Busca a los ángeles con una obstinación que raya en la plegaria. Está convencido de que, si su orden consigue desafiar suficientemente al Cielo, el propio Dios deberá regresar para poner fin a la guerra. Su pregunta más íntima es qué hará si descubre que nadie vendrá a detenerlo."
+      ]
+    },
+    "trasfondo": "La orden de San Longinos nació alrededor de la lanza que, según la tradición, atravesó el costado de Cristo. Antes de la Ausencia, sus guerreros custodiaban reliquias y trincheras sagradas. Cuando las plegarias dejaron de recibir respuesta, fueron de los primeros en contemplar la transformación de los ejércitos celestiales: aquellos a quienes habían venerado comenzaron a tratarlos como enemigos.\n\nLa Ira convirtió su disciplina en una promesa de guerra. Cada Penitente lleva esquirlas de hierro bendito sobre los ojos, recuerdo de un juramento terrible: no mirar atrás mientras quede un enemigo frente a él. Las tropas los llaman los hombres de Gólgota, porque avanzan incluso cuando la esperanza retrocede. Para ellos, la herida es una señal de desafío y no una invitación a rendirse.\n\nLonginos empuña una lanza de trinchera y una pistola de clavos de crucifixión. Busca a los ángeles con una obstinación que raya en la plegaria. Está convencido de que, si su orden consigue desafiar suficientemente al Cielo, el propio Dios deberá regresar para poner fin a la guerra. Su pregunta más íntima es qué hará si descubre que nadie vendrá a detenerlo.",
+    "equipoInicial": [
+      {
+        "nombre": "Lanza de Trinchera «Gólgota»",
+        "tipo": "arma",
+        "danio": "1d10",
+        "modo": "fisico",
+        "efecto": "Permite atacar a corta distancia sin quedar cuerpo a cuerpo.",
+        "id": "equipo-san-longinos-1"
+      },
+      {
+        "nombre": "Pistola de Clavos de Crucifixión",
+        "tipo": "arma",
+        "danio": "1d6",
+        "modo": "distancia",
+        "efecto": "Ataque a distancia.",
+        "id": "equipo-san-longinos-2"
+      }
+    ],
+    "pasiva": {
+      "nombre": "Cólera Sangrienta",
+      "descripcion": "Mientras Longinos tenga 50 % o menos de sus PV máximos, todos sus ataques añaden +1d4 de daño y la penalización de Ataque Preciso baja de -3 a -1. No puede usar su acción para curarse con vendajes ni pociones mientras haya enemigos vivos.",
+      "condiciones": [
+        "PV actuales ≤ 50 % de PV máximos"
+      ],
+      "beneficios": [
+        "+1d4 de daño a todos los ataques",
+        "Ataques Precisos: penalización original -3 pasa a -1"
+      ],
+      "limitaciones": [
+        "No puede curarse a sí mismo con vendajes o pociones mientras haya enemigos vivos"
+      ],
+      "pendienteAdaptacion2d6": "La penalización original -3/-1 debe reconciliarse con la propuesta de Ataques Precisos de -2."
+    },
+    "martirio": {
+      "nombre": "Herida del Costado",
+      "descripcion": "Ataque de lanza que impacta automáticamente, ignora todo Blindaje y aplica Sangrado Sacro. El objetivo pierde 1d6 PV al comienzo de cada uno de sus turnos y Longinos recupera 3 PV cada vez que se aplica el sangrado.",
+      "efectos": [
+        "Impacto automático",
+        "Ignora Blindaje",
+        "Aplica Sangrado Sacro: 1d6 PV al inicio de cada turno enemigo",
+        "Longinos recupera 3 PV por cada activación del sangrado"
+      ],
+      "duracionSangrado": "Pendiente de definir",
+      "tipo": "martirio",
+      "usoIndicadoEnFichaOriginal": "1 vez por combate",
+      "maxCharges": 1,
+      "prototypeMaxCharges": 1,
+      "chargeCost": 1,
+      "restauraAlEmpezarExpedicion": true,
+      "restauraEntreCombates": false,
+      "estadoBalance": "carga_maxima_confirmada"
+    },
+    "estadisticasDerivadas": {
+      "pvMaximos": "12 + SANGRE × 3",
+      "defensa": "8 + ceil(CENIZA / 2)",
+      "movimiento": "2 + CENIZA",
+      "estigmaMaximo": "10 + DOGMA"
+    },
+    "desbloqueo": {
+      "inicialmenteDisponible": true,
+      "lugar": null,
+      "requisito": "Disponible desde el principio",
+      "costeEcos": null
+    },
+    "pendientes": [
+      "Revisar balance general",
+      "Adaptar referencias antiguas a d20 cuando corresponda",
+      "Establecer alcance en casillas si la regla lo requiere"
+    ]
   },
   {
     "id": "santa-lucia",
@@ -38,7 +123,88 @@
     ],
     "passiveId": "pasiva-santa-lucia",
     "martyrId": "martirio-santa-lucia",
-    "review": "pendiente_balance"
+    "review": "pendiente_balance",
+    "titulo": "La Penitente de la SOBERBIA",
+    "pecado": "Soberbia",
+    "categoria": "capital",
+    "rolCompleto": "Francotiradora / Destructora de Puntos Débiles",
+    "narrativa": {
+      "lema": "La verdad no necesita ojos, pero exige un precio.",
+      "origen": "La memoria de Santa Lucía, mártir asociada a la vista y a la fe, inspiró a una orden dedicada a observar los signos divinos. Sus integrantes interpretaron el Desgarro del Cielo como una revelación reservada a los más puros. Una de ellas dio un paso que ninguna otra se atrevió a dar: reclamó para sí el derecho de contemplar el Trono Vacío sin protección.",
+      "caida": "La luz del Trono acabó con su visión ordinaria. En lugar de retirarse, la Penitente adoptó dos casquillos de bronce bendito como ojos ceremoniales. Desde entonces asegura percibir las fisuras de la creación que los mortales corrientes no alcanzan a distinguir. Su Soberbia se alimenta de esa certeza: se considera superior a los mismos seres celestiales y vive cada error propio como una humillación insoportable.",
+      "presente": "Ahora atraviesa las ruinas con el fusil antitanque Ojo de Aguja, buscando las grietas exactas en armaduras, juramentos y criaturas. Donde sus compañeros ven monstruos invencibles, ella encuentra un punto débil. La orden la admira por su precisión y la teme por su orgullo: para Lucía, un disparo fallido no es simplemente un fracaso táctico, sino una ofensa contra la perfección que cree encarnar.",
+      "parrafos": [
+        "La memoria de Santa Lucía, mártir asociada a la vista y a la fe, inspiró a una orden dedicada a observar los signos divinos. Sus integrantes interpretaron el Desgarro del Cielo como una revelación reservada a los más puros. Una de ellas dio un paso que ninguna otra se atrevió a dar: reclamó para sí el derecho de contemplar el Trono Vacío sin protección.",
+        "La luz del Trono acabó con su visión ordinaria. En lugar de retirarse, la Penitente adoptó dos casquillos de bronce bendito como ojos ceremoniales. Desde entonces asegura percibir las fisuras de la creación que los mortales corrientes no alcanzan a distinguir. Su Soberbia se alimenta de esa certeza: se considera superior a los mismos seres celestiales y vive cada error propio como una humillación insoportable.",
+        "Ahora atraviesa las ruinas con el fusil antitanque Ojo de Aguja, buscando las grietas exactas en armaduras, juramentos y criaturas. Donde sus compañeros ven monstruos invencibles, ella encuentra un punto débil. La orden la admira por su precisión y la teme por su orgullo: para Lucía, un disparo fallido no es simplemente un fracaso táctico, sino una ofensa contra la perfección que cree encarnar."
+      ]
+    },
+    "trasfondo": "La memoria de Santa Lucía, mártir asociada a la vista y a la fe, inspiró a una orden dedicada a observar los signos divinos. Sus integrantes interpretaron el Desgarro del Cielo como una revelación reservada a los más puros. Una de ellas dio un paso que ninguna otra se atrevió a dar: reclamó para sí el derecho de contemplar el Trono Vacío sin protección.\n\nLa luz del Trono acabó con su visión ordinaria. En lugar de retirarse, la Penitente adoptó dos casquillos de bronce bendito como ojos ceremoniales. Desde entonces asegura percibir las fisuras de la creación que los mortales corrientes no alcanzan a distinguir. Su Soberbia se alimenta de esa certeza: se considera superior a los mismos seres celestiales y vive cada error propio como una humillación insoportable.\n\nAhora atraviesa las ruinas con el fusil antitanque Ojo de Aguja, buscando las grietas exactas en armaduras, juramentos y criaturas. Donde sus compañeros ven monstruos invencibles, ella encuentra un punto débil. La orden la admira por su precisión y la teme por su orgullo: para Lucía, un disparo fallido no es simplemente un fracaso táctico, sino una ofensa contra la perfección que cree encarnar.",
+    "equipoInicial": [
+      {
+        "nombre": "Fusil Antitanque «Ojo de Aguja»",
+        "tipo": "arma",
+        "danio": "1d12",
+        "modo": "distancia",
+        "efecto": "Requiere no haberse movido este turno; si se movió, aplica -2 a la tirada de ataque.",
+        "penalizacionAlMoverse": -2,
+        "id": "equipo-santa-lucia-1"
+      },
+      {
+        "nombre": "Estilete Quirúrgico",
+        "tipo": "arma",
+        "danio": "1d4",
+        "modo": "cuerpo_a_cuerpo",
+        "efecto": "Ataque cuerpo a cuerpo.",
+        "id": "equipo-santa-lucia-2"
+      }
+    ],
+    "pasiva": {
+      "nombre": "Mirada Inmaculada",
+      "descripcion": "No aplica la penalización original de -3 por Ataque Preciso a Puntos Débiles. Siempre que falla cualquier tirada de ataque, recibe +1 de Estigma.",
+      "beneficios": [
+        "Anula la penalización original -3 de Ataques Precisos dirigidos a Puntos Débiles"
+      ],
+      "costes": [
+        "+1 de Estigma por cada ataque fallado"
+      ],
+      "pendienteAdaptacion2d6": "Revisar la referencia original a -3."
+    },
+    "martirio": {
+      "nombre": "Juicio de la Ciega",
+      "descripcion": "El próximo disparo de Ojo de Aguja es un crítico automático, con 2d12 de daño, y destruye un Punto Débil del objetivo sin tirada adicional.",
+      "efectos": [
+        "Próximo disparo crítico automático",
+        "2d12 daño con el fusil",
+        "Destruye 1 Punto Débil sin tirada"
+      ],
+      "restriccion": "Requiere el fusil Ojo de Aguja",
+      "tipo": "martirio",
+      "usoIndicadoEnFichaOriginal": "1 vez por combate",
+      "maxCharges": null,
+      "prototypeMaxCharges": 1,
+      "chargeCost": 1,
+      "restauraAlEmpezarExpedicion": true,
+      "restauraEntreCombates": false,
+      "estadoBalance": "carga_maxima_pendiente"
+    },
+    "estadisticasDerivadas": {
+      "pvMaximos": "12 + SANGRE × 3",
+      "defensa": "8 + ceil(CENIZA / 2)",
+      "movimiento": "2 + CENIZA",
+      "estigmaMaximo": "10 + DOGMA"
+    },
+    "desbloqueo": {
+      "inicialmenteDisponible": true,
+      "lugar": null,
+      "requisito": "Disponible desde el principio",
+      "costeEcos": null
+    },
+    "pendientes": [
+      "Revisar balance general",
+      "Adaptar referencias antiguas a d20 cuando corresponda",
+      "Establecer alcance en casillas si la regla lo requiere"
+    ]
   },
   {
     "id": "san-erasmo",
@@ -59,7 +225,91 @@
     ],
     "passiveId": "pasiva-san-erasmo",
     "martyrId": "martirio-san-erasmo",
-    "review": "pendiente_balance"
+    "review": "pendiente_balance",
+    "titulo": "El Penitente de la GULA",
+    "pecado": "Gula",
+    "categoria": "capital",
+    "rolCompleto": "Tanque Grotesco / Alquimista Caníbal",
+    "narrativa": {
+      "lema": "Todo lo que devora el mundo alimentará mi horno.",
+      "origen": "San Erasmo, conocido también como San Telmo, quedó unido en la tradición a un martirio y a los símbolos de los marineros. Su orden heredó el lenguaje del hierro, las cadenas y los cabrestantes. Después de la desaparición de Dios, sus miembros recorrieron puertos derruidos y santuarios convertidos en depósitos de restos celestiales, buscando una forma de sobrevivir a un mundo que parecía consumirse a sí mismo.",
+      "caida": "De aquella desesperación nació la Gula. El Penitente lleva una caldera ritual de hierro en su armadura y la alimenta con despojos de criaturas infernales y reliquias celestiales. No come por placer, sino porque se ha convencido de que toda derrota enemiga contiene una porción de fuerza que puede reclamar. Su escudo se parece a la puerta de un horno y su gancho arrastra a los adversarios hacia un encuentro inevitable.",
+      "presente": "En combate funciona como un bastión que se fortalece mientras el campo se llena de enemigos derrotados. Sin embargo, la necesidad de alimentar la caldera nunca desaparece y termina gobernando su voluntad. Su tragedia es sencilla: quiso convertirse en refugio de otros supervivientes y acabó dependiendo del mismo horror del que prometió protegerlos.",
+      "parrafos": [
+        "San Erasmo, conocido también como San Telmo, quedó unido en la tradición a un martirio y a los símbolos de los marineros. Su orden heredó el lenguaje del hierro, las cadenas y los cabrestantes. Después de la desaparición de Dios, sus miembros recorrieron puertos derruidos y santuarios convertidos en depósitos de restos celestiales, buscando una forma de sobrevivir a un mundo que parecía consumirse a sí mismo.",
+        "De aquella desesperación nació la Gula. El Penitente lleva una caldera ritual de hierro en su armadura y la alimenta con despojos de criaturas infernales y reliquias celestiales. No come por placer, sino porque se ha convencido de que toda derrota enemiga contiene una porción de fuerza que puede reclamar. Su escudo se parece a la puerta de un horno y su gancho arrastra a los adversarios hacia un encuentro inevitable.",
+        "En combate funciona como un bastión que se fortalece mientras el campo se llena de enemigos derrotados. Sin embargo, la necesidad de alimentar la caldera nunca desaparece y termina gobernando su voluntad. Su tragedia es sencilla: quiso convertirse en refugio de otros supervivientes y acabó dependiendo del mismo horror del que prometió protegerlos."
+      ]
+    },
+    "trasfondo": "San Erasmo, conocido también como San Telmo, quedó unido en la tradición a un martirio y a los símbolos de los marineros. Su orden heredó el lenguaje del hierro, las cadenas y los cabrestantes. Después de la desaparición de Dios, sus miembros recorrieron puertos derruidos y santuarios convertidos en depósitos de restos celestiales, buscando una forma de sobrevivir a un mundo que parecía consumirse a sí mismo.\n\nDe aquella desesperación nació la Gula. El Penitente lleva una caldera ritual de hierro en su armadura y la alimenta con despojos de criaturas infernales y reliquias celestiales. No come por placer, sino porque se ha convencido de que toda derrota enemiga contiene una porción de fuerza que puede reclamar. Su escudo se parece a la puerta de un horno y su gancho arrastra a los adversarios hacia un encuentro inevitable.\n\nEn combate funciona como un bastión que se fortalece mientras el campo se llena de enemigos derrotados. Sin embargo, la necesidad de alimentar la caldera nunca desaparece y termina gobernando su voluntad. Su tragedia es sencilla: quiso convertirse en refugio de otros supervivientes y acabó dependiendo del mismo horror del que prometió protegerlos.",
+    "equipoInicial": [
+      {
+        "nombre": "Gancho de Carnicero con Cadena",
+        "tipo": "arma",
+        "danio": "1d8",
+        "modo": "mixto",
+        "efecto": "Si impacta a distancia, arrastra al enemigo hasta dejarlo cuerpo a cuerpo con Erasmo.",
+        "id": "equipo-san-erasmo-1"
+      },
+      {
+        "nombre": "Puerta de Horno",
+        "tipo": "equipo",
+        "danio": null,
+        "modo": "escudo",
+        "efecto": "Escudo pesado que otorga +2 a Defensa.",
+        "bonoDefensa": 2,
+        "id": "equipo-san-erasmo-2"
+      }
+    ],
+    "pasiva": {
+      "nombre": "Comunión Voraz",
+      "descripcion": "Cuando un enemigo muere o pierde un Punto Débil, puede gastar su Movimiento para alimentarse de sus restos. Recupera 1d6 PV y gana +1 de Blindaje hasta terminar el combate, con un máximo acumulado de +3. Si pasan 2 rondas consecutivas sin alimentarse, pierde 2 PV.",
+      "disparadores": [
+        "Muerte de un enemigo",
+        "Destrucción de Punto Débil"
+      ],
+      "coste": "Gasta su movimiento para acercarse y activar el efecto",
+      "cura": "1d6",
+      "blindajePorActivacion": 1,
+      "blindajeMaximo": 3,
+      "penalizacion": [
+        "Tras 2 rondas seguidas sin activarla, pierde 2 PV"
+      ]
+    },
+    "martirio": {
+      "nombre": "Purga de Bilis Hirviente",
+      "descripcion": "Descarga alquímica en cono frente a Erasmo. Todos los enemigos afectados reciben 2d6 de daño directo y pierden 2 puntos de Blindaje de forma permanente según el borrador original.",
+      "efectos": [
+        "Cono frontal",
+        "2d6 de daño directo a todos los enemigos alcanzados",
+        "-2 al Blindaje de los objetivos, permanentemente en la regla original"
+      ],
+      "tipo": "martirio",
+      "usoIndicadoEnFichaOriginal": "1 vez por combate",
+      "maxCharges": null,
+      "prototypeMaxCharges": 1,
+      "chargeCost": 1,
+      "restauraAlEmpezarExpedicion": true,
+      "restauraEntreCombates": false,
+      "estadoBalance": "carga_maxima_pendiente"
+    },
+    "estadisticasDerivadas": {
+      "pvMaximos": "12 + SANGRE × 3",
+      "defensa": "8 + ceil(CENIZA / 2)",
+      "movimiento": "2 + CENIZA",
+      "estigmaMaximo": "10 + DOGMA"
+    },
+    "desbloqueo": {
+      "inicialmenteDisponible": true,
+      "lugar": null,
+      "requisito": "Disponible desde el principio",
+      "costeEcos": null
+    },
+    "pendientes": [
+      "Revisar balance general",
+      "Adaptar referencias antiguas a d20 cuando corresponda",
+      "Establecer alcance en casillas si la regla lo requiere"
+    ]
   },
   {
     "id": "santa-magdalena",
@@ -80,7 +330,89 @@
     ],
     "passiveId": "pasiva-santa-magdalena",
     "martyrId": "martirio-santa-magdalena",
-    "review": "pendiente_balance"
+    "review": "pendiente_balance",
+    "titulo": "La Penitente de la LUJURIA",
+    "pecado": "Lujuria",
+    "categoria": "capital",
+    "rolCompleto": "Magia de Sangre / Manipulación de Dolor y Estigma",
+    "narrativa": {
+      "lema": "Toda plegaria encuentra eco en aquello que nos duele.",
+      "origen": "Las seguidoras de Santa Magdalena comenzaron como guardianas de un culto dedicado al arrepentimiento y al consuelo. Cuando el Cielo dejó de responder, interpretaron el silencio como una prueba: quizá lo divino ya no hablaba mediante milagros, sino a través de las experiencias humanas que nadie deseaba compartir. En esa búsqueda confundieron la fe con una obsesión por la frontera entre lo sagrado y el Abismo.",
+      "caida": "La Lujuria de su orden no persigue riquezas ni coronas, sino una unión imposible con la presencia ausente. Sus velos de novia cubiertos de hollín y sus rosarios de alambre recuerdan promesas que nunca pudieron cumplirse. Aprendieron a convertir Estigma, voluntad y dolor en vínculos de sangre espectral, como si cada emoción intensa pudiera abrir otra vez el camino hacia una respuesta divina.",
+      "presente": "Magdalena combate con un látigo de rosas de alambre y un incensario de alabastro. Cuanto más cerca está del Quebranto, más poder encuentra en los Milagros Rotos. Su don más temido une su suerte a la de un adversario y transforma el sufrimiento compartido en un arma. Aunque predica que toda carga debe compartirse, todavía debe aprender dónde termina la devoción y empieza el deseo de controlar a los demás.",
+      "parrafos": [
+        "Las seguidoras de Santa Magdalena comenzaron como guardianas de un culto dedicado al arrepentimiento y al consuelo. Cuando el Cielo dejó de responder, interpretaron el silencio como una prueba: quizá lo divino ya no hablaba mediante milagros, sino a través de las experiencias humanas que nadie deseaba compartir. En esa búsqueda confundieron la fe con una obsesión por la frontera entre lo sagrado y el Abismo.",
+        "La Lujuria de su orden no persigue riquezas ni coronas, sino una unión imposible con la presencia ausente. Sus velos de novia cubiertos de hollín y sus rosarios de alambre recuerdan promesas que nunca pudieron cumplirse. Aprendieron a convertir Estigma, voluntad y dolor en vínculos de sangre espectral, como si cada emoción intensa pudiera abrir otra vez el camino hacia una respuesta divina.",
+        "Magdalena combate con un látigo de rosas de alambre y un incensario de alabastro. Cuanto más cerca está del Quebranto, más poder encuentra en los Milagros Rotos. Su don más temido une su suerte a la de un adversario y transforma el sufrimiento compartido en un arma. Aunque predica que toda carga debe compartirse, todavía debe aprender dónde termina la devoción y empieza el deseo de controlar a los demás."
+      ]
+    },
+    "trasfondo": "Las seguidoras de Santa Magdalena comenzaron como guardianas de un culto dedicado al arrepentimiento y al consuelo. Cuando el Cielo dejó de responder, interpretaron el silencio como una prueba: quizá lo divino ya no hablaba mediante milagros, sino a través de las experiencias humanas que nadie deseaba compartir. En esa búsqueda confundieron la fe con una obsesión por la frontera entre lo sagrado y el Abismo.\n\nLa Lujuria de su orden no persigue riquezas ni coronas, sino una unión imposible con la presencia ausente. Sus velos de novia cubiertos de hollín y sus rosarios de alambre recuerdan promesas que nunca pudieron cumplirse. Aprendieron a convertir Estigma, voluntad y dolor en vínculos de sangre espectral, como si cada emoción intensa pudiera abrir otra vez el camino hacia una respuesta divina.\n\nMagdalena combate con un látigo de rosas de alambre y un incensario de alabastro. Cuanto más cerca está del Quebranto, más poder encuentra en los Milagros Rotos. Su don más temido une su suerte a la de un adversario y transforma el sufrimiento compartido en un arma. Aunque predica que toda carga debe compartirse, todavía debe aprender dónde termina la devoción y empieza el deseo de controlar a los demás.",
+    "equipoInicial": [
+      {
+        "nombre": "Látigo de Rosas de Alambre",
+        "tipo": "arma",
+        "danio": "1d6",
+        "modo": "cuerpo_a_cuerpo",
+        "efecto": "Con resultado de ataque 15 o más, desarma o inmoviliza un miembro del objetivo por 1 turno. La condición 15+ procede del sistema original y necesita adaptación al 2d6.",
+        "condicionOriginal": "15+ en la tirada",
+        "duracionTurnos": 1,
+        "pendienteAdaptacion2d6": true,
+        "id": "equipo-santa-magdalena-1"
+      },
+      {
+        "nombre": "Incensario de Alabastro",
+        "tipo": "equipo",
+        "danio": null,
+        "modo": "canalizador",
+        "efecto": "Otorga +1 a las tiradas de DOGMA.",
+        "bonoDogma": 1,
+        "id": "equipo-santa-magdalena-2"
+      }
+    ],
+    "pasiva": {
+      "nombre": "Éxtasis del Sufrimiento",
+      "descripcion": "Con Estigma igual o superior a 5 entra en Arrebato. Sus ataques y Milagros Rotos hacen +3 de daño. El coste de Milagros Rotos baja de +2 a +1 Estigma.",
+      "umbralEstigma": 5,
+      "bonoDanio": 3,
+      "costeMilagrosNormalEstigma": 2,
+      "costeMilagrosArrebatoEstigma": 1
+    },
+    "martirio": {
+      "nombre": "Matrimonio de Sangre",
+      "descripcion": "Durante 2 rondas une a Magdalena y un enemigo. Cada vez que Magdalena recibe daño a sus PV, incluso de fuentes propias o Milagros, el objetivo recibe el doble ignorando Blindaje.",
+      "duracionRondas": 2,
+      "efectos": [
+        "Vínculo con un enemigo",
+        "Cada pérdida de PV de Magdalena causa daño ×2 al objetivo",
+        "Ignora Blindaje del objetivo",
+        "Incluye daño autoinfligido y coste de Milagros"
+      ],
+      "tipo": "martirio",
+      "usoIndicadoEnFichaOriginal": "1 vez por combate",
+      "maxCharges": null,
+      "prototypeMaxCharges": 1,
+      "chargeCost": 1,
+      "restauraAlEmpezarExpedicion": true,
+      "restauraEntreCombates": false,
+      "estadoBalance": "carga_maxima_pendiente"
+    },
+    "estadisticasDerivadas": {
+      "pvMaximos": "12 + SANGRE × 3",
+      "defensa": "8 + ceil(CENIZA / 2)",
+      "movimiento": "2 + CENIZA",
+      "estigmaMaximo": "10 + DOGMA"
+    },
+    "desbloqueo": {
+      "inicialmenteDisponible": true,
+      "lugar": null,
+      "requisito": "Disponible desde el principio",
+      "costeEcos": null
+    },
+    "pendientes": [
+      "Revisar balance general",
+      "Adaptar referencias antiguas a d20 cuando corresponda",
+      "Establecer alcance en casillas si la regla lo requiere"
+    ]
   },
   {
     "id": "san-lorenzo",
@@ -101,7 +433,94 @@
     ],
     "passiveId": "pasiva-san-lorenzo",
     "martyrId": "martirio-san-lorenzo",
-    "review": "pendiente_balance"
+    "review": "pendiente_balance",
+    "titulo": "El Penitente de la AVARICIA",
+    "pecado": "Avaricia",
+    "categoria": "capital",
+    "rolCompleto": "Artificiero / Control de Recursos y Fuego",
+    "narrativa": {
+      "lema": "Ni una moneda para el cielo que nos abandonó.",
+      "origen": "San Lorenzo fue recordado como custodio de los bienes de la Iglesia y por negarse a entregar sus tesoros a quienes los reclamaban por la fuerza. En DEUS ABSENS, sus herederos mantuvieron ese deber durante generaciones. Cuando llegaron las guerras del Desgarro, las reliquias, los dientes de oro de viejos relicarios y los Ecos Divinos se volvieron la moneda con la que los supervivientes compraban refugio y milagros.",
+      "caida": "La fidelidad a la custodia degeneró en Avaricia. El Penitente transporta un relicario de hierro incandescente que cruje con cada paso y se niega a desprenderse incluso de lo que ya no necesita. Cree que renunciar a un tesoro equivale a perder una pequeña parte de la creación. Guarda tanto que cada objeto acaba pesando más que sus juramentos.",
+      "presente": "Lorenzo utiliza su lanzallamas consagrado y un martillo de tasador para imponer el valor que asigna a cada cosa. Puede convertir Ecos en una indulgencia imposible, alterando el resultado de un instante decisivo. Ayuda a los compañeros porque ellos también son una inversión que quiere conservar, pero no tolera la idea de regalar una posesión. Su camino podría obligarlo a descubrir algo cuyo valor no se mida en Ecos.",
+      "parrafos": [
+        "San Lorenzo fue recordado como custodio de los bienes de la Iglesia y por negarse a entregar sus tesoros a quienes los reclamaban por la fuerza. En DEUS ABSENS, sus herederos mantuvieron ese deber durante generaciones. Cuando llegaron las guerras del Desgarro, las reliquias, los dientes de oro de viejos relicarios y los Ecos Divinos se volvieron la moneda con la que los supervivientes compraban refugio y milagros.",
+        "La fidelidad a la custodia degeneró en Avaricia. El Penitente transporta un relicario de hierro incandescente que cruje con cada paso y se niega a desprenderse incluso de lo que ya no necesita. Cree que renunciar a un tesoro equivale a perder una pequeña parte de la creación. Guarda tanto que cada objeto acaba pesando más que sus juramentos.",
+        "Lorenzo utiliza su lanzallamas consagrado y un martillo de tasador para imponer el valor que asigna a cada cosa. Puede convertir Ecos en una indulgencia imposible, alterando el resultado de un instante decisivo. Ayuda a los compañeros porque ellos también son una inversión que quiere conservar, pero no tolera la idea de regalar una posesión. Su camino podría obligarlo a descubrir algo cuyo valor no se mida en Ecos."
+      ]
+    },
+    "trasfondo": "San Lorenzo fue recordado como custodio de los bienes de la Iglesia y por negarse a entregar sus tesoros a quienes los reclamaban por la fuerza. En DEUS ABSENS, sus herederos mantuvieron ese deber durante generaciones. Cuando llegaron las guerras del Desgarro, las reliquias, los dientes de oro de viejos relicarios y los Ecos Divinos se volvieron la moneda con la que los supervivientes compraban refugio y milagros.\n\nLa fidelidad a la custodia degeneró en Avaricia. El Penitente transporta un relicario de hierro incandescente que cruje con cada paso y se niega a desprenderse incluso de lo que ya no necesita. Cree que renunciar a un tesoro equivale a perder una pequeña parte de la creación. Guarda tanto que cada objeto acaba pesando más que sus juramentos.\n\nLorenzo utiliza su lanzallamas consagrado y un martillo de tasador para imponer el valor que asigna a cada cosa. Puede convertir Ecos en una indulgencia imposible, alterando el resultado de un instante decisivo. Ayuda a los compañeros porque ellos también son una inversión que quiere conservar, pero no tolera la idea de regalar una posesión. Su camino podría obligarlo a descubrir algo cuyo valor no se mida en Ecos.",
+    "equipoInicial": [
+      {
+        "nombre": "Lanzallamas de Aceite Consagrado «La Parrilla»",
+        "tipo": "arma",
+        "danio": "1d8",
+        "modo": "fuego",
+        "efecto": "Alcanza hasta a 2 enemigos que estén juntos.",
+        "maxObjetivos": 2,
+        "id": "equipo-san-lorenzo-1"
+      },
+      {
+        "nombre": "Martillo de Tasador",
+        "tipo": "arma",
+        "danio": "1d6",
+        "modo": "cuerpo_a_cuerpo",
+        "efecto": "Inflige +2 de daño contra objetivos con Blindaje.",
+        "bonusVsBlindaje": 2,
+        "id": "equipo-san-lorenzo-2"
+      }
+    ],
+    "pasiva": {
+      "nombre": "Peso del Oro Sacro",
+      "descripcion": "Obtiene un 25 % más de Ecos Divinos al final de cada combate. Por cada 25 Ecos acumulados sin gastar durante la expedición, gana +1 al ataque y +1 al daño, hasta +4. No puede regalar objetos ni pagar sobornos en eventos narrativos.",
+      "bonoEcosPorcentaje": 25,
+      "ecosPorAcumulacion": 25,
+      "bonoAtaquePorTramo": 1,
+      "bonoDanioPorTramo": 1,
+      "bonoMaximo": 4,
+      "limitaciones": [
+        "No puede regalar objetos",
+        "No puede pagar sobornos durante eventos narrativos"
+      ]
+    },
+    "martirio": {
+      "nombre": "Comprar la Indulgencia",
+      "descripcion": "Puede gastar 15 Ecos Divinos durante un combate para cambiar un dado recién lanzado, propio, aliado o enemigo, en un 20 natural o un 1 natural según la regla original. El efecto necesita adaptación al sistema 2d6 y a las cargas de martirio acordadas.",
+      "costeEcos": 15,
+      "alcance": "Dado propio, aliado o enemigo",
+      "timing": "Al terminar de lanzar un dado",
+      "resultadoOriginal": [
+        "20 natural",
+        "1 natural"
+      ],
+      "pendienteAdaptacion2d6": true,
+      "tipo": "martirio",
+      "usoIndicadoEnFichaOriginal": "Usos ilimitados mientras tengas Ecos",
+      "maxCharges": null,
+      "prototypeMaxCharges": 1,
+      "chargeCost": 1,
+      "restauraAlEmpezarExpedicion": true,
+      "restauraEntreCombates": false,
+      "estadoBalance": "carga_maxima_pendiente"
+    },
+    "estadisticasDerivadas": {
+      "pvMaximos": "12 + SANGRE × 3",
+      "defensa": "8 + ceil(CENIZA / 2)",
+      "movimiento": "2 + CENIZA",
+      "estigmaMaximo": "10 + DOGMA"
+    },
+    "desbloqueo": {
+      "inicialmenteDisponible": true,
+      "lugar": null,
+      "requisito": "Disponible desde el principio",
+      "costeEcos": null
+    },
+    "pendientes": [
+      "Revisar balance general",
+      "Adaptar referencias antiguas a d20 cuando corresponda",
+      "Establecer alcance en casillas si la regla lo requiere",
+      "La ficha original indica usos ilimitados con Ecos; requiere decidir cómo interactúan con las cargas persistentes."
+    ]
   },
   {
     "id": "san-bartolome",
@@ -122,7 +541,90 @@
     ],
     "passiveId": "pasiva-san-bartolome",
     "martyrId": "martirio-san-bartolome",
-    "review": "pendiente_balance"
+    "review": "pendiente_balance",
+    "titulo": "El Penitente de la ENVIDIA",
+    "pecado": "Envidia",
+    "categoria": "capital",
+    "rolCompleto": "Asesino Silencioso / Ladrón de Anatomía",
+    "narrativa": {
+      "lema": "Lo que os hace únicos también puede pertenecerme.",
+      "origen": "El martirio de San Bartolomé inspiró una orden obsesionada con la identidad y la transformación. Cuando los ángeles se volvieron hostiles y las criaturas del Abismo comenzaron a ocupar templos abandonados, sus miembros observaron que el poder de cada enemigo parecía residir en detalles concretos: un sello, una articulación sobrenatural, un símbolo o un don imposible de imitar.",
+      "caida": "La Envidia les enseñó a coleccionar esos atributos como trofeos. Sus mantos están formados por fragmentos de uniformes, máscaras y restos rituales tomados de enemigos derrotados. Bartolomé no soporta que una criatura posea una facultad que él no pueda reclamar. Ha hecho de la imitación un arte silencioso y de cada combate una oportunidad para convertirse, durante unos instantes, en aquello que persigue.",
+      "presente": "Con cuchillos gemelos y una ballesta de hueso, busca puntos débiles antes de rematar a un adversario. Su don le permite apropiarse de rasgos enemigos y desaparecer tras un disfraz de sombras y reliquias. Pero cuanto más cambia, menos claro recuerda el motivo original de su penitencia. Su mayor temor no es perder una batalla, sino descubrir que, debajo de todos sus trofeos, ya no queda una identidad que pueda llamar propia.",
+      "parrafos": [
+        "El martirio de San Bartolomé inspiró una orden obsesionada con la identidad y la transformación. Cuando los ángeles se volvieron hostiles y las criaturas del Abismo comenzaron a ocupar templos abandonados, sus miembros observaron que el poder de cada enemigo parecía residir en detalles concretos: un sello, una articulación sobrenatural, un símbolo o un don imposible de imitar.",
+        "La Envidia les enseñó a coleccionar esos atributos como trofeos. Sus mantos están formados por fragmentos de uniformes, máscaras y restos rituales tomados de enemigos derrotados. Bartolomé no soporta que una criatura posea una facultad que él no pueda reclamar. Ha hecho de la imitación un arte silencioso y de cada combate una oportunidad para convertirse, durante unos instantes, en aquello que persigue.",
+        "Con cuchillos gemelos y una ballesta de hueso, busca puntos débiles antes de rematar a un adversario. Su don le permite apropiarse de rasgos enemigos y desaparecer tras un disfraz de sombras y reliquias. Pero cuanto más cambia, menos claro recuerda el motivo original de su penitencia. Su mayor temor no es perder una batalla, sino descubrir que, debajo de todos sus trofeos, ya no queda una identidad que pueda llamar propia."
+      ]
+    },
+    "trasfondo": "El martirio de San Bartolomé inspiró una orden obsesionada con la identidad y la transformación. Cuando los ángeles se volvieron hostiles y las criaturas del Abismo comenzaron a ocupar templos abandonados, sus miembros observaron que el poder de cada enemigo parecía residir en detalles concretos: un sello, una articulación sobrenatural, un símbolo o un don imposible de imitar.\n\nLa Envidia les enseñó a coleccionar esos atributos como trofeos. Sus mantos están formados por fragmentos de uniformes, máscaras y restos rituales tomados de enemigos derrotados. Bartolomé no soporta que una criatura posea una facultad que él no pueda reclamar. Ha hecho de la imitación un arte silencioso y de cada combate una oportunidad para convertirse, durante unos instantes, en aquello que persigue.\n\nCon cuchillos gemelos y una ballesta de hueso, busca puntos débiles antes de rematar a un adversario. Su don le permite apropiarse de rasgos enemigos y desaparecer tras un disfraz de sombras y reliquias. Pero cuanto más cambia, menos claro recuerda el motivo original de su penitencia. Su mayor temor no es perder una batalla, sino descubrir que, debajo de todos sus trofeos, ya no queda una identidad que pueda llamar propia.",
+    "equipoInicial": [
+      {
+        "nombre": "Cuchillos Desolladores Gemelos",
+        "tipo": "arma",
+        "danio": "2d4",
+        "modo": "cuerpo_a_cuerpo",
+        "efecto": "Contra un enemigo que ya perdió un Punto Débil, añade +1d6 de daño.",
+        "bonusDanioPuntoDebil": "1d6",
+        "id": "equipo-san-bartolome-1"
+      },
+      {
+        "nombre": "Ballesta de Mano de Hueso",
+        "tipo": "arma",
+        "danio": "1d6",
+        "modo": "distancia",
+        "efecto": "Arma silenciosa de distancia.",
+        "id": "equipo-san-bartolome-2"
+      }
+    ],
+    "pasiva": {
+      "nombre": "Injerto Blasfemo",
+      "descripcion": "Si destruye un Punto Débil mediante Ataque Preciso, se cura 3 PV y toma una propiedad asociada a ese punto hasta terminar el combate. Puede obtener Blindaje o utilizar una vez un ataque especial robable del enemigo.",
+      "disparador": "Destruir Punto Débil con Ataque Preciso",
+      "curaPV": 3,
+      "duracion": "Resto del combate",
+      "propiedadesRobables": [
+        "Blindaje asociado al punto",
+        "Ataque especial asociado al punto, 1 uso"
+      ],
+      "pendienteAdaptacion": "El texto anterior mencionaba Tabla de Instinto; ahora se refiere a ataques especiales del bestiario que controla el director."
+    },
+    "martirio": {
+      "nombre": "Piel de Nadie",
+      "descripcion": "Se desplaza instantáneamente detrás de cualquier enemigo del tablero. Los enemigos no pueden atacarle hasta su próximo turno, y su siguiente ataque con cuchillos impacta automáticamente ignorando Defensa.",
+      "efectos": [
+        "Colocación instantánea detrás de cualquier enemigo",
+        "No puede ser atacado hasta su siguiente turno",
+        "Siguiente ataque con cuchillos impacta automáticamente"
+      ],
+      "alcance": "Cualquier enemigo del campo de batalla",
+      "tipo": "martirio",
+      "usoIndicadoEnFichaOriginal": "1 vez por combate",
+      "maxCharges": null,
+      "prototypeMaxCharges": 1,
+      "chargeCost": 1,
+      "restauraAlEmpezarExpedicion": true,
+      "restauraEntreCombates": false,
+      "estadoBalance": "carga_maxima_pendiente"
+    },
+    "estadisticasDerivadas": {
+      "pvMaximos": "12 + SANGRE × 3",
+      "defensa": "8 + ceil(CENIZA / 2)",
+      "movimiento": "2 + CENIZA",
+      "estigmaMaximo": "10 + DOGMA"
+    },
+    "desbloqueo": {
+      "inicialmenteDisponible": true,
+      "lugar": null,
+      "requisito": "Disponible desde el principio",
+      "costeEcos": null
+    },
+    "pendientes": [
+      "Revisar balance general",
+      "Adaptar referencias antiguas a d20 cuando corresponda",
+      "Establecer alcance en casillas si la regla lo requiere",
+      "Tabla de Instinto fue descartada: usar habilidades propias del bestiario controladas por el director."
+    ]
   },
   {
     "id": "san-simeon",
@@ -143,7 +645,86 @@
     ],
     "passiveId": "pasiva-san-simeon",
     "martyrId": "martirio-san-simeon",
-    "review": "pendiente_balance"
+    "review": "pendiente_balance",
+    "titulo": "El Penitente de la PEREZA",
+    "pecado": "Pereza",
+    "categoria": "capital",
+    "rolCompleto": "Artillero Pesado / Fortaleza Inmóvil",
+    "narrativa": {
+      "lema": "Que el mundo se mueva. Yo permaneceré.",
+      "origen": "San Simeón el Estilita pasó buena parte de su vida sobre una columna, apartado del mundo. Siglos después, una orden deformó aquel ejemplo de austeridad hasta convertirlo en doctrina de inmovilidad absoluta. Durante las primeras incursiones infernales, uno de sus guardianes contempló la caída de su refugio sin intervenir, convencido de que ninguna acción humana podía cambiar la voluntad del Cielo.",
+      "caida": "Su pecado fue la Pereza entendida como renuncia a actuar. Como penitencia, quedó unido a un fragmento de pilar de mármol y a una ametralladora pesada. La piedra, que antes simbolizaba contemplación, se transformó en fortaleza portátil. Su marcha es lenta y deliberada; cada posición elegida parece una sentencia. Ya no espera salvación, pero tampoco permite que sus enemigos se acerquen impunemente.",
+      "presente": "Simeón protege las rutas de su grupo creando un punto de resistencia en mitad del caos. Cuando permanece inmóvil, el Pilar y El Campanario convierten su apatía en defensa y fuego sostenido. Sus compañeros saben que pueden confiar en él para mantener una línea, aunque nadie está seguro de que acuda cuando sea necesario abandonar su puesto. Su historia gira alrededor de una elección que siempre ha evitado: moverse por alguien más.",
+      "parrafos": [
+        "San Simeón el Estilita pasó buena parte de su vida sobre una columna, apartado del mundo. Siglos después, una orden deformó aquel ejemplo de austeridad hasta convertirlo en doctrina de inmovilidad absoluta. Durante las primeras incursiones infernales, uno de sus guardianes contempló la caída de su refugio sin intervenir, convencido de que ninguna acción humana podía cambiar la voluntad del Cielo.",
+        "Su pecado fue la Pereza entendida como renuncia a actuar. Como penitencia, quedó unido a un fragmento de pilar de mármol y a una ametralladora pesada. La piedra, que antes simbolizaba contemplación, se transformó en fortaleza portátil. Su marcha es lenta y deliberada; cada posición elegida parece una sentencia. Ya no espera salvación, pero tampoco permite que sus enemigos se acerquen impunemente.",
+        "Simeón protege las rutas de su grupo creando un punto de resistencia en mitad del caos. Cuando permanece inmóvil, el Pilar y El Campanario convierten su apatía en defensa y fuego sostenido. Sus compañeros saben que pueden confiar en él para mantener una línea, aunque nadie está seguro de que acuda cuando sea necesario abandonar su puesto. Su historia gira alrededor de una elección que siempre ha evitado: moverse por alguien más."
+      ]
+    },
+    "trasfondo": "San Simeón el Estilita pasó buena parte de su vida sobre una columna, apartado del mundo. Siglos después, una orden deformó aquel ejemplo de austeridad hasta convertirlo en doctrina de inmovilidad absoluta. Durante las primeras incursiones infernales, uno de sus guardianes contempló la caída de su refugio sin intervenir, convencido de que ninguna acción humana podía cambiar la voluntad del Cielo.\n\nSu pecado fue la Pereza entendida como renuncia a actuar. Como penitencia, quedó unido a un fragmento de pilar de mármol y a una ametralladora pesada. La piedra, que antes simbolizaba contemplación, se transformó en fortaleza portátil. Su marcha es lenta y deliberada; cada posición elegida parece una sentencia. Ya no espera salvación, pero tampoco permite que sus enemigos se acerquen impunemente.\n\nSimeón protege las rutas de su grupo creando un punto de resistencia en mitad del caos. Cuando permanece inmóvil, el Pilar y El Campanario convierten su apatía en defensa y fuego sostenido. Sus compañeros saben que pueden confiar en él para mantener una línea, aunque nadie está seguro de que acuda cuando sea necesario abandonar su puesto. Su historia gira alrededor de una elección que siempre ha evitado: moverse por alguien más.",
+    "equipoInicial": [
+      {
+        "nombre": "Ametralladora Rotatoria «El Campanario»",
+        "tipo": "arma",
+        "danio": "2d6",
+        "modo": "distancia",
+        "efecto": "Ametralladora pesada de distancia.",
+        "id": "equipo-san-simeon-1"
+      },
+      {
+        "nombre": "El Pilar de Piedra",
+        "tipo": "arma",
+        "danio": "1d10",
+        "modo": "cuerpo_a_cuerpo",
+        "efecto": "Empuja al objetivo varios metros hacia atrás; distancia en casillas pendiente de definir.",
+        "pendienteEmpujeCasillas": true,
+        "id": "equipo-san-simeon-2"
+      }
+    ],
+    "pasiva": {
+      "nombre": "Inercia del Estilita",
+      "descripcion": "Si no utiliza su movimiento durante el turno, gana +2 Blindaje y +2 al daño de su ametralladora hasta el inicio de su siguiente turno.",
+      "condicion": "No gastar movimiento durante el turno",
+      "bonoBlindaje": 2,
+      "bonoDanioAmetralladora": 2,
+      "duracion": "Hasta el inicio del siguiente turno"
+    },
+    "martirio": {
+      "nombre": "Apatía Absoluta",
+      "descripcion": "Hasta su próximo turno, es inmune a ganar Estigma, a movimientos forzados y al aturdimiento. Antes de que un enemigo que se acerque para atacarle cuerpo a cuerpo pueda golpearlo, recibe automáticamente una ráfaga de 2d6 de daño.",
+      "duracion": "Hasta el siguiente turno de Simeón",
+      "efectos": [
+        "Inmunidad a Estigma nuevo",
+        "Inmunidad a empujones y movimientos forzados",
+        "Inmunidad al aturdimiento",
+        "Contraataque de 2d6 automático ante enemigos que se acercan para atacar cuerpo a cuerpo"
+      ],
+      "tipo": "martirio",
+      "usoIndicadoEnFichaOriginal": "1 vez por combate",
+      "maxCharges": null,
+      "prototypeMaxCharges": 1,
+      "chargeCost": 1,
+      "restauraAlEmpezarExpedicion": true,
+      "restauraEntreCombates": false,
+      "estadoBalance": "carga_maxima_pendiente"
+    },
+    "estadisticasDerivadas": {
+      "pvMaximos": "12 + SANGRE × 3",
+      "defensa": "8 + ceil(CENIZA / 2)",
+      "movimiento": "2 + CENIZA",
+      "estigmaMaximo": "10 + DOGMA"
+    },
+    "desbloqueo": {
+      "inicialmenteDisponible": true,
+      "lugar": null,
+      "requisito": "Disponible desde el principio",
+      "costeEcos": null
+    },
+    "pendientes": [
+      "Revisar balance general",
+      "Adaptar referencias antiguas a d20 cuando corresponda",
+      "Establecer alcance en casillas si la regla lo requiere"
+    ]
   },
   {
     "id": "san-judas-tadeo",
@@ -164,7 +745,93 @@
     ],
     "passiveId": "pasiva-san-judas-tadeo",
     "martyrId": "martirio-san-judas-tadeo",
-    "review": "pendiente_balance"
+    "review": "pendiente_balance",
+    "titulo": "El Penitente de la DESESPERACIÓN",
+    "pecado": "Desesperación",
+    "categoria": "apocrifo",
+    "rolCompleto": "Nigromante de Trinchera / Comandante de Mártires Caídos",
+    "narrativa": {
+      "lema": "Una causa perdida no es una causa olvidada.",
+      "origen": "Judas Tadeo, patrono de las causas imposibles, se convirtió en símbolo de aquellos que seguían rezando incluso después de la Ausencia. Millones de súplicas quedaron sin respuesta y dieron forma a un nuevo pecado: la Desesperación. Su orden comenzó a registrar los nombres de quienes caían durante las expediciones, negándose a permitir que el silencio del Cielo borrara también su memoria.",
+      "caida": "El Penitente lleva a la espalda un Osario de Alambre, una estructura de jaulas y campanas que conserva reliquias de los compañeros perdidos. Cada nombre pesa tanto como una derrota. En vez de aceptar el duelo, aprendió a convocar ecos espectrales de esos guerreros y a hacer que marchen de nuevo a su lado. Sus invocaciones no nacen de la esperanza, sino de la incapacidad de dejar atrás el pasado.",
+      "presente": "Judas Tadeo combate con una maza-incensario y una campana fúnebre, guiando espectros que protegen al grupo y reproducen técnicas de Penitentes anteriores. Cuantas más expediciones fracasan, más historias alimentan su poder. Es un aliado formidable y una advertencia viviente: preservar la memoria puede salvar a los supervivientes, pero también impedirles construir algo distinto de sus pérdidas.",
+      "parrafos": [
+        "Judas Tadeo, patrono de las causas imposibles, se convirtió en símbolo de aquellos que seguían rezando incluso después de la Ausencia. Millones de súplicas quedaron sin respuesta y dieron forma a un nuevo pecado: la Desesperación. Su orden comenzó a registrar los nombres de quienes caían durante las expediciones, negándose a permitir que el silencio del Cielo borrara también su memoria.",
+        "El Penitente lleva a la espalda un Osario de Alambre, una estructura de jaulas y campanas que conserva reliquias de los compañeros perdidos. Cada nombre pesa tanto como una derrota. En vez de aceptar el duelo, aprendió a convocar ecos espectrales de esos guerreros y a hacer que marchen de nuevo a su lado. Sus invocaciones no nacen de la esperanza, sino de la incapacidad de dejar atrás el pasado.",
+        "Judas Tadeo combate con una maza-incensario y una campana fúnebre, guiando espectros que protegen al grupo y reproducen técnicas de Penitentes anteriores. Cuantas más expediciones fracasan, más historias alimentan su poder. Es un aliado formidable y una advertencia viviente: preservar la memoria puede salvar a los supervivientes, pero también impedirles construir algo distinto de sus pérdidas."
+      ]
+    },
+    "trasfondo": "Judas Tadeo, patrono de las causas imposibles, se convirtió en símbolo de aquellos que seguían rezando incluso después de la Ausencia. Millones de súplicas quedaron sin respuesta y dieron forma a un nuevo pecado: la Desesperación. Su orden comenzó a registrar los nombres de quienes caían durante las expediciones, negándose a permitir que el silencio del Cielo borrara también su memoria.\n\nEl Penitente lleva a la espalda un Osario de Alambre, una estructura de jaulas y campanas que conserva reliquias de los compañeros perdidos. Cada nombre pesa tanto como una derrota. En vez de aceptar el duelo, aprendió a convocar ecos espectrales de esos guerreros y a hacer que marchen de nuevo a su lado. Sus invocaciones no nacen de la esperanza, sino de la incapacidad de dejar atrás el pasado.\n\nJudas Tadeo combate con una maza-incensario y una campana fúnebre, guiando espectros que protegen al grupo y reproducen técnicas de Penitentes anteriores. Cuantas más expediciones fracasan, más historias alimentan su poder. Es un aliado formidable y una advertencia viviente: preservar la memoria puede salvar a los supervivientes, pero también impedirles construir algo distinto de sus pérdidas.",
+    "equipoInicial": [
+      {
+        "nombre": "Maza-Incensario «Causa Perdida»",
+        "tipo": "arma",
+        "danio": "1d8",
+        "modo": "cuerpo_a_cuerpo",
+        "efecto": "Cada golpe exitoso reduce el Estigma propio en 1.",
+        "reduceEstigmaEnImpacto": 1,
+        "id": "equipo-san-judas-tadeo-1"
+      },
+      {
+        "nombre": "Campana Fúnebre de Bronce",
+        "tipo": "arma",
+        "danio": "1d4",
+        "modo": "mental_distancia",
+        "efecto": "Arma secundaria y canalizador; guía a los espectros y causa daño mental a distancia ignorando cobertura.",
+        "ignoraCobertura": true,
+        "id": "equipo-san-judas-tadeo-2"
+      }
+    ],
+    "pasiva": {
+      "nombre": "El Peso de los Caídos",
+      "descripcion": "Antes de la expedición elige hasta 3 cráneos de Santos Penitentes muertos en campañas anteriores; si faltan, utiliza Soldados Anónimos. Una vez por turno y como acción gratuita puede ganar +2 Estigma para invocar un espectro por 2 rondas. El espectro ataca durante el turno de Judas con el arma inicial de ese Santo usando DOGMA. Si un golpe fuera a reducir a Judas a 0 PV mientras haya un espectro activo, el espectro puede absorber el golpe y Judas queda a 1 PV.",
+      "maxRecuerdos": 3,
+      "sustitutoSinMuertes": "Soldados Anónimos",
+      "tipoAccion": "gratuita",
+      "usosPorTurno": 1,
+      "costeEstigma": 2,
+      "duracionEspectroRondas": 2,
+      "atributoAtaqueEspectro": "DOGMA",
+      "ataqueEspectro": "Arma inicial del Santo caído",
+      "proteccionLetal": "Consume un espectro activo para quedar con 1 PV"
+    },
+    "martirio": {
+      "nombre": "Procesión de los Olvidados",
+      "descripcion": "Invoca simultáneamente tres espectros sin pagar Estigma. Todos realizan un ataque inmediato y, al final del turno, liberan una explosión ritual de 2d6 de daño en área que ignora Blindaje.",
+      "cantidadEspectros": 3,
+      "costeEstigma": 0,
+      "efectos": [
+        "Tres espectros al mismo tiempo",
+        "Cada espectro ataca inmediatamente",
+        "Al final del turno infligen 2d6 de daño de área",
+        "Daño de área ignora Blindaje"
+      ],
+      "tipo": "martirio",
+      "usoIndicadoEnFichaOriginal": "1 vez por combate",
+      "maxCharges": null,
+      "prototypeMaxCharges": 1,
+      "chargeCost": 1,
+      "restauraAlEmpezarExpedicion": true,
+      "restauraEntreCombates": false,
+      "estadoBalance": "carga_maxima_pendiente"
+    },
+    "estadisticasDerivadas": {
+      "pvMaximos": "12 + SANGRE × 3",
+      "defensa": "8 + ceil(CENIZA / 2)",
+      "movimiento": "2 + CENIZA",
+      "estigmaMaximo": "10 + DOGMA"
+    },
+    "desbloqueo": {
+      "inicialmenteDisponible": false,
+      "lugar": "Basílica",
+      "requisito": "Romper el sello mediante Ecos Divinos en el Santuario",
+      "costeEcos": null
+    },
+    "pendientes": [
+      "Revisar balance general",
+      "Adaptar referencias antiguas a d20 cuando corresponda",
+      "Establecer alcance en casillas si la regla lo requiere"
+    ]
   },
   {
     "id": "santa-juana",
@@ -185,7 +852,102 @@
     ],
     "passiveId": "pasiva-santa-juana",
     "martyrId": "martirio-santa-juana",
-    "review": "pendiente_balance"
+    "review": "pendiente_balance",
+    "titulo": "El Pecado de la HEREJÍA",
+    "pecado": "Herejía",
+    "categoria": "apocrifo",
+    "rolCompleto": "Híbrido Celestial (Nefilim) / Asalto Aéreo y Piromancia Blanca",
+    "narrativa": {
+      "lema": "Mi herejía fue pronunciar en voz alta el silencio.",
+      "origen": "Antes del Desgarro nació Juana, hija de una mortal y un serafín desertor. Su herencia nefilim le permitía escuchar señales del Cielo que otros confundían con sueños. Cuando descubrió que el Trono estaba vacío, intentó advertir a los suyos. La Inquisición no aceptó aquella verdad y la condenó como hereje, creyendo que el fuego bastaría para silenciar su voz.",
+      "caida": "Juana sobrevivió al castigo y despertó un poder que ni ella comprendía. El Fuego Blanco dejó su armadura ennegrecida como una segunda piel ceremonial. Desde entonces los ángeles la persiguen por su origen prohibido, mientras que muchos humanos solo la aceptan por la utilidad de su fuerza. Su Herejía consiste en haber dicho lo que nadie quería escuchar y negarse a retractarse.",
+      "presente": "Empuña el mandoble La Pira y un estandarte consumido por las cenizas. Cuando su Estigma alcanza el límite, despliega una Forma Seráfica de alas ardientes que le concede un poder devastador a cambio de agotar su resistencia. Puede arrasar una línea enemiga, pero cada transformación le recuerda que pertenece a dos mundos que la rechazan. Su verdadero deseo es encontrar un lugar donde no tenga que convertirse en arma para ser aceptada.",
+      "parrafos": [
+        "Antes del Desgarro nació Juana, hija de una mortal y un serafín desertor. Su herencia nefilim le permitía escuchar señales del Cielo que otros confundían con sueños. Cuando descubrió que el Trono estaba vacío, intentó advertir a los suyos. La Inquisición no aceptó aquella verdad y la condenó como hereje, creyendo que el fuego bastaría para silenciar su voz.",
+        "Juana sobrevivió al castigo y despertó un poder que ni ella comprendía. El Fuego Blanco dejó su armadura ennegrecida como una segunda piel ceremonial. Desde entonces los ángeles la persiguen por su origen prohibido, mientras que muchos humanos solo la aceptan por la utilidad de su fuerza. Su Herejía consiste en haber dicho lo que nadie quería escuchar y negarse a retractarse.",
+        "Empuña el mandoble La Pira y un estandarte consumido por las cenizas. Cuando su Estigma alcanza el límite, despliega una Forma Seráfica de alas ardientes que le concede un poder devastador a cambio de agotar su resistencia. Puede arrasar una línea enemiga, pero cada transformación le recuerda que pertenece a dos mundos que la rechazan. Su verdadero deseo es encontrar un lugar donde no tenga que convertirse en arma para ser aceptada."
+      ]
+    },
+    "trasfondo": "Antes del Desgarro nació Juana, hija de una mortal y un serafín desertor. Su herencia nefilim le permitía escuchar señales del Cielo que otros confundían con sueños. Cuando descubrió que el Trono estaba vacío, intentó advertir a los suyos. La Inquisición no aceptó aquella verdad y la condenó como hereje, creyendo que el fuego bastaría para silenciar su voz.\n\nJuana sobrevivió al castigo y despertó un poder que ni ella comprendía. El Fuego Blanco dejó su armadura ennegrecida como una segunda piel ceremonial. Desde entonces los ángeles la persiguen por su origen prohibido, mientras que muchos humanos solo la aceptan por la utilidad de su fuerza. Su Herejía consiste en haber dicho lo que nadie quería escuchar y negarse a retractarse.\n\nEmpuña el mandoble La Pira y un estandarte consumido por las cenizas. Cuando su Estigma alcanza el límite, despliega una Forma Seráfica de alas ardientes que le concede un poder devastador a cambio de agotar su resistencia. Puede arrasar una línea enemiga, pero cada transformación le recuerda que pertenece a dos mundos que la rechazan. Su verdadero deseo es encontrar un lugar donde no tenga que convertirse en arma para ser aceptada.",
+    "equipoInicial": [
+      {
+        "nombre": "Mandoble Carbonizado «La Pira»",
+        "tipo": "arma",
+        "danio": "1d10",
+        "modo": "cuerpo_a_cuerpo",
+        "efecto": "Puede pagar 2 PV para envolver el arma en Fuego Blanco y añadir +1d8 de daño.",
+        "costePV": 2,
+        "bonusDanio": "1d8",
+        "id": "equipo-santa-juana-1"
+      },
+      {
+        "nombre": "Estandarte Ennegrecido",
+        "tipo": "equipo",
+        "danio": null,
+        "modo": "reliquia",
+        "efecto": "Reliquia de mano izquierda: inmunidad al daño de fuego y +1 a Defensa.",
+        "inmuneFuego": true,
+        "bonoDefensa": 1,
+        "id": "equipo-santa-juana-2"
+      }
+    ],
+    "pasiva": {
+      "nombre": "Apoteosis de la Hoguera",
+      "descripcion": "Al llegar al límite de Estigma, no sufre Quebranto: se transforma en Forma Seráfica durante 2 rondas. Puede volar y queda fuera del alcance cuerpo a cuerpo de enemigos terrestres; obtiene altura. Sus ataques suman ACERO y DOGMA al daño e ignoran el Blindaje. Al final de cada turno de esa forma pierde 3 PV inevitables. Al terminar la transformación, Estigma vuelve a 0.",
+      "disparador": "Estigma llega a su máximo",
+      "sustituyeQuebranto": true,
+      "duracionFormaRondas": 2,
+      "subhabilidades": [
+        {
+          "nombre": "Vuelo Ígneo",
+          "efecto": "Vuelo, ventaja de altura, fuera del alcance cuerpo a cuerpo terrestre."
+        },
+        {
+          "nombre": "Furia del Cielo Quemado",
+          "efecto": "Añade ACERO y DOGMA al daño; ignora Blindaje."
+        },
+        {
+          "nombre": "Combustión Interna",
+          "efecto": "Pierde 3 PV inevitables al final de cada turno en Forma Seráfica."
+        }
+      ],
+      "alTerminar": "Estigma vuelve a 0"
+    },
+    "martirio": {
+      "nombre": "Bautismo de la Pira",
+      "descripcion": "Gana inmediatamente +5 Estigma, que puede activar su Forma Seráfica. Una columna de Fuego Blanco inflige 2d8 de daño a todos los enemigos cercanos y los deja Cegados (-3 a sus ataques durante su siguiente turno).",
+      "estigmaGanado": 5,
+      "danio": "2d8",
+      "alcance": "Enemigos cercanos",
+      "estadoAplicado": "Cegado",
+      "penalizacionAtaqueObjetivos": -3,
+      "duracionCeguera": "Siguiente turno de cada objetivo",
+      "tipo": "martirio",
+      "usoIndicadoEnFichaOriginal": "1 vez por combate",
+      "maxCharges": null,
+      "prototypeMaxCharges": 1,
+      "chargeCost": 1,
+      "restauraAlEmpezarExpedicion": true,
+      "restauraEntreCombates": false,
+      "estadoBalance": "carga_maxima_pendiente"
+    },
+    "estadisticasDerivadas": {
+      "pvMaximos": "12 + SANGRE × 3",
+      "defensa": "8 + ceil(CENIZA / 2)",
+      "movimiento": "2 + CENIZA",
+      "estigmaMaximo": "10 + DOGMA"
+    },
+    "desbloqueo": {
+      "inicialmenteDisponible": false,
+      "lugar": "Basílica",
+      "requisito": "Romper el sello mediante Ecos Divinos en el Santuario",
+      "costeEcos": null
+    },
+    "pendientes": [
+      "Revisar balance general",
+      "Adaptar referencias antiguas a d20 cuando corresponda",
+      "Establecer alcance en casillas si la regla lo requiere"
+    ]
   },
   {
     "id": "san-lazaro",
@@ -206,6 +968,103 @@
     ],
     "passiveId": "pasiva-san-lazaro",
     "martyrId": "martirio-san-lazaro",
-    "review": "pendiente_balance"
+    "review": "pendiente_balance",
+    "titulo": "El Pecado de la APOSTASÍA",
+    "pecado": "Apostasía",
+    "categoria": "apocrifo",
+    "rolCompleto": "Portador de Plagas / Tanque Inmortal Putrefacto",
+    "narrativa": {
+      "lema": "Ni el cielo ni el abismo decidirán mi final.",
+      "origen": "La tradición cuenta que Lázaro regresó de la muerte después de cuatro días en el sepulcro. En el mundo de DEUS ABSENS, su historia dio origen a una orden obsesionada con aquello que espera al otro lado. Cuando Dios desapareció, sus miembros llegaron a una conclusión aterradora: más allá de la vida quizá no existía una promesa, sino una maquinaria abandonada que seguía funcionando por costumbre.",
+      "caida": "La Apostasía fue su respuesta. Rechazaron tanto la autoridad del Cielo como los pactos del Infierno y se negaron a entregar su destino a ninguno de los dos. Visten vendas selladas, máscaras de filtración y placas de plomo marcadas con fórmulas de preservación. Sus armas transportan plagas del sepulcro, y su voluntad parece prolongarse incluso cuando el cuerpo debería rendirse.",
+      "presente": "Lázaro avanza con el fusil Cuarto Día y una losa convertida en escudo y maza. Es resistente a enfermedades, venenos y sangrado, y posee una última oportunidad de seguir luchando cuando alcanza sus límites. Sus compañeros lo consideran imposible de detener; él sabe que cada regreso tiene un precio. Su pregunta no es cómo evitar la muerte para siempre, sino qué vida merece defender mientras todavía pueda elegir.",
+      "parrafos": [
+        "La tradición cuenta que Lázaro regresó de la muerte después de cuatro días en el sepulcro. En el mundo de DEUS ABSENS, su historia dio origen a una orden obsesionada con aquello que espera al otro lado. Cuando Dios desapareció, sus miembros llegaron a una conclusión aterradora: más allá de la vida quizá no existía una promesa, sino una maquinaria abandonada que seguía funcionando por costumbre.",
+        "La Apostasía fue su respuesta. Rechazaron tanto la autoridad del Cielo como los pactos del Infierno y se negaron a entregar su destino a ninguno de los dos. Visten vendas selladas, máscaras de filtración y placas de plomo marcadas con fórmulas de preservación. Sus armas transportan plagas del sepulcro, y su voluntad parece prolongarse incluso cuando el cuerpo debería rendirse.",
+        "Lázaro avanza con el fusil Cuarto Día y una losa convertida en escudo y maza. Es resistente a enfermedades, venenos y sangrado, y posee una última oportunidad de seguir luchando cuando alcanza sus límites. Sus compañeros lo consideran imposible de detener; él sabe que cada regreso tiene un precio. Su pregunta no es cómo evitar la muerte para siempre, sino qué vida merece defender mientras todavía pueda elegir."
+      ]
+    },
+    "trasfondo": "La tradición cuenta que Lázaro regresó de la muerte después de cuatro días en el sepulcro. En el mundo de DEUS ABSENS, su historia dio origen a una orden obsesionada con aquello que espera al otro lado. Cuando Dios desapareció, sus miembros llegaron a una conclusión aterradora: más allá de la vida quizá no existía una promesa, sino una maquinaria abandonada que seguía funcionando por costumbre.\n\nLa Apostasía fue su respuesta. Rechazaron tanto la autoridad del Cielo como los pactos del Infierno y se negaron a entregar su destino a ninguno de los dos. Visten vendas selladas, máscaras de filtración y placas de plomo marcadas con fórmulas de preservación. Sus armas transportan plagas del sepulcro, y su voluntad parece prolongarse incluso cuando el cuerpo debería rendirse.\n\nLázaro avanza con el fusil Cuarto Día y una losa convertida en escudo y maza. Es resistente a enfermedades, venenos y sangrado, y posee una última oportunidad de seguir luchando cuando alcanza sus límites. Sus compañeros lo consideran imposible de detener; él sabe que cada regreso tiene un precio. Su pregunta no es cómo evitar la muerte para siempre, sino qué vida merece defender mientras todavía pueda elegir.",
+    "equipoInicial": [
+      {
+        "nombre": "Fusil de Agujas Virulentas «Cuarto Día»",
+        "tipo": "arma",
+        "danio": "1d8",
+        "modo": "distancia",
+        "efecto": "Un disparo exitoso aplica Peste de Sepulcro: 2 PV al inicio de los turnos del objetivo durante 3 rondas.",
+        "dotDanio": 2,
+        "dotDuracionRondas": 3,
+        "estado": "Peste de Sepulcro",
+        "id": "equipo-san-lazaro-1"
+      },
+      {
+        "nombre": "Losa del Sepulcro",
+        "tipo": "arma",
+        "danio": "1d8",
+        "modo": "cuerpo_a_cuerpo_y_escudo",
+        "efecto": "Maza pesada y +1 de Blindaje permanente contra ataques frontales.",
+        "bonusBlindajeFrontal": 1,
+        "id": "equipo-san-lazaro-2"
+      }
+    ],
+    "pasiva": {
+      "nombre": "Rechazo de la Tumba",
+      "descripcion": "Es inmune a venenos, enfermedades y sangrado. Cuando un ataque lo reduce a 0 PV entra en Putrefacción Activa durante 2 rondas: sigue actuando sin penalización y sus ataques infligen +2 de daño ácido. Si derrota a un enemigo antes de terminar o concluye el combate mientras dura el estado, vuelve con 5 PV; si no, muere definitivamente.",
+      "inmunidades": [
+        "venenos",
+        "enfermedades",
+        "sangrado"
+      ],
+      "disparador": "Ataque lo reduce a 0 PV",
+      "estado": "Putrefacción Activa",
+      "duracionRondas": 2,
+      "bonoDanioAcido": 2,
+      "condicionesRecuperacion": [
+        "Derrotar un enemigo dentro de las 2 rondas",
+        "Terminar el combate durante las 2 rondas"
+      ],
+      "pvRecuperados": 5,
+      "fracaso": "Muerte definitiva"
+    },
+    "martirio": {
+      "nombre": "Exhalación del Sudario",
+      "descripcion": "Elige un enemigo a alcance corto o medio; ataque automático que ignora Defensa e inflige 3d6. Lázaro reduce su Estigma en 3 y el objetivo queda Podrido, recibiendo +2 de daño adicional de cualquier fuente durante el resto del combate.",
+      "alcance": [
+        "corto",
+        "medio"
+      ],
+      "impactoAutomatico": true,
+      "ignoraDefensa": true,
+      "danio": "3d6",
+      "reduccionEstigma": 3,
+      "estadoAplicado": "Podrido",
+      "bonusDanioRecibido": 2,
+      "duracionEstado": "Resto del combate",
+      "tipo": "martirio",
+      "usoIndicadoEnFichaOriginal": "1 vez por combate",
+      "maxCharges": null,
+      "prototypeMaxCharges": 1,
+      "chargeCost": 1,
+      "restauraAlEmpezarExpedicion": true,
+      "restauraEntreCombates": false,
+      "estadoBalance": "carga_maxima_pendiente"
+    },
+    "estadisticasDerivadas": {
+      "pvMaximos": "12 + SANGRE × 3",
+      "defensa": "8 + ceil(CENIZA / 2)",
+      "movimiento": "2 + CENIZA",
+      "estigmaMaximo": "10 + DOGMA"
+    },
+    "desbloqueo": {
+      "inicialmenteDisponible": false,
+      "lugar": "Basílica",
+      "requisito": "Romper el sello mediante Ecos Divinos en el Santuario",
+      "costeEcos": null
+    },
+    "pendientes": [
+      "Revisar balance general",
+      "Adaptar referencias antiguas a d20 cuando corresponda",
+      "Establecer alcance en casillas si la regla lo requiere"
+    ]
   }
 ]

@@ -1,4 +1,20 @@
-# DEUS ABSENS · Santuario digital v6.3
+# DEUS ABSENS · Pulido visual y hoja de partida v6.4
+
+Esta entrega mantiene la apariencia editorial de la v6.3 y añade navegación agrupada, una pantalla de créditos más cuidada, una selección de Santo confirmable/bloqueable y una hoja de personaje con inventario local.
+
+**Instalación:** sustituir las rutas del archivo de actualización directamente en la raíz del repositorio de GitHub Pages. No eliminar los JSON ni el almacenamiento del navegador.
+
+**Para preparar una ficha:** Personajes → Elegir → Distribuir atributos → Guardar → Confirmar y sellar. Después se abre la hoja de partida con Ficha de combate, Inventario y Crónica. El director puede reabrir la selección mediante confirmación.
+
+**Limitación:** bloqueo e inventario solo en este navegador. No hay autenticación de director ni sincronización multijugador. El inventario manual no añade automáticamente efectos mecánicos.
+
+Para imágenes futuras: incorporar retratos locales `assets/images/*.webp` o `.jpg` y referenciarlos desde la propiedad opcional `retrato` de los personajes o enemigos en sus JSON. Los glifos siguen funcionando sin imágenes.
+
+Detalle de los cambios: `docs/INTERFAZ_VISUAL_V6_4.md`.
+
+---
+
+# DEUS ABSENS · Santuario digital v6.4
 
 Sitio web estático para GitHub Pages. Conserva los nombres de archivo y rutas originales.
 
@@ -21,7 +37,7 @@ Sitio web estático para GitHub Pages. Conserva los nombres de archivo y rutas o
 
 ### Publicar desde la versión v6.2
 
-El ZIP `DEUS_ABSENS_visual_v6.3_ACTUALIZACION.zip` contiene exactamente las rutas que debes sustituir o añadir. Extrae desde la raíz del repositorio y **no borres** `data/personajes.json`, `data/habilidades.json`, `data/reliquias.json` ni tus otros ficheros.
+El ZIP de actualización correspondiente a v6.3 contenía las rutas de esa versión; para instalar este refinamiento desde v6.3 utiliza `DEUS_ABSENS_pulido_v6.4_ACTUALIZACION.zip`. Extrae desde la raíz del repositorio y **no borres** `data/personajes.json`, `data/habilidades.json`, `data/reliquias.json` ni tus otros ficheros.
 
 Archivos modificados: `index.html`, `assets/css/style.css`, `assets/js/app.js`, `assets/js/ui.js`, `assets/js/data.js`, `README.md`. Archivo nuevo: `docs/INTERFAZ_VISUAL_V6_3.md`.
 
@@ -31,7 +47,7 @@ Archivos modificados: `index.html`, `assets/css/style.css`, `assets/js/app.js`, 
 
 - **Bloque visual 2:** los diez Santos ahora aparecen como cartas/expedientes sagrados con glifos propios, lemas narrativos, atributos y accesos a la ficha completa.
 - **Iconografía de navegación:** los once menús tienen un símbolo y las cabeceras de sección usan ornamentos individuales.
-- **Transiciones ligeras:** animación entre secciones, con respeto a la preferencia del sistema de reducir movimiento.
+- **Transiciones:** la navegación es inmediata y sin animaciones de pantalla completa. Los detalles de hover son mínimos.
 - **Narrativas preservadas:** el proyecto completo incorpora el JSON ampliado v2.9 con las historias completas de los diez Penitentes y mantiene las mismas identidades de personaje y habilidades.
 
 - **Pantalla de entrada** antes de acceder al contenido principal, con opción de entrar al inicio o saltar a personajes.

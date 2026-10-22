@@ -52,19 +52,34 @@
 <header class="topbar">
   <div class="top-inner">
     <a class="brand" href="#" aria-label="Volver al inicio" data-goto="inicio"><span class="brand-mark"><span>✦</span></span> DEUS ABSENS</a>
-    <div class="top-meta"><span class="top-pill">Santuario digital</span><span class="top-pill muted-pill">Versión visual v6.3</span></div>
-    <nav class="nav" aria-label="Navegación principal">
-      <button class="active" data-section="inicio"><span class="nav-glyph" aria-hidden="true">✦</span><span class="nav-label">Inicio</span></button>
-      <button data-section="historia"><span class="nav-glyph" aria-hidden="true">❦</span><span class="nav-label">Crónica</span></button>
-      <button data-section="reglas"><span class="nav-glyph" aria-hidden="true">⚖</span><span class="nav-label">Reglas</span></button>
-      <button data-section="personajes"><span class="nav-glyph" aria-hidden="true">♜</span><span class="nav-label">Personajes</span></button>
-      <button data-section="enemigos"><span class="nav-glyph" aria-hidden="true">☠</span><span class="nav-label">Enemigos</span></button>
-      <button data-section="expedicion"><span class="nav-glyph" aria-hidden="true">⤳</span><span class="nav-label">Expedición</span></button>
-      <button data-section="zonas"><span class="nav-glyph" aria-hidden="true">◇</span><span class="nav-label">Zonas</span></button>
-      <button data-section="encuentro"><span class="nav-glyph" aria-hidden="true">⚙</span><span class="nav-label">Director</span></button>
-      <button data-section="progreso"><span class="nav-glyph" aria-hidden="true">⟁</span><span class="nav-label">Legado</span></button>
-      <button data-section="objetos"><span class="nav-glyph" aria-hidden="true">⚿</span><span class="nav-label">Reliquias</span></button>
-      <button data-section="creditos"><span class="nav-glyph" aria-hidden="true">✧</span><span class="nav-label">Créditos</span></button>
+    <div class="top-meta"><span class="top-pill">Santuario digital</span><span class="top-pill muted-pill">Versión v6.4</span></div>
+    <nav class="nav nav-grouped" aria-label="Navegación principal">
+      <button class="nav-home active" data-section="inicio"><span class="nav-glyph" aria-hidden="true">✦</span><span class="nav-label">Inicio</span></button>
+      <details class="nav-group">
+        <summary>El mundo <span aria-hidden="true">⌄</span></summary>
+        <div class="nav-panel">
+          <button data-section="historia"><span class="nav-glyph" aria-hidden="true">❦</span> Crónica</button>
+          <button data-section="reglas"><span class="nav-glyph" aria-hidden="true">⚖</span> Reglas</button>
+          <button data-section="zonas"><span class="nav-glyph" aria-hidden="true">◇</span> Zonas</button>
+        </div>
+      </details>
+      <details class="nav-group">
+        <summary>El códice <span aria-hidden="true">⌄</span></summary>
+        <div class="nav-panel">
+          <button data-section="personajes"><span class="nav-glyph" aria-hidden="true">♜</span> Penitentes</button>
+          <button data-section="enemigos"><span class="nav-glyph" aria-hidden="true">☠</span> Bestiario</button>
+          <button data-section="objetos"><span class="nav-glyph" aria-hidden="true">⚿</span> Reliquias</button>
+        </div>
+      </details>
+      <details class="nav-group">
+        <summary>La partida <span aria-hidden="true">⌄</span></summary>
+        <div class="nav-panel">
+          <button data-section="expedicion"><span class="nav-glyph" aria-hidden="true">⤳</span> Expedición</button>
+          <button data-section="encuentro"><span class="nav-glyph" aria-hidden="true">⚙</span> Director</button>
+          <button data-section="progreso"><span class="nav-glyph" aria-hidden="true">⟁</span> Legado</button>
+        </div>
+      </details>
+      <button class="nav-credit" data-section="creditos"><span class="nav-glyph" aria-hidden="true">✧</span><span class="nav-label">Créditos</span></button>
     </nav>
   </div>
 </header>
@@ -152,8 +167,9 @@
   </section>
 
   <section class="section" id="personajes">
-    <div class="section-head"><div><div class="kicker">Capítulo III · Los que aún caminan</div><h2>Personajes jugables</h2><p class="lead">Consulta los diez Santos penitentes, distribuye +3, +2, +1 y +0, y controla PV, Estigma y cargas de martirio.</p></div></div>
-    <div class="toolbar"><input id="characterSearch" class="search" placeholder="Buscar personaje o habilidad…" aria-label="Buscar personaje"><select id="characterFilter" class="filter" aria-label="Filtrar personajes"><option value="all">Todos</option><option value="available">Desbloqueados</option><option value="locked">Sellados</option><option value="chosen">Personaje elegido</option></select></div>
+    <div class="section-head"><div><div class="kicker">Capítulo III · Los que aún caminan</div><h2>Personajes jugables</h2><p class="lead">Elige uno de los diez Santos, distribuye los atributos y confirma tu elección para abrir una hoja de partida con inventario.</p></div></div>
+    <div class="character-catalog-heading" id="characterCatalogHeading"><span class="kicker">ARCHIVO DE PENITENTES / 10 REGISTROS</span><p>Una elección comienza aquí. Después de confirmar la ficha, el catálogo queda bloqueado para esta partida.</p></div>
+    <div class="toolbar" id="characterCatalogTools"><input id="characterSearch" class="search" placeholder="Buscar personaje o habilidad…" aria-label="Buscar personaje"><select id="characterFilter" class="filter" aria-label="Filtrar personajes"><option value="all">Todos</option><option value="available">Desbloqueados</option><option value="locked">Sellados</option><option value="chosen">Personaje elegido</option></select></div>
     <div id="characterSheetPanel"></div>
     <div class="grid" id="characterGrid"></div>
   </section>
@@ -270,32 +286,25 @@
   </section>
 
   <section class="section" id="creditos">
-    <div class="section-head"><div><div class="kicker">Capítulo IX · Quién invocó esto</div><h2>Créditos</h2><p class="lead">Una sección formal para reconocer autoría, construcción técnica y estado actual del proyecto.</p></div></div>
-    <div class="columns credits-layout">
-      <div class="card">
-        <div class="kicker">Autoría del proyecto</div>
-        <h3>DEUS ABSENS</h3>
-        <p><strong>Concepto, universo y dirección creativa:</strong> Autor del proyecto / mesa de juego.</p>
-        <p><strong>Diseño del sistema:</strong> desarrollo iterativo de reglas, balance y prototipado.</p>
-        <p><strong>Construcción web:</strong> HTML, CSS y JavaScript vanilla.</p>
-      </div>
-      <div class="card">
-        <div class="kicker">Asistencia y prototipo</div>
-        <h3>Santuario digital</h3>
-        <p><strong>Apoyo de diseño y estructura:</strong> asistencia conversacional para organización del contenido, documentación y prototipos.</p>
-        <p><strong>Fuentes:</strong> Cinzel y Crimson Pro.</p>
-        <p><strong>Estado:</strong> manual jugable en desarrollo, con menús estructurales listos para crecer.</p>
-      </div>
-    </div>
-    <div class="grid" style="margin-top:18px">
-      <article class="card placeholder-card"><div class="symbol">✦</div><h3>Agradecimientos</h3><p>Espacio listo para incluir colaboradores de arte, pruebas, narrativa, comunidad y dirección de juego.</p></article>
-      <article class="card placeholder-card"><div class="symbol">⚙</div><h3>Versión del proyecto</h3><p>Visual UI v6.3 · portada estática, atlas dinámico y relicario renovado.</p></article>
-      <article class="card placeholder-card"><div class="symbol">☉</div><h3>Notas</h3><p>Puedes reemplazar fácilmente estos textos por nombres reales cuando quieras publicar una versión más formal.</p></article>
+    <div class="section-head"><div><div class="kicker">Último folio · El archivo de la ausencia</div><h2>Créditos</h2><p class="lead">Todo códice tiene una mano que lo escribió y una mesa que le dio vida.</p></div></div>
+    <div class="credits-folio">
+      <div class="credits-monogram" aria-hidden="true">✦</div>
+      <span class="overline">UNA OBRA EN CONSTRUCCIÓN</span>
+      <h3>DEUS ABSENS</h3>
+      <p class="credits-subtitle">El cielo está vacío. El mundo todavía tiene historias.</p>
+      <div class="credits-fine-rule" aria-hidden="true">✧</div>
+      <span class="credits-label">Concepto, universo y dirección creativa</span>
+      <strong class="credits-author">Isaias Martinez</strong>
+      <span class="credits-label">Desarrollo del sistema y prototipo digital</span>
+      <p>Diseño iterativo de reglas, documentación y una web estática en HTML, CSS y JavaScript, con asistencia de IA durante el proceso creativo y técnico.</p>
+      <div class="credits-fine-rule" aria-hidden="true">✧</div>
+      <p class="credits-note">A los jugadores, directores y futuros colaboradores que den voz a este mundo.</p>
+      <span class="overline">SANTUARIO DIGITAL · VERSIÓN 6.4</span>
     </div>
   </section>
 </main>
 
-<footer class="footer">DEUS ABSENS · EL SILENCIO TAMBIÉN ES UNA RESPUESTA<br><span style="font-size:12px">Santuario digital en desarrollo · visual v6.3</span></footer>
+<footer class="footer">DEUS ABSENS · EL SILENCIO TAMBIÉN ES UNA RESPUESTA<br><span style="font-size:12px">Santuario digital en desarrollo · visual v6.4</span></footer>
 
 <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
   <div class="modal"><div class="kicker" id="modalKicker">Decisión</div><h3 id="modalTitle">Confirmar</h3><div id="modalBody"></div><div class="modal-actions" id="modalActions"></div></div>

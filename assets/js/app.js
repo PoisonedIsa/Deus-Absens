@@ -1,6 +1,8 @@
 // DEUS ABSENS: fichas digitales de consulta y mesa del director. Sin cálculo de rutas.
 import {cargarDatos} from './data.js';
-import {cargarEstado,guardarEstado} from './state.js';
+import {cargarEstado,guardarEstado,STORAGE_KEY} from './state.js';
+import {normalizarLegado,nuevoId,crearCodigo,leerCodigo,construirInforme,validarInforme,validarRecompensa,aplicarRecompensa,restaurarInforme} from './legacy.js';
+import {pintarEconomia,pintarMejoras,pintarCodigos} from './legacy-ui.js';
 import {abrirModal,cerrarModal,avisar,escapar,mostrarError,mostrarSeccion,renderPersonajes,renderEnemigos,renderMesa,renderReliquias,renderResumen,renderZonas,textoFichaPersonaje,textoFichaEnemigo,textoFichaZona,getSheet,estadisticas} from './ui.js';
 const $=id=>document.getElementById(id);
 function cerrarPortada(destino='inicio'){
@@ -13,8 +15,10 @@ function cerrarPortada(destino='inicio'){
  mostrarSeccion(destino);
 }
 async function iniciar(){
- const data=await cargarDatos();const {characters,enemies,items,abilities,equipment,zones,zonesStatus}=data;
+ const data=await cargarDatos();const {characters,enemies,items,abilities,equipment,zones,zonesStatus,improvements}=data;
  const state=cargarEstado(items);
+ state.legacy=normalizarLegado(state.legacy);
+ let codeMode='player',directorRecipient=null;
  state.sheetTab='resumen';state.catalogOpen=false;
  const byChar=Object.fromEntries(characters.map(c=>[c.id,c]));
  const byEnemy=Object.fromEntries(enemies.map(e=>[e.id,e]));
@@ -27,6 +31,9 @@ async function iniciar(){
   if(kind==='all'||kind==='encounter')renderMesa(enemies,state);
   if(kind==='all'||kind==='items')renderReliquias(items,state);
   renderResumen(characters,enemies,items,state);
+  if(kind==='all'||kind==='legacy'||kind==='characters'||kind==='items'){
+   pintarEconomia(state);pintarMejoras(improvements,state);pintarCodigos(codeMode,directorRecipient,state);
+  }
  }
  function persist(kind){if(!guardarEstado(state))avisar('No se pudo guardar en el navegador.');render(kind)}
  function sheetFor(c){
@@ -69,7 +76,7 @@ async function iniciar(){
   const values=Object.values(record.attrs||{}).slice().sort((a,b)=>b-a);
   if(JSON.stringify(values)!=='[3,2,1,0]'){avisar('Debes asignar exactamente +3, +2, +1 y +0.');return;}
   abrirModal('Sellar ficha de partida',`<p>¿Confirmar a <strong>${escapar(c.name)}</strong> como tu Penitente para esta partida?</p><p>Los atributos y la selección quedarán bloqueados. Podrás seguir gestionando PV, Estigma, martirio e inventario. El director podrá reabrir la selección mediante una confirmación expresa.</p>`,[
-    {label:'Confirmar y sellar',action:()=>{state.selectionLocked=true;state.sheetTab='resumen';state.catalogOpen=false;persist('characters');avisar('Ficha sellada. Se ha abierto tu hoja de partida.')}},
+    {label:'Confirmar y sellar',action:()=>{if(!state.legacy.playerId)state.legacy.playerId=nuevoId('penitente');state.selectionLocked=true;state.sheetTab='resumen';state.catalogOpen=false;persist('characters');avisar('Ficha sellada. Se ha abierto tu hoja de partida.')}},
     {label:'Volver',secondary:true}
   ],'Rito de consagración');
  }
@@ -131,6 +138,100 @@ async function iniciar(){
   if(action==='enemy-full')instance.hp=def.hp;
   persist('encounter');
  }
+ // El director y el jugador comparten el esquema, NO la misma sesión de navegador.
+ function outputCode(code){$('codeOutput').value=code;$('codeOutput').focus();$('codeOutput').select();}
+ function respaldoLocal(){
+  try{localStorage.setItem('deusAbsensBackupV65',JSON.stringify(state));return true;}
+  catch(e){console.warn(e);avisar('No se pudo crear el respaldo. No se aplicaron cambios.');return false;}
+ }
+ function importCode(){
+  const raw=$('codeInput').value;
+  let obj;
+  try{obj=leerCodigo(raw);}catch(e){avisar(e.message);return;}
+  const p=obj.payload;
+  if(obj.type==='PLAYER_REPORT'){
+   try{validarInforme(p,characters,items,improvements);}catch(e){avisar(e.message);return;}
+   const summary=`<p><strong>${escapar(p.saintName||p.saintId)}</strong> · ${escapar(p.playerId)}</p><p>Ecos de expedición: <strong>${p.ecos.expedition}</strong>. Reservados: <strong>${p.ecos.reserve}</strong>. Inventario: <strong>${p.sheet.inventory.length}</strong> registros.</p><p class="muted fine-print">${escapar(p.campaignId||'Aún no vinculado a una campaña')}. Un informe de jugador no acredita la autorización de sus datos.</p>`;
+   if(codeMode==='director'){
+    abrirModal('Informe recibido del Penitente',summary+'<p>¿Usar este informe para identificar al destinatario de una recompensa? No cambia tus datos de director.</p>',[
+     {label:'Elegir destinatario',action:()=>{directorRecipient={playerId:p.playerId,name:p.saintName||p.saintId,campaignId:p.campaignId};pintarCodigos(codeMode,directorRecipient,state);avisar('Informe registrado para preparar la recompensa.')}},
+     {label:'Cancelar',secondary:true}
+    ],'Códigos · lectura');
+   }else{
+    abrirModal('Restaurar una hoja de partida',summary+'<p><strong>Atención:</strong> este proceso sustituye la selección y el progreso personal actuales de este navegador. Se guardará un respaldo local previo.</p>',[
+     {label:'Restaurar mi ficha',action:()=>{if(!respaldoLocal())return;try{restaurarInforme(p,state,characters,items,improvements);state.sheetTab='resumen';state.catalogOpen=false;persist('all');avisar('Ficha restaurada.');}catch(e){avisar(e.message);}}},
+     {label:'Cancelar',secondary:true}
+    ],'Restauración confirmada');
+   }
+  } else {
+   if(codeMode==='director'){avisar('Cambia a modo jugador para aplicar una recompensa.');return;}
+   try{validarRecompensa(p,state,characters,items,improvements);}catch(e){avisar(e.message);return;}
+   const itemsFound=[p.global.saints.length&&`${p.global.saints.length} Santos`,p.global.relics.length&&`${p.global.relics.length} reliquias`,p.personalUpgrades.length&&`${p.personalUpgrades.length} mejoras personales`,p.global.upgrades.length&&`${p.global.upgrades.length} mejoras globales`].filter(Boolean).join(' · ')||'Sin desbloqueos nuevos';
+   abrirModal('Recompensa del director',`<p><strong>Campaña:</strong> ${escapar(p.campaignId)}</p><p><strong>Destino:</strong> ${escapar(p.toPlayer)}</p><p><strong>Ecos de expedición que se agregarán:</strong> ${p.ecosExpedition}</p><p>${escapar(itemsFound)}</p><p class="muted fine-print">Revisa el origen de este código. No contiene ninguna firma que permita acreditar quién lo creó. Se guardará un respaldo antes de aplicarlo.</p>`,[
+    {label:'Aplicar recompensa',action:()=>{if(!respaldoLocal())return;try{aplicarRecompensa(p,state,characters,items,improvements);persist('all');avisar('Recompensa aplicada a esta ficha.');}catch(e){avisar(e.message);}}},
+    {label:'Cancelar',secondary:true}
+   ],'Confirmación de recompensa');
+  }
+ }
+ function exportReport(){
+  const c=byChar[state.chosen];if(!c||!state.selectionLocked){avisar('Primero selecciona y sella un Santo.');return;}
+  if(!state.legacy.playerId)state.legacy.playerId=nuevoId('penitente');
+  try{const code=crearCodigo('PLAYER_REPORT',construirInforme(state,c));guardarEstado(state);pintarCodigos(codeMode,directorRecipient,state);outputCode(code);avisar('Informe de ficha generado.');}
+  catch(e){avisar(e.message);}
+ }
+ function createCampaign(){
+  if(codeMode!=='director'||state.legacy.campaignId)return;
+  abrirModal('Crear sello de campaña','<p>Se creará un identificador local de campaña para vincular los códigos emitidos por esta mesa. No crea cuentas ni un servidor.</p>',[
+   {label:'Crear sello',action:()=>{state.legacy.campaignId=nuevoId('campana');persist('legacy');avisar('Sello de campaña creado.');}},
+   {label:'Cancelar',secondary:true}
+  ],'Mesa del director');
+ }
+ function directorGrant(){
+  if(codeMode!=='director'||!directorRecipient||!state.legacy.campaignId)return;
+  if(directorRecipient.campaignId&&directorRecipient.campaignId!==state.legacy.campaignId){avisar('Este Penitente ya pertenece a otra campaña.');return;}
+  const secrets=characters.filter(c=>c.secret&&!state.unlockedSaints.includes(c.id));
+  const relics=items.filter(i=>!state.unlocked.includes(i.id));
+  const unowned=improvements.filter(i=>['personal','global'].includes(i.scope) && !(i.scope==='global'?state.legacy.globalUpgrades:[]).includes(i.id));
+  const checks=(entries,kind)=>entries.map(c=>`<label><input type="checkbox" data-grant="${kind}" value="${escapar(c.id)}"><span>${escapar(c.name||c.nombre||c.id)}</span></label>`).join('');
+  const body=`<p>Destinatario: <strong>${escapar(directorRecipient.name)}</strong><br><small>${escapar(directorRecipient.playerId)}</small></p>
+    <label class="legacy-inline-label" for="grantEcos">Ecos de expedición entregados manualmente (sin tarifa automática)</label>
+    <input id="grantEcos" class="legacy-number" type="number" min="0" max="100000000" step="1" value="0">
+    <label class="legacy-inline-label">Nuevos Santos apócrifos</label><div class="legacy-option-grid">${checks(secrets,'saint')||'<span class="muted">Ninguno pendiente.</span>'}</div>
+    <label class="legacy-inline-label">Nuevas reliquias</label><div class="legacy-option-grid">${checks(relics,'relic')||'<span class="muted">Ninguna pendiente.</span>'}</div>
+    <label class="legacy-inline-label">Mejoras aprobadas del catálogo</label><div class="legacy-option-grid">${checks(unowned,'upgrade')||'<span class="muted">El catálogo aún no tiene mejoras aprobadas.</span>'}</div>
+    <p class="legacy-modaltip">Los desbloqueos globales ya registrados en esta mesa también se incluirán. No se descuentan Ecos ni se aplican efectos de mejoras.</p>`;
+  abrirModal('Emitir código de recompensa',body,[
+   {label:'Generar código',action:()=>{
+    const raw=($('grantEcos')?.value||'');const qty=Number(raw);
+    if(!/^\d+$/.test(raw)||!Number.isSafeInteger(qty)||qty<0||qty>100000000){avisar('Indica una cantidad entera válida de Ecos.');return;}
+    const chosen=kind=>[...document.querySelectorAll(`[data-grant="${kind}"]:checked`)].map(x=>x.value);
+    const saints=chosen('saint'),relicIds=chosen('relic'),upgradeIds=chosen('upgrade');
+    const pids=upgradeIds.filter(id=>improvements.some(i=>i.id===id&&i.scope==='personal'));
+    const gids=upgradeIds.filter(id=>improvements.some(i=>i.id===id&&i.scope==='global'));
+    const payload={id:nuevoId('recompensa'),campaignId:state.legacy.campaignId,toPlayer:directorRecipient.playerId,
+     ecosExpedition:qty,personalUpgrades:pids,global:{saints:[...new Set([...state.unlockedSaints,...saints])],relics:[...new Set([...state.unlocked,...relicIds])],upgrades:[...new Set([...state.legacy.globalUpgrades,...gids])]}};
+    try{
+     const code=crearCodigo('DIRECTOR_GRANT',payload);
+     // El director registra solo progresión global; nunca suma Ecos a su propia ficha.
+     state.unlockedSaints=payload.global.saints;state.unlocked=payload.global.relics;state.legacy.globalUpgrades=payload.global.upgrades;
+     state.legacy.directorHistory.push({id:payload.id,toPlayer:payload.toPlayer,ecos:qty});
+     state.legacy.directorHistory=state.legacy.directorHistory.slice(-40);
+     persist('all');outputCode(code);avisar('Código de recompensa preparado. Cópialo y entrégalo al jugador.');
+    }catch(e){avisar(e.message);}
+   }},
+   {label:'Cancelar',secondary:true}
+  ],'Registro del director');
+ }
+ function restoreBackup(){
+  const raw=localStorage.getItem('deusAbsensBackupV65');if(!raw){avisar('No hay ningún respaldo local v6.5.');return;}
+  abrirModal('Recuperar respaldo',`<p>¿Restaurar el respaldo local anterior? Esto sustituye el estado de juego actual. La restauración no sincroniza otros dispositivos.</p>`,[
+   {label:'Restaurar respaldo',action:()=>{
+    try{const old=JSON.parse(raw);if(!old||typeof old!=='object'||!Array.isArray(old.unlocked)||typeof old.sheets!=='object')throw Error('Respaldo corrupto.');
+     for(const key of Object.keys(state))delete state[key];Object.assign(state,old);state.legacy=normalizarLegado(state.legacy);state.sheetTab='resumen';state.catalogOpen=false;persist('all');avisar('Respaldo local recuperado.');
+    }catch(e){avisar(e.message);}
+   }},{label:'Cancelar',secondary:true}
+  ],'Seguridad local');
+ }
  document.addEventListener('click',event=>{
   const t=event.target.closest('[data-enter-app],[data-goto],[data-section],[data-action]');if(!t)return;
   if(t.dataset.enterApp){event.preventDefault();cerrarPortada(t.dataset.enterApp);return}
@@ -154,6 +255,15 @@ async function iniciar(){
   else if(a==='attributes')modifyAttr();
   else if(a==='charges-reset')resetCharges();
   else if(['charge-use','charge-add','player-hp-minus','player-hp-plus','player-estigma-minus','player-estigma-plus'].includes(a))editPlayer(a);
+  else if(a==='legacy-mode-player'||a==='legacy-mode-director'){codeMode=a==='legacy-mode-player'?'player':'director';pintarCodigos(codeMode,directorRecipient,state);}
+  else if(a==='legacy-export-player')exportReport();
+  else if(a==='legacy-import')importCode();
+  else if(a==='legacy-new-campaign')createCampaign();
+  else if(a==='legacy-director-grant')directorGrant();
+  else if(a==='legacy-copy'){const v=$('codeOutput').value;if(!v){avisar('Aún no hay código para copiar.');}else if(navigator.clipboard?.writeText){navigator.clipboard.writeText(v).then(()=>avisar('Código copiado.')).catch(()=>{$('codeOutput').select();avisar('Selecciona y copia el código manualmente.');});}else{$('codeOutput').select();avisar('Selecciona y copia el código manualmente.');}}
+  else if(a==='legacy-select-code'){$('codeOutput').focus();$('codeOutput').select();}
+  else if(a==='legacy-backup'){if(respaldoLocal())avisar('Respaldo local guardado.');}
+  else if(a==='legacy-restore-backup')restoreBackup();
   else if(a==='unlock')unlockItem(id);
  });
  $('modalBackdrop').addEventListener('click',e=>{if(e.target.id==='modalBackdrop')cerrarModal()});
@@ -162,6 +272,7 @@ async function iniciar(){
  for(const id of ['characterSearch','characterFilter'])$(id).addEventListener('input',()=>renderPersonajes(characters,state,abilities,equipment,items));
  for(const id of ['enemySearch','enemyFilter'])$(id).addEventListener('input',()=>renderEnemigos(enemies));
  for(const id of ['itemSearch','itemFilter','itemRarityFilter'])$(id).addEventListener('input',()=>renderReliquias(items,state));
+ $('upgradeFilter').addEventListener('input',()=>pintarMejoras(improvements,state));
  render();
 }
 iniciar().catch(e=>{console.error('No se pudo iniciar DEUS ABSENS:',e);mostrarError('No se pudieron cargar los catálogos. Comprueba los archivos JSON y utiliza GitHub Pages o un servidor local.')});

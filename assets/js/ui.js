@@ -12,6 +12,7 @@ export function mostrarSeccion(id) {
     else b.removeAttribute('aria-current');
   });
   $('hero').style.display = id==='inicio'?'grid':'none';
+  document.querySelectorAll(".nav-group").forEach(g=>{g.classList.toggle("contains-active",Boolean(g.querySelector(`button[data-section="${id}"]`)));g.open=false;});
   window.scrollTo(0,0);
 }
 
@@ -40,7 +41,7 @@ const GLIFOS_SANTOS={
  'santa-magdalena':'✧','san-lorenzo':'⚿','san-bartolome':'⟁',
  'san-simeon':'♟','san-judas-tadeo':'☷','santa-juana':'✶','san-lazaro':'☩'
 };
-export function renderPersonajes(chars,state,abilities=[],equipment=[]){
+export function renderPersonajes(chars,state,abilities=[],equipment=[],relics=[]){
   const byId=Object.fromEntries(abilities.map(a=>[a.id,a]));
   const q=$('characterSearch').value.toLowerCase().trim(),filter=$('characterFilter').value;
   const shown=chars.filter(c=>{
@@ -53,11 +54,12 @@ export function renderPersonajes(chars,state,abilities=[],equipment=[]){
     const passive=byId[c.passiveId]||c.pasiva,martyr=byId[c.martyrId]||c.martirio,sheet=getSheet(state,c.id,martyr);
     const ix=chars.indexOf(c)+1;
     const sigil=GLIFOS_SANTOS[c.id]||c.icon||'✦';
+    const art=typeof c.retrato==='string'&&/^assets\/images\/[a-zA-Z0-9_./-]+$/.test(c.retrato)?c.retrato:null;
     const motto=c.narrativa?.lema||c.desc;
     return `<article class="card character-card codex-card${locked?' locked':''}${selected?' codex-selected':''}" data-sanctum="${escapar(c.id)}">
       <div class="codex-border" aria-hidden="true"></div>
       <div class="codex-topline"><span class="codex-index">${c.secret?'APÓCRIFO · ': 'SANTO · '}${String(ix).padStart(2,'0')}</span><span class="codex-seal">${locked?'✧ SELLO INTACTO':selected?'✦ ACTIVO':escapar(c.sin).toUpperCase()}</span></div>
-      <div class="codex-emblem" aria-hidden="true"><span class="codex-emblem-ring"></span><span class="codex-emblem-ornament">${escapar(sigil)}</span><span class="codex-emblem-star">✦</span></div>
+      <div class="codex-emblem" aria-hidden="true"><span class="codex-emblem-ring"></span><span class="codex-emblem-ornament">${art?`<img class="codex-portrait" src="${escapar(art)}" alt="Retrato de ${escapar(c.name)}" loading="lazy" decoding="async">`:escapar(sigil)}</span><span class="codex-emblem-star">✦</span></div>
       <div class="codex-heading"><span class="codex-sin">${escapar(c.titulo||c.sin)}</span><h3>${escapar(c.name)}</h3><p class="codex-role">${escapar(c.rolCompleto||c.role)}</p></div>
       <p class="codex-quote">«${escapar(motto)}»</p>
       <div class="codex-rule" aria-hidden="true">✦</div>
@@ -65,20 +67,47 @@ export function renderPersonajes(chars,state,abilities=[],equipment=[]){
       <div class="codex-traits"><p><strong>Pasiva</strong><span>${escapar(passive?.name??passive?.nombre??'Pendiente')}</span></p><p><strong>Martirio</strong><span>${escapar(martyr?.name??martyr?.nombre??'Pendiente')}</span></p></div>
       <div class="card-bottom codex-actions"><button class="small codex-action-primary" data-action="character-detail" data-id="${escapar(c.id)}">Leer expediente ↗</button>
         ${locked?`<button class="small" data-action="saint-unlock" data-id="${escapar(c.id)}">Desbloquear (director)</button>`:
-         selected?'<span class="tag gold">Penitente elegido</span>':`<button class="small" data-action="choose" data-id="${escapar(c.id)}">Elegir</button>`}</div>
+         selected?'<span class="tag gold">Penitente elegido</span>':state.selectionLocked?'<span class="tag">No disponible en esta partida</span>':`<button class="small" data-action="choose" data-id="${escapar(c.id)}">Elegir</button>`}</div>
     </article>`;
   }).join('')||'<div class="empty">No hay Penitentes para este filtro.</div>';
   const chosen=chars.find(c=>c.id===state.chosen);
-  if(!chosen){$('characterSheetPanel').innerHTML='<div class="inventory-note">Elige un Santo para visualizar su ficha de partida y configurar sus atributos.</div>';return;}
+  const lockedSession=Boolean(state.selectionLocked&&chosen);
+  const catalogVisible=!lockedSession||Boolean(state.catalogOpen);
+  const catalogTools=$('characterCatalogTools');
+  if(catalogTools)catalogTools.hidden=!catalogVisible;
+  const catalogHeading=$('characterCatalogHeading');
+  if(catalogHeading)catalogHeading.hidden=!catalogVisible;
+  $('characterGrid').hidden=!catalogVisible;
+  if(!chosen){$('characterSheetPanel').innerHTML='<div class="inventory-note">Elige un Santo y distribuye +3, +2, +1 y +0 para preparar tu ficha. La selección solo se bloquea al confirmarla.</div>';return;}
   const martyr=byId[chosen.martyrId],sheet=getSheet(state,chosen.id,martyr),a=sheet.attrs,d=sheet.derived;
-  $('characterSheetPanel').innerHTML=`<div class="sheet-panel codex-active-sheet">
-    <div class="sheet-header"><div><div class="kicker">Expediente activo · Guardado local</div><h3>${escapar(chosen.name)}</h3><p>${escapar(chosen.role)} · ${escapar(chosen.sin)}</p></div><span class="tag gold">Seleccionado</span></div>
-    <div class="attributes">${Object.entries(a).map(([key,v])=>`<div class="attribute"><small>${key}</small><strong>+${v}</strong></div>`).join('')}</div>
-    <div class="stats sheet-stats"><span class="stat">PV: ${sheet.pv}/${d.pv}</span><span class="stat">Defensa: ${d.defensa}</span><span class="stat">Movimiento: ${d.movimiento}</span><span class="stat">Estigma: ${sheet.estigma}/${d.estigma}</span></div>
-    <div class="martyr-block"><p><strong>${escapar(martyr?.name)}</strong> · <strong class="martyr-count">${sheet.charges}/${sheet.max}</strong> cargas ${martyr?.maxCharges==null?'<span class="tag">Capacidad de prueba</span>':''}</p><p class="muted">${escapar(martyr?.description)}</p>
-    <div class="card-bottom"><button class="small" data-action="charge-use" ${sheet.charges===0?'disabled':''}>Consumir carga</button><button class="small" data-action="charge-add" ${sheet.charges===sheet.max?'disabled':''}>Recargar (director)</button><button class="small" data-action="charges-reset">Nueva expedición</button></div></div>
-    <div class="card-bottom"><button class="small" data-action="attributes">Distribuir atributos</button><button class="small" data-action="player-hp-minus">PV -1</button><button class="small" data-action="player-hp-plus">PV +1</button><button class="small" data-action="player-estigma-minus">Estigma -1</button><button class="small" data-action="player-estigma-plus">Estigma +1</button></div>
-    <p class="muted fine-print">La nueva expedición restaura únicamente las cargas. Las fichas se guardan en este navegador; todavía no existe sincronización entre jugadores.</p></div>`;
+  const rec=state.sheets?.[chosen.id]||{};
+  const hasConfirmedAttributes=Boolean(rec.attributesConfirmed);
+  const gear=Object.fromEntries(equipment.map(g=>[g.id,g]));
+  const relicCatalog=Object.fromEntries(relics.map(r=>[r.id,r]));
+  const inventory=Array.isArray(rec.inventory)?rec.inventory:[];
+  const entries=inventory.map((item,index)=>{
+    const obj=item.kind==='equipment'?gear[item.id]:item.kind==='relic'?relicCatalog[item.id]:null;
+    const name=obj?.name||item.name||'Objeto sin identificar';
+    const detail=obj?.effect||obj?.desc||'';
+    return `<article class="inventory-entry"><div class="inventory-entry-icon" aria-hidden="true">${item.kind==='relic'?'✧':item.kind==='manual'?'◇':'⚿'}</div><div class="inventory-entry-copy"><strong>${escapar(name)}</strong><small>${escapar(item.kind==='equipment'?'Equipo inicial':item.kind==='relic'?'Reliquia':'Registro manual')} ${detail?'· '+escapar(detail):''}</small></div>${lockedSession?`<button class="small inventory-remove" data-action="inventory-remove" data-uid="${escapar(item.uid)}" aria-label="Retirar ${escapar(name)}">Retirar</button>`:''}</article>`;
+  }).join('')||'<p class="muted">Tu inventario está vacío.</p>';
+  const tab=state.sheetTab||'resumen';
+  const inventoryBlock=`<section class="sheet-inventory" aria-label="Inventario del Penitente"><div class="panel-heading"><span class="kicker">REGISTRO DE PERTENENCIAS</span><h4>Inventario</h4><p>El equipo inicial se añade automáticamente. El inventario es un registro manual de objetos obtenidos en tu partida.</p></div><div class="inventory-list">${entries}</div>${lockedSession?'<button class="small inventory-add" data-action="inventory-add">+ Registrar objeto</button>':''}</section>`;
+  const attributes=Object.entries(a).map(([key,v])=>`<div class="attribute"><small>${key}</small><strong>+${v}</strong></div>`).join('');
+  const stats=`<div class="stats sheet-stats"><span class="stat">PV: ${sheet.pv}/${d.pv}</span><span class="stat">Defensa: ${d.defensa}</span><span class="stat">Movimiento: ${d.movimiento}</span><span class="stat">Estigma: ${sheet.estigma}/${d.estigma}</span></div>`;
+  const counters=`<div class="sheet-controls"><div class="sheet-control-unit"><strong>PV ${sheet.pv}/${d.pv}</strong><div><button class="small" data-action="player-hp-minus" aria-label="Reducir puntos de vida">−</button><button class="small" data-action="player-hp-plus" aria-label="Aumentar puntos de vida">+</button></div></div><div class="sheet-control-unit"><strong>Estigma ${sheet.estigma}/${d.estigma}</strong><div><button class="small" data-action="player-estigma-minus" aria-label="Reducir Estigma">−</button><button class="small" data-action="player-estigma-plus" aria-label="Aumentar Estigma">+</button></div></div></div>`;
+  const martyrBlock=`<div class="martyr-block"><div class="martyr-title"><span class="kicker">MARTIRIO</span><strong>${escapar(martyr?.name||chosen.martirio?.nombre||'Por definir')}</strong></div><p class="muted">${escapar(martyr?.description||chosen.martirio?.descripcion||'')}</p><span class="tag gold">${sheet.charges}/${sheet.max} cargas${martyr?.maxCharges==null?' · capacidad provisional':''}</span><div class="card-bottom"><button class="small" data-action="charge-use" ${sheet.charges===0?'disabled':''}>Consumir</button><button class="small" data-action="charge-add" ${sheet.charges===sheet.max?'disabled':''}>Recargar (director)</button><button class="small" data-action="charges-reset">Nueva expedición</button></div></div>`;
+  const shortHistory=Array.isArray(chosen.narrativa?.parrafos)?chosen.narrativa.parrafos:[chosen.trasfondo||chosen.desc];
+  const detailHistory=`<div class="sheet-story">${shortHistory.map((paragraph,i)=>`<p>${escapar(paragraph)}</p>`).join('')}</div><button class="small" data-action="character-detail" data-id="${escapar(chosen.id)}">Abrir expediente completo ↗</button>`;
+  const activeBody=tab==='inventario'?inventoryBlock:tab==='historia'?detailHistory:
+    `<div class="sheet-summary-grid"><div><span class="kicker">ATRIBUTOS ${lockedSession?'SELLADOS':'POR CONFIRMAR'}</span><div class="attributes">${attributes}</div>${stats}${counters}${martyrBlock}</div><div class="sheet-aside"><span class="kicker">PERTENENCIAS</span><h4>Equipo e inventario</h4><p>${inventory.length} objeto(s) registrados</p><div class="inventory-preview">${entries}</div><button class="small" data-action="sheet-tab" data-tab="inventario">Abrir inventario ↗</button></div></div>`;
+  $('characterSheetPanel').innerHTML=`<div class="sheet-panel codex-active-sheet ${lockedSession?'sheet-finalized':'sheet-preparation'}">
+    <div class="sheet-cover-rule" aria-hidden="true"><span>✦</span></div>
+    <div class="sheet-header"><div><div class="kicker">${lockedSession?'EXPEDIENTE DE PARTIDA · REGISTRO SELLADO':'PREPARACIÓN DE FICHA · ANTES DE DESCENDER'}</div><h3>${escapar(chosen.name)}</h3><p>${escapar(chosen.rolCompleto||chosen.role)} · ${escapar(chosen.sin)}</p></div><span class="tag ${lockedSession?'gold':''}">${lockedSession?'FICHA CONFIRMADA':'ELECCIÓN SIN CONFIRMAR'}</span></div>
+    <p class="sheet-motto">«${escapar(chosen.narrativa?.lema||chosen.desc)}»</p>
+    ${!lockedSession?`<div class="sheet-prepare"><div><span class="kicker">I. CONSAGRACIÓN</span><h4>Antes de sellar tu destino</h4><p>Reparte tus cuatro valores de atributo. Después confirma el Santo para abrir su ficha definitiva de esta partida.</p></div><div class="attributes">${attributes}</div>${stats}<div class="sheet-prepare-buttons"><button class="btn secondary" data-action="attributes">${hasConfirmedAttributes?'Revisar atributos':'Distribuir atributos'}</button><button class="btn" data-action="confirm-character" ${!hasConfirmedAttributes?'disabled title="Primero distribuye los atributos"':''}>Confirmar y sellar ficha</button></div><p class="fine-print muted">${hasConfirmedAttributes?'Atributos preparados. Ya puedes confirmar.':'Debes revisar los atributos para poder confirmar la elección.'}</p></div>`:''}
+    ${lockedSession?`<div class="sheet-tabs" role="group" aria-label="Secciones de la ficha"><button data-action="sheet-tab" data-tab="resumen" class="${tab==='resumen'?'selected':''}">Ficha de combate</button><button data-action="sheet-tab" data-tab="inventario" class="${tab==='inventario'?'selected':''}">Inventario</button><button data-action="sheet-tab" data-tab="historia" class="${tab==='historia'?'selected':''}">Crónica</button></div><div class="sheet-tab-body">${activeBody}</div><div class="sheet-footer-actions"><button class="small" data-action="catalog-toggle">${catalogVisible?'Ocultar catálogo':'Consultar otros Santos'}</button><button class="small danger-outline" data-action="unlock-selection">Reabrir selección (director)</button></div><p class="muted fine-print">El bloqueo afecta solamente a esta ficha guardada en este navegador. No sincroniza las elecciones de otros jugadores.</p>`:''}
+  </div>`;
 }
 
 export function textoFichaPersonaje(c,abilities,equipment,state){
@@ -108,12 +137,12 @@ export function textoFichaPersonaje(c,abilities,equipment,state){
 export function renderEnemigos(enemies){
   const q=$('enemySearch').value.toLowerCase().trim(),filter=$('enemyFilter').value;
   const filtered=enemies.filter(e=>(filter==='all'||e.type===filter)&&[e.name,e.desc,e.type,e.ability,...(e.attacks||[]).map(a=>a.name)].join(' ').toLowerCase().includes(q));
-  $('enemyGrid').innerHTML=filtered.map(e=>`<article class="card enemy-card">
-    <div class="character-top"><div><span class="tag ${e.type==='Celestial'?'gold':''}">${escapar(e.type)} · ${escapar(e.threat)}</span><h3>${escapar(e.name)}</h3></div><div class="symbol">${escapar(e.icon)}</div></div>
+  $('enemyGrid').innerHTML=filtered.map(e=>{const art=typeof e.retrato==='string'&&/^assets\/images\/[a-zA-Z0-9_./-]+$/.test(e.retrato)?e.retrato:null;return `<article class="card enemy-card">
+    <div class="character-top"><div><span class="tag ${e.type==='Celestial'?'gold':''}">${escapar(e.type)} · ${escapar(e.threat)}</span><h3>${escapar(e.name)}</h3></div><div class="symbol">${art?`<img class="enemy-portrait" src="${escapar(art)}" alt="Retrato de ${escapar(e.name)}" loading="lazy" decoding="async">`:escapar(e.icon)}</div></div>
     <p>${escapar(e.desc)}</p><div class="stats"><span class="stat">PV ${e.hp}</span><span class="stat">DEF ${e.defense}</span><span class="stat">BLIN ${e.armor}</span><span class="stat">MOV ${e.movement}</span></div>
     <p><strong>Acciones:</strong> ${(e.attacks||[]).map(a=>`${escapar(a.name)} (${escapar(a.damage)}${a.strikes>1?', '+a.strikes+' ataques':''})`).join(' · ')}</p>
     <span class="tag">ESTADÍSTICAS PROVISIONALES</span><div class="card-bottom"><button class="small" data-action="enemy-detail" data-id="${escapar(e.id)}">Ver ficha</button><button class="small" data-action="enemy-add" data-id="${escapar(e.id)}">Añadir a mesa</button></div>
-  </article>`).join('')||'<div class="empty">No hay enemigos que coincidan con la búsqueda.</div>';
+  </article>`;}).join('')||'<div class="empty">No hay enemigos que coincidan con la búsqueda.</div>';
 }
 export function textoFichaEnemigo(e){return `<div class="detail-sheet"><p>${escapar(e.desc)}</p><div class="stats"><span class="stat">PV ${e.hp}</span><span class="stat">Defensa ${e.defense}</span><span class="stat">Blindaje ${e.armor}</span><span class="stat">Movimiento ${e.movement}</span></div>
     <h4>Ataques y opciones</h4>${(e.attacks||[]).map(a=>`<p><strong>${escapar(a.name)}</strong>: ${a.strikes>1?`${a.strikes} ataques por acción principal, cada uno `:'1 ataque por acción principal, '} daño ${escapar(a.damage)}. Alcance orientativo ${escapar(a.rangeTiles)} casillas. Bono de ataque ${a.attackBonus>=0?'+':''}${escapar(a.attackBonus)}.</p>`).join('')}

@@ -1,6 +1,6 @@
 # DEUS ABSENS | Terreno, coberturas y trampas
 
-**Versión de diseño v1.9.** Los tres tipos de terreno a continuación son acuerdos confirmados. Los valores de cobertura y otros detalles indicados expresamente como propuestas no son reglas oficiales.
+**Versión de diseño v2.0.** Los tres tipos de terreno a continuación son acuerdos confirmados. Los valores de cobertura y otros detalles indicados expresamente como propuestas no son reglas oficiales.
 
 ## Categorías confirmadas
 
@@ -18,7 +18,7 @@ Movimiento básico: **1 punto ortogonal** / **2 puntos diagonal**. Para probar o
 - Trampa intermedia: **1d6** (ejemplo de categoría).
 - Trampa mayor: **1d8** (ejemplo de categoría; máximo daño por dado principal permitido actualmente).
 
-**Confirmado:** las trampas están permanentemente activas; no se consumen tras dañar a un Penitente y pueden volver a afectar a otros. Los enemigos son inmunes a ellas. **Confirmado:** cada Penitente tira el dado de daño correspondiente **al entrar en una casilla de trampa**, y vuelve a tirarlo **al inicio de cada uno de sus turnos si sigue ocupándola**. Es una tirada por cada activación. Permanece activa para entradas y turnos posteriores. La posible desactivación extraordinaria sigue sin decidirse.
+**Confirmado:** las trampas están permanentemente activas; no se consumen tras dañar a un Penitente y pueden volver a afectar a otros. Los enemigos son inmunes a ellas. **Confirmado:** cada Penitente tira el dado de daño correspondiente **al entrar en una casilla de trampa**, y vuelve a tirarlo **al inicio de cada uno de sus turnos si sigue ocupándola**. Es una tirada por cada activación. Permanece activa para entradas y turnos posteriores. La posible desactivación extraordinaria sigue sin decidirse. La visibilidad ya no es uniforme: existen trampas visibles y ocultas.
 
 ## Coberturas: aún por balancear
 
@@ -55,3 +55,12 @@ Pueden añadirse variantes como cánticos castigadores, símbolos de penitencia,
 5. Daño base por tipo: `1d4`, `1d6` o `1d8`. Los efectos adicionales y el modo de desactivación extraordinaria siguen sin determinarse.
 
 **Ejemplo:** un Penitente entra en una trampa `1d6` y tira `1d6` de daño. Si inicia su siguiente turno allí, tira otros `1d6`. No recibe daño adicional solo por acabar su turno en ella; el segundo disparador es el comienzo del turno.
+
+## Actualización v2.0 · Trampas visibles y ocultas (CONFIRMADO)
+
+- Los escenarios pueden contener **trampas visibles** y **trampas ocultas**. La combinación es una regla aprobada.
+- Una trampa visible se representa abiertamente en el tablero para los jugadores.
+- Una trampa oculta mantiene su posición reservada para el director hasta que se descubra o revele según las reglas que definamos después. Para jugar en tablero físico, el director puede conservar las coordenadas ocultas en su panel o notas sin colocarlas a la vista.
+- **Ambas clases** permanecen siempre activas; infligen el daño por tipo (`1d4` a `1d8`) al entrar y al inicio de cada turno en esa casilla. Los enemigos son inmunes. La visibilidad no altera daño ni frecuencia de activación.
+- Se recomienda registrar la visibilidad **por cada aparición de trampa**, no necesariamente por arquetipo: una trampa de agujas puede aparecer visible en una sala y oculta en otra. Este punto se modela en el catálogo como posibilidad técnica y podrá ajustarse.
+- **PENDIENTE:** cómo detectarlas, qué atributo y tirada usar, cuándo quedan reveladas después de activarse, si pueden neutralizarse y qué información ve cada jugador en la interfaz. No se consideran aprobados valores numéricos de detección.

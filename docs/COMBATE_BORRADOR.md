@@ -136,7 +136,7 @@ Estas reglas se ofrecen para pruebas y **no sustituyen** los acuerdos confirmado
 
 - Movimiento normal confirmado: 1 punto ortogonal, 2 diagonal.
 - Ejemplo de cálculo **propuesto, pendiente de validar**: el multiplicador ×2 aplica al entrar en la casilla de obstáculo: coste 2 ortogonal o 4 diagonal; enemigos siempre pagan 1 o 2, respectivamente. No tratar el detalle de cálculo como definitivo.
-- Trampas: representar en el catálogo variantes de prueba 1d4, 1d6 y 1d8; ninguna debe infligir daño superior a 1d8 mediante su dado principal. La activación al entrar y al inicio de cada turno mientras se ocupa la casilla está **confirmada en v1.9**.
+- Trampas: representar en el catálogo variantes de prueba 1d4, 1d6 y 1d8; ninguna debe infligir daño superior a 1d8 mediante su dado principal. La activación al entrar y al inicio de cada turno mientras se ocupa la casilla está **confirmada en v2.0**.
 - Las trampas no afectan a los enemigos; los muros sí les impiden el paso.
 - Los obstáculos transitables pueden ofrecer cobertura, pero el bono y la resistencia aún no están aprobados.
 - El sistema procedural deberá validar conectividad y coste de caminos, reservar posiciones iniciales y evitar encerrar a las unidades con muros.
@@ -146,13 +146,17 @@ Estas reglas se ofrecen para pruebas y **no sustituyen** los acuerdos confirmado
 - Las trampas **nunca se agotan tras activarse**. Siguen representando peligros permanentes de la casilla durante el encuentro.
 - Los Penitentes pueden sufrir daño de trampa según su tipo (`1d4`, `1d6` o `1d8`); los enemigos no lo sufren.
 - Su aspecto narrativo será sacro y tétrico: sangre ritual, agujas penitenciales, símbolos profanados y otros motivos semejantes.
-- **Actualizado en v1.9:** se confirmó daño al entrar y al inicio de cada turno mientras se permanezca en la casilla. No se aplican daños adicionales al mero final de turno.
+- **Actualizado en v2.0:** se confirmó daño al entrar y al inicio de cada turno mientras se permanezca en la casilla. No se aplican daños adicionales al mero final de turno.
 - Reglas de muros y obstáculos transitables de v1.7 siguen vigentes; los bonos de cobertura siguen en evaluación.
 
-## Actualización v1.9 · Momento del daño de trampas (CONFIRMADO)
+## Actualización v2.0 · Momento del daño de trampas (CONFIRMADO)
 
 - **Entrada:** al pisar la casilla, todo Penitente recibe una tirada del dado de daño de la trampa (`1d4`, `1d6` o `1d8`).
 - **Inicio de turno:** si el Penitente empieza su turno sobre la casilla de trampa, recibe otra tirada de ese dado antes de su movimiento.
 - **Repetición:** se aplica de nuevo cada vez que entre o comience allí un turno. Nunca se agota la trampa.
 - **Enemigos:** inmunes a trampas en ambos casos. Los muros siguen bloqueando a todos.
 - **Sin daño adicional al final del turno** por el solo hecho de quedarse allí. Otros efectos y modos de desactivación extraordinaria siguen sin decidirse.
+
+## Trampas visibles y ocultas (v2.0, confirmado)
+
+Los mapas incluyen una mezcla de trampas visibles y ocultas. Su visibilidad no cambia el daño: las trampas siguen siendo permanentes, dañan al entrar y al inicio de cada turno sobre su casilla, e ignoran a los enemigos. Las reglas de detección, revelación y neutralización siguen sin definirse.

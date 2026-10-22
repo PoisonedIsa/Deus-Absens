@@ -115,3 +115,11 @@ Este documento separa acuerdos reales de funcionalidades pendientes.
 - Los enemigos siguen siendo inmunes; ninguna activación consume ni desactiva la trampa.
 - Los detalles de detección, visibilidad y posibles efectos especiales aún no están fijados.
 - Esta regla prevalece sobre referencias anteriores que calificaban el daño por permanencia como pendiente.
+
+## Actualización v2.0 · Visibilidad de trampas (CONFIRMADO)
+
+- Los escenarios pueden contener tanto **trampas visibles** como **trampas ocultas**.
+- El director conoce las posiciones de las trampas ocultas; no se colocan como fichas visibles para todos al preparar el tablero físico.
+- Una trampa no cambia su daño ni se consume por ser visible u oculta. Daño por tipo `1d4` a `1d8`, al entrar y al comienzo de cada turno en su casilla; enemigos inmunes.
+- **Pendiente** decidir cómo se detectan, revelan y neutralizan las trampas, incluido el posible uso de CENIZA o DOGMA.
+- No se ha implementado este comportamiento en la web; solo está documentado y preparado en el catálogo de datos.

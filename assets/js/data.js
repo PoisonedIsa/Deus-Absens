@@ -35,5 +35,13 @@ export async function cargarDatos() {
   }));
   const datos = Object.fromEntries(entries);
   for (const [nombre, lista] of Object.entries(datos)) comprobarIds(lista, nombre);
+  // Las zonas usan un esquema objeto con {schemaVersion, estado, zonas}, no la lista de catálogos.
+  const respuestaZonas = await fetch(new URL('../../data/zonas.json', import.meta.url));
+  if (!respuestaZonas.ok) throw new Error(`No se pudieron cargar las zonas (${respuestaZonas.status})`);
+  const documentoZonas = await respuestaZonas.json();
+  if (!Array.isArray(documentoZonas?.zonas)) throw new Error('El archivo de zonas no tiene una lista "zonas".');
+  comprobarIds(documentoZonas.zonas,'zonas');
+  datos.zones = documentoZonas.zonas;
+  datos.zonesStatus = documentoZonas.estado || 'BORRADOR';
   return datos;
 }

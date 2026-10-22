@@ -1,7 +1,7 @@
 // DEUS ABSENS: fichas digitales de consulta y mesa del director. Sin cálculo de rutas.
 import {cargarDatos} from './data.js';
 import {cargarEstado,guardarEstado} from './state.js';
-import {abrirModal,cerrarModal,avisar,escapar,mostrarError,mostrarSeccion,renderPersonajes,renderEnemigos,renderMesa,renderReliquias,renderResumen,textoFichaPersonaje,textoFichaEnemigo,getSheet,estadisticas} from './ui.js';
+import {abrirModal,cerrarModal,avisar,escapar,mostrarError,mostrarSeccion,renderPersonajes,renderEnemigos,renderMesa,renderReliquias,renderResumen,renderZonas,textoFichaPersonaje,textoFichaEnemigo,textoFichaZona,getSheet,estadisticas} from './ui.js';
 const $=id=>document.getElementById(id);
 function cerrarPortada(destino='inicio'){
  const gate=$('splashGate');
@@ -13,14 +13,16 @@ function cerrarPortada(destino='inicio'){
  mostrarSeccion(destino);
 }
 async function iniciar(){
- const data=await cargarDatos();const {characters,enemies,items,abilities,equipment}=data;
+ const data=await cargarDatos();const {characters,enemies,items,abilities,equipment,zones,zonesStatus}=data;
  const state=cargarEstado(items);
  const byChar=Object.fromEntries(characters.map(c=>[c.id,c]));
  const byEnemy=Object.fromEntries(enemies.map(e=>[e.id,e]));
+ const byZone=Object.fromEntries(zones.map(z=>[z.id,z]));
  const byAbility=Object.fromEntries(abilities.map(a=>[a.id,a]));
  function render(kind='all'){
   if(kind==='all'||kind==='characters')renderPersonajes(characters,state,abilities,equipment);
   if(kind==='all')renderEnemigos(enemies);
+  if(kind==='all')renderZonas(zones,zonesStatus);
   if(kind==='all'||kind==='encounter')renderMesa(enemies,state);
   if(kind==='all'||kind==='items')renderReliquias(items,state);
   renderResumen(characters,enemies,items,state);
@@ -90,6 +92,8 @@ async function iniciar(){
   else if(a==='saint-unlock')unlockSaint(id);
   else if(a==='enemy-detail'){const e=byEnemy[id];if(e)abrirModal(e.name,textoFichaEnemigo(e),[{label:'Cerrar',secondary:true}],`${e.type} · ${e.threat}`);}
   else if(a==='enemy-add')spawn(id);
+  else if(a==='zone-detail'){const z=byZone[id];if(z)abrirModal(z.nombreProvisional||`Zona ${z.numero}`,textoFichaZona(z),[{label:'Cerrar',secondary:true}],`Atlas · Registro ${z.numero}`);}
+  else if(a==='relic-detail'){const r=items.find(i=>i.id===id);if(r){const known=state.unlocked.includes(r.id);abrirModal(r.name, known?`<div class="detail-sheet"><div class="relic-modal-symbol" aria-hidden="true">${escapar(r.icon)}</div><div class="stats"><span class="stat">${escapar(r.type)}</span><span class="stat">${escapar(r.rarity)}</span></div><p>${escapar(r.desc)}</p><p><strong>Registro:</strong> ${escapar(r.condition)}</p></div>`:`<p>Esta reliquia sigue sellada.</p><p><strong>Condición de prueba:</strong> ${escapar(r.condition)}</p>`,[{label:'Cerrar',secondary:true}],known?'Reliquia descubierta':'Registro sellado');}}
   else if(a==='enemy-hit'||a==='enemy-heal'||a==='enemy-full'||a==='enemy-remove')mutateEnemy(a,t.dataset.uid,t.dataset.amount);
   else if(a==='attributes')modifyAttr();
   else if(a==='charges-reset')resetCharges();
@@ -100,7 +104,7 @@ async function iniciar(){
  document.addEventListener('keydown',e=>{if(e.key==='Escape')cerrarModal()});
  for(const id of ['characterSearch','characterFilter'])$(id).addEventListener('input',()=>renderPersonajes(characters,state,abilities,equipment));
  for(const id of ['enemySearch','enemyFilter'])$(id).addEventListener('input',()=>renderEnemigos(enemies));
- for(const id of ['itemSearch','itemFilter'])$(id).addEventListener('input',()=>renderReliquias(items,state));
+ for(const id of ['itemSearch','itemFilter','itemRarityFilter'])$(id).addEventListener('input',()=>renderReliquias(items,state));
  render();
 }
 iniciar().catch(e=>{console.error('No se pudo iniciar DEUS ABSENS:',e);mostrarError('No se pudieron cargar los catálogos. Comprueba los archivos JSON y utiliza GitHub Pages o un servidor local.')});

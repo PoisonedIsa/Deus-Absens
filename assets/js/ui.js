@@ -165,12 +165,86 @@ export function renderResumen(chars,enemies,items,state){
   progress('legacyRelicsBar','legacyRelicsPct',nLoot,items.length);
 }
 
+// Atlas visual. Los valores proceden de data/zonas.json y continúan siendo borradores.
+export function renderZonas(zones,estado='BORRADOR'){
+  const host=$('zoneGrid');
+  if(!host)return;
+  if(!zones.length){host.innerHTML='<div class="empty">No hay zonas registradas todavía.</div>';return;}
+  host.innerHTML=zones.map((zone,index)=>{
+    const number=Number(zone.numero)||index+1;
+    const encounter=zone.generacion?.encuentro||{};
+    const terrain=zone.generacion?.terreno||{};
+    const densityMin=Number.isFinite(Number(terrain.densidadMin))?Math.round(Number(terrain.densidadMin)*100):null;
+    const densityMax=Number.isFinite(Number(terrain.densidadMax))?Math.round(Number(terrain.densidadMax)*100):null;
+    const boards=(zone.tablerosPermitidos||[]).map(n=>`${escapar(n)}×${escapar(n)}`).join(' · ')||'Sin definir';
+    const quantity=Number.isFinite(Number(encounter.cantidadBase))?String(encounter.cantidadBase):'—';
+    const variability=Number.isFinite(Number(encounter.variacionCantidad))?`±${encounter.variacionCantidad}`:'';
+    return `<article class="card atlas-card atlas-card-${Math.min(3,Math.max(1,number))}">
+      <div class="atlas-card-surface" aria-hidden="true"><span>${String(number).padStart(2,'0')}</span><span class="atlas-card-symbol">${['◇','✠','⬡'][(number-1)%3]}</span></div>
+      <div class="atlas-card-top"><span>REGISTRO ${String(number).padStart(2,'0')}</span><span class="tag">BORRADOR</span></div>
+      <h3>${escapar(zone.nombreProvisional||`Zona ${number}`)}</h3>
+      <p class="atlas-card-subtitle">La identidad narrativa y los enemigos característicos de esta zona todavía están por diseñarse.</p>
+      <div class="atlas-data-grid">
+        <div><small>Encuentro base</small><strong>${escapar(quantity)} ${escapar(variability)}</strong></div>
+        <div><small>Tableros</small><strong>${boards}</strong></div>
+        <div><small>Densidad de terreno</small><strong>${densityMin===null||densityMax===null?'—':`${densityMin}–${densityMax} %`}</strong></div>
+        <div><small>Amenaza (borrador)</small><strong>${escapar(encounter.presupuestoAmenaza??'—')}</strong></div>
+      </div>
+      <div class="atlas-card-foot"><span class="atlas-status-dot" aria-hidden="true"></span><span>Parámetros provisionales</span><button class="small" data-action="zone-detail" data-id="${escapar(zone.id)}">Ver ficha ↗</button></div>
+    </article>`;
+  }).join('');
+}
+
+export function textoFichaZona(zone){
+ const e=zone.generacion?.encuentro||{},t=zone.generacion?.terreno||{};
+ const pct=v=>Number.isFinite(Number(v))?`${Math.round(Number(v)*100)} %`:'Sin definir';
+ const boards=(zone.tablerosPermitidos||[]).map(n=>`${escapar(n)}×${escapar(n)}`).join(' · ')||'Sin definir';
+ return `<div class="detail-sheet atlas-detail">
+   <div class="atlas-detail-warn">ARCHIVO EN BORRADOR · No representa estadísticas aprobadas.</div>
+   <p>${escapar(zone.nombreProvisional||`Zona ${zone.numero}`)} es un marcador estructural del atlas. Su nombre final, ambientación y distribución de enemigos aún no están confirmados.</p>
+   <h4>Tableros permitidos</h4><p>${boards}</p>
+   <h4>Generación de encuentros (prototipo)</h4>
+   <div class="atlas-modal-stats"><span>Cantidad base: <strong>${escapar(e.cantidadBase??'—')}</strong></span><span>Variación: <strong>${escapar(e.variacionCantidad??'—')}</strong></span><span>Presupuesto de amenaza: <strong>${escapar(e.presupuestoAmenaza??'—')}</strong></span><span>Excepcionales máximos: <strong>${escapar(e.maximoExcepcionales??'—')}</strong></span></div>
+   <h4>Terreno (prototipo)</h4><p>Densidad entre <strong>${pct(t.densidadMin)}</strong> y <strong>${pct(t.densidadMax)}</strong>.</p>
+   <p class="muted fine-print">Estos valores se consultan desde data/zonas.json. Esta sección no genera rutas, enemigos ni tableros automáticamente.</p>
+ </div>`;
+}
+
+const CLASE_RAREZA={'Común':'comun','Poco común':'poco-comun','Rara':'rara','Única':'unica','Mítica':'mitica'};
 export function renderReliquias(items,state){
-  const q=$('itemSearch').value.toLowerCase(),filter=$('itemFilter').value;
-  const result=items.filter(i=>{const found=state.unlocked.includes(i.id);return (filter==='all'||filter==='unlocked'&&found||filter==='locked'&&!found)&&[i.name,i.type,i.desc,i.condition].join(' ').toLowerCase().includes(q)});
-  $('itemGrid').innerHTML=result.map(i=>{const known=state.unlocked.includes(i.id);return `<article class="card ${known?'':'locked'}"><div class="character-top"><div><span class="tag ${i.rarity==='Mítica'||i.rarity==='Única'?'gold':''}">${escapar(i.rarity)}</span><h3>${escapar(i.name)}</h3></div><div class="symbol">${known?escapar(i.icon):'▧'}</div></div><p>${known?escapar(i.desc):'Registro oculto. Descubre su condición para revelarlo.'}</p><div class="stats"><span class="stat">${escapar(i.type)}</span></div>${known?'<span class="tag gold">Descubierto</span>':`<p class="locked-note">${escapar(i.condition)}</p><button class="small" data-action="unlock" data-id="${escapar(i.id)}">Registrar hallazgo de prueba</button>`}</article>`}).join('')||'<div class="empty">Sin reliquias coincidentes.</div>';
-  const total=items.filter(i=>state.unlocked.includes(i.id)).length;
-  $('relicCount').textContent=`${total} de ${items.length} reliquias`;
-  $('homeProgress').style.width=items.length?`${total/items.length*100}%`:'0%';
+  const q=$('itemSearch').value.toLowerCase().trim();
+  const filter=$('itemFilter').value;
+  const rarity=$('itemRarityFilter')?.value||'all';
+  const isKnown=i=>state.unlocked.includes(i.id);
+  const result=items.filter(i=>{
+    const known=isKnown(i);
+    const correctStatus=filter==='all'||filter==='unlocked'&&known||filter==='locked'&&!known;
+    return correctStatus&&(rarity==='all'||rarity===i.rarity)&&[i.name,i.type,i.desc,i.condition,i.rarity].join(' ').toLowerCase().includes(q);
+  });
+  $('itemGrid').innerHTML=result.map((item,index)=>{
+    const known=isKnown(item);
+    const rare=CLASE_RAREZA[item.rarity]||'comun';
+    const symbol=known?escapar(item.icon||'✦'):'◇';
+    return `<article class="card relic-card relic-${rare}${known?' relic-discovered':' relic-locked'}">
+      <div class="relic-topline"><span>RELICARIO · ${String(index+1).padStart(2,'0')}</span><span class="relic-rarity">${escapar(item.rarity)}</span></div>
+      <div class="relic-emblem" aria-hidden="true"><span class="relic-emblem-inner">${symbol}</span></div>
+      <div class="relic-card-copy"><span class="relic-type">${escapar(item.type)}</span><h3>${escapar(item.name)}</h3>
+        <p>${known?escapar(item.desc):'Este objeto todavía no ha sido registrado en el santuario.'}</p></div>
+      <div class="relic-condition"><span class="relic-condition-title">${known?'REGISTRO ABIERTO':'CONDICIÓN DE DESCUBRIMIENTO'}</span>
+        <p>${known?'Se conserva como hallazgo descubierto.':escapar(item.condition)}</p></div>
+      <div class="relic-card-foot"><span class="relic-state">${known?'✦ Descubierta':'◇ Sellada'}</span>
+        <div class="relic-actions"><button class="small" data-action="relic-detail" data-id="${escapar(item.id)}">Consultar</button>
+        ${known?'':`<button class="small relic-unlock" data-action="unlock" data-id="${escapar(item.id)}">Registrar (prueba)</button>`}</div></div>
+    </article>`;
+  }).join('')||'<div class="empty">No hay reliquias que coincidan con los filtros.</div>';
+  const total=items.filter(isKnown).length;
+  const max=items.length;
+  const percent=max?Math.round(total/max*100):0;
+  $('relicCount').textContent=`${total} de ${max} reliquias`;
+  $('relicResultCount').textContent=`${result.length} resultados`;
+  $('relicKnown').textContent=String(total);
+  $('relicHidden').textContent=String(max-total);
+  $('relicProgressLabel').textContent=`${percent} %`;
+  $('homeProgress').style.width=max?`${percent}%`:'0%';
   $('homeProgressText').textContent=`${total} reliquias descubiertas`;
 }

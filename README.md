@@ -1,9 +1,14 @@
-# DEUS ABSENS · Santuario digital v6.0
+# DEUS ABSENS · Santuario digital v6.1
 
 Sitio web estático para GitHub Pages. Conserva los nombres de archivo y rutas originales.
 
 
 ## Mejoras visuales y estructurales de esta versión
+
+- **Bloque visual 2:** los diez Santos ahora aparecen como cartas/expedientes sagrados con glifos propios, lemas narrativos, atributos y accesos a la ficha completa.
+- **Iconografía de navegación:** los once menús tienen un símbolo y las cabeceras de sección usan ornamentos individuales.
+- **Transiciones ligeras:** animación entre secciones, con respeto a la preferencia del sistema de reducir movimiento.
+- **Narrativas y reglas preservadas:** el proyecto completo incorpora el JSON ampliado v2.9 y el documento acumulado de Puntos Débiles v5.7, sin modificar las identidades ni habilidades.
 
 - **Pantalla de entrada** antes de acceder al contenido principal, con opción de entrar al inicio o saltar a personajes.
 - **Navegación ampliada** con menús para Expedición, Zonas, Legado y Créditos.

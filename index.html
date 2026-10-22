@@ -4,21 +4,42 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#100e12">
-<title>DEUS ABSENS — Manual de juego</title>
+<title>DEUS ABSENS — Santuario digital</title>
 <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
+<div class="splash-gate open" id="splashGate" aria-hidden="false">
+  <div class="splash-noise"></div>
+  <div class="splash-core">
+    <div class="splash-mark">✦</div>
+    <div class="eyebrow">Roguelite de mesa · Santuario digital</div>
+    <h1>DEUS ABSENS</h1>
+    <p class="subtitle">El cielo calló. La carne recuerda. Y cada expedición desciende un poco más hacia aquello que ya no responde.</p>
+    <p class="splash-copy">Esta interfaz funciona como códice, directorio y cámara de campaña: personajes, bestiario, reliquias, legado y herramientas del director reunidos en un solo lugar.</p>
+    <div class="splash-actions">
+      <button class="btn" data-enter-app="inicio">Entrar al santuario</button>
+      <button class="btn secondary" data-enter-app="personajes">Ir a personajes</button>
+    </div>
+    <div class="splash-foot">MEMENTO FINIS · La caída comienza cuando abras el umbral</div>
+  </div>
+</div>
+
 <header class="topbar">
   <div class="top-inner">
     <a class="brand" href="#" aria-label="Volver al inicio" data-goto="inicio"><span class="brand-mark"><span>✦</span></span> DEUS ABSENS</a>
+    <div class="top-meta"><span class="top-pill">Santuario digital</span><span class="top-pill muted-pill">Versión visual v6.0</span></div>
     <nav class="nav" aria-label="Navegación principal">
       <button class="active" data-section="inicio">Inicio</button>
       <button data-section="historia">Crónica</button>
       <button data-section="reglas">Reglas</button>
       <button data-section="personajes">Personajes</button>
       <button data-section="enemigos">Enemigos</button>
-      <button data-section="encuentro">Mesa del director</button>
+      <button data-section="expedicion">Expedición</button>
+      <button data-section="zonas">Zonas</button>
+      <button data-section="encuentro">Director</button>
+      <button data-section="progreso">Legado</button>
       <button data-section="objetos">Reliquias</button>
+      <button data-section="creditos">Créditos</button>
     </nav>
   </div>
 </header>
@@ -35,6 +56,18 @@
       <button class="btn secondary" data-goto="personajes">Elegir personaje</button>
     </div>
   </div>
+  <div class="hero-panels">
+    <div class="hero-panel">
+      <span class="tag gold">Estado</span>
+      <h3>Manual vivo</h3>
+      <p>El santuario digital sigue creciendo: combate, legado, zonas, bestiario y menús estructurales ya tienen un lugar propio.</p>
+    </div>
+    <div class="hero-panel">
+      <span class="tag">En desarrollo</span>
+      <h3>Próximos sistemas</h3>
+      <p>Progreso por jugador, expediciones, códigos, versiones redimidas, utilidades del director y menú de campaña.</p>
+    </div>
+  </div>
 </section>
 
 <div id="appStatus" class="app-status" role="alert" hidden></div>
@@ -47,7 +80,7 @@
       <article class="card"><div class="symbol">♜</div><h3>III. Los condenados</h3><p>Conoce los diez Penitentes, asigna atributos y controla las cargas de martirio.</p><button class="small" data-goto="personajes">Ver personajes ↗</button></article>
       <article class="card"><div class="symbol">☠</div><h3>IV. Los adversarios</h3><p>Ángeles sin misericordia, horrores del abismo y criaturas nacidas de la ausencia.</p><button class="small" data-goto="enemigos">Abrir bestiario ↗</button></article>
       <article class="card"><div class="symbol">⚿</div><h3>V. Reliquias y hallazgos</h3><p>Armas, juramentos y objetos que se revelan conforme la expedición deja huella.</p><button class="small" data-goto="objetos">Abrir relicario ↗</button></article>
-      <article class="card"><div class="symbol">✧</div><h3>VI. Tu legado</h3><p>Los descubrimientos sobreviven a la derrota. Cada intento puede abrir una puerta que antes no existía.</p><div class="progress-wrap"><div class="progress" id="homeProgress"></div></div><span id="homeProgressText" class="tag gold">0 reliquias descubiertas</span></article>
+      <article class="card"><div class="symbol">✧</div><h3>VI. Legado y progreso</h3><p>Los descubrimientos sobreviven a la derrota. Esta sección ya tiene su espacio para crecimiento futuro.</p><button class="small" data-goto="progreso">Abrir legado ↗</button><div class="progress-wrap"><div class="progress" id="homeProgress"></div></div><span id="homeProgressText" class="tag gold">0 reliquias descubiertas</span></article>
     </div>
   </section>
 
@@ -77,50 +110,102 @@
   </section>
 
   <section class="section" id="reglas">
-    <div class="section-head"><div><div class="kicker">Capítulo II · Sobrevivir al descenso</div><h2>Reglas fundamentales</h2><p class="lead">Esta es una estructura inicial y editable. Sustituye los valores provisionales cuando definas el sistema definitivo de dados, daño y dificultad.</p></div></div>
+    <div class="section-head"><div><div class="kicker">Capítulo II · Sobrevivir al descenso</div><h2>Reglas fundamentales</h2><p class="lead">Una base táctica para expediciones letales. Aquí se concentran las reglas aprobadas y los sistemas en crecimiento.</p></div></div>
     <ol class="rule-list">
       <li><div><strong>Prepara la expedición.</strong><br><span style="color:var(--muted)">El grupo elige personajes, equipa reliquias disponibles y fija un objetivo para el descenso.</span></div></li>
       <li><div><strong>Explora por etapas.</strong><br><span style="color:var(--muted)">Cada zona presenta un encuentro, una decisión, un hallazgo o una amenaza. El director describe el riesgo antes de pedir una acción.</span></div></li>
       <li><div><strong>Resuelve las acciones.</strong><br><span style="color:var(--muted)">Cuando el resultado sea incierto, utiliza la mecánica de prueba que defina tu mesa. Un fallo debe cambiar la situación: cuesta recursos, atrae enemigos o revela una consecuencia.</span></div></li>
-      <li><div><strong>Combate con intención.</strong><br><span style="color:var(--muted)">Inicio → movimiento → acción principal → cierre (solo con un efecto que lo permita). Ataques con 2d6, diagonal de movimiento cuesta 2; ataques cuerpo a cuerpo cubren las 8 casillas vecinas.</span></div></li>
-      <li><div><strong>Caer no es terminar.</strong><br><span style="color:var(--muted)">Al fracasar una expedición, el personaje puede perder recursos temporales; los descubrimientos permanentes permanecen desbloqueados para futuras partidas.</span></div></li>
-      <li><div><strong>La evolución es única.</strong><br><span style="color:var(--muted)">Cada personaje puede escoger una sola evolución. La elección es permanente y transforma su habilidad principal, su aspecto o su forma de jugar.</span></div></li>
+      <li><div><strong>Combate con intención.</strong><br><span style="color:var(--muted)">Inicio → movimiento → acción principal → cierre. Ataques con 2d6, movimiento diagonal 2, Defensa 8 + mitad de CENIZA redondeada hacia arriba.</span></div></li>
+      <li><div><strong>Puntos Débiles y búsquedas.</strong><br><span style="color:var(--muted)">Los Puntos Débiles pueden estar ocultos, tener resistencia propia y descubrirse mediante CENIZA o DOGMA.</span></div></li>
+      <li><div><strong>Caer no es terminar.</strong><br><span style="color:var(--muted)">Al fracasar una expedición, pueden perderse recursos temporales; los descubrimientos permanentes permanecen desbloqueados para futuras partidas.</span></div></li>
     </ol>
     <div class="grid" style="margin-top:24px">
       <article class="card"><div class="symbol">Ⅰ</div><h3>Una expedición</h3><p>Preparación → exploración → encuentros → jefe o retirada → consecuencias.</p></article>
-      <article class="card"><div class="symbol">Ⅱ</div><h3>Progreso persistente</h3><p>Las reliquias descubiertas se registran entre partidas. Puedes añadir condiciones de desbloqueo específicas.</p></article>
-      <article class="card"><div class="symbol">Ⅲ</div><h3>Decisiones irreversibles</h3><p>Tres Santos apócrifos comienzan sellados. Sus costes de desbloqueo y las versiones redimidas todavía están en diseño.</p></article>
+      <article class="card"><div class="symbol">Ⅱ</div><h3>Progreso persistente</h3><p>Las reliquias descubiertas se registran entre partidas. El menú de Legado servirá como centro de progreso.</p></article>
+      <article class="card"><div class="symbol">Ⅲ</div><h3>Decisiones irreversibles</h3><p>Tres Santos apócrifos comienzan sellados. Sus costes de desbloqueo y las versiones redimidas siguen en diseño.</p></article>
     </div>
   </section>
 
   <section class="section" id="personajes">
-    <div class="section-head"><div><div class="kicker">Capítulo III · Los que aún caminan</div><h2>Personajes jugables</h2><p class="lead">Consulta los diez Santos penitentes, distribuye +3, +2, +1 y +0, y controla PV, Estigma y cargas de martirio. Tres Santos apócrifos empiezan bloqueados.</p></div></div>
+    <div class="section-head"><div><div class="kicker">Capítulo III · Los que aún caminan</div><h2>Personajes jugables</h2><p class="lead">Consulta los diez Santos penitentes, distribuye +3, +2, +1 y +0, y controla PV, Estigma y cargas de martirio.</p></div></div>
     <div class="toolbar"><input id="characterSearch" class="search" placeholder="Buscar personaje o habilidad…" aria-label="Buscar personaje"><select id="characterFilter" class="filter" aria-label="Filtrar personajes"><option value="all">Todos</option><option value="available">Desbloqueados</option><option value="locked">Sellados</option><option value="chosen">Personaje elegido</option></select></div>
     <div id="characterSheetPanel"></div>
     <div class="grid" id="characterGrid"></div>
   </section>
 
   <section class="section" id="enemigos">
-    <div class="section-head"><div><div class="kicker">Capítulo IV · El bestiario</div><h2>Los que aguardan</h2><p class="lead">Fichas de enemigos con estadísticas provisionales, ataques simples y múltiples, habilidades y movimiento propio. El director decide sus acciones sin cálculo de rutas.</p></div></div>
+    <div class="section-head"><div><div class="kicker">Capítulo IV · El bestiario</div><h2>Los que aguardan</h2><p class="lead">Fichas de enemigos con estadísticas provisionales, ataques simples y múltiples, habilidades y movimiento propio.</p></div></div>
     <div class="toolbar"><input id="enemySearch" class="search" placeholder="Buscar criatura…" aria-label="Buscar enemigo"><select id="enemyFilter" class="filter" aria-label="Filtrar enemigos"><option value="all">Todas las categorías</option><option value="Celestial">Celestiales</option><option value="Infernal">Infernales</option><option value="Umbral">Umbrales</option></select></div>
     <div class="grid" id="enemyGrid"></div>
   </section>
 
+  <section class="section" id="expedicion">
+    <div class="section-head"><div><div class="kicker">Capítulo V · Estructura de campaña</div><h2>Expediciones</h2><p class="lead">Sección estructural lista para crecer. Aquí vivirá el flujo completo de una expedición: preparación, ruta, encuentros, recompensas y salida.</p></div></div>
+    <div class="grid">
+      <article class="card placeholder-card"><div class="symbol">⌘</div><h3>Preparación</h3><p>Selección de Penitentes, equipamiento inicial, reliquias activas y condición especial del descenso.</p><span class="coming-tag">Próximamente</span></article>
+      <article class="card placeholder-card"><div class="symbol">⤳</div><h3>Ruta</h3><p>Ramas de exploración, zonas encadenadas, eventos narrativos, combates y decisiones del director.</p><span class="coming-tag">Próximamente</span></article>
+      <article class="card placeholder-card"><div class="symbol">☍</div><h3>Resultado</h3><p>Resumen de victoria, retirada o fracaso, con botín, pérdidas, ecos y progreso persistente.</p><span class="coming-tag">Próximamente</span></article>
+    </div>
+  </section>
+
+  <section class="section" id="zonas">
+    <div class="section-head"><div><div class="kicker">Capítulo VI · Geografía del descenso</div><h2>Zonas</h2><p class="lead">Otro menú estructural listo. Aquí podrás registrar biomas, amenazas, reglas ambientales y enemigos frecuentes por zona.</p></div></div>
+    <div class="grid">
+      <article class="card placeholder-card"><div class="symbol">◈</div><h3>Primer Umbral</h3><p>Espacios todavía cercanos al mundo humano. Amenazas directas, rutas legibles y horrores apenas revelados.</p><span class="coming-tag">Base conceptual</span></article>
+      <article class="card placeholder-card"><div class="symbol">✠</div><h3>Recintos Sacrílegos</h3><p>Templos, hospitales, catacumbas o ruinas consagradas que mezclan lo sagrado con lo corrupto.</p><span class="coming-tag">Base conceptual</span></article>
+      <article class="card placeholder-card"><div class="symbol">⬣</div><h3>Profundidades</h3><p>Zonas de mayor dificultad narrativa y táctica, donde las reglas del mundo se deforman.</p><span class="coming-tag">Base conceptual</span></article>
+    </div>
+  </section>
+
   <section class="section" id="encuentro">
-    <div class="section-head"><div><div class="kicker">Herramientas del director · Prototipo</div><h2>Mesa del director</h2><p class="lead">Añade enemigos desde el bestiario y controla sus PV por separado. El director elige movimientos, objetivos, ataques y habilidades; no hay cálculo automático de rutas.</p></div></div>
+    <div class="section-head"><div><div class="kicker">Herramientas del director · Prototipo</div><h2>Mesa del director</h2><p class="lead">Añade enemigos desde el bestiario y controla sus PV por separado. El director elige movimientos, objetivos, ataques y habilidades.</p></div></div>
     <div class="inventory-note"><strong id="encounterCount">0 criaturas en mesa</strong>. Las fichas enemigas utilizan números de prueba hasta que definamos el balance. Las modificaciones de PV se guardan solamente en este navegador.</div>
     <div class="grid" id="encounterList"></div>
   </section>
 
+  <section class="section" id="progreso">
+    <div class="section-head"><div><div class="kicker">Capítulo VII · Lo que perdura</div><h2>Legado</h2><p class="lead">Aquí vivirá el progreso global del mundo y el progreso personal de cada jugador: desbloqueos, ecos, códigos y evolución de campaña.</p></div></div>
+    <div class="grid">
+      <article class="card placeholder-card"><div class="symbol">⟁</div><h3>Desbloqueos globales</h3><p>Personajes, reliquias, mejoras y rutas que se comparten entre expediciones.</p><span class="coming-tag">Pendiente de implementación</span></article>
+      <article class="card placeholder-card"><div class="symbol">⌬</div><h3>Progreso personal</h3><p>Estado de cada jugador, ecos conservados, fichas persistentes y futuras versiones redimidas.</p><span class="coming-tag">Pendiente de implementación</span></article>
+      <article class="card placeholder-card"><div class="symbol">☷</div><h3>Códigos de campaña</h3><p>Sistema futuro para guardar y restaurar el estado de una campaña física mediante códigos.</p><span class="coming-tag">Pendiente de implementación</span></article>
+    </div>
+  </section>
+
   <section class="section" id="objetos">
-    <div class="section-head"><div><div class="kicker">Capítulo V · El relicario</div><h2>Objetos y reliquias</h2><p class="lead">Algunos hallazgos esperan en la oscuridad. Otros solo aparecen cuando el mundo reconoce lo que has hecho.</p></div></div>
+    <div class="section-head"><div><div class="kicker">Capítulo VIII · El relicario</div><h2>Objetos y reliquias</h2><p class="lead">Algunos hallazgos esperan en la oscuridad. Otros solo aparecen cuando el mundo reconoce lo que has hecho.</p></div></div>
     <div class="inventory-note"><strong id="relicCount">0 de 6 reliquias</strong> descubiertas. Los objetos bloqueados muestran una condición narrativa de ejemplo; puedes cambiarla en el código para ajustarla a tu campaña.</div>
     <div class="toolbar"><input id="itemSearch" class="search" placeholder="Buscar reliquia…" aria-label="Buscar objeto"><select id="itemFilter" class="filter" aria-label="Filtrar objetos"><option value="all">Todos los objetos</option><option value="unlocked">Descubiertos</option><option value="locked">Bloqueados</option></select></div>
     <div class="grid" id="itemGrid"></div>
   </section>
+
+  <section class="section" id="creditos">
+    <div class="section-head"><div><div class="kicker">Capítulo IX · Quién invocó esto</div><h2>Créditos</h2><p class="lead">Una sección formal para reconocer autoría, construcción técnica y estado actual del proyecto.</p></div></div>
+    <div class="columns credits-layout">
+      <div class="card">
+        <div class="kicker">Autoría del proyecto</div>
+        <h3>DEUS ABSENS</h3>
+        <p><strong>Concepto, universo y dirección creativa:</strong> Autor del proyecto / mesa de juego.</p>
+        <p><strong>Diseño del sistema:</strong> desarrollo iterativo de reglas, balance y prototipado.</p>
+        <p><strong>Construcción web:</strong> HTML, CSS y JavaScript vanilla.</p>
+      </div>
+      <div class="card">
+        <div class="kicker">Asistencia y prototipo</div>
+        <h3>Santuario digital</h3>
+        <p><strong>Apoyo de diseño y estructura:</strong> asistencia conversacional para organización del contenido, documentación y prototipos.</p>
+        <p><strong>Fuentes:</strong> Cinzel y Crimson Pro.</p>
+        <p><strong>Estado:</strong> manual jugable en desarrollo, con menús estructurales listos para crecer.</p>
+      </div>
+    </div>
+    <div class="grid" style="margin-top:18px">
+      <article class="card placeholder-card"><div class="symbol">✦</div><h3>Agradecimientos</h3><p>Espacio listo para incluir colaboradores de arte, pruebas, narrativa, comunidad y dirección de juego.</p></article>
+      <article class="card placeholder-card"><div class="symbol">⚙</div><h3>Versión del proyecto</h3><p>Visual UI v6.0 · menús expandidos, pantalla de entrada, créditos, placeholders y mejoras de ambientación.</p></article>
+      <article class="card placeholder-card"><div class="symbol">☉</div><h3>Notas</h3><p>Puedes reemplazar fácilmente estos textos por nombres reales cuando quieras publicar una versión más formal.</p></article>
+    </div>
+  </section>
 </main>
 
-<footer class="footer">DEUS ABSENS · EL SILENCIO TAMBIÉN ES UNA RESPUESTA<br><span style="font-size:12px">Manual de juego en desarrollo · fichas v2.8</span></footer>
+<footer class="footer">DEUS ABSENS · EL SILENCIO TAMBIÉN ES UNA RESPUESTA<br><span style="font-size:12px">Santuario digital en desarrollo · visual v6.0</span></footer>
 
 <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
   <div class="modal"><div class="kicker" id="modalKicker">Decisión</div><h3 id="modalTitle">Confirmar</h3><div id="modalBody"></div><div class="modal-actions" id="modalActions"></div></div>

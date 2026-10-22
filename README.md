@@ -1,6 +1,15 @@
-# DEUS ABSENS · Fichas de combate v2.8
+# DEUS ABSENS · Santuario digital v6.0
 
 Sitio web estático para GitHub Pages. Conserva los nombres de archivo y rutas originales.
+
+
+## Mejoras visuales y estructurales de esta versión
+
+- **Pantalla de entrada** antes de acceder al contenido principal, con opción de entrar al inicio o saltar a personajes.
+- **Navegación ampliada** con menús para Expedición, Zonas, Legado y Créditos.
+- **Secciones placeholder** ya creadas para que el proyecto crezca sin tener que rehacer la estructura del sitio.
+- **Créditos** como sección formal independiente.
+- **Mejoras visuales**: atmósfera más marcada, paneles hero, microanimaciones, hover states, badges y ambientación general más coherente con el tono del juego.
 
 ## Implementado y probado en esta versión
 

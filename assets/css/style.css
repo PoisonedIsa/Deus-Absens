@@ -359,3 +359,106 @@ body::before,body::after{display:none}
 @media(max-width:980px){.section-two-col{grid-template-columns:1fr}.encounter-grid{grid-template-columns:1fr}}
 @media(max-width:780px){.hud-row{grid-template-columns:1fr}.hud-stat strong{font-size:19px}.mission-emblem,.director-seal{display:none}.mission-banner,.director-banner,.legacy-banner{padding:23px}.top-meta{display:none}}
 @media(max-width:560px){.top-inner{display:block;padding:12px 15px 5px}.nav{margin-top:11px}.nav button{font-size:10px}.mission-panel,.legacy-panel{padding:18px}.ritual-step{grid-template-columns:30px minmax(0,1fr);gap:10px}.ritual-index{width:28px;height:32px;font-size:12px}.ritual-step button{grid-column:2;justify-self:start}.director-toolstrip{flex-direction:column;align-items:stretch}.encounter-heading{flex-wrap:wrap}.encounter-heading .tag{margin-left:66px}}
+
+/* DEUS ABSENS v6.3 · Portada, Atlas y Relicario. Todos los motivos son ESTÁTICOS. */
+.splash-gate{overflow-y:auto;padding:18px;background:#0e0b11}
+.splash-core{width:min(1100px,100%);max-width:1100px;min-height:570px;display:grid;grid-template-columns:minmax(290px,.83fr) minmax(0,1.17fr);align-items:stretch;padding:0;text-align:left;border:1px solid #765657;background:#171117;box-shadow:0 12px 35px #0008}
+.splash-core::before,.splash-core::after{display:none}
+.splash-art{display:flex;align-items:center;justify-content:center;flex-direction:column;position:relative;overflow:hidden;padding:28px 16px 20px;background:linear-gradient(160deg,#2d1b29,#140f18 70%);border-right:1px solid #785d5d}
+.splash-art::before{content:"";position:absolute;inset:16px;border:1px solid #ad8b652c;pointer-events:none}
+.splash-art svg{display:block;width:min(100%,340px);max-height:475px;height:auto;flex:0 1 auto}
+.splash-art-label{position:relative;color:#d0b58c;font:9px Cinzel,serif;letter-spacing:.17em;text-align:center;margin-top:8px}
+.splash-content{padding:clamp(27px,4.3vw,68px) clamp(25px,5vw,73px);align-self:center;min-width:0}
+.splash-content h1{font-size:clamp(52px,7vw,88px);line-height:1.08;letter-spacing:.045em;margin:18px 0 15px;color:#f0dfca}
+.splash-content h1 span{color:#d2aa78}
+.splash-number{font:9px Cinzel,serif;letter-spacing:.23em;color:#b59576;margin-bottom:24px}
+.splash-content .eyebrow{letter-spacing:.17em;font-size:10px}
+.splash-hairline{display:flex;align-items:center;gap:12px;width:min(300px,100%);color:var(--gold);font-size:12px;margin:16px 0}
+.splash-hairline::after{content:"";height:1px;background:#886b5e;flex:1}
+.splash-content .subtitle{font-size:clamp(21px,2.5vw,27px);margin:0 0 17px;text-align:left;line-height:1.3;color:#dac5bb}
+.splash-content .splash-copy{margin:0;max-width:460px;font-size:17px;line-height:1.55}
+.splash-content .splash-actions{justify-content:flex-start;margin:30px 0 26px}
+.splash-content .splash-foot{font-size:9px;text-align:left;margin:0;line-height:1.8;letter-spacing:.1em;color:#ac8e76}
+.splash-content .splash-foot span{padding:0 5px}
+/* Atlas de zonas, sin nombres biográficos ni cifras inventadas */
+.atlas-banner{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:23px 30px;border:1px solid #73605e;background:linear-gradient(110deg,#2b2029,#1a161d)}
+.atlas-banner-art{flex:0 0 166px;height:130px;display:flex;align-items:center;justify-content:center;gap:8px;border:1px solid #7f6a5a;background:linear-gradient(135deg,#2d2631,#18121b);color:#bd9a77;font:38px Cinzel,serif}
+.atlas-banner-art span:nth-child(2){transform:translateY(-16px);font-size:30px;color:#debc8e}
+.atlas-banner-copy{flex:1;min-width:0}
+.atlas-banner-copy h3{font-size:clamp(22px,3vw,30px);margin:8px 0}
+.atlas-banner-copy p{font-size:17px;line-height:1.45;color:var(--muted);margin:0;max-width:680px}
+.atlas-banner-copy code{font-size:14px;color:var(--gold)}
+.atlas-banner-seal{font:60px Cinzel,serif;color:#d4b182;flex:0 0 auto}
+.atlas-legend{display:flex;flex-wrap:wrap;align-items:center;gap:12px 22px;padding:17px 0 19px;color:#b5a19a;font:11px Cinzel,serif;letter-spacing:.04em}
+.atlas-legend span{display:flex;align-items:center;gap:9px}
+.atlas-key{display:inline-block;width:10px;height:10px;border:1px solid var(--gold);transform:rotate(45deg)}
+.key-board{background:#a33c424d}.key-manual{background:#c7a77970}
+.atlas-grid{align-items:stretch}
+.atlas-card{padding:0;display:flex;flex-direction:column;background:#1b161e;border-color:#65535a;min-width:0}
+.atlas-card::after{display:none}
+.atlas-card-surface{height:160px;display:grid;place-items:center;position:relative;overflow:hidden;background:
+  repeating-linear-gradient(45deg,transparent 0 17px,#f1d6b00a 17px 18px),
+  radial-gradient(circle at 50% 50%,#7e4b4d55,#231820 67%)}
+.atlas-card-2 .atlas-card-surface{background:repeating-linear-gradient(-45deg,transparent 0 17px,#f1d6b00a 17px 18px),radial-gradient(circle at 50% 50%,#735c7055,#211824 67%)}
+.atlas-card-3 .atlas-card-surface{background:repeating-linear-gradient(90deg,transparent 0 18px,#f1d6b00a 18px 19px),radial-gradient(circle at 50% 50%,#8c684455,#241a1b 67%)}
+.atlas-card-surface>span:first-child{color:#c4a481;opacity:.35;font:92px Cinzel,serif;line-height:1}
+.atlas-card-symbol{position:absolute;display:grid;place-items:center;width:95px;height:95px;border:1px solid #aa88707d;border-radius:50%;font:45px Cinzel,serif;color:#e2c192;background:#201921e6}
+.atlas-card-top{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:18px 20px 0;font:10px Cinzel,serif;letter-spacing:.13em;color:var(--gold)}
+.atlas-card-top .tag{margin:0;color:#bca69f;font-size:9px}
+.atlas-card h3{margin:12px 20px 8px;font-size:23px}
+.atlas-card-subtitle{font-size:16px!important;line-height:1.4;min-height:66px;margin:0 20px 18px!important}
+.atlas-data-grid{margin:0 20px;padding:15px 0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px 14px;border-top:1px solid #59434a;border-bottom:1px solid #59434a}
+.atlas-data-grid div{min-width:0}.atlas-data-grid small{font:9px Cinzel,serif;letter-spacing:.03em;color:#b8a5a0;display:block;margin-bottom:5px}.atlas-data-grid strong{font:15px Cinzel,serif;color:#ead8c1;overflow-wrap:anywhere}
+.atlas-card-foot{margin-top:auto;display:flex;align-items:center;gap:7px;flex-wrap:wrap;padding:17px 20px 21px;font-size:14px;color:#bda59b}
+.atlas-card-foot .small{margin-left:auto}
+.atlas-status-dot{width:7px;height:7px;background:#b48767;border-radius:50%}
+.atlas-footer{border:1px dashed #655050;color:#bda9a1;background:#17121a;margin-top:18px;padding:14px 18px;font-size:16px}
+.atlas-footer strong{color:#e0c39f}
+.atlas-detail-warn{border:1px solid #785a4b;padding:10px;font:11px Cinzel,serif;color:#dfb18a;margin-bottom:15px}
+.atlas-modal-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.atlas-modal-stats span{display:flex;flex-direction:column;gap:4px;padding:10px;border:1px solid var(--line);color:#c2b3ad;font-size:15px}
+.atlas-modal-stats strong{color:var(--gold);font:19px Cinzel,serif}
+/* Archivo de reliquias: rarezas visuales, filtros y lectura */
+.relic-banner{display:flex;gap:24px;align-items:center;padding:25px 28px;border:1px solid #826353;background:linear-gradient(110deg,#302321,#1b171d)}
+.relic-banner-symbol{width:110px;height:110px;flex:0 0 110px;display:grid;place-items:center;border:1px solid #c7a779;color:#d7b78a;background:#201a1e;font:54px Cinzel,serif}
+.relic-banner-copy h3{font:clamp(23px,3vw,30px) Cinzel,serif;margin:8px 0 9px}
+.relic-banner-copy p{color:#c5b4aa;font-size:17px;line-height:1.45;margin:0;max-width:750px}
+.relic-hud{margin:15px 0 20px}
+.relic-archive-toolbar{display:flex;justify-content:space-between;align-items:end;gap:20px;border-bottom:1px solid var(--line2);padding-bottom:16px;margin-bottom:20px}
+.relic-archive-toolbar h3{font-size:21px;margin:7px 0 4px}
+.relic-archive-toolbar p{color:#b6a39e;font-size:15px;margin:0}
+.relic-filters{margin:0;flex:1;max-width:650px;justify-content:flex-end}
+.relic-filters .search{min-width:195px;flex:1 1 220px}
+.relic-filters .filter{flex:0 1 auto;min-width:120px;max-width:175px}
+.relic-grid{align-items:stretch}
+.relic-card{--relic-accent:#b6a19a;display:flex;flex-direction:column;min-height:400px;padding:20px 21px;border-color:#66504c;background:linear-gradient(150deg,#241b21,#171219)}
+.relic-card::after{display:none}
+.relic-rara{--relic-accent:#8fb7b1}
+.relic-unica{--relic-accent:#d6b076}
+.relic-mitica{--relic-accent:#c08dba}
+.relic-poco-comun{--relic-accent:#a8bb88}
+.relic-topline{display:flex;align-items:center;justify-content:space-between;gap:6px;border-bottom:1px solid #5d4548;padding-bottom:12px;color:#ae9e9a;font:10px Cinzel,serif;letter-spacing:.075em}
+.relic-rarity{color:var(--relic-accent);border:1px solid currentColor;padding:3px 7px;letter-spacing:0;white-space:nowrap}
+.relic-emblem{display:grid;place-items:center;height:134px;margin:18px 0 17px;background:linear-gradient(145deg,#32262d,#1b171d);border:1px solid #6d5351;position:relative}
+.relic-emblem::before{content:"";position:absolute;width:84px;height:84px;border:1px solid var(--relic-accent);transform:rotate(45deg);opacity:.55}
+.relic-emblem-inner{position:relative;color:var(--relic-accent);font:48px Cinzel,serif}
+.relic-locked .relic-emblem{background:#1a151c;border-style:dashed}
+.relic-locked .relic-emblem-inner{color:#857a7b}
+.relic-card-copy{flex:1}
+.relic-type{font:10px Cinzel,serif;color:var(--relic-accent);letter-spacing:.11em;text-transform:uppercase}
+.relic-card-copy h3{font-size:20px;line-height:1.2;margin:7px 0 12px;overflow-wrap:anywhere}
+.relic-card-copy p{font-size:16px;line-height:1.42;color:#bfb1ac}
+.relic-condition{margin:12px 0 0;border-top:1px solid #554045;padding:14px 0 11px}
+.relic-condition-title{font:9px Cinzel,serif;letter-spacing:.1em;color:var(--relic-accent)}
+.relic-condition p{font-size:15px;line-height:1.35;color:#b8aaa4;margin:7px 0 0}
+.relic-card-foot{margin-top:auto;display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;border-top:1px solid #554045;padding-top:14px}
+.relic-state{font:10px Cinzel,serif;color:var(--relic-accent);white-space:nowrap}
+.relic-actions{display:flex;gap:6px;flex-wrap:wrap}
+.relic-actions .small{font-size:12px;padding:7px 8px}
+.relic-unlock{border-color:#987354!important;color:#dfbd92!important}
+.relic-archive-note{margin-top:18px;border:1px dashed #6e5250;padding:16px 19px;color:#b7a49e;font-size:15px}
+.relic-modal-symbol{border:1px solid #8b6a59;background:#241b24;display:grid;place-items:center;color:#d7b78a;height:88px;font:43px Cinzel,serif;margin-bottom:18px}
+@media(max-width:1050px){.relic-archive-toolbar{flex-direction:column;align-items:stretch}.relic-filters{justify-content:flex-start;max-width:none}.atlas-banner-seal{display:none}}
+@media(max-width:850px){.splash-core{grid-template-columns:1fr}.splash-art{padding:16px;max-height:255px;border-right:0;border-bottom:1px solid #785d5d}.splash-art svg{height:207px;width:180px}.splash-art-label{font-size:8px}.splash-content{text-align:center;padding:28px 26px 36px}.splash-number{margin-bottom:14px}.splash-content h1{margin:12px 0;font-size:clamp(49px,8vw,68px)}.splash-content .subtitle{text-align:center;margin:0 auto 14px}.splash-content .splash-copy{margin:0 auto}.splash-hairline{margin:12px auto}.splash-content .splash-actions{justify-content:center;margin:21px 0}.splash-content .splash-foot{text-align:center}.atlas-banner-art{flex-basis:100px;width:100px;height:112px;font-size:27px}}
+@media(max-width:650px){.atlas-banner-art,.atlas-banner-seal{display:none}.atlas-banner{padding:22px}.atlas-data-grid{gap:11px}.relic-banner{gap:15px;padding:20px}.relic-banner-symbol{width:65px;height:65px;flex-basis:65px;font-size:33px}.relic-filters .filter{flex:1 1 135px;max-width:none}.splash-gate{padding:10px}.splash-art{max-height:175px}.splash-art svg{height:135px;width:130px}.splash-art-label{display:none}.splash-content{padding:26px 18px 30px}.splash-content h1{font-size:clamp(43px,12vw,60px)}.splash-number{font-size:8px}.splash-content .splash-foot{font-size:8px}.relic-card{min-height:0}}
+@media(prefers-reduced-motion:reduce){.splash-gate,.splash-art,.atlas-card,.relic-card{animation:none!important;transition:none!important}}

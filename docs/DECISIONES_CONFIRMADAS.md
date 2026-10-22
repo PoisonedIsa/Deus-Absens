@@ -66,5 +66,20 @@ Este documento separa acuerdos reales de funcionalidades pendientes.
 - Si un Penitente muere en combate, **sus objetos quedan en la casilla donde cayó** y otros jugadores pueden recuperarlos durante el combate.
 - No se envían de inmediato al inventario grupal, ni se duplican al recuperarlos.
 - El catálogo de objetos desbloqueados permanece separado del inventario físico de la expedición.
-- Aún no se ha decidido qué acción cuesta recoger un objeto, desde qué casillas es posible hacerlo, ni qué sucede con los objetos abandonados cuando termina el combate.
+- **Recoger el botín consume la acción principal del turno** del Penitente que realiza la recuperación. En ese turno no podrá usar esa misma acción para atacar o utilizar un objeto activo.
+- **Una acción principal permite recuperar todos los objetos que dejó un Penitente caído** en ese botín; no se necesita una acción por objeto.
+- **Alcance confirmado:** puede recuperarse desde **cualquiera de las 8 casillas inmediatamente adyacentes**, incluyendo diagonales, sin entrar a la casilla del botín, **si un muro u obstáculo sólido no bloquea la recogida**. La recogida sigue consumiendo una acción principal y transfiere todo el lote.
+- **Si el grupo vence el combate**, los supervivientes pueden recuperar los objetos de los caídos que sigan en el tablero, antes de abandonar el escenario. Al haber terminado el combate, esa recuperación ya no consume acciones principales de turno.
+- **Si los jugadores abandonan el escenario sin recuperar el botín, esos objetos se pierden definitivamente en la expedición**, sea por retirada, derrota o por marcharse después de ganar sin recogerlos.
+- **Los enemigos pueden recoger objetos del botín de los caídos si llegan antes que los jugadores.** Cuando un enemigo toma objetos, pasan del suelo a su posesión sin duplicarse.
+- **Armas robadas útiles:** un enemigo equipa un arma si es superior a su ataque o mejora su funcionamiento (por ejemplo, le aporta mayor alcance).
+- **Armas inferiores:** un enemigo destruye el arma si es peor que sus ataques y no añade una ventaja útil; al hacerlo **se cura por completo, hasta su máximo de PV actual**. El arma queda destruida.
+- **Objetos activos y pasivos:** los enemigos pueden utilizarlos igual que los Penitentes, respetando sus efectos definidos.
+- **Muerte del enemigo:** cualquier objeto o arma que posea **desaparece definitivamente de la expedición**. No se recupera de su cadáver ni después de una victoria.
+- **Esta pérdida no elimina los desbloqueos permanentes** del legado compartido: perder una copia durante la expedición no equivale a bloquear de nuevo el objeto.
+- **Saqueo enemigo gratuito:** cuando un enemigo alcanza el botín y puede recogerlo, **lo toma, equipa o destruye sin gastar acción principal ni puntos de movimiento adicionales**. Puede continuar su turno y atacar si conserva su acción principal. La destrucción de un arma inferior restaura inmediatamente sus PV al máximo.
+- **Alcance del saqueo enemigo (confirmado):** el enemigo puede recoger objetos gratuitamente desde cualquiera de las **8 casillas adyacentes** al botín, incluidas las diagonales, sin ocupar su casilla, **si ningún muro u obstáculo sólido bloquea la recogida**. El alcance es idéntico al de los Penitentes; el coste de recogida no lo es.
+- **Acciones distintas:** recoger/equipar/destruir gratuitamente no vuelve gratuita la activación posterior de un objeto activo; se respetan los costes de uso definidos para ese objeto.
+- **Bloqueo por obstáculos (confirmado):** muros y obstáculos sólidos bloquean la recogida de botín, incluso desde una casilla adyacente, tanto para Penitentes como para enemigos. No se permite recoger objetos a través de esos obstáculos.
+- **Pendiente:** interacción con coberturas no sólidas, prioridad si hay varios objetos, reglas para armas equivalentes, requisitos especiales de uso y límites de inventario.
 - **Pendiente de implementar** en la interfaz y la persistencia.

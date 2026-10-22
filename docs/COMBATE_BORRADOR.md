@@ -252,3 +252,16 @@ En cada registro de `data/enemigos.json` se añadirá `movimiento: número` (ent
 ```
 
 El ejemplo anterior **no es un enemigo añadido** ni asigna el valor 3 a ningún enemigo existente. Se actualizará el catálogo cuando se aprueben las fichas definitivas.
+
+
+## Actualización v2.7 · Control directo de enemigos (CONFIRMADO)
+
+- **Se descarta por completo la propuesta de Tablas de Instinto y tiradas aleatorias para elegir conductas.** El director decide las acciones, objetivos, habilidades y maniobras de todos los enemigos.
+- Como comportamiento de referencia, los enemigos buscan **al Penitente alcanzable más cercano siguiendo la ruta de menor coste de movimiento**, calculada conforme a las reglas del tablero. Es una orientación, **no limita la libertad del director**.
+- Los enemigos disponen de sus propias acciones en la ficha, incluidos ataques básicos, ataques a distancia, habilidades especiales y, en ciertos casos, **ataque múltiple**.
+- **Ataque múltiple** es una sola acción principal que permite ejecutar el número de ataques indicado en la ficha; los ataques se resuelven por separado salvo que la habilidad especifique otra cosa. Solo los enemigos a los que se otorgue expresamente podrán utilizarlo.
+- Cada enemigo conserva un **valor fijo de movimiento** por tipo, independiente de CENIZA. Los ataques se resuelven con la base de 2d6 previamente confirmada; los detalles definitivos de bonificadores, críticos y Ataques Precisos todavía se diseñarán.
+- Moverse vertical u horizontalmente cuesta 1; diagonalmente, 2; los muros bloquean; los obstáculos transitables y las trampas no penalizan a los enemigos.
+- El saqueo enemigo es gratuito al alcanzar botín desde una de las ocho casillas adyacentes si no hay un muro u obstáculo sólido interpuesto, conforme a las reglas aprobadas. La elección de saquear corresponde al director.
+- **Pendientes:** ocupación de casillas, rutas bloqueadas o inaccesibles, desempates de objetivos, alcance y línea de visión, límites de multataque, habilidades especiales, activación de enemigos y formas de representarlo en la web.
+- Esta entrega **solo actualiza documentación**; no programa movimiento ni control enemigo.

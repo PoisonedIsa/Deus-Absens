@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#100e12">
+<title>DEUS ABSENS — Manual de juego</title>
+<link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="top-inner">
+    <a class="brand" href="#" aria-label="Volver al inicio" data-goto="inicio"><span class="brand-mark"><span>✦</span></span> DEUS ABSENS</a>
+    <nav class="nav" aria-label="Navegación principal">
+      <button class="active" data-section="inicio">Inicio</button>
+      <button data-section="historia">Crónica</button>
+      <button data-section="reglas">Reglas</button>
+      <button data-section="personajes">Personajes</button>
+      <button data-section="enemigos">Enemigos</button>
+      <button data-section="objetos">Reliquias</button>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="hero">
+  <div class="sigils"></div>
+  <div class="hero-content">
+    <div class="eyebrow">Manual de campaña · Roguelite de mesa</div>
+    <h1>DEUS ABSENS</h1>
+    <p class="subtitle">El cielo ha quedado vacío. El infierno ya no conoce sus fronteras. Y la humanidad todavía se atreve a buscar.</p>
+    <div class="hero-rule">✦ &nbsp; MEMENTO FINIS &nbsp; ✦</div>
+    <div class="actions">
+      <button class="btn" data-goto="historia">Leer la crónica</button>
+      <button class="btn secondary" data-goto="personajes">Elegir personaje</button>
+    </div>
+  </div>
+</section>
+
+<div id="appStatus" class="app-status" role="alert" hidden></div>
+<main>
+  <section class="section active" id="inicio">
+    <div class="section-head"><div><div class="kicker">Antes de descender</div><h2>El mundo después del silencio</h2><p class="lead">Un manual vivo para una expedición imposible. Descubre sus verdades, prepara tu descenso y decide qué estás dispuesto a sacrificar.</p></div></div>
+    <div class="grid">
+      <article class="card"><div class="symbol">☩</div><h3>I. La crónica</h3><p>Conoce la desaparición de Dios, la hostilidad de los coros celestiales y las grietas que devoran el mundo.</p><button class="small" data-goto="historia">Abrir capítulo ↗</button></article>
+      <article class="card"><div class="symbol">⚖</div><h3>II. Las leyes del descenso</h3><p>Consulta las reglas esenciales, las expediciones, la caída y el precio de volver a intentarlo.</p><button class="small" data-goto="reglas">Consultar reglas ↗</button></article>
+      <article class="card"><div class="symbol">♜</div><h3>III. Los condenados</h3><p>Elige un arquetipo, conoce sus dones y desbloquea una única evolución irreversible.</p><button class="small" data-goto="personajes">Ver personajes ↗</button></article>
+      <article class="card"><div class="symbol">☠</div><h3>IV. Los adversarios</h3><p>Ángeles sin misericordia, horrores del abismo y criaturas nacidas de la ausencia.</p><button class="small" data-goto="enemigos">Abrir bestiario ↗</button></article>
+      <article class="card"><div class="symbol">⚿</div><h3>V. Reliquias y hallazgos</h3><p>Armas, juramentos y objetos que se revelan conforme la expedición deja huella.</p><button class="small" data-goto="objetos">Abrir relicario ↗</button></article>
+      <article class="card"><div class="symbol">✧</div><h3>VI. Tu legado</h3><p>Los descubrimientos sobreviven a la derrota. Cada intento puede abrir una puerta que antes no existía.</p><div class="progress-wrap"><div class="progress" id="homeProgress"></div></div><span id="homeProgressText" class="tag gold">0 reliquias descubiertas</span></article>
+    </div>
+  </section>
+
+  <section class="section" id="historia">
+    <div class="section-head"><div><div class="kicker">Capítulo I · La verdad enterrada</div><h2>La crónica de la ausencia</h2><p class="lead">No hubo trompetas. No hubo juicio final. Solo un día en que la plegaria no encontró a nadie al otro lado.</p></div></div>
+    <div class="columns">
+      <div class="prose">
+        <p class="quote">«El cielo no cayó. Simplemente dejó de responder».</p>
+        <p>Al principio, los templos siguieron llenos. Las velas ardían, las campanas sonaban y los sacerdotes pronunciaban las mismas palabras de siempre. Pero las respuestas dejaron de llegar. Los milagros se apagaron uno tras otro, como estrellas al amanecer.</p>
+        <p>Después vino el odio. Los ángeles, privados de la presencia que daba sentido a su existencia, volvieron sus rostros contra la humanidad. Para ellos, los mortales eran una especie defectuosa: demasiado frágil para custodiar la creación y demasiado orgullosa para aceptar su final.</p>
+        <p>Las puertas del Infierno se abrieron en lugares donde la realidad era más débil: bajo hospitales, en criptas olvidadas, en ciudades que habían rezado demasiado tarde. Algo antiguo cruzó el umbral. Algo que no necesitaba permiso.</p>
+        <p>Ahora, los supervivientes buscan a Dios. Algunos quieren suplicarle que regrese; otros, exigir respuestas; unos pocos desean ocupar el trono vacío. Nadie sabe si Dios está perdido, muerto, escondido… o si se marchó por voluntad propia.</p>
+      </div>
+      <aside class="card">
+        <div class="kicker">Las tres heridas del mundo</div>
+        <h3>El Cielo</h3><p>Los coros celestiales han convertido la obediencia en una forma de exterminio. Su luz revela la culpa y quema la carne.</p>
+        <span class="tag">Orden sin piedad</span>
+        <hr style="border:0;border-top:1px solid var(--line);margin:20px 0">
+        <h3>El Infierno</h3><p>Una frontera rota por la que ascienden pactos, hambre y criaturas que no deberían tener nombre.</p>
+        <span class="tag">Hambre sin fondo</span>
+        <hr style="border:0;border-top:1px solid var(--line);margin:20px 0">
+        <h3>La Tierra</h3><p>Ciudades santificadas por el miedo, caminos que cambian y comunidades obligadas a escoger qué monstruo tolerar.</p>
+        <span class="tag gold">Esperanza precaria</span>
+      </aside>
+    </div>
+    <div class="card" style="margin-top:18px"><div class="kicker">La pregunta central</div><h3>¿Qué harás si encuentras a Dios?</h3><p>El manual puede describir el mundo, pero la respuesta pertenece a quienes se atrevan a atravesarlo.</p></div>
+  </section>
+
+  <section class="section" id="reglas">
+    <div class="section-head"><div><div class="kicker">Capítulo II · Sobrevivir al descenso</div><h2>Reglas fundamentales</h2><p class="lead">Esta es una estructura inicial y editable. Sustituye los valores provisionales cuando definas el sistema definitivo de dados, daño y dificultad.</p></div></div>
+    <ol class="rule-list">
+      <li><div><strong>Prepara la expedición.</strong><br><span style="color:var(--muted)">El grupo elige personajes, equipa reliquias disponibles y fija un objetivo para el descenso.</span></div></li>
+      <li><div><strong>Explora por etapas.</strong><br><span style="color:var(--muted)">Cada zona presenta un encuentro, una decisión, un hallazgo o una amenaza. El director describe el riesgo antes de pedir una acción.</span></div></li>
+      <li><div><strong>Resuelve las acciones.</strong><br><span style="color:var(--muted)">Cuando el resultado sea incierto, utiliza la mecánica de prueba que defina tu mesa. Un fallo debe cambiar la situación: cuesta recursos, atrae enemigos o revela una consecuencia.</span></div></li>
+      <li><div><strong>Combate con intención.</strong><br><span style="color:var(--muted)">En cada turno, cada personaje realiza su movimiento y una acción principal. El orden, el alcance y el daño deben concretarse en la versión final de las reglas.</span></div></li>
+      <li><div><strong>Caer no es terminar.</strong><br><span style="color:var(--muted)">Al fracasar una expedición, el personaje puede perder recursos temporales; los descubrimientos permanentes permanecen desbloqueados para futuras partidas.</span></div></li>
+      <li><div><strong>La evolución es única.</strong><br><span style="color:var(--muted)">Cada personaje puede escoger una sola evolución. La elección es permanente y transforma su habilidad principal, su aspecto o su forma de jugar.</span></div></li>
+    </ol>
+    <div class="grid" style="margin-top:24px">
+      <article class="card"><div class="symbol">Ⅰ</div><h3>Una expedición</h3><p>Preparación → exploración → encuentros → jefe o retirada → consecuencias.</p></article>
+      <article class="card"><div class="symbol">Ⅱ</div><h3>Progreso persistente</h3><p>Las reliquias descubiertas se registran entre partidas. Puedes añadir condiciones de desbloqueo específicas.</p></article>
+      <article class="card"><div class="symbol">Ⅲ</div><h3>Decisiones irreversibles</h3><p>Una evolución por personaje. Elige con cuidado: no existe un camino de regreso.</p></article>
+    </div>
+  </section>
+
+  <section class="section" id="personajes">
+    <div class="section-head"><div><div class="kicker">Capítulo III · Los que aún caminan</div><h2>Personajes jugables</h2><p class="lead">Escoge un condenado. Cada personaje tiene un don inicial y una evolución única. La selección y la evolución se guardan en este navegador.</p></div></div>
+    <div class="toolbar"><input id="characterSearch" class="search" placeholder="Buscar personaje o habilidad…" aria-label="Buscar personaje"><select id="characterFilter" class="filter" aria-label="Filtrar personajes"><option value="all">Todos los arquetipos</option><option value="available">Sin elegir</option><option value="chosen">Personaje elegido</option><option value="evolved">Evolucionados</option></select></div>
+    <div class="grid" id="characterGrid"></div>
+  </section>
+
+  <section class="section" id="enemigos">
+    <div class="section-head"><div><div class="kicker">Capítulo IV · El bestiario</div><h2>Los que aguardan</h2><p class="lead">No todo lo que te persigue nació en el Infierno. Algunas cosas descendieron del cielo. Otras estaban aquí antes de que existieran ambos.</p></div></div>
+    <div class="toolbar"><input id="enemySearch" class="search" placeholder="Buscar criatura…" aria-label="Buscar enemigo"><select id="enemyFilter" class="filter" aria-label="Filtrar enemigos"><option value="all">Todas las categorías</option><option value="Celestial">Celestiales</option><option value="Infernal">Infernales</option><option value="Umbral">Umbrales</option></select></div>
+    <div class="grid" id="enemyGrid"></div>
+  </section>
+
+  <section class="section" id="objetos">
+    <div class="section-head"><div><div class="kicker">Capítulo V · El relicario</div><h2>Objetos y reliquias</h2><p class="lead">Algunos hallazgos esperan en la oscuridad. Otros solo aparecen cuando el mundo reconoce lo que has hecho.</p></div></div>
+    <div class="inventory-note"><strong id="relicCount">0 de 6 reliquias</strong> descubiertas. Los objetos bloqueados muestran una condición narrativa de ejemplo; puedes cambiarla en el código para ajustarla a tu campaña.</div>
+    <div class="toolbar"><input id="itemSearch" class="search" placeholder="Buscar reliquia…" aria-label="Buscar objeto"><select id="itemFilter" class="filter" aria-label="Filtrar objetos"><option value="all">Todos los objetos</option><option value="unlocked">Descubiertos</option><option value="locked">Bloqueados</option></select></div>
+    <div class="grid" id="itemGrid"></div>
+  </section>
+</main>
+
+<footer class="footer">DEUS ABSENS · EL SILENCIO TAMBIÉN ES UNA RESPUESTA<br><span style="font-size:12px">Manual de juego en desarrollo · versión 0.1</span></footer>
+
+<div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal"><div class="kicker" id="modalKicker">Decisión</div><h3 id="modalTitle">Confirmar</h3><div id="modalBody"></div><div class="modal-actions" id="modalActions"></div></div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script type="module" src="./assets/js/app.js"></script>
+</body>
+</html>

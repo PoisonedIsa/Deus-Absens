@@ -1,6 +1,6 @@
 # DEUS ABSENS | Terreno, coberturas y trampas
 
-**Versión de diseño v2.0.** Los tres tipos de terreno a continuación son acuerdos confirmados. Los valores de cobertura y otros detalles indicados expresamente como propuestas no son reglas oficiales.
+**Versión de diseño v2.1.** Los tres tipos de terreno a continuación son acuerdos confirmados. Los valores de cobertura y otros detalles indicados expresamente como propuestas no son reglas oficiales.
 
 ## Categorías confirmadas
 
@@ -63,4 +63,16 @@ Pueden añadirse variantes como cánticos castigadores, símbolos de penitencia,
 - Una trampa oculta mantiene su posición reservada para el director hasta que se descubra o revele según las reglas que definamos después. Para jugar en tablero físico, el director puede conservar las coordenadas ocultas en su panel o notas sin colocarlas a la vista.
 - **Ambas clases** permanecen siempre activas; infligen el daño por tipo (`1d4` a `1d8`) al entrar y al inicio de cada turno en esa casilla. Los enemigos son inmunes. La visibilidad no altera daño ni frecuencia de activación.
 - Se recomienda registrar la visibilidad **por cada aparición de trampa**, no necesariamente por arquetipo: una trampa de agujas puede aparecer visible en una sala y oculta en otra. Este punto se modela en el catálogo como posibilidad técnica y podrá ajustarse.
-- **PENDIENTE:** cómo detectarlas, qué atributo y tirada usar, cuándo quedan reveladas después de activarse, si pueden neutralizarse y qué información ve cada jugador en la interfaz. No se consideran aprobados valores numéricos de detección.
+- **ACTUALIZACIÓN v2.1:** ahora están aprobadas las dos modalidades de detección (pasiva y búsqueda activa). Siguen pendientes los atributos, dados, dificultades, radios, frecuencia de comprobación y revelación al activarse; no hay valores numéricos de detección aprobados.
+
+## Actualización v2.1 · Detección pasiva y búsqueda activa (CONFIRMADO)
+
+Ambas modalidades coexisten y se aplican únicamente a trampas ocultas:
+
+1. **Detección pasiva:** los Penitentes tienen oportunidad de advertir una trampa oculta sin dedicar una acción a buscarla. La frecuencia, el radio y el umbral de éxito aún no se han definido. No significa revelar automáticamente todas las trampas del tablero.
+2. **Búsqueda activa:** un Penitente puede dedicar su **acción principal** a buscar trampas ocultas. Esta modalidad deberá ser más fiable que la pasiva, aunque los valores de prueba se definirán más adelante.
+3. **Descubrir no es desactivar:** si se descubre una trampa, se conoce su peligro y puede evitarse; sigue haciendo daño al entrar y al iniciar allí un turno. Sigue estando siempre activa.
+4. **Dirección de juego:** el director conserva las posiciones de las trampas que todavía no hayan sido reveladas. La aplicación futura podrá mostrar una vista separada para el director.
+5. **Propuesta de prueba, aún NO aprobada:** resolver ambas detecciones con `2d6 + CENIZA` en trampas mecánicas y `2d6 + DOGMA` en las rituales. La búsqueda activa tendría un umbral menor o una bonificación respecto de la pasiva.
+
+**Pendiente de definir:** radio, momento o frecuencia de detección pasiva, dificultades, revelación tras activar una trampa y reglas sobre información compartida con el grupo. Por ahora ninguna de estas cuestiones tiene un número fijo ni una resolución automática implementada.

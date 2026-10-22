@@ -159,4 +159,12 @@ Estas reglas se ofrecen para pruebas y **no sustituyen** los acuerdos confirmado
 
 ## Trampas visibles y ocultas (v2.0, confirmado)
 
-Los mapas incluyen una mezcla de trampas visibles y ocultas. Su visibilidad no cambia el daño: las trampas siguen siendo permanentes, dañan al entrar y al inicio de cada turno sobre su casilla, e ignoran a los enemigos. Las reglas de detección, revelación y neutralización siguen sin definirse.
+Los mapas incluyen una mezcla de trampas visibles y ocultas. Su visibilidad no cambia el daño: las trampas siguen siendo permanentes, dañan al entrar y al inicio de cada turno sobre su casilla, e ignoran a los enemigos. La detección pasiva y la búsqueda activa están aprobadas en v2.1; las dificultades y otras especificaciones siguen pendientes.
+
+## Detección de trampas (v2.1, confirmado)
+
+- Habrá **detección pasiva** sin coste de acción y **búsqueda activa** que consume la acción principal.
+- La búsqueda activa será más fiable, pero no se han establecido radios, dificultades ni bonificaciones numéricas.
+- Detectar una trampa no la neutraliza: sigue activándose al entrar y al iniciar un turno sobre ella.
+- Propuesta pendiente de aprobación: `2d6 + CENIZA` para peligros mecánicos y `2d6 + DOGMA` para peligros rituales.
+- Las trampas no reveladas se mantienen ocultas al jugador y conocidas por el director.

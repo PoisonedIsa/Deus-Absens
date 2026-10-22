@@ -93,7 +93,7 @@ Este documento separa acuerdos reales de funcionalidades pendientes.
 - Los ejemplos de trampas `1d4`, `1d6` y `1d8` se usan como categorías iniciales; faltan diseñar clases definitivas, ubicaciones y efectos especiales específicos. El daño ocurre al entrar y al inicio de cada turno en la casilla (v1.9).
 - El movimiento ordinario permanece confirmado: horizontal/vertical cuesta 1 punto y diagonal cuesta 2 puntos. **Aplicación provisional del doble coste:** entrar en un obstáculo ortogonalmente cuesta 2 puntos, diagonalmente cuesta 4; queda por validar la forma de calcular un movimiento que entra y sale de terreno mixto.
 - **Confirmado:** las trampas están siempre activas y no se agotan con el uso; pueden dañar repetidamente a Penitentes. Su estética será sacra y tétrica (sangre ritual, agujas, símbolos profanados, etc.).
-- **Sin definir:** cobertura que podrían dar los obstáculos, si las trampas se ven antes de pisarlas, si se pueden desactivar de manera extraordinaria y si obstáculos transitables bloquean la recogida por razones físicas.
+- **Sin definir:** cobertura que podrían dar los obstáculos, cómo se calculan las dificultades de detección y si se pueden desactivar de manera extraordinaria y si obstáculos transitables bloquean la recogida por razones físicas.
 - Los valores anteriores de coberturas `+1/+2 Defensa` y `4/8 PV` siguen siendo **propuestas no aprobadas**; ningún obstáculo transitable bloqueará el paso solo porque una versión anterior del borrador lo indicara.
 - Las nuevas reglas están **documentadas, pero no implementadas en la web ni en el generador procedural**.
 
@@ -103,7 +103,7 @@ Este documento separa acuerdos reales de funcionalidades pendientes.
 - Solo afectan a los Penitentes; los enemigos siguen siendo inmunes a sus efectos.
 - El dado de daño de cada tipo está dentro del intervalo **1d4 a 1d8**, inclusive.
 - Estética narrativa: trampas sacras y tétricas, inspiradas en sangre ritual, agujas penitenciales y símbolos profanados. Los nombres propuestos en `data/obstaculos.json` son **ejemplos**, no denominaciones finales.
-- **Confirmado en v1.9:** las trampas causan daño al entrar y al inicio de cada turno si el Penitente permanece en la casilla. **Pendiente:** visibilidad, detección y posible neutralización extraordinaria.
+- **Confirmado en v1.9:** las trampas causan daño al entrar y al inicio de cada turno si el Penitente permanece en la casilla. **Actualización v2.1:** detección pasiva y búsqueda activa confirmadas; quedan pendientes sus valores y una posible neutralización extraordinaria.
 - Las reglas nuevas tienen precedencia sobre cualquier mención anterior que deje abierta la posibilidad de trampas consumibles. Aún no están programadas en la web.
 
 ## Actualización v1.9 · Activación de trampas (CONFIRMADO)
@@ -113,7 +113,7 @@ Este documento separa acuerdos reales de funcionalidades pendientes.
 - Cada activación implica una nueva tirada del dado del tipo de trampa (`1d4`, `1d6` o `1d8`).
 - No se aplica daño por el solo hecho de terminar el turno en la casilla.
 - Los enemigos siguen siendo inmunes; ninguna activación consume ni desactiva la trampa.
-- Los detalles de detección, visibilidad y posibles efectos especiales aún no están fijados.
+- Hay trampas visibles y ocultas; la detección pasiva y la búsqueda activa se confirman en v2.1, sin dificultades fijadas aún.
 - Esta regla prevalece sobre referencias anteriores que calificaban el daño por permanencia como pendiente.
 
 ## Actualización v2.0 · Visibilidad de trampas (CONFIRMADO)
@@ -121,5 +121,13 @@ Este documento separa acuerdos reales de funcionalidades pendientes.
 - Los escenarios pueden contener tanto **trampas visibles** como **trampas ocultas**.
 - El director conoce las posiciones de las trampas ocultas; no se colocan como fichas visibles para todos al preparar el tablero físico.
 - Una trampa no cambia su daño ni se consume por ser visible u oculta. Daño por tipo `1d4` a `1d8`, al entrar y al comienzo de cada turno en su casilla; enemigos inmunes.
-- **Pendiente** decidir cómo se detectan, revelan y neutralizan las trampas, incluido el posible uso de CENIZA o DOGMA.
+- **Actualización v2.1:** se aprueban detección pasiva y búsqueda activa, pero siguen pendientes los atributos definitivos, umbrales, radios, frecuencia, revelación por activación y neutralización.
 - No se ha implementado este comportamiento en la web; solo está documentado y preparado en el catálogo de datos.
+
+## Actualización v2.1 · Dos formas de detección de trampas (CONFIRMADO)
+
+- **Pasiva:** un Penitente puede advertir peligros ocultos sin gastar acción; no descubre automáticamente todas las trampas. Radio, frecuencia y dificultad pendientes.
+- **Activa:** un Penitente puede emplear su **acción principal** para buscar trampas; será más fiable que la pasiva. Sus valores exactos siguen pendientes.
+- **Detectar no desactiva:** las trampas descubiertas siguen siendo permanentes, dañan al entrar y al inicio de cada turno si se permanece en su casilla. Los enemigos son inmunes.
+- **Propuesta aún no aprobada:** `2d6 + CENIZA` para trampas físicas, `2d6 + DOGMA` para trampas rituales. No se asignaron números de dificultad, radios ni probabilidades.
+- Este acuerdo está **documentado, no programado** en el manual ni en el generador.

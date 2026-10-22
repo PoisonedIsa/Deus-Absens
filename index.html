@@ -27,7 +27,7 @@
 <header class="topbar">
   <div class="top-inner">
     <a class="brand" href="#" aria-label="Volver al inicio" data-goto="inicio"><span class="brand-mark"><span>✦</span></span> DEUS ABSENS</a>
-    <div class="top-meta"><span class="top-pill">Santuario digital</span><span class="top-pill muted-pill">Versión visual v6.1</span></div>
+    <div class="top-meta"><span class="top-pill">Santuario digital</span><span class="top-pill muted-pill">Versión visual v6.2</span></div>
     <nav class="nav" aria-label="Navegación principal">
       <button class="active" data-section="inicio"><span class="nav-glyph" aria-hidden="true">✦</span><span class="nav-label">Inicio</span></button>
       <button data-section="historia"><span class="nav-glyph" aria-hidden="true">❦</span><span class="nav-label">Crónica</span></button>
@@ -140,13 +140,35 @@
   </section>
 
   <section class="section" id="expedicion">
-    <div class="section-head"><div><div class="kicker">Capítulo V · Estructura de campaña</div><h2>Expediciones</h2><p class="lead">Sección estructural lista para crecer. Aquí vivirá el flujo completo de una expedición: preparación, ruta, encuentros, recompensas y salida.</p></div></div>
-    <div class="grid">
-      <article class="card placeholder-card"><div class="symbol">⌘</div><h3>Preparación</h3><p>Selección de Penitentes, equipamiento inicial, reliquias activas y condición especial del descenso.</p><span class="coming-tag">Próximamente</span></article>
-      <article class="card placeholder-card"><div class="symbol">⤳</div><h3>Ruta</h3><p>Ramas de exploración, zonas encadenadas, eventos narrativos, combates y decisiones del director.</p><span class="coming-tag">Próximamente</span></article>
-      <article class="card placeholder-card"><div class="symbol">☍</div><h3>Resultado</h3><p>Resumen de victoria, retirada o fracaso, con botín, pérdidas, ecos y progreso persistente.</p><span class="coming-tag">Próximamente</span></article>
+    <div class="section-head"><div><div class="kicker">Capítulo V · Antes de cruzar el umbral</div><h2>Preparar el descenso</h2><p class="lead">Una vista de preparación para reunir a la mesa. El director conserva el control narrativo y los sistemas de campaña aún en desarrollo se distinguen con claridad.</p></div></div>
+    <div class="mission-banner" aria-label="Estado de preparación de expedición">
+      <div class="mission-heading"><span class="overline">ARCHIVO DE EXPEDICIÓN / 001</span><h3>La víspera del descenso</h3><p>Un grupo, una ruta, un destino incierto. Consulta qué tienes preparado antes de empezar tu sesión física.</p></div>
+      <div class="mission-emblem" aria-hidden="true">⤳<small>IN ITINERE</small></div>
+    </div>
+    <div class="hud-row" aria-label="Resumen de preparación">
+      <div class="hud-stat"><span class="hud-icon" aria-hidden="true">♜</span><div><span class="hud-label">Penitente elegido</span><strong id="expSelectedName">Ninguno</strong></div></div>
+      <div class="hud-stat"><span class="hud-icon" aria-hidden="true">☠</span><div><span class="hud-label">Enemigos en la mesa</span><strong id="expEnemiesCount">0</strong></div></div>
+      <div class="hud-stat"><span class="hud-icon" aria-hidden="true">⚿</span><div><span class="hud-label">Reliquias descubiertas</span><strong id="expLootCount">0</strong></div></div>
+    </div>
+    <div class="section-two-col">
+      <article class="card mission-panel">
+        <div class="panel-heading"><span class="tag gold">PASO A PASO</span><h3>Ritual de preparación</h3><p>Accesos directos a las herramientas que ya funcionan.</p></div>
+        <div class="ritual-steps">
+          <div class="ritual-step"><span class="ritual-index">01</span><div><strong>Elegir Penitente</strong><p>Selecciona tu Santo y prepara los atributos de su ficha.</p></div><button class="small" data-goto="personajes">Personajes ↗</button></div>
+          <div class="ritual-step"><span class="ritual-index">02</span><div><strong>Revisar reliquias</strong><p>Consulta los hallazgos desbloqueados en este navegador.</p></div><button class="small" data-goto="objetos">Reliquias ↗</button></div>
+          <div class="ritual-step"><span class="ritual-index">03</span><div><strong>Preparar enemigos</strong><p>El director puede añadir criaturas a la mesa y controlar sus PV.</p></div><button class="small" data-goto="encuentro">Director ↗</button></div>
+        </div>
+      </article>
+      <aside class="card mission-panel pending-panel">
+        <div class="panel-heading"><span class="tag">EN DISEÑO</span><h3>El mapa aún no está escrito</h3><p>La navegación estructural está lista, pero estos sistemas todavía no ejecutan una expedición.</p></div>
+        <div class="pending-line"><span class="pending-mark">◇</span><div><strong>Rutas y eventos</strong><span>Recorridos variables bajo el control del director.</span></div></div>
+        <div class="pending-line"><span class="pending-mark">✧</span><div><strong>Encuentros procedurales</strong><span>Selección de enemigos basada en zonas, pendiente de desarrollar.</span></div></div>
+        <div class="pending-line"><span class="pending-mark">⟁</span><div><strong>Fin de expedición</strong><span>Recompensas, pérdidas y progresión persistente.</span></div></div>
+        <button class="small panel-link" data-goto="zonas">Consultar zonas ↗</button>
+      </aside>
     </div>
   </section>
+
 
   <section class="section" id="zonas">
     <div class="section-head"><div><div class="kicker">Capítulo VI · Geografía del descenso</div><h2>Zonas</h2><p class="lead">Otro menú estructural listo. Aquí podrás registrar biomas, amenazas, reglas ambientales y enemigos frecuentes por zona.</p></div></div>
@@ -158,19 +180,46 @@
   </section>
 
   <section class="section" id="encuentro">
-    <div class="section-head"><div><div class="kicker">Herramientas del director · Prototipo</div><h2>Mesa del director</h2><p class="lead">Añade enemigos desde el bestiario y controla sus PV por separado. El director elige movimientos, objetivos, ataques y habilidades.</p></div></div>
-    <div class="inventory-note"><strong id="encounterCount">0 criaturas en mesa</strong>. Las fichas enemigas utilizan números de prueba hasta que definamos el balance. Las modificaciones de PV se guardan solamente en este navegador.</div>
-    <div class="grid" id="encounterList"></div>
+    <div class="section-head"><div><div class="kicker">Herramientas del director · Prototipo</div><h2>Mesa del director</h2><p class="lead">Una mesa de control manual: añade criaturas desde el bestiario, registra sus PV y consulta sus ataques. El director decide objetivos, movimiento y habilidades.</p></div></div>
+    <div class="director-banner">
+      <div><span class="overline">ARCHIVO RESTRINGIDO · MESA DE COMBATE</span><h3>La voluntad detrás del velo</h3><p>Los enemigos no se mueven solos. No hay IA ni cálculo de rutas. La web registra sus fichas y PV mientras el director conduce el encuentro.</p></div>
+      <span class="director-seal" aria-hidden="true">⚙</span>
+    </div>
+    <div class="hud-row" aria-label="Estado actual de la mesa">
+      <div class="hud-stat"><span class="hud-icon" aria-hidden="true">☠</span><div><span class="hud-label">Criaturas añadidas</span><strong id="dirTotal">0</strong></div></div>
+      <div class="hud-stat"><span class="hud-icon" aria-hidden="true">✦</span><div><span class="hud-label">En pie</span><strong id="dirStanding">0</strong></div></div>
+      <div class="hud-stat"><span class="hud-icon" aria-hidden="true">✠</span><div><span class="hud-label">PV actuales de la mesa</span><strong id="dirHpTotal">0 / 0</strong></div></div>
+    </div>
+    <div class="director-toolstrip"><div><strong id="encounterCount">0 criaturas en mesa</strong><p>Valores de combate de prueba. Los cambios se guardan solamente en este navegador.</p></div><button class="btn secondary" data-goto="enemigos">+ Añadir desde el bestiario</button></div>
+    <div class="grid encounter-grid" id="encounterList"></div>
   </section>
 
+
   <section class="section" id="progreso">
-    <div class="section-head"><div><div class="kicker">Capítulo VII · Lo que perdura</div><h2>Legado</h2><p class="lead">Aquí vivirá el progreso global del mundo y el progreso personal de cada jugador: desbloqueos, ecos, códigos y evolución de campaña.</p></div></div>
-    <div class="grid">
-      <article class="card placeholder-card"><div class="symbol">⟁</div><h3>Desbloqueos globales</h3><p>Personajes, reliquias, mejoras y rutas que se comparten entre expediciones.</p><span class="coming-tag">Pendiente de implementación</span></article>
-      <article class="card placeholder-card"><div class="symbol">⌬</div><h3>Progreso personal</h3><p>Estado de cada jugador, ecos conservados, fichas persistentes y futuras versiones redimidas.</p><span class="coming-tag">Pendiente de implementación</span></article>
-      <article class="card placeholder-card"><div class="symbol">☷</div><h3>Códigos de campaña</h3><p>Sistema futuro para guardar y restaurar el estado de una campaña física mediante códigos.</p><span class="coming-tag">Pendiente de implementación</span></article>
+    <div class="section-head"><div><div class="kicker">Capítulo VII · Lo que perdura</div><h2>Archivo de Legado</h2><p class="lead">Lo que el grupo ha descubierto hasta ahora en este navegador. Sin confundir los desbloqueos de prueba con el sistema definitivo de Ecos.</p></div></div>
+    <div class="legacy-banner"><span class="overline">REGISTRO DE CAMPAÑA · LOCAL</span><h3>La memoria del santuario</h3><p>Las fichas, el Penitente seleccionado y los hallazgos que registraste se conservan en este dispositivo. Los códigos de campaña y la sincronización aún no están implementados.</p></div>
+    <div class="hud-row legacy-hud" aria-label="Datos del legado guardados">
+      <div class="hud-stat"><span class="hud-icon" aria-hidden="true">♜</span><div><span class="hud-label">Santos disponibles</span><strong id="legacySaints">7 / 10</strong></div></div>
+      <div class="hud-stat"><span class="hud-icon" aria-hidden="true">⚿</span><div><span class="hud-label">Reliquias descubiertas</span><strong id="legacyRelics">0 / 6</strong></div></div>
+      <div class="hud-stat"><span class="hud-icon" aria-hidden="true">✦</span><div><span class="hud-label">Ficha activa</span><strong id="legacySelected">Sin elegir</strong></div></div>
+    </div>
+    <div class="section-two-col">
+      <article class="card legacy-panel">
+        <div class="panel-heading"><span class="tag gold">REGISTROS DISPONIBLES</span><h3>Descubrimientos del grupo</h3><p>Solo se muestran datos que ya existen en el guardado actual.</p></div>
+        <div class="progress-block"><div class="progress-label"><span>Santos desbloqueados</span><strong id="legacySaintsPct">70 %</strong></div><div class="progress-track"><div class="progress-fill" id="legacySaintsBar" style="width:70%"></div></div></div>
+        <div class="progress-block"><div class="progress-label"><span>Reliquias descubiertas</span><strong id="legacyRelicsPct">0 %</strong></div><div class="progress-track"><div class="progress-fill" id="legacyRelicsBar" style="width:0%"></div></div></div>
+        <div class="panel-actions"><button class="small" data-goto="personajes">Revisar Santos ↗</button><button class="small" data-goto="objetos">Abrir relicario ↗</button></div>
+      </article>
+      <aside class="card legacy-panel pending-panel">
+        <div class="panel-heading"><span class="tag">NO IMPLEMENTADO</span><h3>El legado que vendrá</h3></div>
+        <div class="pending-line"><span class="pending-mark">⟁</span><div><strong>Ecos Divinos</strong><span>Recurso de progresión de la campaña.</span></div></div>
+        <div class="pending-line"><span class="pending-mark">☷</span><div><strong>Códigos de guardado</strong><span>Importación y exportación para grupos sin servidor.</span></div></div>
+        <div class="pending-line"><span class="pending-mark">✧</span><div><strong>Versiones redimidas</strong><span>Evoluciones únicas de los Santos aún por definir.</span></div></div>
+        <p class="small-note">Los controles de prueba existentes no descuentan Ecos ni completan estas funciones.</p>
+      </aside>
     </div>
   </section>
+
 
   <section class="section" id="objetos">
     <div class="section-head"><div><div class="kicker">Capítulo VIII · El relicario</div><h2>Objetos y reliquias</h2><p class="lead">Algunos hallazgos esperan en la oscuridad. Otros solo aparecen cuando el mundo reconoce lo que has hecho.</p></div></div>
@@ -199,13 +248,13 @@
     </div>
     <div class="grid" style="margin-top:18px">
       <article class="card placeholder-card"><div class="symbol">✦</div><h3>Agradecimientos</h3><p>Espacio listo para incluir colaboradores de arte, pruebas, narrativa, comunidad y dirección de juego.</p></article>
-      <article class="card placeholder-card"><div class="symbol">⚙</div><h3>Versión del proyecto</h3><p>Visual UI v6.1 · códice de personajes, iconografía por sección y transiciones accesibles.</p></article>
+      <article class="card placeholder-card"><div class="symbol">⚙</div><h3>Versión del proyecto</h3><p>Visual UI v6.2 · interfaz optimizada, paneles de expedición, legado y dirección de juego.</p></article>
       <article class="card placeholder-card"><div class="symbol">☉</div><h3>Notas</h3><p>Puedes reemplazar fácilmente estos textos por nombres reales cuando quieras publicar una versión más formal.</p></article>
     </div>
   </section>
 </main>
 
-<footer class="footer">DEUS ABSENS · EL SILENCIO TAMBIÉN ES UNA RESPUESTA<br><span style="font-size:12px">Santuario digital en desarrollo · visual v6.1</span></footer>
+<footer class="footer">DEUS ABSENS · EL SILENCIO TAMBIÉN ES UNA RESPUESTA<br><span style="font-size:12px">Santuario digital en desarrollo · visual v6.2</span></footer>
 
 <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
   <div class="modal"><div class="kicker" id="modalKicker">Decisión</div><h3 id="modalTitle">Confirmar</h3><div id="modalBody"></div><div class="modal-actions" id="modalActions"></div></div>

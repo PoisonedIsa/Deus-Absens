@@ -1,14 +1,22 @@
-# DEUS ABSENS · Santuario digital v6.1
+# DEUS ABSENS · Santuario digital v6.2
 
 Sitio web estático para GitHub Pages. Conserva los nombres de archivo y rutas originales.
 
 
-## Mejoras visuales y estructurales de esta versión
+## Bloque visual v6.2 · interfaz y rendimiento
+
+- **Expedición:** nueva vista de preparación con resumen de Santo seleccionado, cantidad de criaturas y reliquias; accesos a secciones reales. Las rutas y la ejecución de expediciones siguen pendientes.
+- **Legado:** panel con recuentos reales de Santos disponibles y reliquias descubiertas en este navegador, progreso y ficha elegida. Ecos, códigos y formas redimidas se indican como no implementados.
+- **Mesa del director:** HUD de enemigos totales, vivos y PV; fichas de seguimiento con barra de PV, acceso a bestiario y todos los controles anteriores. Valores de combate siguen siendo provisionales. Sin IA ni rutas.
+- **Rendimiento:** suprimidos efectos de animación permanente, blur y transiciones completas de vista; navegación instantánea y actualización selectiva de DOM al cambiar PV/cargas y descubrimientos. Interfaz más ligera en escritorio y teléfono.
+- **Guardado:** no se borra ni cambia la clave `localStorage.deusAbsensState` ni se modifican los JSON de personajes/enemigos/reliquias.
+
+## Mejoras visuales y estructurales previas
 
 - **Bloque visual 2:** los diez Santos ahora aparecen como cartas/expedientes sagrados con glifos propios, lemas narrativos, atributos y accesos a la ficha completa.
 - **Iconografía de navegación:** los once menús tienen un símbolo y las cabeceras de sección usan ornamentos individuales.
 - **Transiciones ligeras:** animación entre secciones, con respeto a la preferencia del sistema de reducir movimiento.
-- **Narrativas y reglas preservadas:** el proyecto completo incorpora el JSON ampliado v2.9 y el documento acumulado de Puntos Débiles v5.7, sin modificar las identidades ni habilidades.
+- **Narrativas preservadas:** el proyecto completo incorpora el JSON ampliado v2.9 con las historias completas de los diez Penitentes y mantiene las mismas identidades de personaje y habilidades.
 
 - **Pantalla de entrada** antes de acceder al contenido principal, con opción de entrar al inicio o saltar a personajes.
 - **Navegación ampliada** con menús para Expedición, Zonas, Legado y Créditos.

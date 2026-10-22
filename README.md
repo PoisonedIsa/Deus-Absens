@@ -1,64 +1,45 @@
-# DEUS ABSENS
+# DEUS ABSENS · Fichas de combate v2.8
 
-Manual web para un **juego de mesa híbrido**: consulta de personajes, bestiario y reliquias, con herramientas digitales de partida previstas para versiones posteriores.
+Sitio web estático para GitHub Pages. Conserva los nombres de archivo y rutas originales.
 
-## Publicar en GitHub Pages
+## Implementado y probado en esta versión
 
-1. Crea un repositorio y copia **el contenido de esta carpeta** a la raíz de la rama `main`.
-2. En el repositorio, abre **Settings → Pages**.
-3. En **Build and deployment**, selecciona **Deploy from a branch**.
-4. Selecciona **`main`** y **`/(root)`** y guarda.
-5. Cuando termine el despliegue, abre la dirección que muestra GitHub Pages.
+- Catálogo de **10 Penitentes**, con 7 disponibles y 3 apócrifos bloqueados de inicio.
+- Fichas completas: trasfondo resumido, pecado, rol, armas, pasiva y martirio, usando contenido del autor.
+- Creador de atributos `+3, +2, +1, +0` sin repeticiones. Fórmulas: PV `12 + SANGRE × 3`; Defensa `8 + techo(CENIZA/2)`; movimiento `2 + CENIZA`; Estigma máximo `10 + DOGMA`.
+- Ficha activa con PV/Estigma y contador de cargas de martirio, persistidos por personaje en `localStorage`. **Una nueva expedición restaura las cargas; un combate nuevo no**.
+- Tres Santos secretos: desbloqueo manual de prueba. **No se descuentan Ecos** hasta crear el sistema de economía.
+- Fichas de 6 enemigos de ejemplo con PV, Defensa, Blindaje, movimiento, acciones, ataques múltiples y habilidades. **TODOS sus valores numéricos de combate son PROVISIONALES**.
+- Mesa del director: añade múltiples ejemplares de enemigos, reduce/restaura PV y elimina individuos. Las criaturas no se mueven automáticamente.
+- Conserva el catálogo de reliquias, su progreso y la crónica original.
 
-`index.html` debe permanecer en la raíz. Todas las rutas usan `./` o URL relativas al propio módulo, así que la web funciona también si el proyecto se publica en una subruta como `usuario.github.io/deus-absens/`.
+## NO implementado todavía
 
-## Abrirlo en tu equipo
+- No hay cálculo de rutas, IA enemiga ni Tablas de Instinto. **El director controla por completo a los enemigos**.
+- No hay sistema automático de tiradas, condiciones, daño, turnos, saqueo ni encuentros procedurales. Las fichas presentan las habilidades y permiten registrar PV manualmente.
+- Sin sincronización entre dispositivos. `localStorage` conserva datos solo en el navegador actual.
+- El legado mixto y los códigos de recuperación de campañas, los Ecos, la ruleta y las evoluciones redimidas todavía están por programar.
+- El catálogo de seis reliquias sigue siendo de demostración.
 
-Debido a que los datos están separados en JSON, abrir `index.html` con `file://` puede bloquear las solicitudes. Arranca un servidor local desde la carpeta del proyecto:
+## Qué cambiar en GitHub
 
-```bash
-python -m http.server 8000
-```
+Si ya publicaste la versión anterior, usa el ZIP **ACTUALIZACION**, que contiene solo las rutas a reemplazar o añadir. No cambies la ubicación de los archivos.
 
-Después abre `http://localhost:8000/`.
+## Archivos del catálogo
 
-## Estado de esta entrega: v0.2.2
+- `data/personajes.json`: diez Santos, identidades, desbloqueos y vínculos a habilidades.
+- `data/habilidades.json`: diez pasivas, diez martirios y límites de cargas. Solo San Longinos tiene capacidad inicial confirmada de 1; para los otros se muestra temporalmente 1 hasta que definamos sus valores.
+- `data/objetos.json`: veinte objetos de equipo inicial de los diez Santos, como registros separados.
+- `data/enemigos.json`: seis criaturas de demostración. **Edita sus estadísticas aquí, no en HTML o JavaScript**.
+- `assets/js/ui.js`: presentación de fichas y contadores.
+- `assets/js/app.js`: interacción, selección, registro de encuentros.
+- `assets/js/state.js`: guardado compatible con selecciones/reliquias de la versión anterior.
 
-**Funcional ahora:** páginas y navegación del manual, seis personajes demostrativos, seis enemigos, seis reliquias, selección/evolución de prueba, filtros y desbloqueos guardados localmente en el navegador.
+## Para visualizar localmente
 
-**Diseñado pero NO programado:** legado mixto (campaña + jugador), códigos de legado, creador de atributos, diez Santos definitivos, formas redimidas, Ecos, contador y recarga de martirio, inventario de partida y combate digital. Ver `docs/DECISIONES_CONFIRMADAS.md`.
+Desde la raíz del proyecto ejecuta `python -m http.server 8000` y abre `http://localhost:8000/`.
+Los JSON no cargan de forma fiable si abres directamente `index.html` con `file://`.
 
-**No se ha comprobado ninguna publicación real a GitHub**: se entrega el repositorio completo para que puedas publicarlo.
+## Seguridad y acceso
 
-## Qué editar
-
-- `data/personajes.json`: fichas y evoluciones.
-- `data/enemigos.json`: bestiario.
-- `data/reliquias.json`: hallazgos y condiciones de desbloqueo.
-- `data/habilidades.json`: catálogo reservado de habilidades, de momento vacío.
-- `data/variantes.json`: catálogo reservado de formas redimidas, de momento vacío.
-- `data/objetos.json`: catálogo reservado de equipo y consumibles, de momento vacío.
-- `data/mejoras.json`: catálogo reservado de mejoras, de momento vacío.
-- `index.html`: textos de historia, reglas y estructura de secciones **por ahora**.
-- `assets/css/style.css`: diseño visual.
-- `assets/js/`: comportamiento del sitio, no contenido del juego.
-
-Consulta [docs/ARQUITECTURA.md](docs/ARQUITECTURA.md) para las rutas estables y las ideas reservadas.
-
-## Notas de progreso
-
-- Los datos de catálogo son públicos: cualquiera que vea el repositorio puede leerlos. Los bloqueos son de presentación, no seguridad contra spoilers.
-- La elección de personaje, las evoluciones y las reliquias desbloqueadas se guardan con `localStorage`, **solo en el navegador y origen actuales**. GitHub Pages no sincroniza partidas entre jugadores ni dispositivos.
-- La clave `deusAbsensState` mantiene compatibilidad con la versión inicial en el **mismo origen**, pero el progreso del archivo local no pasa automáticamente a GitHub Pages.
-- Aún **no hay** motor de combate, fichas de partida en grupo ni inventario con cantidades. Se diseñarán al concretar las reglas.
-
-## Diseño del sistema roguelite (no implementado)
-
-Las nuevas decisiones e ideas se registran en [docs/DISENO_DE_JUEGO.md](docs/DISENO_DE_JUEGO.md) y en [docs/IDEAS.md](docs/IDEAS.md). El proyecto **no implementa todavía** códigos de progreso, Ecos, santificación/redenciones ni el nuevo creador de personajes; esta entrega actualiza documentación sin alterar la web funcional.
-
-
-## Actualizaciones posteriores
-
-Una vez publicado este ZIP completo, podremos enviar **únicamente** `data/personajes.json`, `data/habilidades.json` o cualquier otro fichero cambiado para sustituirlo por la misma ruta en GitHub. Si una característica requiere nueva interfaz o lógica, indicaremos también los archivos JavaScript/HTML necesarios; editar solo JSON no genera por sí mismo controles nuevos.
-
-`docs/CONTRATO_DATOS.md` detalla nombres, referencias y pautas para futuras entregas.
+La web estática no distingue permisos reales entre jugador y director: el botón «Desbloquear (director)» es temporal y cualquier persona con acceso a la página podría usarlo. Esto se resolverá junto con el sistema de códigos/roles. No publiques contraseñas ni secretos en JSON públicos.

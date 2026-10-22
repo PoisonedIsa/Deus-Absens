@@ -17,6 +17,7 @@
       <button data-section="reglas">Reglas</button>
       <button data-section="personajes">Personajes</button>
       <button data-section="enemigos">Enemigos</button>
+      <button data-section="encuentro">Mesa del director</button>
       <button data-section="objetos">Reliquias</button>
     </nav>
   </div>
@@ -42,8 +43,8 @@
     <div class="section-head"><div><div class="kicker">Antes de descender</div><h2>El mundo después del silencio</h2><p class="lead">Un manual vivo para una expedición imposible. Descubre sus verdades, prepara tu descenso y decide qué estás dispuesto a sacrificar.</p></div></div>
     <div class="grid">
       <article class="card"><div class="symbol">☩</div><h3>I. La crónica</h3><p>Conoce la desaparición de Dios, la hostilidad de los coros celestiales y las grietas que devoran el mundo.</p><button class="small" data-goto="historia">Abrir capítulo ↗</button></article>
-      <article class="card"><div class="symbol">⚖</div><h3>II. Las leyes del descenso</h3><p>Consulta las reglas esenciales, las expediciones, la caída y el precio de volver a intentarlo.</p><button class="small" data-goto="reglas">Consultar reglas ↗</button></article>
-      <article class="card"><div class="symbol">♜</div><h3>III. Los condenados</h3><p>Elige un arquetipo, conoce sus dones y desbloquea una única evolución irreversible.</p><button class="small" data-goto="personajes">Ver personajes ↗</button></article>
+      <article class="card"><div class="symbol">⚖</div><h3>II. Las leyes del descenso</h3><p>Consulta los dados 2d6, el movimiento en cuadrícula, las cargas de martirio y el precio de cada expedición.</p><button class="small" data-goto="reglas">Consultar reglas ↗</button></article>
+      <article class="card"><div class="symbol">♜</div><h3>III. Los condenados</h3><p>Conoce los diez Penitentes, asigna atributos y controla las cargas de martirio.</p><button class="small" data-goto="personajes">Ver personajes ↗</button></article>
       <article class="card"><div class="symbol">☠</div><h3>IV. Los adversarios</h3><p>Ángeles sin misericordia, horrores del abismo y criaturas nacidas de la ausencia.</p><button class="small" data-goto="enemigos">Abrir bestiario ↗</button></article>
       <article class="card"><div class="symbol">⚿</div><h3>V. Reliquias y hallazgos</h3><p>Armas, juramentos y objetos que se revelan conforme la expedición deja huella.</p><button class="small" data-goto="objetos">Abrir relicario ↗</button></article>
       <article class="card"><div class="symbol">✧</div><h3>VI. Tu legado</h3><p>Los descubrimientos sobreviven a la derrota. Cada intento puede abrir una puerta que antes no existía.</p><div class="progress-wrap"><div class="progress" id="homeProgress"></div></div><span id="homeProgressText" class="tag gold">0 reliquias descubiertas</span></article>
@@ -81,27 +82,34 @@
       <li><div><strong>Prepara la expedición.</strong><br><span style="color:var(--muted)">El grupo elige personajes, equipa reliquias disponibles y fija un objetivo para el descenso.</span></div></li>
       <li><div><strong>Explora por etapas.</strong><br><span style="color:var(--muted)">Cada zona presenta un encuentro, una decisión, un hallazgo o una amenaza. El director describe el riesgo antes de pedir una acción.</span></div></li>
       <li><div><strong>Resuelve las acciones.</strong><br><span style="color:var(--muted)">Cuando el resultado sea incierto, utiliza la mecánica de prueba que defina tu mesa. Un fallo debe cambiar la situación: cuesta recursos, atrae enemigos o revela una consecuencia.</span></div></li>
-      <li><div><strong>Combate con intención.</strong><br><span style="color:var(--muted)">En cada turno, cada personaje realiza su movimiento y una acción principal. El orden, el alcance y el daño deben concretarse en la versión final de las reglas.</span></div></li>
+      <li><div><strong>Combate con intención.</strong><br><span style="color:var(--muted)">Inicio → movimiento → acción principal → cierre (solo con un efecto que lo permita). Ataques con 2d6, diagonal de movimiento cuesta 2; ataques cuerpo a cuerpo cubren las 8 casillas vecinas.</span></div></li>
       <li><div><strong>Caer no es terminar.</strong><br><span style="color:var(--muted)">Al fracasar una expedición, el personaje puede perder recursos temporales; los descubrimientos permanentes permanecen desbloqueados para futuras partidas.</span></div></li>
       <li><div><strong>La evolución es única.</strong><br><span style="color:var(--muted)">Cada personaje puede escoger una sola evolución. La elección es permanente y transforma su habilidad principal, su aspecto o su forma de jugar.</span></div></li>
     </ol>
     <div class="grid" style="margin-top:24px">
       <article class="card"><div class="symbol">Ⅰ</div><h3>Una expedición</h3><p>Preparación → exploración → encuentros → jefe o retirada → consecuencias.</p></article>
       <article class="card"><div class="symbol">Ⅱ</div><h3>Progreso persistente</h3><p>Las reliquias descubiertas se registran entre partidas. Puedes añadir condiciones de desbloqueo específicas.</p></article>
-      <article class="card"><div class="symbol">Ⅲ</div><h3>Decisiones irreversibles</h3><p>Una evolución por personaje. Elige con cuidado: no existe un camino de regreso.</p></article>
+      <article class="card"><div class="symbol">Ⅲ</div><h3>Decisiones irreversibles</h3><p>Tres Santos apócrifos comienzan sellados. Sus costes de desbloqueo y las versiones redimidas todavía están en diseño.</p></article>
     </div>
   </section>
 
   <section class="section" id="personajes">
-    <div class="section-head"><div><div class="kicker">Capítulo III · Los que aún caminan</div><h2>Personajes jugables</h2><p class="lead">Escoge un condenado. Cada personaje tiene un don inicial y una evolución única. La selección y la evolución se guardan en este navegador.</p></div></div>
-    <div class="toolbar"><input id="characterSearch" class="search" placeholder="Buscar personaje o habilidad…" aria-label="Buscar personaje"><select id="characterFilter" class="filter" aria-label="Filtrar personajes"><option value="all">Todos los arquetipos</option><option value="available">Sin elegir</option><option value="chosen">Personaje elegido</option><option value="evolved">Evolucionados</option></select></div>
+    <div class="section-head"><div><div class="kicker">Capítulo III · Los que aún caminan</div><h2>Personajes jugables</h2><p class="lead">Consulta los diez Santos penitentes, distribuye +3, +2, +1 y +0, y controla PV, Estigma y cargas de martirio. Tres Santos apócrifos empiezan bloqueados.</p></div></div>
+    <div class="toolbar"><input id="characterSearch" class="search" placeholder="Buscar personaje o habilidad…" aria-label="Buscar personaje"><select id="characterFilter" class="filter" aria-label="Filtrar personajes"><option value="all">Todos</option><option value="available">Desbloqueados</option><option value="locked">Sellados</option><option value="chosen">Personaje elegido</option></select></div>
+    <div id="characterSheetPanel"></div>
     <div class="grid" id="characterGrid"></div>
   </section>
 
   <section class="section" id="enemigos">
-    <div class="section-head"><div><div class="kicker">Capítulo IV · El bestiario</div><h2>Los que aguardan</h2><p class="lead">No todo lo que te persigue nació en el Infierno. Algunas cosas descendieron del cielo. Otras estaban aquí antes de que existieran ambos.</p></div></div>
+    <div class="section-head"><div><div class="kicker">Capítulo IV · El bestiario</div><h2>Los que aguardan</h2><p class="lead">Fichas de enemigos con estadísticas provisionales, ataques simples y múltiples, habilidades y movimiento propio. El director decide sus acciones sin cálculo de rutas.</p></div></div>
     <div class="toolbar"><input id="enemySearch" class="search" placeholder="Buscar criatura…" aria-label="Buscar enemigo"><select id="enemyFilter" class="filter" aria-label="Filtrar enemigos"><option value="all">Todas las categorías</option><option value="Celestial">Celestiales</option><option value="Infernal">Infernales</option><option value="Umbral">Umbrales</option></select></div>
     <div class="grid" id="enemyGrid"></div>
+  </section>
+
+  <section class="section" id="encuentro">
+    <div class="section-head"><div><div class="kicker">Herramientas del director · Prototipo</div><h2>Mesa del director</h2><p class="lead">Añade enemigos desde el bestiario y controla sus PV por separado. El director elige movimientos, objetivos, ataques y habilidades; no hay cálculo automático de rutas.</p></div></div>
+    <div class="inventory-note"><strong id="encounterCount">0 criaturas en mesa</strong>. Las fichas enemigas utilizan números de prueba hasta que definamos el balance. Las modificaciones de PV se guardan solamente en este navegador.</div>
+    <div class="grid" id="encounterList"></div>
   </section>
 
   <section class="section" id="objetos">
@@ -112,7 +120,7 @@
   </section>
 </main>
 
-<footer class="footer">DEUS ABSENS · EL SILENCIO TAMBIÉN ES UNA RESPUESTA<br><span style="font-size:12px">Manual de juego en desarrollo · versión 0.1</span></footer>
+<footer class="footer">DEUS ABSENS · EL SILENCIO TAMBIÉN ES UNA RESPUESTA<br><span style="font-size:12px">Manual de juego en desarrollo · fichas v2.8</span></footer>
 
 <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
   <div class="modal"><div class="kicker" id="modalKicker">Decisión</div><h3 id="modalTitle">Confirmar</h3><div id="modalBody"></div><div class="modal-actions" id="modalActions"></div></div>

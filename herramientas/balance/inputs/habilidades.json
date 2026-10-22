@@ -1,0 +1,212 @@
+[
+  {
+    "id": "pasiva-san-longinos",
+    "characterId": "san-longinos",
+    "type": "pasiva",
+    "name": "Cólera Sangrienta",
+    "description": "Con 50 % o menos de PV: +1d4 de daño a los ataques y penalización de Ataques Precisos reducida de -3 a -1 (regla original pendiente de adaptar al 2d6). No puede curarse con vendajes o pociones mientras queden enemigos.",
+    "review": "pendiente_balance"
+  },
+  {
+    "id": "martirio-san-longinos",
+    "characterId": "san-longinos",
+    "type": "martirio",
+    "name": "Herida del Costado",
+    "description": "Impacto automático, ignora Blindaje y aplica Sangrado Sacro: 1d6 PV al inicio de cada turno del objetivo; Longinos recupera 3 PV cada vez que se aplica este sangrado. Duración todavía por definir.",
+    "maxCharges": 1,
+    "prototypeMaxCharges": 1,
+    "chargeCost": 1,
+    "restoreAtExpeditionStart": true,
+    "restoreBetweenCombats": false,
+    "review": "capacidad_confirmada"
+  },
+  {
+    "id": "pasiva-santa-lucia",
+    "characterId": "santa-lucia",
+    "type": "pasiva",
+    "name": "Mirada Inmaculada",
+    "description": "Sin penalización por Ataques Precisos a Puntos Débiles. Cada ataque fallado añade 1 de Estigma.",
+    "review": "pendiente_balance"
+  },
+  {
+    "id": "martirio-santa-lucia",
+    "characterId": "santa-lucia",
+    "type": "martirio",
+    "name": "Juicio de la Ciega",
+    "description": "El próximo disparo es crítico automático: 2d12 de daño y destruye un Punto Débil sin tirada. Su efecto sobre jefes sigue pendiente de balance.",
+    "maxCharges": null,
+    "prototypeMaxCharges": 1,
+    "chargeCost": 1,
+    "restoreAtExpeditionStart": true,
+    "restoreBetweenCombats": false,
+    "review": "pendiente_balance"
+  },
+  {
+    "id": "pasiva-san-erasmo",
+    "characterId": "san-erasmo",
+    "type": "pasiva",
+    "name": "Comunión Voraz",
+    "description": "Cuando un enemigo cae o pierde un Punto Débil, puede gastar su Movimiento para consumir restos: recupera 1d6 PV y obtiene +1 Blindaje hasta terminar el combate (máximo +3). Tras 2 rondas consecutivas sin alimentarse pierde 2 PV.",
+    "review": "pendiente_balance"
+  },
+  {
+    "id": "martirio-san-erasmo",
+    "characterId": "san-erasmo",
+    "type": "martirio",
+    "name": "Purga de Bilis Hirviente",
+    "description": "Ataque en cono: 2d6 de daño directo a los enemigos frente a él y -2 de Blindaje de forma permanente según la regla original.",
+    "maxCharges": null,
+    "prototypeMaxCharges": 1,
+    "chargeCost": 1,
+    "restoreAtExpeditionStart": true,
+    "restoreBetweenCombats": false,
+    "review": "pendiente_balance"
+  },
+  {
+    "id": "pasiva-santa-magdalena",
+    "characterId": "santa-magdalena",
+    "type": "pasiva",
+    "name": "Éxtasis del Sufrimiento",
+    "description": "Con Estigma 5 o más, todos sus ataques y hechizos hacen +3 de daño; el coste de Milagros Rotos baja de +2 a +1 Estigma.",
+    "review": "pendiente_balance"
+  },
+  {
+    "id": "martirio-santa-magdalena",
+    "characterId": "santa-magdalena",
+    "type": "martirio",
+    "name": "Matrimonio de Sangre",
+    "description": "Durante 2 rondas crea un vínculo con un enemigo: cuando ella pierde PV, el objetivo recibe el doble, ignorando Blindaje. Fuentes y límites de daño pendientes de balance.",
+    "maxCharges": null,
+    "prototypeMaxCharges": 1,
+    "chargeCost": 1,
+    "restoreAtExpeditionStart": true,
+    "restoreBetweenCombats": false,
+    "review": "pendiente_balance"
+  },
+  {
+    "id": "pasiva-san-lorenzo",
+    "characterId": "san-lorenzo",
+    "type": "pasiva",
+    "name": "Peso del Oro Sacro",
+    "description": "Recibe +25 % de Ecos al final del combate. Por cada 25 Ecos sin gastar durante la expedición obtiene +1 al ataque y daño, máximo +4. No puede regalar objetos ni pagar sobornos.",
+    "review": "pendiente_balance"
+  },
+  {
+    "id": "martirio-san-lorenzo",
+    "characterId": "san-lorenzo",
+    "type": "martirio",
+    "name": "Comprar la Indulgencia",
+    "description": "Gasta 15 Ecos para modificar un dado recién lanzado, propio, aliado o enemigo. El efecto original 20/1 natural y el antiguo uso ilimitado están PENDIENTES de adaptación al 2d6 y al sistema de cargas.",
+    "maxCharges": null,
+    "prototypeMaxCharges": 1,
+    "chargeCost": 1,
+    "restoreAtExpeditionStart": true,
+    "restoreBetweenCombats": false,
+    "review": "pendiente_balance"
+  },
+  {
+    "id": "pasiva-san-bartolome",
+    "characterId": "san-bartolome",
+    "type": "pasiva",
+    "name": "Injerto Blasfemo",
+    "description": "Al destruir un Punto Débil con Ataque Preciso, recupera 3 PV y obtiene temporalmente una propiedad asociada a ese punto hasta terminar el combate; los efectos robables se definirán en el bestiario.",
+    "review": "pendiente_balance"
+  },
+  {
+    "id": "martirio-san-bartolome",
+    "characterId": "san-bartolome",
+    "type": "martirio",
+    "name": "Piel de Nadie",
+    "description": "Se coloca detrás de un enemigo. No puede ser objetivo de ataques hasta su próximo turno y su siguiente ataque con cuchillos impacta automáticamente.",
+    "maxCharges": null,
+    "prototypeMaxCharges": 1,
+    "chargeCost": 1,
+    "restoreAtExpeditionStart": true,
+    "restoreBetweenCombats": false,
+    "review": "pendiente_balance"
+  },
+  {
+    "id": "pasiva-san-simeon",
+    "characterId": "san-simeon",
+    "type": "pasiva",
+    "name": "Inercia del Estilita",
+    "description": "Si no utiliza su movimiento durante el turno: +2 de Blindaje y +2 al daño de la ametralladora hasta su siguiente turno.",
+    "review": "pendiente_balance"
+  },
+  {
+    "id": "martirio-san-simeon",
+    "characterId": "san-simeon",
+    "type": "martirio",
+    "name": "Apatía Absoluta",
+    "description": "Hasta el próximo turno: inmune a ganar Estigma, a desplazamientos forzosos y a aturdimiento; enemigos que se acerquen para atacar cuerpo a cuerpo reciben un disparo automático de 2d6 antes de su ataque. Cantidad de respuestas pendientes de balance.",
+    "maxCharges": null,
+    "prototypeMaxCharges": 1,
+    "chargeCost": 1,
+    "restoreAtExpeditionStart": true,
+    "restoreBetweenCombats": false,
+    "review": "pendiente_balance"
+  },
+  {
+    "id": "pasiva-san-judas-tadeo",
+    "characterId": "san-judas-tadeo",
+    "type": "pasiva",
+    "name": "El Peso de los Caídos",
+    "description": "Comienza con hasta 3 recuerdos de Penitentes caídos (o soldados anónimos). Una vez por turno puede sumar +2 de Estigma para invocar un espectro durante 2 rondas; el espectro ataca con DOGMA. Un espectro activo puede absorber un golpe letal y dejar al Santo en 1 PV.",
+    "review": "pendiente_balance"
+  },
+  {
+    "id": "martirio-san-judas-tadeo",
+    "characterId": "san-judas-tadeo",
+    "type": "martirio",
+    "name": "Procesión de los Olvidados",
+    "description": "Invoca tres espectros sin pagar Estigma; atacan inmediatamente y al cerrar el turno producen 2d6 de daño de área que ignora Blindaje.",
+    "maxCharges": null,
+    "prototypeMaxCharges": 1,
+    "chargeCost": 1,
+    "restoreAtExpeditionStart": true,
+    "restoreBetweenCombats": false,
+    "review": "pendiente_balance"
+  },
+  {
+    "id": "pasiva-santa-juana",
+    "characterId": "santa-juana",
+    "type": "pasiva",
+    "name": "Apoteosis de la Hoguera",
+    "description": "Al alcanzar el límite de Estigma adopta Forma Seráfica durante 2 rondas: vuela, añade ACERO y DOGMA al daño e ignora Blindaje; pierde 3 PV al final de cada turno de transformación. Después Estigma vuelve a 0.",
+    "review": "pendiente_balance"
+  },
+  {
+    "id": "martirio-santa-juana",
+    "characterId": "santa-juana",
+    "type": "martirio",
+    "name": "Bautismo de la Pira",
+    "description": "Obtiene +5 de Estigma y produce 2d8 de daño a enemigos próximos, causando Ceguera (-3 a sus ataques durante el siguiente turno).",
+    "maxCharges": null,
+    "prototypeMaxCharges": 1,
+    "chargeCost": 1,
+    "restoreAtExpeditionStart": true,
+    "restoreBetweenCombats": false,
+    "review": "pendiente_balance"
+  },
+  {
+    "id": "pasiva-san-lazaro",
+    "characterId": "san-lazaro",
+    "type": "pasiva",
+    "name": "Rechazo de la Tumba",
+    "description": "Inmune a venenos, enfermedades y Sangrado. Al llegar a 0 PV puede seguir actuando durante 2 rondas con +2 de daño ácido; si derrota a un enemigo o termina el combate durante ese tiempo regresa con 5 PV; en caso contrario muere.",
+    "review": "pendiente_balance"
+  },
+  {
+    "id": "martirio-san-lazaro",
+    "characterId": "san-lazaro",
+    "type": "martirio",
+    "name": "Exhalación del Sudario",
+    "description": "Ataque automático a corta o media distancia: 3d6 de daño, reduce su propio Estigma en 3 y aplica Podrido (+2 de daño recibido desde cualquier fuente hasta el final del combate).",
+    "maxCharges": null,
+    "prototypeMaxCharges": 1,
+    "chargeCost": 1,
+    "restoreAtExpeditionStart": true,
+    "restoreBetweenCombats": false,
+    "review": "pendiente_balance"
+  }
+]

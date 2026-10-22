@@ -1,3 +1,26 @@
+# DEUS ABSENS · Proyecto completo para GitHub · v7.2
+
+**Este archivo ZIP es el proyecto COMPLETO.** Descomprime su contenido y sube los archivos y carpetas directamente a la raíz de tu repositorio de GitHub. No crees una carpeta adicional dentro del repositorio.
+
+Contiene la web funcional más reciente (v6.9: interfaz editorial v6.5 + tablero de iniciativa), los catálogos de personajes y enemigos y toda la documentación hasta el balance v7.2.
+
+**IMPORTANTE:** v7.2 es una actualización de reglas, documentos e informes de simulación; no convierte en funciones automáticas los sistemas todavía pendientes. Los valores del balance siguen siendo provisionales. Las tiradas y los Ecos no se conceden automáticamente al finalizar encuentros.
+
+**Reglas vigentes clave:** Ecos personales completos para todos los Penitentes que hayan acertado un ataque contra el enemigo derrotado (aunque Blindaje absorba daño), reserva al cerrar expedición = `floor(60 % de Ecos obtenidos)`, compras de mejoras personales y permanentes; martirios con cargas y límites individuales, sin curación gratuita entre encuentros. Cargas y límites concretos pendientes excepto Longinos (1 por expedición).
+
+El simulador de balance en `herramientas/balance/` es material de análisis y **NO controla a los enemigos**; el director continúa decidiendo sus acciones.
+
+## Instalación rápida en GitHub Pages
+
+1. Abre tu repositorio de GitHub y conserva una copia de seguridad si ya hay una versión publicada.
+2. Extrae este ZIP; sube **el contenido** (`index.html`, `assets/`, `data/`, `docs/`, `herramientas/`, etc.) a la raíz del repositorio y permite reemplazar los archivos existentes.
+3. Asegúrate de que `index.html` quede en la raíz, y activa GitHub Pages desde la rama que estás usando.
+4. Recarga la página publicada con Ctrl + F5 (o el equivalente del móvil).
+
+**Guardados:** la información del jugador reside en `localStorage` de su navegador. Reemplazar archivos en GitHub no la reinicia automáticamente; no borres datos del sitio. Para seguridad, exporta el código de ficha antes de actualizar.
+
+---
+
 # DEUS ABSENS · Pulido visual y hoja de partida v6.4
 
 Esta entrega mantiene la apariencia editorial de la v6.3 y añade navegación agrupada, una pantalla de créditos más cuidada, una selección de Santo confirmable/bloqueable y una hoja de personaje con inventario local.

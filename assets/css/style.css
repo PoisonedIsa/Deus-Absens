@@ -86,3 +86,10 @@ button.small{background:transparent;border:1px solid var(--line);color:var(--ink
 .detail-sheet h4{font:14px Cinzel,serif;color:var(--gold);margin:18px 0 7px}.detail-sheet p{margin:6px 0 11px;line-height:1.5}
 .modal{width:min(720px,100%)}.encounter-card{min-height:0}.encounter-card small{font-family:Georgia,serif;color:var(--muted);font-size:13px}
 @media(max-width:560px){.attributes{grid-template-columns:repeat(2,minmax(0,1fr))}.sheet-header{flex-wrap:wrap}.sheet-panel{padding:16px}.attribute-form{grid-template-columns:1fr}}
+
+/* Narrativas extensas de los Santos: lectura cómoda dentro de la ficha. */
+.lore-block{padding:20px 21px 10px;background:linear-gradient(145deg,#251c22,#171318);border-left:2px solid var(--gold);margin-bottom:20px}
+.lore-block .kicker{line-height:1.6}
+.detail-sheet .lore-quote{font-family:'Crimson Pro',Georgia,serif;font-size:24px;line-height:1.3;font-style:italic;color:#e7cfb1;margin:12px 0 18px}
+.detail-sheet .lore-paragraph{font-size:17px;line-height:1.65;color:#d4c4ba;margin:0 0 16px}
+@media(max-width:560px){.lore-block{padding:17px 16px 7px}.detail-sheet .lore-paragraph{font-size:16px}}

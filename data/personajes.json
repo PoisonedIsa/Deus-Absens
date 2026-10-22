@@ -1,92 +1,211 @@
 [
   {
-    "id": "penitente",
-    "name": "El Penitente",
-    "role": "Vanguardia",
+    "id": "san-longinos",
+    "name": "San Longinos",
+    "sin": "Ira",
+    "role": "Berserker de Trinchera",
     "icon": "†",
-    "tags": [
-      "Resistencia",
-      "Cuerpo a cuerpo"
+    "desc": "Guerrero de la orden de Longinos: su furia es una promesa de asalto contra el Cielo.",
+    "suggestedAttributes": [
+      "ACERO",
+      "SANGRE"
     ],
-    "hp": 8,
-    "skill": "Última absolución",
-    "desc": "Convierte el dolor en fuerza. Cuanto más cerca está de caer, más peligroso se vuelve.",
-    "evolution": "El Mártir Vacío",
-    "evoDesc": "Su herida deja de sangrar. Una vez por expedición, sobrevive a un golpe que lo habría derrotado y devuelve parte del daño."
+    "secret": false,
+    "unlockHint": "Disponible desde el inicio",
+    "equipmentIds": [
+      "equipo-san-longinos-1",
+      "equipo-san-longinos-2"
+    ],
+    "passiveId": "pasiva-san-longinos",
+    "martyrId": "martirio-san-longinos",
+    "review": "pendiente_balance"
   },
   {
-    "id": "hereje",
-    "name": "La Hereje",
-    "role": "Ocultista",
-    "icon": "☽",
-    "tags": [
-      "Rituales",
-      "Control"
-    ],
-    "hp": 5,
-    "skill": "Salmo invertido",
-    "desc": "Pronuncia fragmentos de una lengua anterior a los ángeles. Cada palabra exige un precio.",
-    "evolution": "La Voz del Abismo",
-    "evoDesc": "Puede alterar un resultado adverso, pero debe aceptar una consecuencia oscura elegida por el director."
-  },
-  {
-    "id": "reliquario",
-    "name": "El Reliquario",
-    "role": "Explorador",
-    "icon": "⚿",
-    "tags": [
-      "Hallazgos",
-      "Apoyo"
-    ],
-    "hp": 6,
-    "skill": "Manos profanas",
-    "desc": "Abre cerraduras sagradas y reconoce objetos que deberían haber permanecido enterrados.",
-    "evolution": "El Santo Ladrón",
-    "evoDesc": "Una vez por expedición, convierte un hallazgo común en una reliquia útil para todo el grupo."
-  },
-  {
-    "id": "desertor",
-    "name": "El Desertor",
-    "role": "Tirador",
-    "icon": "➶",
-    "tags": [
-      "Distancia",
-      "Precisión"
-    ],
-    "hp": 6,
-    "skill": "Plomo bendito",
-    "desc": "Un antiguo soldado celestial que recuerda cómo sangran los seres de luz.",
-    "evolution": "El Ángel Caído",
-    "evoDesc": "Sus disparos atraviesan protecciones celestiales; cada uso deja una marca visible que atrae la atención del Cielo."
-  },
-  {
-    "id": "oraculo",
-    "name": "La Oráculo Ciega",
-    "role": "Vidente",
+    "id": "santa-lucia",
+    "name": "Santa Lucía",
+    "sin": "Soberbia",
+    "role": "Francotiradora",
     "icon": "◉",
-    "tags": [
-      "Visiones",
-      "Destino"
+    "desc": "Vidente de las grietas del Cielo que busca la perfección de cada disparo.",
+    "suggestedAttributes": [
+      "CENIZA"
     ],
-    "hp": 5,
-    "skill": "Ver la herida",
-    "desc": "No ve el futuro: ve las grietas por las que el futuro intenta entrar.",
-    "evolution": "La Última Profeta",
-    "evoDesc": "Puede hacer una pregunta sobre una amenaza y recibir una verdad útil, aunque incompleta, antes del enfrentamiento."
+    "secret": false,
+    "unlockHint": "Disponible desde el inicio",
+    "equipmentIds": [
+      "equipo-santa-lucia-1",
+      "equipo-santa-lucia-2"
+    ],
+    "passiveId": "pasiva-santa-lucia",
+    "martyrId": "martirio-santa-lucia",
+    "review": "pendiente_balance"
   },
   {
-    "id": "carcelero",
-    "name": "El Carcelero",
-    "role": "Control",
-    "icon": "⛓",
-    "tags": [
-      "Cadenas",
-      "Protección"
+    "id": "san-erasmo",
+    "name": "San Erasmo",
+    "sin": "Gula",
+    "role": "Tanque y alquimista",
+    "icon": "♜",
+    "desc": "Un penitente marcado por el hambre ritual, la alquimia y el dominio de los restos del combate.",
+    "suggestedAttributes": [
+      "SANGRE",
+      "ACERO"
     ],
-    "hp": 7,
-    "skill": "Pacto de hierro",
-    "desc": "Lleva las llaves de una prisión que ya no existe. Algunas cerraduras siguen respondiendo.",
-    "evolution": "El Guardián del Umbral",
-    "evoDesc": "Puede inmovilizar brevemente a una criatura sobrenatural, pero debe sacrificar un recurso o aceptar una herida."
+    "secret": false,
+    "unlockHint": "Disponible desde el inicio",
+    "equipmentIds": [
+      "equipo-san-erasmo-1",
+      "equipo-san-erasmo-2"
+    ],
+    "passiveId": "pasiva-san-erasmo",
+    "martyrId": "martirio-san-erasmo",
+    "review": "pendiente_balance"
+  },
+  {
+    "id": "santa-magdalena",
+    "name": "Santa Magdalena",
+    "sin": "Lujuria",
+    "role": "Ocultista del Estigma",
+    "icon": "☽",
+    "desc": "Ocultista obsesionada con el vínculo entre sufrimiento, fe y poder prohibido.",
+    "suggestedAttributes": [
+      "DOGMA",
+      "SANGRE"
+    ],
+    "secret": false,
+    "unlockHint": "Disponible desde el inicio",
+    "equipmentIds": [
+      "equipo-santa-magdalena-1",
+      "equipo-santa-magdalena-2"
+    ],
+    "passiveId": "pasiva-santa-magdalena",
+    "martyrId": "martirio-santa-magdalena",
+    "review": "pendiente_balance"
+  },
+  {
+    "id": "san-lorenzo",
+    "name": "San Lorenzo",
+    "sin": "Avaricia",
+    "role": "Artificiero de Ecos",
+    "icon": "⚿",
+    "desc": "Tesorero de reliquias que sacrifica recursos para modificar el resultado del destino.",
+    "suggestedAttributes": [
+      "DOGMA",
+      "ACERO"
+    ],
+    "secret": false,
+    "unlockHint": "Disponible desde el inicio",
+    "equipmentIds": [
+      "equipo-san-lorenzo-1",
+      "equipo-san-lorenzo-2"
+    ],
+    "passiveId": "pasiva-san-lorenzo",
+    "martyrId": "martirio-san-lorenzo",
+    "review": "pendiente_balance"
+  },
+  {
+    "id": "san-bartolome",
+    "name": "San Bartolomé",
+    "sin": "Envidia",
+    "role": "Asesino e imitador",
+    "icon": "➶",
+    "desc": "Cazador que arrebata propiedades de sus enemigos y convierte sus victorias en ventajas temporales.",
+    "suggestedAttributes": [
+      "CENIZA",
+      "ACERO"
+    ],
+    "secret": false,
+    "unlockHint": "Disponible desde el inicio",
+    "equipmentIds": [
+      "equipo-san-bartolome-1",
+      "equipo-san-bartolome-2"
+    ],
+    "passiveId": "pasiva-san-bartolome",
+    "martyrId": "martirio-san-bartolome",
+    "review": "pendiente_balance"
+  },
+  {
+    "id": "san-simeon",
+    "name": "San Simeón",
+    "sin": "Pereza",
+    "role": "Artillero inmóvil",
+    "icon": "⛓",
+    "desc": "Defensor de posición que convierte la inmovilidad en poder artillero.",
+    "suggestedAttributes": [
+      "SANGRE",
+      "CENIZA"
+    ],
+    "secret": false,
+    "unlockHint": "Disponible desde el inicio",
+    "equipmentIds": [
+      "equipo-san-simeon-1",
+      "equipo-san-simeon-2"
+    ],
+    "passiveId": "pasiva-san-simeon",
+    "martyrId": "martirio-san-simeon",
+    "review": "pendiente_balance"
+  },
+  {
+    "id": "san-judas-tadeo",
+    "name": "San Judas Tadeo",
+    "sin": "Desesperación",
+    "role": "Nigromante y comandante",
+    "icon": "☠",
+    "desc": "Portador de la memoria de expediciones perdidas que convoca ecos de antiguos compañeros.",
+    "suggestedAttributes": [
+      "DOGMA",
+      "SANGRE"
+    ],
+    "secret": true,
+    "unlockHint": "Desbloqueo por Ecos en la Basílica; coste pendiente de definir",
+    "equipmentIds": [
+      "equipo-san-judas-tadeo-1",
+      "equipo-san-judas-tadeo-2"
+    ],
+    "passiveId": "pasiva-san-judas-tadeo",
+    "martyrId": "martirio-san-judas-tadeo",
+    "review": "pendiente_balance"
+  },
+  {
+    "id": "santa-juana",
+    "name": "Santa Juana de las Cenizas",
+    "sin": "Herejía",
+    "role": "Nefilim de asalto",
+    "icon": "✧",
+    "desc": "Portadora de una herencia celestial prohibida; alterna entre lucha terrenal y Forma Seráfica.",
+    "suggestedAttributes": [
+      "DOGMA",
+      "ACERO"
+    ],
+    "secret": true,
+    "unlockHint": "Desbloqueo por Ecos en la Basílica; coste pendiente de definir",
+    "equipmentIds": [
+      "equipo-santa-juana-1",
+      "equipo-santa-juana-2"
+    ],
+    "passiveId": "pasiva-santa-juana",
+    "martyrId": "martirio-santa-juana",
+    "review": "pendiente_balance"
+  },
+  {
+    "id": "san-lazaro",
+    "name": "San Lázaro",
+    "sin": "Apostasía",
+    "role": "Tanque de plagas",
+    "icon": "♆",
+    "desc": "Guardián de enfermedades antiguas cuyo poder surge de negarse a abandonar el combate.",
+    "suggestedAttributes": [
+      "SANGRE",
+      "DOGMA"
+    ],
+    "secret": true,
+    "unlockHint": "Desbloqueo por Ecos en la Basílica; coste pendiente de definir",
+    "equipmentIds": [
+      "equipo-san-lazaro-1",
+      "equipo-san-lazaro-2"
+    ],
+    "passiveId": "pasiva-san-lazaro",
+    "martyrId": "martirio-san-lazaro",
+    "review": "pendiente_balance"
   }
 ]

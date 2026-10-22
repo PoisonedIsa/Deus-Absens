@@ -5,7 +5,7 @@ Estado: BORRADOR DE DISEÑO 0.3. No modificar las reglas oficiales sin aprobaci�
 ## Decisiones expresadas por el creador
 
 - Combate táctico sobre tablero físico cuadriculado, de 10 × 10 o 15 × 15.
-- Los personajes se desplazan una cantidad de casillas determinada por un modificador apropiado.
+- El movimiento base de los Penitentes es 2 + CENIZA puntos por turno (confirmado).
 - Secuencia del turno: inicio de turno → movimiento → ataque o uso de objeto activo → acción de cierre, solo cuando exista una habilidad u objeto que la habilite.
 - Los enemigos también se mueven y atacan.
 - Se quiere explorar el sistema de ataque con 2d6.
@@ -32,8 +32,8 @@ Estado: BORRADOR DE DISEÑO 0.3. No modificar las reglas oficiales sin aprobaci�
 - En un tablero vacío, el coste mínimo de ir de (x1, y1) a (x2, y2) equivale a |x2 - x1| + |y2 - y1|: moverse diagonalmente no acorta el coste, pero ofrece una trayectoria alternativa.
 
 ### Movimiento
-- Movimiento (casillas) = 2 + CENIZA.
-- CENIZA 0/1/2/3 equivale a 2/3/4/5 casillas.
+- **Movimiento base (CONFIRMADO): 2 + CENIZA puntos de movimiento.**
+- CENIZA +0/+1/+2/+3 equivale a 2/3/4/5 puntos, respectivamente. Son puntos de desplazamiento, no necesariamente casillas, porque el coste depende de la dirección y el terreno.
 - Se efectúa en una fase de movimiento, antes de la acción principal. Modificadores por equipo o estados por definir.
 
 ### Resolución de ataques
@@ -110,7 +110,7 @@ Estas reglas se ofrecen para pruebas y **no sustituyen** los acuerdos confirmado
 2. ¿Los obstáculos destructibles bloquean la recogida de botín al interponerse? Ya está confirmado que los obstáculos **sólidos** sí.
 3. ¿Un ataque dirigido a un obstáculo impacta automáticamente o requiere tirada?
 4. Si los disparos pueden atravesar varios obstáculos o si solo cuenta el mayor bono.
-5. Iniciativa, rango por arma, movimiento base (2 + CENIZA sigue provisional), acciones de cierre y manejo de estados.
+5. Iniciativa, rango por arma, modificaciones al movimiento base ya confirmado (2 + CENIZA), acciones de cierre y manejo de estados.
 6. Probar el efecto de CENIZA sobre movimiento, Defensa y puntería; evitar que domine los otros atributos.
 7. Adaptar a 2d6 las fichas originales de Santa Magdalena, San Lorenzo y Ataques Precisos antes de programar.
 
@@ -214,3 +214,17 @@ Definir **Defensa base** y progresión por CENIZA, luego fijar críticos y Ataqu
 - La misma regla se aplica a personajes y enemigos con atributo CENIZA definido; bonos de coberturas, equipamiento o estados se resolverán aparte.
 - Se confirma la Defensa, **no** todavía la fórmula definitiva de impacto, el efecto de los críticos o la penalización del Ataque Preciso. El dado de ataque 2d6 sí está confirmado.
 - Las referencias previas a `8 + CENIZA` en versiones anteriores quedan anuladas por este acuerdo.
+
+
+## Actualización v2.4 · Movimiento base (CONFIRMADO)
+
+- **Cada Penitente dispone de `2 + CENIZA` puntos de movimiento por turno.**
+- CENIZA +0: **2 puntos**; +1: **3**; +2: **4**; +3: **5**.
+- Cruzar a una casilla horizontal o vertical cuesta **1 punto**; cruzar en diagonal cuesta **2 puntos**.
+- Las casillas con **obstáculos transitables** duplican el coste para los Penitentes, pero no para los enemigos. Sigue pendiente aprobar el cálculo exacto para combinaciones de diagonal y obstáculo (propuesto: coste 4).
+- Las **trampas** no bloquean el paso; dañan al entrar y al inicio de cada turno que se permanezca en la casilla. Los enemigos no sufren sus efectos.
+- Los **muros** impiden atravesar la casilla a ambos bandos.
+- La distancia realmente recorrida depende del coste del terreno: «5 puntos de movimiento» no equivale siempre a «5 casillas».
+- El valor de movimiento de cada **enemigo** se definirá individualmente en el bestiario; la fórmula confirmada `2 + CENIZA` corresponde a los Penitentes.
+- Pendientes: modificadores por equipo y estados, ocupación de casillas, atravesar esquinas bloqueadas y coste diagonal sobre obstáculo transitable.
+- Esta actualización es solo documental; **no implementa** movimiento en la web.

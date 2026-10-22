@@ -21,7 +21,7 @@ Prueba estas reglas **solo como simulación**:
 | +2 | 7+ | 21/36 = 58,33 % |
 | +3 | 6+ | 26/36 = 72,22 % |
 
-**Advertencia de balance:** CENIZA influiría simultáneamente en acierto a distancia, Defensa y movimiento (este último todavía propuesto como 2+CENIZA). Conviene comparar fichas con CENIZA +0 y +3.
+**Advertencia de balance:** CENIZA influiría simultáneamente en acierto a distancia, Defensa y movimiento (este último ya confirmado como 2+CENIZA). Conviene comparar fichas con CENIZA +0 y +3.
 
 ## Casos de prueba sugeridos
 
@@ -47,3 +47,15 @@ Prueba estas reglas **solo como simulación**:
 | +3 | 2 | 10 |
 
 La probabilidad del cuadro anterior corresponde a un **objetivo fijo con Defensa 9**, no a todos los personajes. Los bonos de cobertura aún no están confirmados.
+
+
+## Movimiento base confirmado (v2.4)
+
+| CENIZA | Puntos de movimiento por turno | Máximo de casillas ortogonales en terreno libre | Máximo de pasos diagonales en terreno libre |
+|---:|---:|---:|---:|
+| +0 | 2 | 2 | 1 |
+| +1 | 3 | 3 | 1 |
+| +2 | 4 | 4 | 2 |
+| +3 | 5 | 5 | 2 |
+
+El coste ortogonal es 1 y el diagonal 2. Esta tabla no incluye obstáculos ni modificaciones por estados. Pruebas pendientes: rutas mixtas con obstáculos, balance de CENIZA como atributo de precisión/Defensa/movimiento y esquinas bloqueadas.

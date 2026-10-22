@@ -150,3 +150,14 @@ Este documento separa acuerdos reales de funcionalidades pendientes.
 - El ataque se basa en **2d6** (confirmado); su fórmula completa y las reglas de críticos y Ataques Precisos continúan en revisión.
 - Las coberturas +1/+2 y la fórmula de movimiento `2 + CENIZA` siguen como propuestas, no reglas aprobadas.
 - Esta actualización es documental; el sistema de combate web aún no está implementado.
+
+
+## Actualización v2.4 · Movimiento base (CONFIRMADO)
+
+- Cada Penitente recibe **2 + CENIZA puntos de movimiento al inicio de su fase de movimiento**.
+- Distribución de valores: CENIZA +0 → 2; +1 → 3; +2 → 4; +3 → 5.
+- Los movimientos horizontales y verticales consumen 1 punto por casilla; los diagonales consumen 2.
+- Los obstáculos transitables ralentizan a Penitentes, las trampas siguen siendo dañinas y los muros son infranqueables para ambos bandos, según las reglas confirmadas previamente.
+- El movimiento propio de cada enemigo se establecerá en sus estadísticas.
+- **Aún no confirmado:** coste exacto de entrar diagonalmente a obstáculos transitables, modificadores, atravesar esquinas y unidades.
+- Este cambio aún no está programado en la web.

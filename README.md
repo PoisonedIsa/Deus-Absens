@@ -97,3 +97,15 @@ Los JSON no cargan de forma fiable si abres directamente `index.html` con `file:
 ## Seguridad y acceso
 
 La web estática no distingue permisos reales entre jugador y director: el botón «Desbloquear (director)» es temporal y cualquier persona con acceso a la página podría usarlo. Esto se resolverá junto con el sistema de códigos/roles. No publiques contraseñas ni secretos en JSON públicos.
+
+## v6.5 · Ecos, mejoras y códigos de legado
+
+Esta versión conserva íntegramente el aspecto v6.4, las diez historias, las fichas y los datos locales. Añade una primera estructura **funcional sin servidor** para:
+
+- **Ecos del jugador:** dos contadores independientes (expedición y reserva), sin operaciones automáticas hasta completar las reglas.
+- **Mejoras:** menú de categorías personal/global, conectado al catálogo `data/mejoras.json` que se mantiene vacío. No hay compras ni bonus inventados.
+- **Códigos:** jugador exporta un informe de su ficha; el director recibe ese informe, genera un sello de campaña y emite recompensas manuales que el jugador revisa y aplica. También se puede restaurar una ficha desde un informe y usar un respaldo local.
+
+**Limitaciones esenciales:** un código `DA65` no está firmado digitalmente, no prueba autoridad de director y no sincroniza distintos navegadores. El director debe entregar códigos a cada jugador. No se aplica el cierre automático con «mitad de Ecos»: falta definir redondeo y bolsa concreta. Las mejoras no tienen precio ni efecto hasta que se confirmen.
+
+Consulta la guía completa en `docs/LEGADO_ECOS_CODIGOS_V6_5.md`.

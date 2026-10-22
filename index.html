@@ -52,7 +52,7 @@
 <header class="topbar">
   <div class="top-inner">
     <a class="brand" href="#" aria-label="Volver al inicio" data-goto="inicio"><span class="brand-mark"><span>✦</span></span> DEUS ABSENS</a>
-    <div class="top-meta"><span class="top-pill">Santuario digital</span><span class="top-pill muted-pill">Versión v6.4</span></div>
+    <div class="top-meta"><span class="top-pill">Santuario digital</span><span class="top-pill muted-pill">Versión v6.5</span></div>
     <nav class="nav nav-grouped" aria-label="Navegación principal">
       <button class="nav-home active" data-section="inicio"><span class="nav-glyph" aria-hidden="true">✦</span><span class="nav-label">Inicio</span></button>
       <details class="nav-group">
@@ -76,7 +76,9 @@
         <div class="nav-panel">
           <button data-section="expedicion"><span class="nav-glyph" aria-hidden="true">⤳</span> Expedición</button>
           <button data-section="encuentro"><span class="nav-glyph" aria-hidden="true">⚙</span> Director</button>
-          <button data-section="progreso"><span class="nav-glyph" aria-hidden="true">⟁</span> Legado</button>
+          <button data-section="progreso"><span class="nav-glyph" aria-hidden="true">⟁</span> Ecos y legado</button>
+          <button data-section="mejoras"><span class="nav-glyph" aria-hidden="true">✣</span> Mejoras</button>
+          <button data-section="codigos"><span class="nav-glyph" aria-hidden="true">☷</span> Códigos</button>
         </div>
       </details>
       <button class="nav-credit" data-section="creditos"><span class="nav-glyph" aria-hidden="true">✧</span><span class="nav-label">Créditos</span></button>
@@ -105,7 +107,7 @@
     <div class="hero-panel">
       <span class="tag">En desarrollo</span>
       <h3>Próximos sistemas</h3>
-      <p>Progreso por jugador, expediciones, códigos, versiones redimidas, utilidades del director y menú de campaña.</p>
+      <p>El progreso individual, los Ecos y los códigos ya tienen su estructura; falta definir las mejoras y el cierre de expedición.</p>
     </div>
   </div>
 </section>
@@ -241,7 +243,7 @@
 
   <section class="section" id="progreso">
     <div class="section-head"><div><div class="kicker">Capítulo VII · Lo que perdura</div><h2>Archivo de Legado</h2><p class="lead">Lo que el grupo ha descubierto hasta ahora en este navegador. Sin confundir los desbloqueos de prueba con el sistema definitivo de Ecos.</p></div></div>
-    <div class="legacy-banner"><span class="overline">REGISTRO DE CAMPAÑA · LOCAL</span><h3>La memoria del santuario</h3><p>Las fichas, el Penitente seleccionado y los hallazgos que registraste se conservan en este dispositivo. Los códigos de campaña y la sincronización aún no están implementados.</p></div>
+    <div class="legacy-banner"><span class="overline">REGISTRO DE CAMPAÑA · LOCAL</span><h3>La memoria del santuario</h3><p>Las fichas, el Penitente seleccionado y los hallazgos que registraste se conservan en este dispositivo. El progreso individual se guarda aquí; los códigos permiten compartir una copia o entregar recompensas sin servidor.</p></div>
     <div class="hud-row legacy-hud" aria-label="Datos del legado guardados">
       <div class="hud-stat"><span class="hud-icon" aria-hidden="true">♜</span><div><span class="hud-label">Santos disponibles</span><strong id="legacySaints">7 / 10</strong></div></div>
       <div class="hud-stat"><span class="hud-icon" aria-hidden="true">⚿</span><div><span class="hud-label">Reliquias descubiertas</span><strong id="legacyRelics">0 / 6</strong></div></div>
@@ -255,18 +257,54 @@
         <div class="panel-actions"><button class="small" data-goto="personajes">Revisar Santos ↗</button><button class="small" data-goto="objetos">Abrir relicario ↗</button></div>
       </article>
       <aside class="card legacy-panel pending-panel">
-        <div class="panel-heading"><span class="tag">NO IMPLEMENTADO</span><h3>El legado que vendrá</h3></div>
-        <div class="pending-line"><span class="pending-mark">⟁</span><div><strong>Ecos Divinos</strong><span>Recurso de progresión de la campaña.</span></div></div>
-        <div class="pending-line"><span class="pending-mark">☷</span><div><strong>Códigos de guardado</strong><span>Importación y exportación para grupos sin servidor.</span></div></div>
-        <div class="pending-line"><span class="pending-mark">✧</span><div><strong>Versiones redimidas</strong><span>Evoluciones únicas de los Santos aún por definir.</span></div></div>
-        <p class="small-note">Los controles de prueba existentes no descuentan Ecos ni completan estas funciones.</p>
+        <div class="panel-heading"><span class="tag gold">MODELO DE PROGRESIÓN</span><h3>Las dos reservas de Ecos</h3><p>Los Ecos pertenecen a cada jugador, mientras los descubrimientos generales se comparten mediante códigos del director.</p></div>
+        <div class="legacy-eco-stats">
+          <div class="eco-counter"><span>Ecos de expedición</span><strong id="legacyExpEcos">0</strong></div>
+          <div class="eco-counter"><span>Ecos reservados</span><strong id="legacySavedEcos">0</strong></div>
+        </div>
+        <p class="small-note">Se conservará la mitad de los Ecos al cerrar una expedición; la bolsa exacta y el redondeo aún se deben definir. No hay conversión automática ni costes.</p>
+        <div class="panel-actions"><button class="small" data-goto="mejoras">Ver mejoras ↗</button><button class="small" data-goto="codigos">Abrir códigos ↗</button></div>
       </aside>
     </div>
   </section>
 
 
+  <section class="section" id="mejoras">
+    <div class="section-head"><div><div class="kicker">Capítulo VIII · Las marcas del legado</div><h2>Archivo de Mejoras</h2><p class="lead">Un catálogo para mejoras personales y mejoras globales de campaña. El sistema distingue sus categorías sin adjudicarles efectos, requisitos ni precios aún no aprobados.</p></div></div>
+    <div class="legacy-banner upgrade-banner"><span class="overline">MEJORAS · CATÁLOGO VINCULADO</span><h3>Lo que la penitencia transforma</h3><p>Los registros se obtienen de <code>data/mejoras.json</code>. Las mejoras personales acompañan a un jugador; las globales se comparten mediante códigos del director.</p></div>
+    <div class="hud-row">
+      <div class="hud-stat"><span class="hud-icon">✣</span><div><span class="hud-label">Mejoras registradas</span><strong id="upgradeCount">0</strong></div></div>
+      <div class="hud-stat"><span class="hud-icon">♜</span><div><span class="hud-label">Adquiridas personales</span><strong id="upgradePersonal">0</strong></div></div>
+      <div class="hud-stat"><span class="hud-icon">⟁</span><div><span class="hud-label">Adquiridas globales</span><strong id="upgradeGlobal">0</strong></div></div>
+    </div>
+    <div class="upgrade-toolbar toolbar"><label class="legacy-inline-label" for="upgradeFilter">Mostrar</label><select id="upgradeFilter" class="filter"><option value="all">Todas las categorías</option><option value="personal">Personales</option><option value="global">Globales</option></select><span class="tag">SIN COMPRAS AUTOMÁTICAS</span></div>
+    <div class="grid" id="upgradeGrid"><div class="empty">Cargando catálogo de mejoras…</div></div>
+    <p class="legacy-footnote">La pantalla de mejoras no descuenta Ecos. Cuando definamos costes y requisitos podrán activarse las compras y verificaciones.</p>
+  </section>
+
+  <section class="section" id="codigos">
+    <div class="section-head"><div><div class="kicker">Capítulo IX · Correspondencia del santuario</div><h2>Códigos de Legado</h2><p class="lead">Un puente entre el director y las fichas individuales. Sin cuentas, sin servidor y sin sincronización automática.</p></div></div>
+    <div class="legacy-banner code-banner"><span class="overline">CÓDIGOS PORTABLES · PROTOTIPO FUNCIONAL</span><h3>Lo que un viajero lleva consigo</h3><p>Los códigos son copias transportables de datos. Permiten devolver una ficha al director y aplicar recompensas o desbloqueos en otro navegador, previa confirmación.</p></div>
+    <div class="code-role-tabs" role="group" aria-label="Modo de intercambio">
+      <button class="small active" id="codePlayerMode" data-action="legacy-mode-player" aria-pressed="true">♜ Soy jugador</button>
+      <button class="small" id="codeDirectorMode" data-action="legacy-mode-director" aria-pressed="false">⚙ Soy director</button>
+    </div>
+    <div class="code-layout">
+      <article class="card code-workspace">
+        <div id="codeModeContent"></div>
+        <div class="code-output-block"><label class="legacy-inline-label" for="codeOutput">Código generado</label><textarea id="codeOutput" class="code-field" rows="5" spellcheck="false" readonly placeholder="Aquí aparecerá un código cuando elijas generar…"></textarea><div class="panel-actions"><button class="small" data-action="legacy-copy">Copiar código</button><button class="small" data-action="legacy-select-code">Seleccionar texto</button></div></div>
+      </article>
+      <aside class="card code-workspace">
+        <div class="kicker">RECIBIR UN CÓDIGO</div><h3>Interpretar y revisar</h3><p>Pega aquí un código recibido. Verás un resumen antes de aplicar cambios a los datos locales.</p>
+        <label class="legacy-inline-label" for="codeInput">Código recibido</label><textarea id="codeInput" class="code-field" rows="7" spellcheck="false" placeholder="DA65. …"></textarea>
+        <div class="panel-actions"><button class="btn" data-action="legacy-import">Revisar código</button><button class="small" data-action="legacy-backup">Crear respaldo local</button><button class="small" data-action="legacy-restore-backup">Recuperar respaldo</button></div>
+        <p class="legacy-footnote"><strong>Importante:</strong> los códigos no están firmados digitalmente y pueden modificarse. Un código válido no demuestra quién lo emitió. Comprueba su procedencia con tu director.</p>
+      </aside>
+    </div>
+  </section>
+
   <section class="section" id="objetos">
-    <div class="section-head"><div><div class="kicker">Capítulo VIII · El relicario</div><h2>El Archivo de las Reliquias</h2><p class="lead">Todo hallazgo tiene un origen. Descubre las reliquias del santuario, consulta sus rarezas y distingue los registros abiertos de los todavía sellados.</p></div></div>
+    <div class="section-head"><div><div class="kicker">Capítulo X · El relicario</div><h2>El Archivo de las Reliquias</h2><p class="lead">Todo hallazgo tiene un origen. Descubre las reliquias del santuario, consulta sus rarezas y distingue los registros abiertos de los todavía sellados.</p></div></div>
     <div class="relic-banner"><div class="relic-banner-symbol" aria-hidden="true">⚿</div><div class="relic-banner-copy"><span class="overline">EL RELICARIO · CATÁLOGO DE PRUEBA</span><h3>Lo que sobrevive al silencio</h3><p>Los desbloqueos actuales se guardan en este navegador. Las condiciones son ejemplos narrativos; registrar un hallazgo todavía no consume Ecos.</p></div></div>
     <div class="hud-row relic-hud" aria-label="Resumen de reliquias">
       <div class="hud-stat"><span class="hud-icon" aria-hidden="true">⚿</span><div><span class="hud-label">Registros abiertos</span><strong id="relicKnown">0</strong></div></div>

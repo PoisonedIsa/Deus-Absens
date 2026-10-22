@@ -224,3 +224,15 @@ Este documento separa acuerdos reales de funcionalidades pendientes.
 5. **Piloto:** la CENIZA del Deudor de Sal sigue sin confirmarse. Su +0 en v6.8 era **convención temporal**, no una ficha oficial. El tablero de prueba solicita un valor antes de tirar y no altera fichas selladas.
 
 **Precedencia:** este bloque sustituye el apartado de «pendientes de iniciativa» y la convención temporal de desempates de v6.8.
+
+## Confirmación v7.2 · Cargas, martirios de área y recuperación (22-10-2026)
+
+**APROBADO y prevalece sobre suposiciones anteriores:**
+
+1. **Las cargas de martirio son individuales según el Santo.** Deben equilibrarse uno por uno; no existe una regla general de «una carga para todos». **Único valor confirmado actualmente: San Longinos, 1 carga por expedición.** Las capacidades de los otros nueve Santos no han sido decididas. Las cantidades `prototypeMaxCharges` del JSON son de prueba, NO definitivas.
+2. **Cada martirio de área tendrá su propio máximo de objetivos**, que debe constar explícitamente en su ficha. No existe un límite global de 3 enemigos. Los topes empleados en la simulación espacial v7.1 para Erasmo, Judas o Juana fueron hipótesis de experimento y no se aprueban por el solo hecho de haber sido simulados.
+3. **No hay recuperación gratuita entre encuentros.** Los PV perdidos y cargas gastadas persisten durante la expedición; los jugadores pueden curarse mediante consumibles, habilidades u otros recursos aprobados. No se recuperan automáticamente PV ni martirios al superar una sala. La reposición de cargas al comienzo de una nueva expedición se mantiene.
+
+**Advertencia de implementación:** no actualizar `data/habilidades.json` con 1 carga para nueve Santos ni crear topes de área por defecto. Las simulaciones que desactiven poderes no definidos no establecen que esos Santos tengan 0 cargas en el juego.
+
+**Balance:** véanse `docs/REVISION_DIEZ_SANTOS_V7_2.md` y `docs/INFORME_BALANCE_V7_2.md`; las pruebas de Python no son reglas de juego ni una IA para enemigos. Las recompensas de Ecos siguen sin valores numéricos definitivos. Se mantiene la regla más reciente: recibe la recompensa completa cada Penitente que acierte un ataque al enemigo, aunque Blindaje absorba el daño.

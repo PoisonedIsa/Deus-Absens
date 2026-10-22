@@ -2,12 +2,24 @@
 const $ = id => document.getElementById(id);
 export const escapar = value => String(value ?? '').replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]));
 export function mostrarSeccion(id) {
-  if (!$(id)?.classList.contains('section')) return;
-  document.querySelectorAll('.section').forEach(s => s.classList.toggle('active',s.id===id));
-  document.querySelectorAll('.nav button').forEach(b => b.classList.toggle('active',b.dataset.section===id));
-  $('hero').style.display = id==='inicio'?'grid':'none';
-  window.scrollTo({top:0,behavior:'smooth'});
+  const target=$(id);
+  if (!target?.classList.contains('section')) return;
+  const activate=()=>{
+    document.querySelectorAll('.section').forEach(s => s.classList.toggle('active',s.id===id));
+    document.querySelectorAll('.nav button').forEach(b => {
+      const active=b.dataset.section===id;
+      b.classList.toggle('active',active);
+      if(active) b.setAttribute('aria-current','page');
+      else b.removeAttribute('aria-current');
+    });
+    $('hero').style.display = id==='inicio'?'grid':'none';
+    window.scrollTo({top:0,behavior:'instant'});
+  };
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduce && typeof document.startViewTransition==='function') document.startViewTransition(activate);
+  else activate();
 }
+
 let toastTimer;
 export function avisar(msg){const e=$('toast');e.textContent=msg;e.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>e.classList.remove('show'),2600)}
 export function cerrarModal(){ $('modalBackdrop').classList.remove('open'); }
@@ -28,33 +40,44 @@ export function getSheet(state,id,ability){
   const charges=Number.isInteger(found?.charges)?Math.max(0,Math.min(found.charges,max)):max;
   return {attrs,derived,max,charges,pv:typeof found?.pv==='number'?Math.max(0,Math.min(derived.pv,found.pv)):derived.pv,estigma:typeof found?.estigma==='number'?Math.max(0,Math.min(derived.estigma,found.estigma)):0};
 }
+const GLIFOS_SANTOS={
+ 'san-longinos':'⛨','santa-lucia':'◉','san-erasmo':'♜',
+ 'santa-magdalena':'✧','san-lorenzo':'⚿','san-bartolome':'⟁',
+ 'san-simeon':'♟','san-judas-tadeo':'☷','santa-juana':'✶','san-lazaro':'☩'
+};
 export function renderPersonajes(chars,state,abilities=[],equipment=[]){
-  const byId=Object.fromEntries(abilities.map(a=>[a.id,a]));const gear=Object.fromEntries(equipment.map(o=>[o.id,o]));
+  const byId=Object.fromEntries(abilities.map(a=>[a.id,a]));
   const q=$('characterSearch').value.toLowerCase().trim(),filter=$('characterFilter').value;
   const shown=chars.filter(c=>{
     const locked=c.secret&&!state.unlockedSaints.includes(c.id);
-    const match=[c.name,c.sin,c.role,c.desc,c.titulo,c.trasfondo,byId[c.passiveId]?.name,byId[c.martyrId]?.name].join(' ').toLowerCase().includes(q);
+    const match=[c.name,c.sin,c.role,c.desc,c.titulo,c.trasfondo,c.narrativa?.lema,byId[c.passiveId]?.name,byId[c.martyrId]?.name].join(' ').toLowerCase().includes(q);
     return match && (filter==='all'||(filter==='available'&&!locked)||(filter==='locked'&&locked)||(filter==='chosen'&&state.chosen===c.id));
   });
   $('characterGrid').innerHTML=shown.map(c=>{
     const locked=c.secret&&!state.unlockedSaints.includes(c.id),selected=state.chosen===c.id;
-    const passive=byId[c.passiveId],martyr=byId[c.martyrId],sheet=getSheet(state,c.id,martyr);
-    return `<article class="card character-card${locked?' locked':''}">
-      <div class="character-top"><div><span class="tag ${locked?'':'gold'}">${escapar(c.sin)}${locked?' · Sellado':''}</span><h3>${escapar(c.name)}</h3></div><div class="crest">${escapar(c.icon)}</div></div>
-      <p>${escapar(c.desc)}</p>
-      <div class="stats"><span class="stat">${escapar(c.role)}</span><span class="stat">PV ${sheet.derived.pv}</span><span class="stat">DEF ${sheet.derived.defensa}</span><span class="stat">MOV ${sheet.derived.movimiento}</span></div>
-      <p><strong>Pasiva:</strong> ${escapar(passive?.name??'Pendiente')}</p>
-      <p><strong>Martirio:</strong> ${escapar(martyr?.name??'Pendiente')} · ${sheet.charges}/${sheet.max} cargas${martyr?.maxCharges==null?' (provisional)':''}</p>
-      <div class="card-bottom"><button class="small" data-action="character-detail" data-id="${escapar(c.id)}">Ver ficha completa</button>
-      ${locked?`<button class="small" data-action="saint-unlock" data-id="${escapar(c.id)}">Desbloquear (director)</button>`:
-      selected?'<span class="tag gold">Penitente elegido</span>':`<button class="small" data-action="choose" data-id="${escapar(c.id)}">Elegir</button>`}</div>
+    const passive=byId[c.passiveId]||c.pasiva,martyr=byId[c.martyrId]||c.martirio,sheet=getSheet(state,c.id,martyr);
+    const ix=chars.indexOf(c)+1;
+    const sigil=GLIFOS_SANTOS[c.id]||c.icon||'✦';
+    const motto=c.narrativa?.lema||c.desc;
+    return `<article class="card character-card codex-card${locked?' locked':''}${selected?' codex-selected':''}" data-sanctum="${escapar(c.id)}">
+      <div class="codex-border" aria-hidden="true"></div>
+      <div class="codex-topline"><span class="codex-index">${c.secret?'APÓCRIFO · ': 'SANTO · '}${String(ix).padStart(2,'0')}</span><span class="codex-seal">${locked?'✧ SELLO INTACTO':selected?'✦ ACTIVO':escapar(c.sin).toUpperCase()}</span></div>
+      <div class="codex-emblem" aria-hidden="true"><span class="codex-emblem-ring"></span><span class="codex-emblem-ornament">${escapar(sigil)}</span><span class="codex-emblem-star">✦</span></div>
+      <div class="codex-heading"><span class="codex-sin">${escapar(c.titulo||c.sin)}</span><h3>${escapar(c.name)}</h3><p class="codex-role">${escapar(c.rolCompleto||c.role)}</p></div>
+      <p class="codex-quote">«${escapar(motto)}»</p>
+      <div class="codex-rule" aria-hidden="true">✦</div>
+      <div class="codex-metrics"><span><small>PV</small><strong>${sheet.derived.pv}</strong></span><span><small>DEF</small><strong>${sheet.derived.defensa}</strong></span><span><small>MOV</small><strong>${sheet.derived.movimiento}</strong></span><span><small>MARTIRIO</small><strong>${sheet.charges}/${sheet.max}</strong></span></div>
+      <div class="codex-traits"><p><strong>Pasiva</strong><span>${escapar(passive?.name??passive?.nombre??'Pendiente')}</span></p><p><strong>Martirio</strong><span>${escapar(martyr?.name??martyr?.nombre??'Pendiente')}</span></p></div>
+      <div class="card-bottom codex-actions"><button class="small codex-action-primary" data-action="character-detail" data-id="${escapar(c.id)}">Leer expediente ↗</button>
+        ${locked?`<button class="small" data-action="saint-unlock" data-id="${escapar(c.id)}">Desbloquear (director)</button>`:
+         selected?'<span class="tag gold">Penitente elegido</span>':`<button class="small" data-action="choose" data-id="${escapar(c.id)}">Elegir</button>`}</div>
     </article>`;
   }).join('')||'<div class="empty">No hay Penitentes para este filtro.</div>';
   const chosen=chars.find(c=>c.id===state.chosen);
   if(!chosen){$('characterSheetPanel').innerHTML='<div class="inventory-note">Elige un Santo para visualizar su ficha de partida y configurar sus atributos.</div>';return;}
   const martyr=byId[chosen.martyrId],sheet=getSheet(state,chosen.id,martyr),a=sheet.attrs,d=sheet.derived;
-  $('characterSheetPanel').innerHTML=`<div class="sheet-panel">
-    <div class="sheet-header"><div><div class="kicker">Ficha activa · Guardado local</div><h3>${escapar(chosen.name)}</h3><p>${escapar(chosen.role)} · ${escapar(chosen.sin)}</p></div><span class="tag gold">Seleccionado</span></div>
+  $('characterSheetPanel').innerHTML=`<div class="sheet-panel codex-active-sheet">
+    <div class="sheet-header"><div><div class="kicker">Expediente activo · Guardado local</div><h3>${escapar(chosen.name)}</h3><p>${escapar(chosen.role)} · ${escapar(chosen.sin)}</p></div><span class="tag gold">Seleccionado</span></div>
     <div class="attributes">${Object.entries(a).map(([key,v])=>`<div class="attribute"><small>${key}</small><strong>+${v}</strong></div>`).join('')}</div>
     <div class="stats sheet-stats"><span class="stat">PV: ${sheet.pv}/${d.pv}</span><span class="stat">Defensa: ${d.defensa}</span><span class="stat">Movimiento: ${d.movimiento}</span><span class="stat">Estigma: ${sheet.estigma}/${d.estigma}</span></div>
     <div class="martyr-block"><p><strong>${escapar(martyr?.name)}</strong> · <strong class="martyr-count">${sheet.charges}/${sheet.max}</strong> cargas ${martyr?.maxCharges==null?'<span class="tag">Capacidad de prueba</span>':''}</p><p class="muted">${escapar(martyr?.description)}</p>
@@ -62,18 +85,22 @@ export function renderPersonajes(chars,state,abilities=[],equipment=[]){
     <div class="card-bottom"><button class="small" data-action="attributes">Distribuir atributos</button><button class="small" data-action="player-hp-minus">PV -1</button><button class="small" data-action="player-hp-plus">PV +1</button><button class="small" data-action="player-estigma-minus">Estigma -1</button><button class="small" data-action="player-estigma-plus">Estigma +1</button></div>
     <p class="muted fine-print">La nueva expedición restaura únicamente las cargas. Las fichas se guardan en este navegador; todavía no existe sincronización entre jugadores.</p></div>`;
 }
+
 export function textoFichaPersonaje(c,abilities,equipment,state){
   const dict=Object.fromEntries(abilities.map(a=>[a.id,a]));const gear=Object.fromEntries(equipment.map(g=>[g.id,g]));
   const p=dict[c.passiveId]??c.pasiva,m=dict[c.martyrId]??c.martirio,sh=getSheet(state,c.id,m);
   const historia=Array.isArray(c.narrativa?.parrafos)?c.narrativa.parrafos:[c.trasfondo||c.desc];
   const historiaHTML=historia.filter(Boolean).map(parrafo=>`<p class="lore-paragraph">${escapar(parrafo)}</p>`).join('');
-  return `<div class="detail-sheet">
+  const sigil=GLIFOS_SANTOS[c.id]||c.icon||'✦';
+  return `<div class="detail-sheet codex-detail">
+    <header class="codex-detail-intro"><div class="codex-detail-emblem" aria-hidden="true">${escapar(sigil)}</div>
+      <div><div class="kicker">Crónica del Penitente · ${escapar(c.titulo||c.sin)}</div>
+      <p class="codex-detail-class">${escapar(c.rolCompleto||c.role)}</p></div></header>
     <div class="lore-block">
-      <div class="kicker">Crónica del Penitente · ${escapar(c.titulo||c.sin)}</div>
       ${c.narrativa?.lema?`<p class="lore-quote">«${escapar(c.narrativa.lema)}»</p>`:''}
       ${historiaHTML}
     </div>
-    <div class="stats"><span class="stat">Pecado: ${escapar(c.sin)}</span><span class="stat">Clase: ${escapar(c.rolCompleto||c.role)}</span></div>
+    <div class="stats codex-detail-tags"><span class="stat">Pecado: ${escapar(c.sin)}</span><span class="stat">Clase: ${escapar(c.role)}</span></div>
     <h4>Atributos sugeridos</h4><p>${(c.suggestedAttributes||[]).map(escapar).join(' y ')}</p>
     <h4>Equipo inicial</h4>${(c.equipmentIds||[]).map(id=>{const g=gear[id];return g?`<p><strong>${escapar(g.name)}</strong> (${escapar(g.damage||'sin daño')}). ${escapar(g.effect)}</p>`:''}).join('')}
     <h4>Pasiva · ${escapar(p?.name||p?.nombre)}</h4><p>${escapar(p?.description||p?.descripcion)}</p>
@@ -82,6 +109,7 @@ export function textoFichaPersonaje(c,abilities,equipment,state){
     <p class="muted fine-print">Los efectos mecánicos todavía están pendientes de balance. Algunas referencias originales a d20 necesitan adaptación a 2d6.</p>
   </div>`;
 }
+
 export function renderEnemigos(enemies){
   const q=$('enemySearch').value.toLowerCase().trim(),filter=$('enemyFilter').value;
   const filtered=enemies.filter(e=>(filter==='all'||e.type===filter)&&[e.name,e.desc,e.type,e.ability,...(e.attacks||[]).map(a=>a.name)].join(' ').toLowerCase().includes(q));

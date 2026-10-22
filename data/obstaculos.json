@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 4,
+  "estado": "trampas_confirmadas_activacion_por_entrada_y_permanencia_otros_detalles_pendientes",
+  "descripcion": "Catálogo de terreno. Trampas perpetuas: dañan a los Penitentes al entrar y de nuevo al inicio de cada turno que permanezcan sobre ellas. No afectan a enemigos. Nombres narrativos provisionales.",
+  "reglasConfirmadas": {
+    "movimientoNormal": {
+      "ortogonal": 1,
+      "diagonal": 2
+    },
+    "jugadorObstaculoMultiplicador": 2,
+    "enemigoObstaculoMultiplicador": 1,
+    "enemigosInmunesATrampas": true,
+    "dadoMinimoTrampa": "1d4",
+    "dadoMaximoTrampa": "1d8",
+    "murosInfranqueablesParaTodos": true,
+    "trampasSiempreActivas": true,
+    "trampasReutilizables": true,
+    "trampasNoSeConsumenAlActivarse": true,
+    "trampasDananAlEntrar": true,
+    "trampasDananAlInicioDeTurnoSiPermanece": true,
+    "trampasNoDananEnemigos": true
+  },
+  "propuestasPendientes": {
+    "costeAlEntrarCasilla": true,
+    "aplicarMultiplicadorSobreDiagonal": true,
+    "trampaVisible": null,
+    "bonosCobertura": null,
+    "resistenciaEstructural": null,
+    "trampaDesactivablePorAccionesEspeciales": null
+  },
+  "terrenos": [
+    {
+      "id": "obstaculo_transitable",
+      "nombre": "Obstáculo transitable",
+      "categoria": "obstaculo",
+      "atravesable": true,
+      "multiplicadorMovimientoJugador": 2,
+      "multiplicadorMovimientoEnemigo": 1,
+      "danoTrampa": null,
+      "bonoDefensa": null,
+      "bloqueaSaqueo": null,
+      "bloqueaVision": null
+    },
+    {
+      "id": "trampa_menor",
+      "nombre": "Charco de sangre consagrada",
+      "categoria": "trampa",
+      "atravesable": true,
+      "multiplicadorMovimientoJugador": 1,
+      "multiplicadorMovimientoEnemigo": 1,
+      "danoTrampa": "1d4",
+      "afectaEnemigos": false,
+      "bloqueaSaqueo": false,
+      "siempreActiva": true,
+      "reutilizable": true,
+      "seConsumeAlActivarse": false,
+      "efectosAdicionales": null,
+      "descripcionNarrativaEjemplo": "Una mancha ritual oscura impregna la piedra y castiga a quien la atraviesa.",
+      "nombreProvisional": true,
+      "activacionesConfirmadas": [
+        "al_entrar_en_casilla",
+        "al_inicio_del_turno_si_ocupa_casilla"
+      ],
+      "tiradasPorActivacion": 1
+    },
+    {
+      "id": "trampa_intermedia",
+      "nombre": "Agujas penitenciales",
+      "categoria": "trampa",
+      "atravesable": true,
+      "multiplicadorMovimientoJugador": 1,
+      "multiplicadorMovimientoEnemigo": 1,
+      "danoTrampa": "1d6",
+      "afectaEnemigos": false,
+      "bloqueaSaqueo": false,
+      "siempreActiva": true,
+      "reutilizable": true,
+      "seConsumeAlActivarse": false,
+      "efectosAdicionales": null,
+      "descripcionNarrativaEjemplo": "Un mecanismo sacro de agujas surge desde las juntas del suelo.",
+      "nombreProvisional": true,
+      "activacionesConfirmadas": [
+        "al_entrar_en_casilla",
+        "al_inicio_del_turno_si_ocupa_casilla"
+      ],
+      "tiradasPorActivacion": 1
+    },
+    {
+      "id": "trampa_mayor",
+      "nombre": "Sello de espinas sacrílegas",
+      "categoria": "trampa",
+      "atravesable": true,
+      "multiplicadorMovimientoJugador": 1,
+      "multiplicadorMovimientoEnemigo": 1,
+      "danoTrampa": "1d8",
+      "afectaEnemigos": false,
+      "bloqueaSaqueo": false,
+      "siempreActiva": true,
+      "reutilizable": true,
+      "seConsumeAlActivarse": false,
+      "efectosAdicionales": null,
+      "descripcionNarrativaEjemplo": "Un sello blasfemo rodeado de espinas se enciende al paso de los vivos.",
+      "nombreProvisional": true,
+      "activacionesConfirmadas": [
+        "al_entrar_en_casilla",
+        "al_inicio_del_turno_si_ocupa_casilla"
+      ],
+      "tiradasPorActivacion": 1
+    },
+    {
+      "id": "muro",
+      "nombre": "Muro",
+      "categoria": "muro",
+      "atravesable": false,
+      "bloqueaMovimientoJugador": true,
+      "bloqueaMovimientoEnemigo": true,
+      "bloqueaSaqueo": true,
+      "bloqueaVision": null,
+      "destructible": null
+    }
+  ]
+}

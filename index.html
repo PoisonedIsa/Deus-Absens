@@ -9,25 +9,50 @@
 </head>
 <body>
 <div class="splash-gate open" id="splashGate" aria-hidden="false">
-  <div class="splash-noise"></div>
   <div class="splash-core">
-    <div class="splash-mark">✦</div>
-    <div class="eyebrow">Roguelite de mesa · Santuario digital</div>
-    <h1>DEUS ABSENS</h1>
-    <p class="subtitle">El cielo calló. La carne recuerda. Y cada expedición desciende un poco más hacia aquello que ya no responde.</p>
-    <p class="splash-copy">Esta interfaz funciona como códice, directorio y cámara de campaña: personajes, bestiario, reliquias, legado y herramientas del director reunidos en un solo lugar.</p>
-    <div class="splash-actions">
-      <button class="btn" data-enter-app="inicio">Entrar al santuario</button>
-      <button class="btn secondary" data-enter-app="personajes">Ir a personajes</button>
+    <div class="splash-art" aria-hidden="true">
+      <svg viewBox="0 0 360 520" xmlns="http://www.w3.org/2000/svg" focusable="false">
+        <defs>
+          <linearGradient id="vitraux" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#713843"/><stop offset="0.48" stop-color="#311e30"/><stop offset="1" stop-color="#18151e"/></linearGradient>
+          <linearGradient id="ray" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#c6a16d" stop-opacity=".28"/><stop offset="1" stop-color="#c6a16d" stop-opacity="0"/></linearGradient>
+        </defs>
+        <path d="M180 19Q330 109 331 249V488H29V249Q30 109 180 19Z" fill="#151117" stroke="#b79b73" stroke-width="2"/>
+        <path d="M180 44Q311 125 311 251V468H49V251Q49 125 180 44Z" fill="url(#vitraux)" stroke="#785461"/>
+        <path d="M180 44V468M49 254H311M49 356H311" stroke="#bd996d" opacity=".24"/>
+        <path d="M180 95L248 204L180 310L112 204Z" fill="#1f1720" stroke="#c6a16d" stroke-width="2"/>
+        <circle cx="180" cy="202" r="61" stroke="#c6a16d" fill="none" stroke-width="1.5"/>
+        <circle cx="180" cy="202" r="49" stroke="#c6a16d" fill="none" stroke-dasharray="3 8" opacity=".55"/>
+        <path d="M180 152V252M130 202H230" stroke="#d3b58a" stroke-width="5" stroke-linecap="square"/>
+        <path d="M152 166L208 238M208 166L152 238" stroke="#d3b58a" opacity=".34"/>
+        <path d="M180 300L244 381L180 454L116 381Z" fill="url(#ray)" stroke="#b79b73" opacity=".85"/>
+        <path d="M79 290Q115 259 144 290V428H79Z M216 290Q245 259 281 290V428H216Z" fill="#100d13" stroke="#8e6470" opacity=".88"/>
+        <path d="M92 307V418M269 307V418" stroke="#c6a16d" opacity=".3"/>
+        <path d="M103 96L120 126M257 96L240 126M106 460H254" stroke="#d3b58a" opacity=".5"/>
+        <circle cx="180" cy="15" r="4" fill="#c6a16d"/>
+        <text x="180" y="498" text-anchor="middle" font-family="Georgia,serif" font-size="10" letter-spacing="5" fill="#c6a16d">TRONO VACÍO</text>
+      </svg>
+      <div class="splash-art-label">✦ ARCHIVO DEL ÚLTIMO CIELO ✦</div>
     </div>
-    <div class="splash-foot">MEMENTO FINIS · La caída comienza cuando abras el umbral</div>
+    <div class="splash-content">
+      <div class="splash-number">✧ &nbsp; ARCHIVO I / EL SANTUARIO &nbsp; ✧</div>
+      <div class="eyebrow">Roguelite de mesa · Códice digital</div>
+      <h1>DEUS<br><span>ABSENS</span></h1>
+      <div class="splash-hairline" aria-hidden="true"><span>✦</span></div>
+      <p class="subtitle">El cielo ha quedado vacío.<br>La búsqueda acaba de comenzar.</p>
+      <p class="splash-copy">Consulta a los Santos, prepara tu expedición y abre los registros del mundo después del silencio.</p>
+      <div class="splash-actions">
+        <button class="btn" data-enter-app="inicio">Entrar al santuario <span aria-hidden="true">↗</span></button>
+        <button class="btn secondary" data-enter-app="personajes">Ver los Penitentes</button>
+      </div>
+      <div class="splash-foot">MEMENTO FINIS <span aria-hidden="true">✦</span> EL SILENCIO TAMBIÉN ES UNA RESPUESTA</div>
+    </div>
   </div>
 </div>
 
 <header class="topbar">
   <div class="top-inner">
     <a class="brand" href="#" aria-label="Volver al inicio" data-goto="inicio"><span class="brand-mark"><span>✦</span></span> DEUS ABSENS</a>
-    <div class="top-meta"><span class="top-pill">Santuario digital</span><span class="top-pill muted-pill">Versión visual v6.2</span></div>
+    <div class="top-meta"><span class="top-pill">Santuario digital</span><span class="top-pill muted-pill">Versión visual v6.3</span></div>
     <nav class="nav" aria-label="Navegación principal">
       <button class="active" data-section="inicio"><span class="nav-glyph" aria-hidden="true">✦</span><span class="nav-label">Inicio</span></button>
       <button data-section="historia"><span class="nav-glyph" aria-hidden="true">❦</span><span class="nav-label">Crónica</span></button>
@@ -171,12 +196,15 @@
 
 
   <section class="section" id="zonas">
-    <div class="section-head"><div><div class="kicker">Capítulo VI · Geografía del descenso</div><h2>Zonas</h2><p class="lead">Otro menú estructural listo. Aquí podrás registrar biomas, amenazas, reglas ambientales y enemigos frecuentes por zona.</p></div></div>
-    <div class="grid">
-      <article class="card placeholder-card"><div class="symbol">◈</div><h3>Primer Umbral</h3><p>Espacios todavía cercanos al mundo humano. Amenazas directas, rutas legibles y horrores apenas revelados.</p><span class="coming-tag">Base conceptual</span></article>
-      <article class="card placeholder-card"><div class="symbol">✠</div><h3>Recintos Sacrílegos</h3><p>Templos, hospitales, catacumbas o ruinas consagradas que mezclan lo sagrado con lo corrupto.</p><span class="coming-tag">Base conceptual</span></article>
-      <article class="card placeholder-card"><div class="symbol">⬣</div><h3>Profundidades</h3><p>Zonas de mayor dificultad narrativa y táctica, donde las reglas del mundo se deforman.</p><span class="coming-tag">Base conceptual</span></article>
+    <div class="section-head"><div><div class="kicker">Capítulo VI · Geografía del descenso</div><h2>Atlas de las Zonas</h2><p class="lead">Consulta las zonas definidas en el archivo de campaña. Sus cantidades de enemigos y densidad del terreno son parámetros de borrador, no reglas aprobadas.</p></div></div>
+    <div class="atlas-banner">
+      <div class="atlas-banner-art" aria-hidden="true"><span>◇</span><span>✦</span><span>◇</span></div>
+      <div class="atlas-banner-copy"><span class="overline">MAPAS DEL DESCENSO · ARCHIVO PROVISIONAL</span><h3>El mundo se abre por estratos</h3><p>Cada zona tendrá amenazas, terreno y encuentros propios. Los datos siguientes se leen del archivo <code>data/zonas.json</code> y todavía están sujetos a balance.</p></div>
+      <div class="atlas-banner-seal" aria-hidden="true">Ⅲ</div>
     </div>
+    <div class="atlas-legend"><span><i class="atlas-key key-sample" aria-hidden="true"></i> Valores de ejemplo</span><span><i class="atlas-key key-board" aria-hidden="true"></i> Tableros 10×10 / 15×15</span><span><i class="atlas-key key-manual" aria-hidden="true"></i> Director controla la ruta</span></div>
+    <div class="grid atlas-grid" id="zoneGrid"><div class="empty">Cargando los registros de zonas…</div></div>
+    <div class="atlas-footer"><strong>No existe aún un generador de encuentros.</strong> Esta pantalla permite consultar y preparar la estructura; no calcula rutas ni mueve personajes o enemigos.</div>
   </section>
 
   <section class="section" id="encuentro">
@@ -222,10 +250,23 @@
 
 
   <section class="section" id="objetos">
-    <div class="section-head"><div><div class="kicker">Capítulo VIII · El relicario</div><h2>Objetos y reliquias</h2><p class="lead">Algunos hallazgos esperan en la oscuridad. Otros solo aparecen cuando el mundo reconoce lo que has hecho.</p></div></div>
-    <div class="inventory-note"><strong id="relicCount">0 de 6 reliquias</strong> descubiertas. Los objetos bloqueados muestran una condición narrativa de ejemplo; puedes cambiarla en el código para ajustarla a tu campaña.</div>
-    <div class="toolbar"><input id="itemSearch" class="search" placeholder="Buscar reliquia…" aria-label="Buscar objeto"><select id="itemFilter" class="filter" aria-label="Filtrar objetos"><option value="all">Todos los objetos</option><option value="unlocked">Descubiertos</option><option value="locked">Bloqueados</option></select></div>
-    <div class="grid" id="itemGrid"></div>
+    <div class="section-head"><div><div class="kicker">Capítulo VIII · El relicario</div><h2>El Archivo de las Reliquias</h2><p class="lead">Todo hallazgo tiene un origen. Descubre las reliquias del santuario, consulta sus rarezas y distingue los registros abiertos de los todavía sellados.</p></div></div>
+    <div class="relic-banner"><div class="relic-banner-symbol" aria-hidden="true">⚿</div><div class="relic-banner-copy"><span class="overline">EL RELICARIO · CATÁLOGO DE PRUEBA</span><h3>Lo que sobrevive al silencio</h3><p>Los desbloqueos actuales se guardan en este navegador. Las condiciones son ejemplos narrativos; registrar un hallazgo todavía no consume Ecos.</p></div></div>
+    <div class="hud-row relic-hud" aria-label="Resumen de reliquias">
+      <div class="hud-stat"><span class="hud-icon" aria-hidden="true">⚿</span><div><span class="hud-label">Registros abiertos</span><strong id="relicKnown">0</strong></div></div>
+      <div class="hud-stat"><span class="hud-icon" aria-hidden="true">▧</span><div><span class="hud-label">Registros sellados</span><strong id="relicHidden">0</strong></div></div>
+      <div class="hud-stat"><span class="hud-icon" aria-hidden="true">✦</span><div><span class="hud-label">Descubrimiento</span><strong id="relicProgressLabel">0 %</strong></div></div>
+    </div>
+    <div class="relic-archive-toolbar">
+      <div><span class="overline">REGISTROS CONSULTABLES</span><h3>Inventario del archivo</h3><p><strong id="relicCount">0 reliquias</strong> registradas · <span id="relicResultCount">0 resultados</span></p></div>
+      <div class="toolbar relic-filters">
+        <input id="itemSearch" class="search" placeholder="Buscar nombre, tipo o condición…" aria-label="Buscar reliquia">
+        <select id="itemFilter" class="filter" aria-label="Filtrar objetos por estado"><option value="all">Todos los estados</option><option value="unlocked">Descubiertos</option><option value="locked">Sellados</option></select>
+        <select id="itemRarityFilter" class="filter" aria-label="Filtrar reliquias por rareza"><option value="all">Todas las rarezas</option><option value="Común">Común</option><option value="Poco común">Poco común</option><option value="Rara">Rara</option><option value="Única">Única</option><option value="Mítica">Mítica</option></select>
+      </div>
+    </div>
+    <div class="grid relic-grid" id="itemGrid"></div>
+    <div class="relic-archive-note">✧ &nbsp; Este catálogo contiene reliquias de demostración. La economía, la ruleta de botín y el inventario compartido se integrarán en una versión posterior.</div>
   </section>
 
   <section class="section" id="creditos">
@@ -248,13 +289,13 @@
     </div>
     <div class="grid" style="margin-top:18px">
       <article class="card placeholder-card"><div class="symbol">✦</div><h3>Agradecimientos</h3><p>Espacio listo para incluir colaboradores de arte, pruebas, narrativa, comunidad y dirección de juego.</p></article>
-      <article class="card placeholder-card"><div class="symbol">⚙</div><h3>Versión del proyecto</h3><p>Visual UI v6.2 · interfaz optimizada, paneles de expedición, legado y dirección de juego.</p></article>
+      <article class="card placeholder-card"><div class="symbol">⚙</div><h3>Versión del proyecto</h3><p>Visual UI v6.3 · portada estática, atlas dinámico y relicario renovado.</p></article>
       <article class="card placeholder-card"><div class="symbol">☉</div><h3>Notas</h3><p>Puedes reemplazar fácilmente estos textos por nombres reales cuando quieras publicar una versión más formal.</p></article>
     </div>
   </section>
 </main>
 
-<footer class="footer">DEUS ABSENS · EL SILENCIO TAMBIÉN ES UNA RESPUESTA<br><span style="font-size:12px">Santuario digital en desarrollo · visual v6.2</span></footer>
+<footer class="footer">DEUS ABSENS · EL SILENCIO TAMBIÉN ES UNA RESPUESTA<br><span style="font-size:12px">Santuario digital en desarrollo · visual v6.3</span></footer>
 
 <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
   <div class="modal"><div class="kicker" id="modalKicker">Decisión</div><h3 id="modalTitle">Confirmar</h3><div id="modalBody"></div><div class="modal-actions" id="modalActions"></div></div>

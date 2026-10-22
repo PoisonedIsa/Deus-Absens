@@ -6,16 +6,18 @@
 
 | Dato | San Longinos | Deudor de Sal |
 |---|---|---|
-| Atributos (Longinos) | ACERO ___ CENIZA ___ SANGRE ___ DOGMA ___ | No definidos salvo el supuesto de CENIZA para iniciativa |
+| Atributos (Longinos) | ACERO ___ CENIZA ___ SANGRE ___ DOGMA ___ | **Solo CENIZA de iniciativa:** ___ (valor de ensayo, todavía no oficial) |
 | PV inicial / PV máximos | ___ / ___ | 14 / 14 (provisional) |
 | Defensa base | ___ | 8 (provisional) |
 | Movimiento | ___ | 3 (provisional) |
 | Blindaje | ___ | 0 (provisional) |
-| Tirada de iniciativa (2d6 + CENIZA) | ___ + ___ = ___ | ___ + ___ = ___; CENIZA +0 **provisional** |
+| Tirada de iniciativa (2d6 + CENIZA) | ___ + CENIZA ___ = ___ | ___ + CENIZA de ensayo ___ = ___ |
 
 **Orden de actuación usado:** __________________________________________
 
-**Regla de desempate aplicada, si la hubo:** ______________________________
+**Empate en total:** mayor CENIZA → primero __________________. Si coinciden CENIZA, dados de desempate entre empatados: ____________________________
+
+**Orden fijo durante todo el combate:** __________________________________
 
 ## Cronología de ataques y PV
 
@@ -38,7 +40,9 @@ Si el combate dura más de seis rondas, duplica las líneas que hagan falta.
 
 ## Seguimiento de reglas
 
-- [ ] Se tiró iniciativa individual para cada combatiente.
+- [ ] Se tiró iniciativa individual **una sola vez al comenzar** el combate, manteniendo el orden.
+- [ ] Se aplicó mayor CENIZA para los empates; si persistieron, tiraron nuevamente solo los empatados.
+- [ ] Se anotó la CENIZA del Deudor como **valor provisional**, sin deducirla de Movimiento.
 - [ ] Se aplicó `2d6 + ACERO` a los ataques cuerpo a cuerpo de Longinos.
 - [ ] El Deudor atacó con `2d6 + bono de su ataque`, no con ACERO inventado.
 - [ ] Se comprobó Defensa, luego Blindaje, en ese orden.

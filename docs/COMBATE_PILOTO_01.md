@@ -1,6 +1,6 @@
 # DEUS ABSENS | Combate piloto 01 · San Longinos vs. Deudor de Sal
 
-**Versión de preparación v6.8 · GUÍA DE PRUEBA, NO BALANCE FINAL**
+**Versión de preparación v6.9 · GUÍA DE PRUEBA, NO BALANCE FINAL**
 
 **Objetivo:** comprobar que el ciclo básico de combate es claro, cuánto dura un enfrentamiento 1 contra 1 y qué incidencias surgen con iniciativa, Defensa, críticos y estados iniciales. No introduce IA enemiga, cálculo de rutas ni automatización.
 
@@ -41,9 +41,9 @@ Con estos valores: **PV 18**, **Defensa 9**, **Movimiento 3**, **Estigma máximo
 | Movimiento | 3 |
 | Ataque «Cobro de sal» | `2d6 + 0` contra Defensa, daño base `1d6` |
 | Alcance de ataque | 1 casilla |
-| **CENIZA para iniciativa** | **+0, supuesto TEMPORAL del piloto** |
+| **CENIZA para iniciativa** | **Sin valor oficial (`null`). Debe declararse provisionalmente para la prueba** |
 
-**Aviso:** `data/enemigos.json` no tiene CENIZA, aunque la nueva regla oficial requiere `2d6+CENIZA` para cada combatiente. El +0 es únicamente un supuesto de prueba; no se modifica ningún JSON ni se establece que todos los enemigos tengan CENIZA +0.
+**Aviso:** `data/enemigos.json` no tiene CENIZA, aunque la nueva regla oficial requiere `2d6+CENIZA` para cada combatiente. El +0 de v6.8 era únicamente un supuesto de prueba; **no** se establece que todos los enemigos tengan CENIZA +0. `data/enemigos.json` incluye ahora `"ceniza": null` para cada tipo hasta asignar y aprobar cifras, sin otros atributos añadidos.
 
 El efecto «Cobro pendiente» figura en la ficha, pero su robo de un recurso temporal no está desarrollado. **No inventar su resolución** durante esta prueba; anotar como pendiente.
 
@@ -51,8 +51,10 @@ El efecto «Cobro pendiente» figura en la ficha, pero su robo de un recurso tem
 
 1. Dibujar una cuadrícula de 10 × 10. Por ejemplo, situar a Longinos en **E5** y al Deudor en **E6**. Están adyacentes. El tablero queda **sin muros, obstáculos bajos, trampas ni Puntos Débiles adicionales**.
 2. Anotar ambos PV y las características anteriores.
-3. Cada combatiente tira su **iniciativa individual `2d6+CENIZA`**. Longinos usa +1. Para el Deudor usar provisionalmente +0. Actúa primero el resultado mayor.
-4. **Convención temporal, aún sin aprobar:** tirar al iniciar el encuentro y conservar el orden; si empatan, repetir solo entre los empatados. No registrar estas convenciones como reglas oficiales.
+3. Antes de tirar, **declarar por escrito** la CENIZA de ensayo del Deudor, porque todavía no hay valor oficial. Longinos usa +1 con la distribución sugerida. **No deducir CENIZA enemiga de su movimiento**.
+4. Cada combatiente tira **2d6+CENIZA una sola vez** al empezar el combate. El orden descendente se mantiene durante todas las rondas.
+5. Si dos o más empatan en total, va primero quien tenga mayor CENIZA. Si también empatan en CENIZA, repiten `2d6+CENIZA` **solo esos combatientes** hasta desempatar; los demás conservan sus posiciones. No se aplican críticos de ataque a tiradas de iniciativa.
+6. Si deseas utilizar la web, abre **Mesa del director → Tablero de iniciativa**, o directamente `herramientas/iniciativa.html`. Pulsa «Cargar combate piloto», introduce la CENIZA de prueba del Deudor y usa dados físicos o virtuales.
 5. Comenzar la ronda 1 con el primero de la lista de iniciativa.
 
 ## Resolver cada turno (ambos bandos)
@@ -81,7 +83,7 @@ Usa un ataque **de alcance legal según la decisión que se apruebe para el arma
 
 ## Criterios de evaluación
 
-- ¿Se entendió y siguió la iniciativa sin dudas? (Anotar valor provisional del Deudor.)
+- ¿Se entendió el orden de iniciativa fijo para el combate, incluido el desempate por CENIZA? (Anotar el valor de prueba del Deudor.)
 - ¿Cuántas rondas y ataques hicieron falta?
 - ¿Se activó Cólera Sangrienta? ¿Influyó?
 - ¿Hubo un 6+6 o 1+1 y se resolvió correctamente?
@@ -90,8 +92,6 @@ Usa un ataque **de alcance legal según la decisión que se apruebe para el arma
 
 **Importante:** un combate 1v1 con estadísticas provisionales **no determina el equilibrio final**. Repetirlo varias veces y luego incorporar un segundo Penitente antes de fijar recompensas de Ecos.
 
-## Próximo bloque de decisiones, no confirmado todavía
+## Decisiones de iniciativa confirmadas (v6.9)
 
-1. Si los enemigos tendrán un valor propio de CENIZA exclusivamente para iniciativa (separado de su movimiento).
-2. Si la iniciativa se tira una sola vez al inicio del encuentro o al comienzo de cada ronda.
-3. Qué hacer en caso de empate en iniciativa.
+CENIZA enemiga por tipo; una única tirada al inicio; empates por mayor CENIZA, luego nuevas tiradas exclusivamente entre los empatados. Estos puntos ya no necesitan otra votación. **Pendiente solo el valor numérico de CENIZA del Deudor y del resto de tipos enemigos.**

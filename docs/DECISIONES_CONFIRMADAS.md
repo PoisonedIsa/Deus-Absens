@@ -214,3 +214,13 @@ Este documento separa acuerdos reales de funcionalidades pendientes.
 **Pendientes de iniciativa:** momento de la tirada (inicio de encuentro o cada ronda), cómo resolver empates y cómo asignar CENIZA a los enemigos. No se convierten estas propuestas en reglas definitivas sin confirmación.
 
 **Estado técnico:** en esta v6.8 solo se actualiza la documentación; la web no implementa todavía tiradas ni el orden de iniciativa. Los datos existentes no se modifican.
+
+## Actualización v6.9 · Iniciativa individual (CONFIRMADO)
+
+1. **CENIZA enemiga por tipo:** cada tipo de enemigo posee un valor específico de **CENIZA exclusivamente para iniciativa**; es independiente de su movimiento y del bono propio de cada ataque. Los seis enemigos actuales **no tienen valores aprobados** y se registran `"ceniza": null` en `data/enemigos.json` hasta asignar valores mediante balance. **No se inventan ACERO, SANGRE ni DOGMA a enemigos.**
+2. **Una tirada al principio:** cada combatiente (Penitente y ejemplar de enemigo) tira **2d6 + CENIZA una sola vez al iniciar el combate**. Se ordena por resultado descendente y se conserva el orden entre rondas, sin nuevas tiradas generales.
+3. **Desempates:** ante el mismo resultado total, actúa primero quien tenga **mayor CENIZA**. Si también coincide CENIZA, **solo los empatados** vuelven a tirar `2d6 + CENIZA` hasta establecer su orden relativo. Las tiradas originales de los demás no cambian. Para varios empatados, quienes queden igualados vuelven a repetir entre sí.
+4. **Iniciativa no equivale a turno automático:** el director mantiene el control de criaturas, acciones, movimientos y objetivos; ninguna IA o ruta calculada. Los dobles 1/6 especiales descritos para **ataques** no se extrapolan a iniciativa.
+5. **Piloto:** la CENIZA del Deudor de Sal sigue sin confirmarse. Su +0 en v6.8 era **convención temporal**, no una ficha oficial. El tablero de prueba solicita un valor antes de tirar y no altera fichas selladas.
+
+**Precedencia:** este bloque sustituye el apartado de «pendientes de iniciativa» y la convención temporal de desempates de v6.8.

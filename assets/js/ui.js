@@ -4,20 +4,15 @@ export const escapar = value => String(value ?? '').replace(/[&<>"']/g, s => ({'
 export function mostrarSeccion(id) {
   const target=$(id);
   if (!target?.classList.contains('section')) return;
-  const activate=()=>{
-    document.querySelectorAll('.section').forEach(s => s.classList.toggle('active',s.id===id));
-    document.querySelectorAll('.nav button').forEach(b => {
-      const active=b.dataset.section===id;
-      b.classList.toggle('active',active);
-      if(active) b.setAttribute('aria-current','page');
-      else b.removeAttribute('aria-current');
-    });
-    $('hero').style.display = id==='inicio'?'grid':'none';
-    window.scrollTo({top:0,behavior:'instant'});
-  };
-  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(!reduce && typeof document.startViewTransition==='function') document.startViewTransition(activate);
-  else activate();
+  document.querySelectorAll('.section').forEach(s => s.classList.toggle('active',s.id===id));
+  document.querySelectorAll('.nav button').forEach(b => {
+    const active=b.dataset.section===id;
+    b.classList.toggle('active',active);
+    if(active) b.setAttribute('aria-current','page');
+    else b.removeAttribute('aria-current');
+  });
+  $('hero').style.display = id==='inicio'?'grid':'none';
+  window.scrollTo(0,0);
 }
 
 let toastTimer;
@@ -129,14 +124,47 @@ export function renderMesa(enemies,state){
   const instances=state.encounter||[];
   const host=$('encounterList');if(!host)return;
   $('encounterCount').textContent=`${instances.length} criatura(s) en mesa`;
-  host.innerHTML=instances.map(s=>{const e=byId[s.enemyId];if(!e)return '';
-    return `<article class="card encounter-card"><div class="character-top"><div><span class="tag">${escapar(e.type)} · ${escapar(e.threat)}</span><h3>${escapar(e.name)} <small>#${escapar(s.label)}</small></h3></div><span class="tag gold">${s.hp===0?'Caído':'En combate'}</span></div>
-      <div class="stats"><span class="stat">PV: ${s.hp}/${e.hp}</span><span class="stat">DEF ${e.defense}</span><span class="stat">BLIN ${e.armor}</span><span class="stat">MOV ${e.movement}</span></div>
-      <p>${(e.attacks||[]).map(a=>`${escapar(a.name)}: ${a.strikes>1?a.strikes+'×':''}${escapar(a.damage)}`).join(' · ')}</p>
-      <div class="card-bottom"><button class="small" data-action="enemy-hit" data-uid="${escapar(s.uid)}" data-amount="1">PV -1</button><button class="small" data-action="enemy-hit" data-uid="${escapar(s.uid)}" data-amount="5">PV -5</button><button class="small" data-action="enemy-heal" data-uid="${escapar(s.uid)}">PV +1</button><button class="small" data-action="enemy-full" data-uid="${escapar(s.uid)}">Curar al máximo</button><button class="small" data-action="enemy-detail" data-id="${escapar(e.id)}">Ficha</button><button class="small" data-action="enemy-remove" data-uid="${escapar(s.uid)}">Quitar</button></div>
+  const valid=instances.filter(s=>byId[s.enemyId]);
+  $('dirTotal').textContent=String(valid.length);
+  $('dirStanding').textContent=String(valid.filter(s=>Number(s.hp)>0).length);
+  const hp=valid.reduce((sum,s)=>sum+Math.max(0,Number(s.hp)||0),0);
+  const maxHp=valid.reduce((sum,s)=>sum+(Number(byId[s.enemyId].hp)||0),0);
+  $('dirHpTotal').textContent=`${hp} / ${maxHp}`;
+  host.innerHTML=valid.map(s=>{const e=byId[s.enemyId];
+    const current=Math.max(0,Math.min(Number(e.hp)||0,Number(s.hp)||0));
+    const ratio=e.hp>0?Math.round(current/e.hp*100):0;
+    return `<article class="card encounter-card${current===0?' encounter-down':''}">
+      <div class="encounter-heading"><span class="encounter-sigil" aria-hidden="true">${escapar(e.icon||'☠')}</span><div class="encounter-title"><span class="kicker">${escapar(e.type)} · ${escapar(e.threat)}</span><h3>${escapar(e.name)} <small>#${escapar(s.label)}</small></h3></div><span class="tag ${current===0?'':'gold'}">${current===0?'Caído':'En combate'}</span></div>
+      <div class="encounter-hp-title"><strong>PV ${current} / ${e.hp}</strong><span>${ratio}%</span></div>
+      <div class="encounter-hp-track" role="progressbar" aria-label="PV de ${escapar(e.name)}" aria-valuenow="${current}" aria-valuemin="0" aria-valuemax="${e.hp}"><span style="width:${ratio}%"></span></div>
+      <div class="stats encounter-stats"><span class="stat">DEF ${e.defense}</span><span class="stat">BLIN ${e.armor}</span><span class="stat">MOV ${e.movement}</span></div>
+      <p class="encounter-attacks">${(e.attacks||[]).map(a=>`${escapar(a.name)}: ${a.strikes>1?a.strikes+'×':''}${escapar(a.damage)}`).join(' · ')}</p>
+      <div class="card-bottom encounter-controls"><button class="small" data-action="enemy-hit" data-uid="${escapar(s.uid)}" data-amount="1">-1 PV</button><button class="small" data-action="enemy-hit" data-uid="${escapar(s.uid)}" data-amount="5">-5 PV</button><button class="small" data-action="enemy-heal" data-uid="${escapar(s.uid)}">+1 PV</button><button class="small" data-action="enemy-full" data-uid="${escapar(s.uid)}">Restaurar</button><button class="small" data-action="enemy-detail" data-id="${escapar(e.id)}">Ficha</button><button class="small danger-outline" data-action="enemy-remove" data-uid="${escapar(s.uid)}">Quitar</button></div>
     </article>`;
-  }).join('')||'<div class="empty">La mesa está vacía. Añade enemigos desde el bestiario. Puedes incluir varias copias del mismo tipo.</div>';
+  }).join('')||'<div class="empty empty-encounter"><span class="empty-mark">⚙</span><h3>La mesa permanece en silencio</h3><p>Añade criaturas desde el bestiario para comenzar a llevar sus PV. Puedes añadir varias copias del mismo tipo.</p><button class="small" data-goto="enemigos">Abrir bestiario ↗</button></div>';
 }
+
+export function renderResumen(chars,enemies,items,state){
+  const chosen=chars.find(c=>c.id===state.chosen);
+  const nSaints=chars.filter(c=>!c.secret||state.unlockedSaints.includes(c.id)).length;
+  const nLoot=items.filter(i=>state.unlocked.includes(i.id)).length;
+  const encounters=(state.encounter||[]).filter(s=>enemies.some(e=>e.id===s.enemyId));
+  const set=(id,value)=>{const node=$(id);if(node)node.textContent=value};
+  const progress=(bar,label,n,max)=>{
+    const pct=max?Math.round(n/max*100):0;
+    const node=$(bar);if(node)node.style.width=pct+'%';
+    set(label,pct+' %');
+  };
+  set('expSelectedName',chosen?.name||'Sin elegir');
+  set('expEnemiesCount',String(encounters.length));
+  set('expLootCount',`${nLoot} / ${items.length}`);
+  set('legacySaints',`${nSaints} / ${chars.length}`);
+  set('legacyRelics',`${nLoot} / ${items.length}`);
+  set('legacySelected',chosen?.name||'Sin elegir');
+  progress('legacySaintsBar','legacySaintsPct',nSaints,chars.length);
+  progress('legacyRelicsBar','legacyRelicsPct',nLoot,items.length);
+}
+
 export function renderReliquias(items,state){
   const q=$('itemSearch').value.toLowerCase(),filter=$('itemFilter').value;
   const result=items.filter(i=>{const found=state.unlocked.includes(i.id);return (filter==='all'||filter==='unlocked'&&found||filter==='locked'&&!found)&&[i.name,i.type,i.desc,i.condition].join(' ').toLowerCase().includes(q)});

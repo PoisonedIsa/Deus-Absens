@@ -1,15 +1,16 @@
 // DEUS ABSENS: fichas digitales de consulta y mesa del director. Sin cálculo de rutas.
 import {cargarDatos} from './data.js';
 import {cargarEstado,guardarEstado} from './state.js';
-import {abrirModal,cerrarModal,avisar,escapar,mostrarError,mostrarSeccion,renderPersonajes,renderEnemigos,renderMesa,renderReliquias,textoFichaPersonaje,textoFichaEnemigo,getSheet,estadisticas} from './ui.js';
+import {abrirModal,cerrarModal,avisar,escapar,mostrarError,mostrarSeccion,renderPersonajes,renderEnemigos,renderMesa,renderReliquias,renderResumen,textoFichaPersonaje,textoFichaEnemigo,getSheet,estadisticas} from './ui.js';
 const $=id=>document.getElementById(id);
 function cerrarPortada(destino='inicio'){
  const gate=$('splashGate');
  if(!gate||!gate.classList.contains('open')){mostrarSeccion(destino);return;}
- gate.classList.add('closing');
  gate.classList.remove('open');
+ gate.classList.add('closing');
  gate.setAttribute('aria-hidden','true');
- setTimeout(()=>mostrarSeccion(destino),180);
+ gate.hidden=true;
+ mostrarSeccion(destino);
 }
 async function iniciar(){
  const data=await cargarDatos();const {characters,enemies,items,abilities,equipment}=data;
@@ -17,16 +18,22 @@ async function iniciar(){
  const byChar=Object.fromEntries(characters.map(c=>[c.id,c]));
  const byEnemy=Object.fromEntries(enemies.map(e=>[e.id,e]));
  const byAbility=Object.fromEntries(abilities.map(a=>[a.id,a]));
- function render(){renderPersonajes(characters,state,abilities,equipment);renderEnemigos(enemies);renderMesa(enemies,state);renderReliquias(items,state)}
- function persist(){if(!guardarEstado(state))avisar('No se pudo guardar en el navegador.');render()}
+ function render(kind='all'){
+  if(kind==='all'||kind==='characters')renderPersonajes(characters,state,abilities,equipment);
+  if(kind==='all')renderEnemigos(enemies);
+  if(kind==='all'||kind==='encounter')renderMesa(enemies,state);
+  if(kind==='all'||kind==='items')renderReliquias(items,state);
+  renderResumen(characters,enemies,items,state);
+ }
+ function persist(kind){if(!guardarEstado(state))avisar('No se pudo guardar en el navegador.');render(kind)}
  function sheetFor(c){const m=byAbility[c.martyrId];const s=getSheet(state,c.id,m);if(!state.sheets[c.id])state.sheets[c.id]={attrs:{...s.attrs},charges:s.charges,pv:s.pv,estigma:s.estigma};return {s,m,record:state.sheets[c.id]}}
  function unlockSaint(id){const c=byChar[id];if(!c||!c.secret||state.unlockedSaints.includes(id))return;
   abrirModal('Desbloqueo manual de prueba',`<p>¿Habilitar a <strong>${escapar(c.name)}</strong>? Esta herramienta es provisional para el director: aún no descontamos Ecos.</p>`,[
-   {label:'Desbloquear',action:()=>{state.unlockedSaints.push(id);persist();avisar('Santo desbloqueado en este navegador.')}},{label:'Cancelar',secondary:true}], 'Basílica');
+   {label:'Desbloquear',action:()=>{state.unlockedSaints.push(id);persist('characters');avisar('Santo desbloqueado en este navegador.')}},{label:'Cancelar',secondary:true}], 'Basílica');
  }
  function choose(id){const c=byChar[id];if(!c||c.secret&&!state.unlockedSaints.includes(id))return;
-  state.chosen=id;sheetFor(c);persist();avisar(`${c.name}: ficha activa.`);
-  document.getElementById('characterSheetPanel').scrollIntoView({behavior:'smooth',block:'start'});
+  state.chosen=id;sheetFor(c);persist('characters');avisar(`${c.name}: ficha activa.`);
+  document.getElementById('characterSheetPanel').scrollIntoView({behavior:'auto',block:'start'});
  }
  function modifyAttr(){const c=byChar[state.chosen];if(!c)return;const {s}=sheetFor(c);
   const names=['ACERO','CENIZA','SANGRE','DOGMA'];
@@ -34,7 +41,7 @@ async function iniciar(){
   <div class="attribute-form">${names.map(name=>`<label>${name}<select data-attr="${name}">${[3,2,1,0].map(n=>`<option value="${n}" ${n===attrs[name]?'selected':''}>+${n}</option>`).join('')}</select></label>`).join('')}</div>
   <p class="muted" id="attributePreview"></p>`;
   let pending={...s.attrs};
-  abrirModal('Distribuir atributos',build(pending),[{label:'Guardar ficha',action:()=>{const rec=state.sheets[c.id];rec.attrs={...pending};const max=estadisticas(pending);rec.pv=Math.min(rec.pv,max.pv);rec.estigma=Math.min(rec.estigma,max.estigma);persist();}},{label:'Cancelar',secondary:true}],c.name);
+  abrirModal('Distribuir atributos',build(pending),[{label:'Guardar ficha',action:()=>{const rec=state.sheets[c.id];rec.attrs={...pending};const max=estadisticas(pending);rec.pv=Math.min(rec.pv,max.pv);rec.estigma=Math.min(rec.estigma,max.estigma);persist('characters');}},{label:'Cancelar',secondary:true}],c.name);
   const form=$('modalBody');
   function preview(){const p=estadisticas(pending);$('attributePreview').textContent=`PV ${p.pv} · Defensa ${p.defensa} · Movimiento ${p.movimiento} · Límite de Estigma ${p.estigma}`;}
   form.addEventListener('change',event=>{
@@ -53,24 +60,24 @@ async function iniciar(){
   else if(kind==='player-hp-plus')record.pv=Math.min(s.derived.pv,s.pv+1);
   else if(kind==='player-estigma-minus')record.estigma=Math.max(0,s.estigma-1);
   else if(kind==='player-estigma-plus')record.estigma=Math.min(s.derived.estigma,s.estigma+1);
-  persist();
+  persist('characters');
  }
  function resetCharges(){const c=byChar[state.chosen];if(!c)return;abrirModal('Nueva expedición',`<p>¿Restaurar todas las cargas de martirio de ${escapar(c.name)}? No se reinician los PV ni el Estigma en esta versión de ficha.</p>`,[
-  {label:'Restaurar cargas',action:()=>{const {s,record}=sheetFor(c);record.charges=s.max;persist();}},{label:'Cancelar',secondary:true}], 'Santuario');}
+  {label:'Restaurar cargas',action:()=>{const {s,record}=sheetFor(c);record.charges=s.max;persist('characters');}},{label:'Cancelar',secondary:true}], 'Santuario');}
  function unlockItem(id){const it=items.find(i=>i.id===id);if(!it||state.unlocked.includes(id))return;
   abrirModal('Registrar hallazgo',`<p>Desbloquear ${escapar(it.name)} en este navegador como prueba del catálogo.</p>`,[
-   {label:'Registrar',action:()=>{state.unlocked.push(id);persist()}},{label:'Cancelar',secondary:true}]);}
+   {label:'Registrar',action:()=>{state.unlocked.push(id);persist('items')}},{label:'Cancelar',secondary:true}]);}
  let counter=0;
  function spawn(id){const e=byEnemy[id];if(!e)return;
   counter+=1;const label=state.encounter.filter(s=>s.enemyId===id).length+1;
-  state.encounter.push({uid:`${Date.now()}_${counter}_${Math.floor(Math.random()*10000)}`,enemyId:id,label,hp:e.hp});persist();avisar(`${e.name} añadido a la mesa.`);}
+  state.encounter.push({uid:`${Date.now()}_${counter}_${Math.floor(Math.random()*10000)}`,enemyId:id,label,hp:e.hp});persist('encounter');avisar(`${e.name} añadido a la mesa.`);}
  function mutateEnemy(action,uid,amount){const i=state.encounter.findIndex(e=>e.uid===uid);if(i<0)return;
   const instance=state.encounter[i],def=byEnemy[instance.enemyId];if(!def)return;
   if(action==='enemy-remove'){state.encounter.splice(i,1);}
   if(action==='enemy-hit')instance.hp=Math.max(0,instance.hp-Number(amount||1));
   if(action==='enemy-heal')instance.hp=Math.min(def.hp,instance.hp+1);
   if(action==='enemy-full')instance.hp=def.hp;
-  persist();
+  persist('encounter');
  }
  document.addEventListener('click',event=>{
   const t=event.target.closest('[data-enter-app],[data-goto],[data-section],[data-action]');if(!t)return;

@@ -183,3 +183,13 @@ Este documento separa acuerdos reales de funcionalidades pendientes.
 - El saqueo enemigo es gratuito al alcanzar botín desde una de las ocho casillas adyacentes si no hay un muro u obstáculo sólido interpuesto, conforme a las reglas aprobadas. La elección de saquear corresponde al director.
 - **Pendientes:** ocupación de casillas, rutas bloqueadas o inaccesibles, desempates de objetivos, alcance y línea de visión, límites de multataque, habilidades especiales, activación de enemigos y formas de representarlo en la web.
 - Esta entrega **solo actualiza documentación**; no programa movimiento ni control enemigo.
+
+## Actualización v6.5 · Economía, mejoras y códigos (CONFIRMADO)
+
+- Cada jugador usa **una ficha sellada en su propio navegador**. El director lleva una mesa separada.
+- Los Ecos son personales, con **Ecos de expedición** y **Ecos reservados** como cuentas distintas.
+- Los desbloqueos globales son compartidos por campaña, pero solo llegan a cada navegador mediante códigos entregados por el director; no existe servidor ni sincronización automática.
+- Los códigos van **de jugador a director** (informe de ficha) y **de director a jugador** (recompensas y desbloqueos). También permiten restaurar una ficha previa mediante confirmación.
+- Existen categorías de mejoras **personales** y **globales**. Por ahora no se aprueban costes, efectos o compras.
+- Se mantiene la regla de conservar la mitad de los Ecos tras una expedición. **No se ha definido la bolsa que pierde Ecos, ni el redondeo en cantidades impares; no implementar un cierre automático aún**.
+- Los códigos v6.5 NO se autentican digitalmente y los bloqueos funcionan solo con datos locales. Véase `docs/LEGADO_ECOS_CODIGOS_V6_5.md`.

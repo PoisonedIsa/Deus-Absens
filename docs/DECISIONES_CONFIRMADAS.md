@@ -83,3 +83,35 @@ Este documento separa acuerdos reales de funcionalidades pendientes.
 - **Bloqueo por obstáculos (confirmado):** muros y obstáculos sólidos bloquean la recogida de botín, incluso desde una casilla adyacente, tanto para Penitentes como para enemigos. No se permite recoger objetos a través de esos obstáculos.
 - **Pendiente:** interacción con coberturas no sólidas, prioridad si hay varios objetos, reglas para armas equivalentes, requisitos especiales de uso y límites de inventario.
 - **Pendiente de implementar** en la interfaz y la persistencia.
+
+
+## Terreno de combate (nuevo acuerdo v1.7)
+- El terreno se divide en **obstáculos transitables**, **trampas** y **muros**.
+- Los **obstáculos** cuestan el doble del movimiento habitual para los Penitentes; a los enemigos **no les aumentan el coste de movimiento**.
+- Los **muros** son infranqueables para Penitentes y enemigos; siguen bloqueando la recogida de objetos a través de ellos.
+- Las **trampas** dañan únicamente a los Penitentes, con dados de daño elegidos por tipo y comprendidos entre **1d4 y 1d8**; a los enemigos no les afectan.
+- Los ejemplos de trampas `1d4`, `1d6` y `1d8` se usan como categorías iniciales; faltan diseñar clases definitivas, ubicaciones y efectos especiales específicos. El daño ocurre al entrar y al inicio de cada turno en la casilla (v1.9).
+- El movimiento ordinario permanece confirmado: horizontal/vertical cuesta 1 punto y diagonal cuesta 2 puntos. **Aplicación provisional del doble coste:** entrar en un obstáculo ortogonalmente cuesta 2 puntos, diagonalmente cuesta 4; queda por validar la forma de calcular un movimiento que entra y sale de terreno mixto.
+- **Confirmado:** las trampas están siempre activas y no se agotan con el uso; pueden dañar repetidamente a Penitentes. Su estética será sacra y tétrica (sangre ritual, agujas, símbolos profanados, etc.).
+- **Sin definir:** cobertura que podrían dar los obstáculos, si las trampas se ven antes de pisarlas, si se pueden desactivar de manera extraordinaria y si obstáculos transitables bloquean la recogida por razones físicas.
+- Los valores anteriores de coberturas `+1/+2 Defensa` y `4/8 PV` siguen siendo **propuestas no aprobadas**; ningún obstáculo transitable bloqueará el paso solo porque una versión anterior del borrador lo indicara.
+- Las nuevas reglas están **documentadas, pero no implementadas en la web ni en el generador procedural**.
+
+## Actualización v1.8 · Trampas persistentes (CONFIRMADO)
+
+- Todas las trampas permanecen **siempre activas** durante el encuentro; **no son de un solo uso** y **no se consumen** cuando se activan.
+- Solo afectan a los Penitentes; los enemigos siguen siendo inmunes a sus efectos.
+- El dado de daño de cada tipo está dentro del intervalo **1d4 a 1d8**, inclusive.
+- Estética narrativa: trampas sacras y tétricas, inspiradas en sangre ritual, agujas penitenciales y símbolos profanados. Los nombres propuestos en `data/obstaculos.json` son **ejemplos**, no denominaciones finales.
+- **Confirmado en v1.9:** las trampas causan daño al entrar y al inicio de cada turno si el Penitente permanece en la casilla. **Pendiente:** visibilidad, detección y posible neutralización extraordinaria.
+- Las reglas nuevas tienen precedencia sobre cualquier mención anterior que deje abierta la posibilidad de trampas consumibles. Aún no están programadas en la web.
+
+## Actualización v1.9 · Activación de trampas (CONFIRMADO)
+
+- Las trampas siempre activas causan daño **cada vez que un Penitente entra** en su casilla.
+- Además, si un Penitente **inicia su turno** sobre una casilla con trampa, vuelve a sufrir el daño correspondiente antes de moverse.
+- Cada activación implica una nueva tirada del dado del tipo de trampa (`1d4`, `1d6` o `1d8`).
+- No se aplica daño por el solo hecho de terminar el turno en la casilla.
+- Los enemigos siguen siendo inmunes; ninguna activación consume ni desactiva la trampa.
+- Los detalles de detección, visibilidad y posibles efectos especiales aún no están fijados.
+- Esta regla prevalece sobre referencias anteriores que calificaban el daño por permanencia como pendiente.

@@ -1,6 +1,6 @@
 # DEUS ABSENS | Sistema de combate
 
-Estado: BORRADOR DE DISEÑO 0.2. No modificar las reglas oficiales sin aprobación.
+Estado: BORRADOR DE DISEÑO 0.3. No modificar las reglas oficiales sin aprobación.
 
 ## Decisiones expresadas por el creador
 
@@ -68,3 +68,91 @@ Los enemigos siguen el mismo orden de fases; el director decide su comportamient
 ## Ubicación prevista en el repositorio
 
 `docs/COMBATE_BORRADOR.md` (este archivo). No sobrescribir todavía `data/personajes.json`, `data/habilidades.json` ni código de combate.
+
+
+## Adiciones de diseño 0.3: coberturas, obstáculos y disparos (PROPUESTAS, NO APROBADAS)
+
+Estas reglas se ofrecen para pruebas y **no sustituyen** los acuerdos confirmados.
+
+### Clasificación de obstáculos
+
+| Tipo | Bonus a Defensa si protege del ataque | PV del obstáculo | Movimiento | Visión |
+|---|---:|---:|---|---|
+| Cobertura ligera | +1 | 4 | No atraviesa su casilla, salvo excepciones de escenario | No bloquea totalmente |
+| Cobertura pesada | +2 | 8 | No atraviesa su casilla | No bloquea totalmente |
+| Muro alto/obstáculo infranqueable | Ninguna tirada: bloquea el ataque | No destructible con ataques convencionales | Bloquea | Bloquea |
+
+- Coberturas no apilan bonos: tomar **solo el mayor** aplicable a cada ataque.
+- Se considera que una cobertura protege cuando se interpone en la trayectoria del ataque hacia el objetivo. El trazado preciso en esquinas o bordes está pendiente.
+- Los muros altos impiden atacar a través de ellos; no confundir +Defensa con bloqueo total de línea de visión.
+- Destruir cobertura: elegir el obstáculo como objetivo de una acción principal de ataque y aplicar el daño del arma contra sus PV; no daña de forma automática al personaje detrás.
+- No se ha aprobado todavía si los ataques contra obstáculos impactan automáticamente, si el Blindaje modifica el daño recibido por estructuras ni qué objetos obstaculizan el saqueo.
+
+### Tiradas de ataque (continúan como propuesta)
+
+- Tirada = 2d6 + ACERO (melee), CENIZA (armas a distancia) o DOGMA (efecto sobrenatural), salvo excepciones.
+- Defensa de prueba: 8 + CENIZA; cobertura ligera añade 1, pesada añade 2.
+- Daño: dados propios de cada arma y luego reducción por Blindaje; el Blindaje no da bonificación a la tirada de ataque.
+- 12 natural (6 y 6): crítico; propuesta de duplicar los **dados** de daño, no todos los modificadores.
+- 2 natural (1 y 1): fallo automático.
+- Ataque a Punto Débil: penalización provisional -2 a la tirada, efecto dependiente del enemigo.
+- Ejemplo: atacante con CENIZA +3 vs Defensa base 9. Sin cobertura: 26/36 = 72,2% de impacto; ligera (DEF 10): 21/36 = 58,3%; pesada (DEF 11): 15/36 = 41,7%. Muro alto: ataque bloqueado.
+
+### Reglas espaciales confirmadas pertinentes
+
+- Horizontal/vertical = 1 punto de movimiento por casilla. Diagonal = 2 puntos.
+- Un ataque cuerpo a cuerpo convencional alcanza una de las ocho casillas adyacentes, incluidas las diagonales.
+- Los obstáculos sólidos y muros bloquean recoger botín desde una casilla adyacente, tanto a Penitentes como enemigos.
+
+### Pendiente de decidir y probar
+
+1. Cómo se calcula exactamente la línea de visión en ángulos y esquinas; si es válida una línea que atraviesa dos esquinas bloqueadas.
+2. ¿Los obstáculos destructibles bloquean la recogida de botín al interponerse? Ya está confirmado que los obstáculos **sólidos** sí.
+3. ¿Un ataque dirigido a un obstáculo impacta automáticamente o requiere tirada?
+4. Si los disparos pueden atravesar varios obstáculos o si solo cuenta el mayor bono.
+5. Iniciativa, rango por arma, movimiento base (2 + CENIZA sigue provisional), acciones de cierre y manejo de estados.
+6. Probar el efecto de CENIZA sobre movimiento, Defensa y puntería; evitar que domine los otros atributos.
+7. Adaptar a 2d6 las fichas originales de Santa Magdalena, San Lorenzo y Ataques Precisos antes de programar.
+
+### Separación de datos y lógica
+
+- `data/obstaculos.json` contiene **arquetipos provisionales**, no reglas aprobadas.
+- En el futuro `data/zonas.json` indicará qué tipos y cantidades de obstáculos pueden generarse según la zona.
+- `assets/js/generador.js` construirá mapas y verificará conectividad.
+- `assets/js/tablero.js` dibujará el escenario y evaluará distancias/obstáculos.
+- No se ha modificado todavía la web ni el generador: estos son datos y documentación para revisión.
+
+
+## Actualización v1.7 · Obstáculos, trampas y muros (DECISIONES CONFIRMADAS)
+
+| Terreno | Penitentes | Enemigos |
+|---|---|---|
+| Libre | Coste normal | Coste normal |
+| Obstáculo transitable | Doble coste de movimiento | Coste normal |
+| Trampa | Daño variable según tipo, de 1d4 a 1d8 | Inmunes al efecto de trampa |
+| Muro | No se puede atravesar | No se puede atravesar |
+
+**Precedencia:** esta sección reemplaza cualquier indicación anterior que trate las coberturas/obstáculos transitables como casillas impasables. No cambia el bloqueo de paredes.
+
+- Movimiento normal confirmado: 1 punto ortogonal, 2 diagonal.
+- Ejemplo de cálculo **propuesto, pendiente de validar**: el multiplicador ×2 aplica al entrar en la casilla de obstáculo: coste 2 ortogonal o 4 diagonal; enemigos siempre pagan 1 o 2, respectivamente. No tratar el detalle de cálculo como definitivo.
+- Trampas: representar en el catálogo variantes de prueba 1d4, 1d6 y 1d8; ninguna debe infligir daño superior a 1d8 mediante su dado principal. La activación al entrar y al inicio de cada turno mientras se ocupa la casilla está **confirmada en v1.9**.
+- Las trampas no afectan a los enemigos; los muros sí les impiden el paso.
+- Los obstáculos transitables pueden ofrecer cobertura, pero el bono y la resistencia aún no están aprobados.
+- El sistema procedural deberá validar conectividad y coste de caminos, reservar posiciones iniciales y evitar encerrar a las unidades con muros.
+
+## Actualización v1.8 · Trampas perpetuamente activas (CONFIRMADO)
+
+- Las trampas **nunca se agotan tras activarse**. Siguen representando peligros permanentes de la casilla durante el encuentro.
+- Los Penitentes pueden sufrir daño de trampa según su tipo (`1d4`, `1d6` o `1d8`); los enemigos no lo sufren.
+- Su aspecto narrativo será sacro y tétrico: sangre ritual, agujas penitenciales, símbolos profanados y otros motivos semejantes.
+- **Actualizado en v1.9:** se confirmó daño al entrar y al inicio de cada turno mientras se permanezca en la casilla. No se aplican daños adicionales al mero final de turno.
+- Reglas de muros y obstáculos transitables de v1.7 siguen vigentes; los bonos de cobertura siguen en evaluación.
+
+## Actualización v1.9 · Momento del daño de trampas (CONFIRMADO)
+
+- **Entrada:** al pisar la casilla, todo Penitente recibe una tirada del dado de daño de la trampa (`1d4`, `1d6` o `1d8`).
+- **Inicio de turno:** si el Penitente empieza su turno sobre la casilla de trampa, recibe otra tirada de ese dado antes de su movimiento.
+- **Repetición:** se aplica de nuevo cada vez que entre o comience allí un turno. Nunca se agota la trampa.
+- **Enemigos:** inmunes a trampas en ambos casos. Los muros siguen bloqueando a todos.
+- **Sin daño adicional al final del turno** por el solo hecho de quedarse allí. Otros efectos y modos de desactivación extraordinaria siguen sin decidirse.

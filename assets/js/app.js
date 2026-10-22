@@ -3,6 +3,14 @@ import {cargarDatos} from './data.js';
 import {cargarEstado,guardarEstado} from './state.js';
 import {abrirModal,cerrarModal,avisar,escapar,mostrarError,mostrarSeccion,renderPersonajes,renderEnemigos,renderMesa,renderReliquias,textoFichaPersonaje,textoFichaEnemigo,getSheet,estadisticas} from './ui.js';
 const $=id=>document.getElementById(id);
+function cerrarPortada(destino='inicio'){
+ const gate=$('splashGate');
+ if(!gate||!gate.classList.contains('open')){mostrarSeccion(destino);return;}
+ gate.classList.add('closing');
+ gate.classList.remove('open');
+ gate.setAttribute('aria-hidden','true');
+ setTimeout(()=>mostrarSeccion(destino),180);
+}
 async function iniciar(){
  const data=await cargarDatos();const {characters,enemies,items,abilities,equipment}=data;
  const state=cargarEstado(items);
@@ -65,7 +73,8 @@ async function iniciar(){
   persist();
  }
  document.addEventListener('click',event=>{
-  const t=event.target.closest('[data-goto],[data-section],[data-action]');if(!t)return;
+  const t=event.target.closest('[data-enter-app],[data-goto],[data-section],[data-action]');if(!t)return;
+  if(t.dataset.enterApp){event.preventDefault();cerrarPortada(t.dataset.enterApp);return}
   if(t.dataset.goto){event.preventDefault();mostrarSeccion(t.dataset.goto);return}
   if(t.dataset.section){mostrarSeccion(t.dataset.section);return}
   const a=t.dataset.action,id=t.dataset.id;

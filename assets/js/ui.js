@@ -33,7 +33,7 @@ export function renderPersonajes(chars,state,abilities=[],equipment=[]){
   const q=$('characterSearch').value.toLowerCase().trim(),filter=$('characterFilter').value;
   const shown=chars.filter(c=>{
     const locked=c.secret&&!state.unlockedSaints.includes(c.id);
-    const match=[c.name,c.sin,c.role,c.desc,byId[c.passiveId]?.name,byId[c.martyrId]?.name].join(' ').toLowerCase().includes(q);
+    const match=[c.name,c.sin,c.role,c.desc,c.titulo,c.trasfondo,byId[c.passiveId]?.name,byId[c.martyrId]?.name].join(' ').toLowerCase().includes(q);
     return match && (filter==='all'||(filter==='available'&&!locked)||(filter==='locked'&&locked)||(filter==='chosen'&&state.chosen===c.id));
   });
   $('characterGrid').innerHTML=shown.map(c=>{
@@ -64,14 +64,23 @@ export function renderPersonajes(chars,state,abilities=[],equipment=[]){
 }
 export function textoFichaPersonaje(c,abilities,equipment,state){
   const dict=Object.fromEntries(abilities.map(a=>[a.id,a]));const gear=Object.fromEntries(equipment.map(g=>[g.id,g]));
-  const p=dict[c.passiveId],m=dict[c.martyrId],sh=getSheet(state,c.id,m);
-  return `<div class="detail-sheet"><p>${escapar(c.desc)}</p><div class="stats"><span class="stat">Pecado: ${escapar(c.sin)}</span><span class="stat">Clase: ${escapar(c.role)}</span></div>
+  const p=dict[c.passiveId]??c.pasiva,m=dict[c.martyrId]??c.martirio,sh=getSheet(state,c.id,m);
+  const historia=Array.isArray(c.narrativa?.parrafos)?c.narrativa.parrafos:[c.trasfondo||c.desc];
+  const historiaHTML=historia.filter(Boolean).map(parrafo=>`<p class="lore-paragraph">${escapar(parrafo)}</p>`).join('');
+  return `<div class="detail-sheet">
+    <div class="lore-block">
+      <div class="kicker">Crónica del Penitente · ${escapar(c.titulo||c.sin)}</div>
+      ${c.narrativa?.lema?`<p class="lore-quote">«${escapar(c.narrativa.lema)}»</p>`:''}
+      ${historiaHTML}
+    </div>
+    <div class="stats"><span class="stat">Pecado: ${escapar(c.sin)}</span><span class="stat">Clase: ${escapar(c.rolCompleto||c.role)}</span></div>
     <h4>Atributos sugeridos</h4><p>${(c.suggestedAttributes||[]).map(escapar).join(' y ')}</p>
-    <h4>Equipo inicial</h4>${(c.equipmentIds||[]).map(id=>{const g=gear[id];return g?`<p><strong>${escapar(g.name)}</strong> (${escapar(g.damage)}). ${escapar(g.effect)}</p>`:''}).join('')}
-    <h4>Pasiva · ${escapar(p?.name)}</h4><p>${escapar(p?.description)}</p>
-    <h4>Martirio · ${escapar(m?.name)}</h4><p>${escapar(m?.description)}</p>
+    <h4>Equipo inicial</h4>${(c.equipmentIds||[]).map(id=>{const g=gear[id];return g?`<p><strong>${escapar(g.name)}</strong> (${escapar(g.damage||'sin daño')}). ${escapar(g.effect)}</p>`:''}).join('')}
+    <h4>Pasiva · ${escapar(p?.name||p?.nombre)}</h4><p>${escapar(p?.description||p?.descripcion)}</p>
+    <h4>Martirio · ${escapar(m?.name||m?.nombre)}</h4><p>${escapar(m?.description||m?.descripcion)}</p>
     <p><strong>Cargas:</strong> ${sh.charges}/${sh.max} ${m?.maxCharges==null?'(capacidad temporal de prueba)':''} · restauración completa al iniciar una nueva expedición.</p>
-    <p class="muted fine-print">Los efectos de esta ficha están pendientes de revisión de balance y algunas referencias a d20 aún deben adaptarse al sistema 2d6.</p></div>`;
+    <p class="muted fine-print">Los efectos mecánicos todavía están pendientes de balance. Algunas referencias originales a d20 necesitan adaptación a 2d6.</p>
+  </div>`;
 }
 export function renderEnemigos(enemies){
   const q=$('enemySearch').value.toLowerCase().trim(),filter=$('enemyFilter').value;

@@ -33,3 +33,23 @@ Este documento separa acuerdos reales de funcionalidades pendientes.
 - Los cuatro catálogos nuevos están vacíos y sus rutas son estables.
 - No existen aún contador interactivo de martirio integrado, códigos de progreso ni legado mixto operativo.
 - El guardado previo `deusAbsensState` se mantiene para no romper el prototipo; su migración se hará cuando el sistema definitivo esté diseñado.
+
+## Combate táctico y tableros (acuerdos posteriores)
+- Tablero físico de **10 × 10** para un grupo previsto de **4 jugadores**; tablero de **15 × 15** para un máximo de **6 jugadores**. El director es independiente del cupo de jugadores.
+- Movimiento horizontal/vertical: **1 punto** por casilla. Movimiento diagonal: **2 puntos** por casilla.
+- Ataque cuerpo a cuerpo convencional: cualquiera de las **8 casillas adyacentes**, diagonales incluidas (interacción con obstáculos pendiente).
+- Turno: inicio → movimiento → acción principal de ataque u objeto activo → acción de cierre únicamente si una habilidad u objeto la habilita.
+- El sistema de resolución **2d6** interesa al creador, pero fórmulas numéricas y balance siguen en desarrollo.
+
+## Expediciones y generación por zonas (acuerdos posteriores)
+- Expediciones variables: el director decide rutas, zonas, objetivos y extensión.
+- No hay selector de dificultad. La zona guía composición y complejidad de encuentros.
+- Enemigos pueden aparecer fuera de su zona de origen; la frecuencia y cantidad dependen de pesos y límites configurables por zona.
+- Obstáculos y encuentros tendrán generación procedural, sujeto a validación del tablero.
+
+## Narrativa del director y consecuencias (acuerdo posterior)
+- La narración y las decisiones se manejan **libremente por el director, al margen de la aplicación**; no se requiere generador automático de historias.
+- La web administrará **recompensas, penalizaciones y otros efectos** aplicables directamente a las fichas individuales, antes o durante los combates.
+- Si el director autoriza botín aleatorio, una **ruleta de objetos** permitirá sortear premios e incorporarlos al inventario. Ejemplo del creador: una decisión favorable concede **dos objetos** antes del combate; no implica que toda escena dé siempre dos.
+- Ganar un objeto durante una expedición y desbloquearlo de forma permanente son registros separados.
+- Mecánicas, probabilidades, cantidades y duraciones específicas de la ruleta y los efectos aún no están implementadas ni balanceadas. Véase `docs/NARRATIVA_RECOMPENSAS.md`.

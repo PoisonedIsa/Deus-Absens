@@ -1,7 +1,7 @@
 {
-  "schemaVersion": 4,
-  "estado": "trampas_confirmadas_activacion_por_entrada_y_permanencia_otros_detalles_pendientes",
-  "descripcion": "Catálogo de terreno. Trampas perpetuas: dañan a los Penitentes al entrar y de nuevo al inicio de cada turno que permanezcan sobre ellas. No afectan a enemigos. Nombres narrativos provisionales.",
+  "schemaVersion": 5,
+  "estado": "trampas_confirmadas_visibles_y_ocultas_deteccion_pendiente",
+  "descripcion": "Terreno del combate. Las trampas pueden ser visibles u ocultas; todas son perpetuas y dañan al entrar y al comienzo de cada turno que un Penitente permanece en ellas. Los enemigos son inmunes.",
   "reglasConfirmadas": {
     "movimientoNormal": {
       "ortogonal": 1,
@@ -18,15 +18,21 @@
     "trampasNoSeConsumenAlActivarse": true,
     "trampasDananAlEntrar": true,
     "trampasDananAlInicioDeTurnoSiPermanece": true,
-    "trampasNoDananEnemigos": true
+    "trampasNoDananEnemigos": true,
+    "trampasVisiblesYOcultas": true,
+    "trampasOcultasNoSeRevelanAutomaticamenteAlJugador": true
   },
   "propuestasPendientes": {
     "costeAlEntrarCasilla": true,
     "aplicarMultiplicadorSobreDiagonal": true,
-    "trampaVisible": null,
     "bonosCobertura": null,
     "resistenciaEstructural": null,
-    "trampaDesactivablePorAccionesEspeciales": null
+    "trampaDesactivablePorAccionesEspeciales": null,
+    "reglasDeteccionTrampasOcultas": null,
+    "atributoDeteccion": null,
+    "dificultadDeteccion": null,
+    "revelacionDespuesDeActivacion": null,
+    "puedeVerLaTrampaOcultaElDirector": null
   },
   "terrenos": [
     {
@@ -61,7 +67,14 @@
         "al_entrar_en_casilla",
         "al_inicio_del_turno_si_ocupa_casilla"
       ],
-      "tiradasPorActivacion": 1
+      "tiradasPorActivacion": 1,
+      "visibilidadPosible": [
+        "visible",
+        "oculta"
+      ],
+      "visibilidadPorInstancia": true,
+      "visibilidadPredeterminada": null,
+      "revelacionAutomatica": null
     },
     {
       "id": "trampa_intermedia",
@@ -83,7 +96,14 @@
         "al_entrar_en_casilla",
         "al_inicio_del_turno_si_ocupa_casilla"
       ],
-      "tiradasPorActivacion": 1
+      "tiradasPorActivacion": 1,
+      "visibilidadPosible": [
+        "visible",
+        "oculta"
+      ],
+      "visibilidadPorInstancia": true,
+      "visibilidadPredeterminada": null,
+      "revelacionAutomatica": null
     },
     {
       "id": "trampa_mayor",
@@ -105,7 +125,14 @@
         "al_entrar_en_casilla",
         "al_inicio_del_turno_si_ocupa_casilla"
       ],
-      "tiradasPorActivacion": 1
+      "tiradasPorActivacion": 1,
+      "visibilidadPosible": [
+        "visible",
+        "oculta"
+      ],
+      "visibilidadPorInstancia": true,
+      "visibilidadPredeterminada": null,
+      "revelacionAutomatica": null
     },
     {
       "id": "muro",

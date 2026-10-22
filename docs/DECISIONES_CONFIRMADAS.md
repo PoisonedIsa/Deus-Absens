@@ -131,3 +131,12 @@ Este documento separa acuerdos reales de funcionalidades pendientes.
 - **Detectar no desactiva:** las trampas descubiertas siguen siendo permanentes, dañan al entrar y al inicio de cada turno si se permanece en su casilla. Los enemigos son inmunes.
 - **Propuesta aún no aprobada:** `2d6 + CENIZA` para trampas físicas, `2d6 + DOGMA` para trampas rituales. No se asignaron números de dificultad, radios ni probabilidades.
 - Este acuerdo está **documentado, no programado** en el manual ni en el generador.
+
+
+## Actualización v2.2 · Dados de ataque (CONFIRMADO)
+
+- Se confirma **2d6 como núcleo de las tiradas de ataque** de DEUS ABSENS.
+- Los dados de daño previstos para las armas y las trampas permanecen por ahora independientes de los dados de ataque.
+- **Aún no confirmado:** valor base de Defensa, fórmula exacta de ataque, frecuencia y efecto de críticos, tratamiento de dobles 1, penalización a Ataques Precisos, modificación de las habilidades originales para 2d6.
+- Ninguna regla numérica provisional en `docs/COMBATE_BORRADOR.md` debe tratarse como definitiva sin la aprobación del creador.
+- No se han cambiado los archivos JSON de personajes ni la lógica de juego en JavaScript.

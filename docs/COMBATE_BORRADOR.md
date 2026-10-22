@@ -168,3 +168,40 @@ Los mapas incluyen una mezcla de trampas visibles y ocultas. Su visibilidad no c
 - Detectar una trampa no la neutraliza: sigue activándose al entrar y al iniciar un turno sobre ella.
 - Propuesta pendiente de aprobación: `2d6 + CENIZA` para peligros mecánicos y `2d6 + DOGMA` para peligros rituales.
 - Las trampas no reveladas se mantienen ocultas al jugador y conocidas por el director.
+
+
+## Actualización v2.2 · Elección del dado central (CONFIRMADO)
+
+- El creador ha confirmado avanzar con **2d6 como sistema central para las tiradas de ataque**.
+- Esta aprobación **no equivale** a aprobar automáticamente la fórmula completa de bonificaciones, los valores de Defensa, los críticos ni el Ataque Preciso. Estos requieren pruebas de equilibrio.
+- Los dados de **daño** propios de las armas (d4, d6, d8, d10, d12) se mantienen de momento, al igual que el daño de trampas (d4 a d8).
+- Propuesta a probar: `2d6 + atributo aplicable + modificadores >= Defensa`. Para cuerpo a cuerpo se propone ACERO; disparos, CENIZA; milagros, DOGMA; SANGRE conserva su papel en PV y resistencia.
+- **Defensa experimental:** `8 + CENIZA`, no aprobada. Los ataques igualan o superan la Defensa; un muro completo impide atacar aunque la tirada sea suficiente.
+- **Crítico experimental:** 6+6 natural (2,78 % de las tiradas) duplica dados de daño del ataque, sin duplicar modificadores fijos.
+- **Fallo experimental:** 1+1 natural (2,78 %) falla siempre.
+- **Ataque preciso experimental:** modificador -2; los efectos sobre Puntos Débiles se definirán por enemigo.
+- En la resolución propuesta, tras impactar se tira el daño del arma, se aplican bonos y se resta el Blindaje, con un mínimo de 0 daño. Orden y límites aún sujetos a prueba.
+
+### Tabla de pruebas exactas, Defensa 9 sin cobertura
+
+| Modificador total de ataque | Se requiere en 2d6 | Tiradas favorables de 36 | Probabilidad |
+|---:|---:|---:|---:|
+| +0 | 9 o más | 10 | 27,78 % |
+| +1 | 8 o más | 15 | 41,67 % |
+| +2 | 7 o más | 21 | 58,33 % |
+| +3 | 6 o más | 26 | 72,22 % |
+
+Las probabilidades incluyen dobles 1 y 6: el doble 1 no llegaría a Defensa 9 con modificadores +0 a +3, y el doble 6 siempre acertaría.
+
+### Compatibilidad obligatoria con las diez fichas (PENDIENTE)
+
+1. Santa Magdalena: umbral 15 en el dado de ataque debe reinterpretarse, pues 2d6 natural no supera 12.
+2. San Lorenzo: reemplazar la manipulación de 20 o 1 natural por una regla apropiada para dos dados; no asumir equivalencia en poder.
+3. San Longinos y Santa Lucía: sus referencias a penalización de -3 en Ataques Precisos deben adaptarse solo cuando aprobemos el coste.
+4. Revisar efectos que garantizan críticos e impactos, especialmente sobre jefes.
+5. CENIZA podría dominar al afectar puntería, Defensa y movimiento; evaluar alternativas antes de fijar la Defensa.
+6. No modificar todavía los valores de armas, daño, cargas de martirio ni datos del juego.
+
+### Próxima decisión
+
+Definir **Defensa base** y progresión por CENIZA, luego fijar críticos y Ataques Precisos tras pruebas.

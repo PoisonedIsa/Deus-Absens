@@ -70,3 +70,19 @@ button.small{background:transparent;border:1px solid var(--line);color:var(--ink
 /* Mensaje visible en caso de fallo al cargar los catálogos */
 .app-status{max-width:1180px;margin:16px auto;padding:16px 24px;border:1px solid var(--red);background:var(--panel);color:var(--ink)}
 .app-status[hidden]{display:none}
+
+/* DEUS ABSENS v2.8 · fichas jugables y mesa del director */
+.sheet-panel{background:linear-gradient(155deg,#241b22,#151116);border:1px solid #836247;padding:22px 25px;margin-bottom:23px;box-shadow:0 12px 28px #0004}
+.sheet-header{display:flex;gap:16px;align-items:flex-start;justify-content:space-between}.sheet-header h3{font-size:26px;margin:5px 0}.sheet-header p{color:var(--muted);margin:0 0 13px}
+.attributes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:12px 0}
+.attribute{background:#100e12;border:1px solid var(--line);padding:9px;display:flex;align-items:center;flex-direction:column;gap:2px}.attribute small{font:10px Cinzel,serif;color:var(--muted)}.attribute strong{font:26px Cinzel,serif;color:var(--gold)}
+.sheet-stats{gap:8px;margin:13px 0}.sheet-stats .stat{font-size:16px}
+.martyr-block{border-top:1px solid var(--line);padding:12px 0}.martyr-block p{margin:6px 0}
+.martyr-count{color:var(--gold)}.fine-print{font-size:14px!important;line-height:1.45}.muted{color:var(--muted)!important}
+.character-card,.enemy-card{min-height:0}.character-card p,.enemy-card p{font-size:16px;line-height:1.45}
+.attribute-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:16px 0}
+.attribute-form label{display:grid;gap:6px;font-family:Cinzel,serif;font-size:12px;color:var(--gold)}
+.attribute-form select{background:#100e12;color:var(--ink);border:1px solid var(--line);padding:10px;font:18px Georgia,serif}
+.detail-sheet h4{font:14px Cinzel,serif;color:var(--gold);margin:18px 0 7px}.detail-sheet p{margin:6px 0 11px;line-height:1.5}
+.modal{width:min(720px,100%)}.encounter-card{min-height:0}.encounter-card small{font-family:Georgia,serif;color:var(--muted);font-size:13px}
+@media(max-width:560px){.attributes{grid-template-columns:repeat(2,minmax(0,1fr))}.sheet-header{flex-wrap:wrap}.sheet-panel{padding:16px}.attribute-form{grid-template-columns:1fr}}

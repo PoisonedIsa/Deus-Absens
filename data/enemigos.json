@@ -1,0 +1,56 @@
+[
+  {
+    "name": "Serafín de Ceniza",
+    "type": "Celestial",
+    "threat": "Élite",
+    "icon": "✧",
+    "desc": "Un ángel cuya aureola se ha convertido en una corona de brasas. Castiga a quienes se esconden tras la fe.",
+    "ability": "Juicio radiante: marca a un objetivo; la siguiente herida contra él es más grave.",
+    "id": "serafin-ceniza"
+  },
+  {
+    "name": "Querubín Desollado",
+    "type": "Celestial",
+    "threat": "Hostigador",
+    "icon": "☼",
+    "desc": "Un mensajero mutilado que repite órdenes de un dios que ya no escucha.",
+    "ability": "Coro roto: obliga al grupo a separarse o sufrir una consecuencia.",
+    "id": "querubin-desollado"
+  },
+  {
+    "name": "Deudor de Sal",
+    "type": "Infernal",
+    "threat": "Común",
+    "icon": "♆",
+    "desc": "Una figura humana cubierta de sal y contratos. Cobra con recuerdos aquello que no se le paga.",
+    "ability": "Cobro pendiente: roba un recurso temporal si alcanza a su presa.",
+    "id": "deudor-sal"
+  },
+  {
+    "name": "La Novia del Foso",
+    "type": "Infernal",
+    "threat": "Élite",
+    "icon": "♛",
+    "desc": "Una criatura vestida con velos de piel, seguida por voces que llaman a sus seres queridos.",
+    "ability": "Votos de hambre: obliga a escoger entre perder salud o abandonar un objeto.",
+    "id": "novia-foso"
+  },
+  {
+    "name": "Perro de la Puerta",
+    "type": "Umbral",
+    "threat": "Común",
+    "icon": "☠",
+    "desc": "Tiene demasiadas articulaciones y un rostro que cambia según quién lo mire.",
+    "ability": "Rastreo imposible: encuentra al personaje que más intenta ocultarse.",
+    "id": "perro-puerta"
+  },
+  {
+    "name": "El Hueco que Reza",
+    "type": "Umbral",
+    "threat": "Jefe",
+    "icon": "◌",
+    "desc": "Una ausencia con forma humana. Su plegaria se oye dentro de los huesos.",
+    "ability": "Silencio absoluto: durante un instante, ninguna habilidad sobrenatural funciona.",
+    "id": "hueco-que-reza"
+  }
+]

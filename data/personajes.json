@@ -1,0 +1,92 @@
+[
+  {
+    "id": "penitente",
+    "name": "El Penitente",
+    "role": "Vanguardia",
+    "icon": "†",
+    "tags": [
+      "Resistencia",
+      "Cuerpo a cuerpo"
+    ],
+    "hp": 8,
+    "skill": "Última absolución",
+    "desc": "Convierte el dolor en fuerza. Cuanto más cerca está de caer, más peligroso se vuelve.",
+    "evolution": "El Mártir Vacío",
+    "evoDesc": "Su herida deja de sangrar. Una vez por expedición, sobrevive a un golpe que lo habría derrotado y devuelve parte del daño."
+  },
+  {
+    "id": "hereje",
+    "name": "La Hereje",
+    "role": "Ocultista",
+    "icon": "☽",
+    "tags": [
+      "Rituales",
+      "Control"
+    ],
+    "hp": 5,
+    "skill": "Salmo invertido",
+    "desc": "Pronuncia fragmentos de una lengua anterior a los ángeles. Cada palabra exige un precio.",
+    "evolution": "La Voz del Abismo",
+    "evoDesc": "Puede alterar un resultado adverso, pero debe aceptar una consecuencia oscura elegida por el director."
+  },
+  {
+    "id": "reliquario",
+    "name": "El Reliquario",
+    "role": "Explorador",
+    "icon": "⚿",
+    "tags": [
+      "Hallazgos",
+      "Apoyo"
+    ],
+    "hp": 6,
+    "skill": "Manos profanas",
+    "desc": "Abre cerraduras sagradas y reconoce objetos que deberían haber permanecido enterrados.",
+    "evolution": "El Santo Ladrón",
+    "evoDesc": "Una vez por expedición, convierte un hallazgo común en una reliquia útil para todo el grupo."
+  },
+  {
+    "id": "desertor",
+    "name": "El Desertor",
+    "role": "Tirador",
+    "icon": "➶",
+    "tags": [
+      "Distancia",
+      "Precisión"
+    ],
+    "hp": 6,
+    "skill": "Plomo bendito",
+    "desc": "Un antiguo soldado celestial que recuerda cómo sangran los seres de luz.",
+    "evolution": "El Ángel Caído",
+    "evoDesc": "Sus disparos atraviesan protecciones celestiales; cada uso deja una marca visible que atrae la atención del Cielo."
+  },
+  {
+    "id": "oraculo",
+    "name": "La Oráculo Ciega",
+    "role": "Vidente",
+    "icon": "◉",
+    "tags": [
+      "Visiones",
+      "Destino"
+    ],
+    "hp": 5,
+    "skill": "Ver la herida",
+    "desc": "No ve el futuro: ve las grietas por las que el futuro intenta entrar.",
+    "evolution": "La Última Profeta",
+    "evoDesc": "Puede hacer una pregunta sobre una amenaza y recibir una verdad útil, aunque incompleta, antes del enfrentamiento."
+  },
+  {
+    "id": "carcelero",
+    "name": "El Carcelero",
+    "role": "Control",
+    "icon": "⛓",
+    "tags": [
+      "Cadenas",
+      "Protección"
+    ],
+    "hp": 7,
+    "skill": "Pacto de hierro",
+    "desc": "Lleva las llaves de una prisión que ya no existe. Algunas cerraduras siguen respondiendo.",
+    "evolution": "El Guardián del Umbral",
+    "evoDesc": "Puede inmovilizar brevemente a una criatura sobrenatural, pero debe sacrificar un recurso o aceptar una herida."
+  }
+]

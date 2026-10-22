@@ -161,3 +161,12 @@ Este documento separa acuerdos reales de funcionalidades pendientes.
 - El movimiento propio de cada enemigo se establecerá en sus estadísticas.
 - **Aún no confirmado:** coste exacto de entrar diagonalmente a obstáculos transitables, modificadores, atravesar esquinas y unidades.
 - Este cambio aún no está programado en la web.
+
+
+## Actualización v2.5 · Movimiento propio por tipo de enemigo (CONFIRMADO)
+
+- Cada tipo de enemigo posee **puntos de movimiento propios y fijos** en su ficha, independientes de CENIZA.
+- No se les aplica `2 + CENIZA`, fórmula reservada a los Penitentes.
+- Enemigos: movimiento horizontal/vertical cuesta 1; diagonal cuesta 2; los obstáculos transitables no penalizan; las trampas no dañan; los muros bloquean.
+- Los números específicos y cualquier patrón especial de movimiento se decidirán al diseñar el bestiario.
+- Pendiente de implementación en `data/enemigos.json` y el futuro motor de combate; **ningún JSON ni archivo JS se modifica en esta versión**.

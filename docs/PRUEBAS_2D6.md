@@ -59,3 +59,11 @@ La probabilidad del cuadro anterior corresponde a un **objetivo fijo con Defensa
 | +3 | 5 | 5 | 2 |
 
 El coste ortogonal es 1 y el diagonal 2. Esta tabla no incluye obstáculos ni modificaciones por estados. Pruebas pendientes: rutas mixtas con obstáculos, balance de CENIZA como atributo de precisión/Defensa/movimiento y esquinas bloqueadas.
+
+
+## Consideraciones de movilidad enemiga (v2.5)
+
+- Las criaturas tendrán **movimiento fijo por tipo**, no derivado de CENIZA.
+- Al probar encuentros en tablero 10×10 o 15×15, medir si cada criatura alcanza una posición útil dentro de un número razonable de turnos.
+- Evaluar obstáculos transitables (sin sobrecoste para enemigos), trampas (sin daño) y muros (bloquean).
+- No hay cifras oficiales de movimiento por enemigo; asignarlas después de revisar sus fichas.

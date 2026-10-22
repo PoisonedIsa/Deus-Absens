@@ -228,3 +228,27 @@ Definir **Defensa base** y progresión por CENIZA, luego fijar críticos y Ataqu
 - El valor de movimiento de cada **enemigo** se definirá individualmente en el bestiario; la fórmula confirmada `2 + CENIZA` corresponde a los Penitentes.
 - Pendientes: modificadores por equipo y estados, ocupación de casillas, atravesar esquinas bloqueadas y coste diagonal sobre obstáculo transitable.
 - Esta actualización es solo documental; **no implementa** movimiento en la web.
+
+
+## Actualización v2.5 · Movimiento individual de enemigos (CONFIRMADO)
+
+- Cada **tipo de enemigo** tiene una cantidad propia y fija de **puntos de movimiento por turno**, registrada en su ficha del bestiario.
+- Su movimiento **no se calcula a partir de CENIZA**, ni mediante la fórmula `2 + CENIZA` de los Penitentes.
+- Se mantienen los costes generales del tablero: **1 punto horizontal/vertical**, **2 puntos diagonal**. Los **muros** no pueden atravesarse.
+- Los **obstáculos transitables** no aumentan el coste para los enemigos y las **trampas** no les causan daño.
+- Las fichas futuras podrán definir comportamientos o habilidades especiales de desplazamiento, sin alterar la regla general.
+- Los valores exactos de cada enemigo están **pendientes de elaborar el bestiario**; no asignar cifras arbitrarias a criaturas provisionales.
+- Esta regla es documental: no hay todavía motor de movimiento implementado en JavaScript.
+
+### Contrato de datos previsto (sin cambiar los JSON actuales)
+
+En cada registro de `data/enemigos.json` se añadirá `movimiento: número` (entero no negativo), que describe **puntos por turno**, no número fijo de casillas: 
+
+```json
+{
+  "id": "enemigo_de_ejemplo",
+  "movimiento": 3
+}
+```
+
+El ejemplo anterior **no es un enemigo añadido** ni asigna el valor 3 a ningún enemigo existente. Se actualizará el catálogo cuando se aprueben las fichas definitivas.

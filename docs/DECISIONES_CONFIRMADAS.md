@@ -193,3 +193,12 @@ Este documento separa acuerdos reales de funcionalidades pendientes.
 - Existen categorías de mejoras **personales** y **globales**. Por ahora no se aprueban costes, efectos o compras.
 - Se mantiene la regla de conservar la mitad de los Ecos tras una expedición. **No se ha definido la bolsa que pierde Ecos, ni el redondeo en cantidades impares; no implementar un cierre automático aún**.
 - Los códigos v6.5 NO se autentican digitalmente y los bloqueos funcionan solo con datos locales. Véase `docs/LEGADO_ECOS_CODIGOS_V6_5.md`.
+
+## Actualización v6.6 · Ecos y mejoras (CONFIRMADO)
+
+- **Ecos por daño:** al derrotar a un enemigo, cada Penitente que le haya causado daño gana **la recompensa completa** de ese enemigo. No exige golpe final; no se reparte entre participantes.
+- **Mejoras personales persistentes:** toda mejora adquirida con Ecos queda vinculada al jugador y perdura entre expediciones. Orientación: desbloqueos de objetos y ventajas universales pequeñas; no son mejoras globales de compra.
+- **Cierre:** se conserva `floor(0.60 × Ecos obtenidos durante la expedición)` y se añade a la reserva personal, que no se reduce.
+- **Sin fijar:** Ecos por enemigo, definición exacta de daño elegible, costes y efectos de mejoras, y tratamiento de posibles gastos durante la expedición.
+- **Precedencia:** sustituye los borradores de 50 % de retención y mejoras globales comprables; los desbloqueos de campaña que gestiona el director siguen siendo distintos de las mejoras personales.
+- **Implementación:** solo documentado. El código de la v6.5 aún no automatiza este reparto ni este cierre.

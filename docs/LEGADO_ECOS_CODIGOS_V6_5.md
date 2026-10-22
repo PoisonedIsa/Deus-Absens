@@ -1,3 +1,6 @@
+
+> **Actualización de diseño v6.6:** las decisiones económicas posteriores sustituyen parte de este documento técnico de v6.5. Las recompensas de enemigos se otorgan completas a cada Penitente que les haya causado daño; las mejoras compradas son exclusivamente personales y permanentes; al cerrar una expedición se transfiere `floor(0.60 × Ecos obtenidos)` a la reserva sin reducir la reserva previa. Consulta `docs/ECOS_Y_MEJORAS_V6_6.md`. Las menciones en este documento a compras de mejoras globales o a conservar el 50 % describen el estado **anterior**, no una regla vigente. La interfaz y el código de v6.5 aún no implementan automáticamente las nuevas reglas.
+
 # DEUS ABSENS · Ecos, mejoras y códigos v6.5
 
 **Estado del módulo: estructura funcional / economía en diseño.** La implementación v6.5 añade menús, almacenamiento y transferencia de datos, pero **no inventa costes ni bonos**.

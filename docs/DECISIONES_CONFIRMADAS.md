@@ -202,3 +202,15 @@ Este documento separa acuerdos reales de funcionalidades pendientes.
 - **Sin fijar:** Ecos por enemigo, definición exacta de daño elegible, costes y efectos de mejoras, y tratamiento de posibles gastos durante la expedición.
 - **Precedencia:** sustituye los borradores de 50 % de retención y mejoras globales comprables; los desbloqueos de campaña que gestiona el director siguen siendo distintos de las mejoras personales.
 - **Implementación:** solo documentado. El código de la v6.5 aún no automatiza este reparto ni este cierre.
+
+## Actualización v6.8 · Primer bloque del combate piloto (CONFIRMADO)
+
+1. **Iniciativa individual:** cada combatiente tira `2d6 + CENIZA` para establecer su orden de actuación. Es iniciativa individual, no alternancia de bandos.
+2. **Obstáculos bajos:** proporcionan `+1 a la Defensa` **cuando protegen claramente al objetivo** frente al ataque considerado. Obstáculos opacos y muros bloquean los ataques que requieren línea de visión; un obstáculo bajo no bloquea por sí solo la visión. No está aprobado un bono de cobertura pesada de +2.
+3. **Ataques enemigos:** cada ataque enemigo se resuelve con `2d6 + bono de ataque indicado en la ficha del ataque`, contra la Defensa del objetivo. No se atribuyen a los enemigos ACERO/DOGMA para atacar por defecto.
+
+**Aclaración clave:** el *bono de ataque* y la *CENIZA para iniciativa* son parámetros distintos. Aunque los enemigos tienen movimiento propio fijo (independiente de CENIZA), su atributo de CENIZA para iniciativa aún no existe en `data/enemigos.json`. En el escenario de entrenamiento se propone CENIZA +0 **solo como dato provisional de prueba**, NO como regla oficial de todos los enemigos.
+
+**Pendientes de iniciativa:** momento de la tirada (inicio de encuentro o cada ronda), cómo resolver empates y cómo asignar CENIZA a los enemigos. No se convierten estas propuestas en reglas definitivas sin confirmación.
+
+**Estado técnico:** en esta v6.8 solo se actualiza la documentación; la web no implementa todavía tiradas ni el orden de iniciativa. Los datos existentes no se modifican.

@@ -76,3 +76,14 @@ Ambas modalidades coexisten y se aplican únicamente a trampas ocultas:
 5. **Propuesta de prueba, aún NO aprobada:** resolver ambas detecciones con `2d6 + CENIZA` en trampas mecánicas y `2d6 + DOGMA` en las rituales. La búsqueda activa tendría un umbral menor o una bonificación respecto de la pasiva.
 
 **Pendiente de definir:** radio, momento o frecuencia de detección pasiva, dificultades, revelación tras activar una trampa y reglas sobre información compartida con el grupo. Por ahora ninguna de estas cuestiones tiene un número fijo ni una resolución automática implementada.
+
+## Actualización v6.8 · Cobertura baja (CONFIRMADO, tiene prioridad sobre propuestas anteriores)
+
+- Un **obstáculo bajo** concede **+1 a la Defensa** del objetivo **si lo protege claramente** del ataque específico.
+- Si no se interpone para protegerlo, el objetivo no recibe ese +1.
+- Un obstáculo bajo **no bloquea la línea de visión** por sí mismo.
+- Un **muro o barrera opaca** bloquea la línea de visión para ataques que la necesitan, en lugar de conceder un bono de Defensa.
+- **No están confirmadas** la cobertura pesada +2, la acumulación de varias coberturas, los PV de obstáculos ni sus reglas de destrucción.
+- Durante la prueba inicial no hay obstáculos; se añade una comparación de cobertura en una segunda pasada.
+
+Esta actualización sustituye el texto histórico «coberturas aún por balancear» **solo en lo referente al +1 por obstáculo bajo**. El resto de propuestas permanece sin aprobar.

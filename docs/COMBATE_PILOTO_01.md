@@ -1,53 +1,97 @@
-# DEUS ABSENS | Primera batalla de prueba · Escenario 01
+# DEUS ABSENS | Combate piloto 01 · San Longinos vs. Deudor de Sal
 
-**Estado: GUÍA DE PRUEBA, NO CONTENIDO FINAL.** El director no tiene que automatizar movimiento ni enemigos. Objetivo: comprobar fluidez de 2d6, Defensa, Blindaje, fases del turno, daño y controles manuales.
+**Versión de preparación v6.8 · GUÍA DE PRUEBA, NO BALANCE FINAL**
 
-## Participantes propuestos (datos reales del prototipo)
+**Objetivo:** comprobar que el ciclo básico de combate es claro, cuánto dura un enfrentamiento 1 contra 1 y qué incidencias surgen con iniciativa, Defensa, críticos y estados iniciales. No introduce IA enemiga, cálculo de rutas ni automatización.
 
-- **Penitente:** San Longinos. Ficha editable en `data/personajes.json`; usa atributos repartidos con +3, +2, +1, +0 según elección del jugador. Sus valores derivados provienen de esa elección; NO se asignan automáticamente aquí.
-- **Arma de Longinos:** Lanza de Trinchera «Gólgota», daño **1d10**. Su alcance extendido todavía necesita decisión; para esta prueba se utiliza únicamente un blanco **adyacente** y no se presume un alcance final. Pistola de Clavos: **1d6** a distancia, alcance exacto aún sin aprobar.
-- **Enemigo de entrenamiento:** Deudor de Sal, **14 PV, Defensa 8, Blindaje 0, Movimiento 3**. Ataque «Cobro de sal»: 1d6, 1 ataque, bono listado +0, alcance listado 1. Estos números están marcados **PROVISIONALES** en `data/enemigos.json`.
-- **Escenario:** tablero físico vacío, sin muros, coberturas, trampas ni Puntos Débiles de prueba inventados. El director controla movimiento y decisiones del Deudor de Sal. No se añade IA ni trayectorias automáticas.
+## Qué necesitamos
 
-## Pasos de la prueba
+- Un tablero físico de **10 × 10**, dos fichas/miniaturas, **2d6** para ataques e iniciativa, **1d10** para la lanza y **1d6** para el ataque enemigo.
+- Una copia del `docs/REGISTRO_COMBATE_PILOTO_01.md` (para imprimir o copiar a mano).
+- La ficha del jugador y la Mesa del director para apuntar PV. No iniciar un nuevo personaje ni sobrescribir una ficha sellada de una campaña real; se puede llevar esta prueba en papel.
+- El director decide cuándo y cómo actúa el Deudor conforme a su turno, sin automatización.
 
-1. Preparar la ficha y registrar los atributos reales del jugador, sus PV máximos y Defensa calculados.
-2. Colocar ambos personajes con al menos una casilla de separación, sin obstáculos. Anotar posiciones y distancia manualmente.
-3. **Antes de jugar, escoger una regla provisional de iniciativa**; no presentarla como regla vigente mientras esté pendiente la decisión del creador.
-4. En cada turno: efectos de inicio aplicables → movimiento → una acción principal → cierre solo si está habilitado.
-5. Ataque cuerpo a cuerpo con Longinos: `2d6 + ACERO + modificadores`, impacta con resultado `>=8` frente al Deudor. Si impacta, tirar daño base de lanza 1d10 y aplicar Blindaje del enemigo (aquí 0). 6+6 garantiza impacto y daño base 2d10; 1+1 falla y da -1 al siguiente ataque del mismo atacante.
-6. Ataque del Deudor: director decide si ataca. Los parámetros de ficha de ataque son `1d6` daño y bono `+0` de prueba; resolver conforme al atributo/bono enemigo que se defina para el prototipo. **Falta confirmar la fórmula general para ataque enemigo**, por lo que no se declara automáticamente que tenga ACERO +0.
-7. Registrar cada ataque, acierto, fallo, daño, ronda, uso de habilidades y duración total. No asignar Ecos aún: cantidad por enemigo sin definir. Sí marcar quién lo acertó para **derecho futuro** a Ecos.
-8. Registrar si los participantes llegan a PV=0. La regla histórica declara muerte al caer a cero; los aspectos de botín y cierre deben consultarse en sus documentos confirmados.
+## Fichas para esta prueba
 
-## Datos que debemos observar (sin decidir balance todavía)
+### San Longinos
 
-| Dato | Anotación durante la prueba |
-|---|---|
-| Atributos elegidos / Defensa / PV del Santo | |
-| Iniciativa provisional usada | |
-| Número de rondas hasta terminar | |
-| Ataques efectuados / acertados / críticos / dobles 1 por bando | |
-| PV perdidos por el Santo | |
-| Martirios y pasivas que influyeron | |
-| Ataques con dudas de alcance, línea de visión o cobertura | |
-| Tiempo de la mesa | |
-| ¿El enemigo resultó trivial, justo o excesivo? | |
+Reparto **SUGERIDO SOLO PARA PRUEBA**, no decisión definitiva ni cambio del Santo:
 
-## Reglas deliberadamente excluidas de este primer escenario
+| Atributo | Valor |
+|---|---:|
+| ACERO | +3 |
+| CENIZA | +1 |
+| SANGRE | +2 |
+| DOGMA | +0 |
 
-- Puntos Débiles individuales del Deudor (no hay datos aprobados).
-- Valores de Ecos o compra de mejoras (no definidos).
-- Coberturas y trampas (aún falta terminar reglas).
-- Rutas automáticas, IA, movimiento asistido o generadores de tablero.
-- Aplicación automática de estados no definidos.
+Con estos valores: **PV 18**, **Defensa 9**, **Movimiento 3**, **Estigma máximo 10**. La mitad de PV máximos es **9**.
 
-## Decisiones inmediatas para el creador
+- Arma para este piloto: **Lanza de Trinchera «Gólgota»**, base **1d10**, usando exclusivamente **alcance adyacente** (incluida diagonal); su alcance adicional real aún no está confirmado.
+- Ataque de melé `2d6+3` contra Defensa del Deudor (`8`). Doble 6 = impacto automático y **2d10 de daño base**. Doble 1 = fallo y `-1` al próximo ataque intentado por Longinos.
+- Pasiva oficial «Cólera Sangrienta»: a **9 PV o menos**, cada ataque suyo añade **1d4 extra** que **NO se duplica** en críticos; la penalización de precisos también baja 1, pero no hay Puntos Débiles inventados en este piloto.
+- Martirio oficial «Herida del Costado»: 1 carga por expedición, impacto garantizado, ignora Blindaje, Sangrado Sacro 1d6 de daño al inicio de los próximos 3 turnos del objetivo y 3 PV de curación a Longinos por activación. **Por claridad, no se necesita usar el martirio en la primera pasada; si se usa, registrar por separado y no inventar daño instantáneo no especificado.**
 
-**Bloque de tres, recomendado para destrabar el prototipo:**
+### Deudor de Sal
 
-1. **Iniciativa:** ¿por bandos alternados, o por cada combatiente individual?
-2. **Cobertura sencilla:** ¿un obstáculo bajo da +1 a Defensa al estar claramente entre atacante y objetivo, o preferimos dejarlo sin bono inicialmente? Los muros opacos siguen bloqueando visión.
-3. **Ataques de enemigos sin atributos propios visibles:** ¿usan `2d6 + bono de ataque` impreso en su ficha contra Defensa, o necesitan atributos ACERO/CENIZA/DOGMA individuales como los Penitentes?
+| Parámetro | Valor EN PROTOTIPO |
+|---|---:|
+| PV | 14 |
+| Defensa | 8 |
+| Blindaje | 0 |
+| Movimiento | 3 |
+| Ataque «Cobro de sal» | `2d6 + 0` contra Defensa, daño base `1d6` |
+| Alcance de ataque | 1 casilla |
+| **CENIZA para iniciativa** | **+0, supuesto TEMPORAL del piloto** |
 
-Al aprobar el bloque, realizar la batalla de prueba y ajustar números reales según lo ocurrido. No publicar como definitivo el enemigo de muestra hasta finalizar las pruebas.
+**Aviso:** `data/enemigos.json` no tiene CENIZA, aunque la nueva regla oficial requiere `2d6+CENIZA` para cada combatiente. El +0 es únicamente un supuesto de prueba; no se modifica ningún JSON ni se establece que todos los enemigos tengan CENIZA +0.
+
+El efecto «Cobro pendiente» figura en la ficha, pero su robo de un recurso temporal no está desarrollado. **No inventar su resolución** durante esta prueba; anotar como pendiente.
+
+## Montaje
+
+1. Dibujar una cuadrícula de 10 × 10. Por ejemplo, situar a Longinos en **E5** y al Deudor en **E6**. Están adyacentes. El tablero queda **sin muros, obstáculos bajos, trampas ni Puntos Débiles adicionales**.
+2. Anotar ambos PV y las características anteriores.
+3. Cada combatiente tira su **iniciativa individual `2d6+CENIZA`**. Longinos usa +1. Para el Deudor usar provisionalmente +0. Actúa primero el resultado mayor.
+4. **Convención temporal, aún sin aprobar:** tirar al iniciar el encuentro y conservar el orden; si empatan, repetir solo entre los empatados. No registrar estas convenciones como reglas oficiales.
+5. Comenzar la ronda 1 con el primero de la lista de iniciativa.
+
+## Resolver cada turno (ambos bandos)
+
+1. **Inicio:** aplicar efectos de comienzo de turno si existen.
+2. **Movimiento:** cada bando puede moverse según sus puntos (Longinos 3, Deudor 3); no se permite atravesar muros. El director elige libremente la conducta del Deudor.
+3. **Acción principal:** un ataque o una acción permitida; no hacer dos ataques normales en un mismo turno.
+4. **Cierre:** solo existe si una habilidad lo habilita expresamente.
+5. Anotar tirada natural, bono y penalizaciones, Defensa objetivo, impacto/fallo, daño base, daño extra, Blindaje y PV resultantes.
+
+### Ejemplos de cálculo
+
+- **Longinos:** tira **2 y 3**: `2+3+ACERO 3=8`, alcanza la Defensa 8 del Deudor y **acierta**. Tira `1d10`; si obtiene 6, el Deudor pasa de 14 a **8 PV**.
+- **Deudor:** tira **5 y 4**: `5+4+bono 0=9`, alcanza la Defensa 9 de Longinos y **acierta**. Si su `1d6` obtiene 3, Longinos pasa de 18 a **15 PV**.
+- **Doble 6 natural** en un ataque: acierto garantizado y se duplican los **dados base del arma**. Para la lanza `2d10`; para «Cobro de sal» `2d6`. Un dado extra `1d4` de Cólera Sangrienta **no** se duplica.
+- **Doble 1 natural** en un ataque: fallo automático y `-1` al siguiente ataque de ese mismo atacante. El modificador se consume cuando se intente el siguiente ataque.
+- **Cobertura baja (para un segundo ensayo, no aquí):** un objetivo de Defensa base 9 pasa a **Defensa 10** si un obstáculo bajo lo protege claramente. Si el obstáculo no protege, vuelve a 9. Un muro opaco bloquea la línea de visión en lugar de sumar Defensa.
+
+### Qué anotar al vencer
+
+Si el Deudor cae a 0 PV, registra **quién acertó al menos un ataque contra ese ejemplar**. Esas personas **tendrían derecho a su recompensa COMPLETA de Ecos**, aunque en este escenario **no hay una cantidad aprobada**, así que **no se suman Ecos** al guardado real.
+
+## Segunda pasada opcional: prueba de cobertura
+
+Usa un ataque **de alcance legal según la decisión que se apruebe para el arma utilizada** y coloca un obstáculo bajo que proteja claramente al objetivo. Comprueba Defensa con y sin protección, manteniendo constantes los demás valores. Si el alcance de la pistola de Longinos aún no está confirmado, **no atribuirle arbitrariamente un rango como regla oficial**. Un muro opaco, por su parte, bloquea la línea de visión. No mezclar obstáculos con el ensayo base sin anotar el cambio.
+
+## Criterios de evaluación
+
+- ¿Se entendió y siguió la iniciativa sin dudas? (Anotar valor provisional del Deudor.)
+- ¿Cuántas rondas y ataques hicieron falta?
+- ¿Se activó Cólera Sangrienta? ¿Influyó?
+- ¿Hubo un 6+6 o 1+1 y se resolvió correctamente?
+- ¿Fue demasiado fácil/difícil el Deudor con 14 PV / DEF 8 / Blindaje 0?
+- ¿Qué reglas faltaron para jugar sin detenerse?
+
+**Importante:** un combate 1v1 con estadísticas provisionales **no determina el equilibrio final**. Repetirlo varias veces y luego incorporar un segundo Penitente antes de fijar recompensas de Ecos.
+
+## Próximo bloque de decisiones, no confirmado todavía
+
+1. Si los enemigos tendrán un valor propio de CENIZA exclusivamente para iniciativa (separado de su movimiento).
+2. Si la iniciativa se tira una sola vez al inicio del encuentro o al comienzo de cada ronda.
+3. Qué hacer en caso de empate en iniciativa.

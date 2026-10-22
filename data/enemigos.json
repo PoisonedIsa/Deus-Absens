@@ -36,7 +36,8 @@
       }
     ],
     "statsStatus": "PROVISIONAL",
-    "source": "Estadísticas de demostración pendientes de revisión del director"
+    "source": "Estadísticas de demostración pendientes de revisión del director",
+    "ceniza": null
   },
   {
     "name": "Querubín Desollado",
@@ -67,7 +68,8 @@
       }
     ],
     "statsStatus": "PROVISIONAL",
-    "source": "Estadísticas de demostración pendientes de revisión del director"
+    "source": "Estadísticas de demostración pendientes de revisión del director",
+    "ceniza": null
   },
   {
     "name": "Deudor de Sal",
@@ -98,7 +100,8 @@
       }
     ],
     "statsStatus": "PROVISIONAL",
-    "source": "Estadísticas de demostración pendientes de revisión del director"
+    "source": "Estadísticas de demostración pendientes de revisión del director",
+    "ceniza": null
   },
   {
     "name": "La Novia del Foso",
@@ -129,7 +132,8 @@
       }
     ],
     "statsStatus": "PROVISIONAL",
-    "source": "Estadísticas de demostración pendientes de revisión del director"
+    "source": "Estadísticas de demostración pendientes de revisión del director",
+    "ceniza": null
   },
   {
     "name": "Perro de la Puerta",
@@ -160,7 +164,8 @@
       }
     ],
     "statsStatus": "PROVISIONAL",
-    "source": "Estadísticas de demostración pendientes de revisión del director"
+    "source": "Estadísticas de demostración pendientes de revisión del director",
+    "ceniza": null
   },
   {
     "name": "El Hueco que Reza",
@@ -199,6 +204,7 @@
       }
     ],
     "statsStatus": "PROVISIONAL",
-    "source": "Estadísticas de demostración pendientes de revisión del director"
+    "source": "Estadísticas de demostración pendientes de revisión del director",
+    "ceniza": null
   }
 ]

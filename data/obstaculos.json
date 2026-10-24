@@ -1,0 +1,188 @@
+{
+  "schemaVersion": 6,
+  "estado": "trampas_visibles_ocultas_deteccion_pasiva_y_activa_confirmadas",
+  "descripcion": "Terreno de combate con trampas permanentes, visibles u ocultas, detectables pasivamente o mediante búsqueda activa. Las dificultades y distancias de detección aún están pendientes.",
+  "reglasConfirmadas": {
+    "movimientoNormal": {
+      "ortogonal": 1,
+      "diagonal": 2
+    },
+    "jugadorObstaculoMultiplicador": 2,
+    "enemigoObstaculoMultiplicador": 1,
+    "enemigosInmunesATrampas": true,
+    "dadoMinimoTrampa": "1d4",
+    "dadoMaximoTrampa": "1d8",
+    "murosInfranqueablesParaTodos": true,
+    "trampasSiempreActivas": true,
+    "trampasReutilizables": true,
+    "trampasNoSeConsumenAlActivarse": true,
+    "trampasDananAlEntrar": true,
+    "trampasDananAlInicioDeTurnoSiPermanece": true,
+    "trampasNoDananEnemigos": true,
+    "trampasVisiblesYOcultas": true,
+    "trampasOcultasNoSeRevelanAutomaticamenteAlJugador": true,
+    "deteccionPasivaDisponible": true,
+    "deteccionActivaDisponible": true,
+    "busquedaActivaConsumeAccionPrincipal": true,
+    "detectarNoDesactivaLaTrampa": true,
+    "trampaDetectadaPermaneceActiva": true
+  },
+  "propuestasPendientes": {
+    "costeAlEntrarCasilla": true,
+    "aplicarMultiplicadorSobreDiagonal": true,
+    "bonosCobertura": null,
+    "resistenciaEstructural": null,
+    "trampaDesactivablePorAccionesEspeciales": null,
+    "atributoDeteccion": null,
+    "dificultadDeteccion": null,
+    "revelacionDespuesDeActivacion": null,
+    "puedeVerLaTrampaOcultaElDirector": null,
+    "dadoYModificadorDeteccion": "propuesta_2d6_mas_ceniza_o_dogma_segun_tipo",
+    "dificultadesPasivaYActiva": null,
+    "radioDeteccionPasiva": null,
+    "radioBusquedaActiva": null,
+    "frecuenciaComprobacionPasiva": null,
+    "revelacionAlActivarse": null
+  },
+  "terrenos": [
+    {
+      "id": "obstaculo_transitable",
+      "nombre": "Obstáculo transitable",
+      "categoria": "obstaculo",
+      "atravesable": true,
+      "multiplicadorMovimientoJugador": 2,
+      "multiplicadorMovimientoEnemigo": 1,
+      "danoTrampa": null,
+      "bonoDefensa": null,
+      "bloqueaSaqueo": null,
+      "bloqueaVision": null
+    },
+    {
+      "id": "trampa_menor",
+      "nombre": "Charco de sangre consagrada",
+      "categoria": "trampa",
+      "atravesable": true,
+      "multiplicadorMovimientoJugador": 1,
+      "multiplicadorMovimientoEnemigo": 1,
+      "danoTrampa": "1d4",
+      "afectaEnemigos": false,
+      "bloqueaSaqueo": false,
+      "siempreActiva": true,
+      "reutilizable": true,
+      "seConsumeAlActivarse": false,
+      "efectosAdicionales": null,
+      "descripcionNarrativaEjemplo": "Una mancha ritual oscura impregna la piedra y castiga a quien la atraviesa.",
+      "nombreProvisional": true,
+      "activacionesConfirmadas": [
+        "al_entrar_en_casilla",
+        "al_inicio_del_turno_si_ocupa_casilla"
+      ],
+      "tiradasPorActivacion": 1,
+      "visibilidadPosible": [
+        "visible",
+        "oculta"
+      ],
+      "visibilidadPorInstancia": true,
+      "visibilidadPredeterminada": null,
+      "revelacionAutomatica": null
+    },
+    {
+      "id": "trampa_intermedia",
+      "nombre": "Agujas penitenciales",
+      "categoria": "trampa",
+      "atravesable": true,
+      "multiplicadorMovimientoJugador": 1,
+      "multiplicadorMovimientoEnemigo": 1,
+      "danoTrampa": "1d6",
+      "afectaEnemigos": false,
+      "bloqueaSaqueo": false,
+      "siempreActiva": true,
+      "reutilizable": true,
+      "seConsumeAlActivarse": false,
+      "efectosAdicionales": null,
+      "descripcionNarrativaEjemplo": "Un mecanismo sacro de agujas surge desde las juntas del suelo.",
+      "nombreProvisional": true,
+      "activacionesConfirmadas": [
+        "al_entrar_en_casilla",
+        "al_inicio_del_turno_si_ocupa_casilla"
+      ],
+      "tiradasPorActivacion": 1,
+      "visibilidadPosible": [
+        "visible",
+        "oculta"
+      ],
+      "visibilidadPorInstancia": true,
+      "visibilidadPredeterminada": null,
+      "revelacionAutomatica": null
+    },
+    {
+      "id": "trampa_mayor",
+      "nombre": "Sello de espinas sacrílegas",
+      "categoria": "trampa",
+      "atravesable": true,
+      "multiplicadorMovimientoJugador": 1,
+      "multiplicadorMovimientoEnemigo": 1,
+      "danoTrampa": "1d8",
+      "afectaEnemigos": false,
+      "bloqueaSaqueo": false,
+      "siempreActiva": true,
+      "reutilizable": true,
+      "seConsumeAlActivarse": false,
+      "efectosAdicionales": null,
+      "descripcionNarrativaEjemplo": "Un sello blasfemo rodeado de espinas se enciende al paso de los vivos.",
+      "nombreProvisional": true,
+      "activacionesConfirmadas": [
+        "al_entrar_en_casilla",
+        "al_inicio_del_turno_si_ocupa_casilla"
+      ],
+      "tiradasPorActivacion": 1,
+      "visibilidadPosible": [
+        "visible",
+        "oculta"
+      ],
+      "visibilidadPorInstancia": true,
+      "visibilidadPredeterminada": null,
+      "revelacionAutomatica": null
+    },
+    {
+      "id": "muro",
+      "nombre": "Muro",
+      "categoria": "muro",
+      "atravesable": false,
+      "bloqueaMovimientoJugador": true,
+      "bloqueaMovimientoEnemigo": true,
+      "bloqueaSaqueo": true,
+      "bloqueaVision": null,
+      "destructible": null
+    }
+  ],
+  "deteccion": {
+    "confirmado": {
+      "modos": [
+        "pasiva",
+        "activa"
+      ],
+      "pasiva": {
+        "consumeAccion": false,
+        "descripcion": "Oportunidad de descubrir peligros ocultos sin declarar búsqueda; momento y alcance pendientes"
+      },
+      "activa": {
+        "consumeAccionPrincipal": true,
+        "descripcion": "Búsqueda voluntaria más fiable; dado, bonificación, radio y dificultad pendientes"
+      },
+      "deteccionNoNeutraliza": true,
+      "trampasDetectadasPermanecenActivas": true
+    },
+    "propuestaNoAprobada": {
+      "tirada": "2d6 + CENIZA para trampas físicas o DOGMA para trampas rituales",
+      "ventajaBusquedaActiva": "dificultad menor o mejor probabilidad que la detección pasiva"
+    },
+    "pendientes": [
+      "dificultad",
+      "radio",
+      "frecuencia_pasiva",
+      "revelacion_por_activacion",
+      "forma_de_compartir_informacion"
+    ]
+  }
+}

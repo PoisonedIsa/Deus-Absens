@@ -1,0 +1,210 @@
+[
+  {
+    "name": "Serafín de Ceniza",
+    "type": "Celestial",
+    "threat": "Élite",
+    "icon": "✧",
+    "desc": "Un ángel cuya aureola se ha convertido en una corona de brasas. Castiga a quienes se esconden tras la fe.",
+    "ability": "Juicio radiante: marca a un objetivo; la siguiente herida contra él es más grave.",
+    "id": "serafin-ceniza",
+    "hp": 30,
+    "defense": 10,
+    "armor": 2,
+    "movement": 3,
+    "attacks": [
+      {
+        "id": "serafin-ceniza-1",
+        "name": "Ascua de juicio",
+        "damage": "1d8",
+        "strikes": 1,
+        "rangeTiles": 2,
+        "attackBonus": 0
+      },
+      {
+        "id": "serafin-ceniza-2",
+        "name": "Fulgor de ceniza",
+        "damage": "1d6",
+        "strikes": 2,
+        "rangeTiles": 1,
+        "attackBonus": 0
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Juicio radiante",
+        "description": "marca a un objetivo; la siguiente herida contra él es más grave."
+      }
+    ],
+    "statsStatus": "PROVISIONAL",
+    "source": "Estadísticas de demostración pendientes de revisión del director",
+    "ceniza": null
+  },
+  {
+    "name": "Querubín Desollado",
+    "type": "Celestial",
+    "threat": "Hostigador",
+    "icon": "☼",
+    "desc": "Un mensajero mutilado que repite órdenes de un dios que ya no escucha.",
+    "ability": "Coro roto: obliga al grupo a separarse o sufrir una consecuencia.",
+    "id": "querubin-desollado",
+    "hp": 16,
+    "defense": 9,
+    "armor": 0,
+    "movement": 5,
+    "attacks": [
+      {
+        "id": "querubin-desollado-1",
+        "name": "Zarpazo sacro",
+        "damage": "1d6",
+        "strikes": 2,
+        "rangeTiles": 1,
+        "attackBonus": 0
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Coro roto",
+        "description": "obliga al grupo a separarse o sufrir una consecuencia."
+      }
+    ],
+    "statsStatus": "PROVISIONAL",
+    "source": "Estadísticas de demostración pendientes de revisión del director",
+    "ceniza": null
+  },
+  {
+    "name": "Deudor de Sal",
+    "type": "Infernal",
+    "threat": "Común",
+    "icon": "♆",
+    "desc": "Una figura humana cubierta de sal y contratos. Cobra con recuerdos aquello que no se le paga.",
+    "ability": "Cobro pendiente: roba un recurso temporal si alcanza a su presa.",
+    "id": "deudor-sal",
+    "hp": 14,
+    "defense": 8,
+    "armor": 0,
+    "movement": 3,
+    "attacks": [
+      {
+        "id": "deudor-sal-1",
+        "name": "Cobro de sal",
+        "damage": "1d6",
+        "strikes": 1,
+        "rangeTiles": 1,
+        "attackBonus": 0
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Cobro pendiente",
+        "description": "roba un recurso temporal si alcanza a su presa."
+      }
+    ],
+    "statsStatus": "PROVISIONAL",
+    "source": "Estadísticas de demostración pendientes de revisión del director",
+    "ceniza": null
+  },
+  {
+    "name": "La Novia del Foso",
+    "type": "Infernal",
+    "threat": "Élite",
+    "icon": "♛",
+    "desc": "Una criatura vestida con velos de piel, seguida por voces que llaman a sus seres queridos.",
+    "ability": "Votos de hambre: obliga a escoger entre perder salud o abandonar un objeto.",
+    "id": "novia-foso",
+    "hp": 26,
+    "defense": 9,
+    "armor": 1,
+    "movement": 3,
+    "attacks": [
+      {
+        "id": "novia-foso-1",
+        "name": "Votos oscuros",
+        "damage": "1d8",
+        "strikes": 1,
+        "rangeTiles": 1,
+        "attackBonus": 0
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Votos de hambre",
+        "description": "obliga a escoger entre perder salud o abandonar un objeto."
+      }
+    ],
+    "statsStatus": "PROVISIONAL",
+    "source": "Estadísticas de demostración pendientes de revisión del director",
+    "ceniza": null
+  },
+  {
+    "name": "Perro de la Puerta",
+    "type": "Umbral",
+    "threat": "Común",
+    "icon": "☠",
+    "desc": "Tiene demasiadas articulaciones y un rostro que cambia según quién lo mire.",
+    "ability": "Rastreo imposible: encuentra al personaje que más intenta ocultarse.",
+    "id": "perro-puerta",
+    "hp": 12,
+    "defense": 9,
+    "armor": 0,
+    "movement": 5,
+    "attacks": [
+      {
+        "id": "perro-puerta-1",
+        "name": "Mordida umbral",
+        "damage": "1d4",
+        "strikes": 2,
+        "rangeTiles": 1,
+        "attackBonus": 0
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Rastreo imposible",
+        "description": "encuentra al personaje que más intenta ocultarse."
+      }
+    ],
+    "statsStatus": "PROVISIONAL",
+    "source": "Estadísticas de demostración pendientes de revisión del director",
+    "ceniza": null
+  },
+  {
+    "name": "El Hueco que Reza",
+    "type": "Umbral",
+    "threat": "Jefe",
+    "icon": "◌",
+    "desc": "Una ausencia con forma humana. Su plegaria se oye dentro de los huesos.",
+    "ability": "Silencio absoluto: durante un instante, ninguna habilidad sobrenatural funciona.",
+    "id": "hueco-que-reza",
+    "hp": 45,
+    "defense": 10,
+    "armor": 2,
+    "movement": 2,
+    "attacks": [
+      {
+        "id": "hueco-que-reza-1",
+        "name": "Eco del silencio",
+        "damage": "1d10",
+        "strikes": 1,
+        "rangeTiles": 2,
+        "attackBonus": 0
+      },
+      {
+        "id": "hueco-que-reza-2",
+        "name": "Ráfaga de ausencia",
+        "damage": "1d6",
+        "strikes": 2,
+        "rangeTiles": 2,
+        "attackBonus": 0
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Silencio absoluto",
+        "description": "durante un instante, ninguna habilidad sobrenatural funciona."
+      }
+    ],
+    "statsStatus": "PROVISIONAL",
+    "source": "Estadísticas de demostración pendientes de revisión del director",
+    "ceniza": null
+  }
+]

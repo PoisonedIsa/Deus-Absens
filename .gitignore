@@ -1,7 +1,0 @@
-# Archivos locales, no subir a GitHub
-.DS_Store
-Thumbs.db
-__pycache__/
-*.pyc
-.vscode/
-.idea/

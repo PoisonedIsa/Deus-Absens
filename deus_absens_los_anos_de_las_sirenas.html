@@ -1,0 +1,4393 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DEUS ABSENS · Los Años de las Sirenas</title>
+<style>
+:root {
+  color-scheme: dark;
+  --bg: #0f1110;
+  --bg-alt: #151816;
+  --panel: #181c1a;
+  --panel-hi: #202623;
+  --sheet-bg: #141816;
+  --edge: #2a312d;
+  --edge-gold: #6e5d3e;
+  --ink: #eceae4;
+  --muted: #9aa39c;
+  --gold: #d8b572;
+  --gold-dim: #8f7748;
+  --red: #e06c62;
+  --red-bg: #2d1918;
+  --green: #6ec486;
+  --green-bg: #172b1e;
+  --blue: #6cb0d6;
+  --purple: #b592e0;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 14.5px/1.55 var(--font-sans);
+  overflow-x: hidden;
+}
+h1, h2, h3, h4 {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  margin: 0 0 6px 0;
+  color: var(--ink);
+}
+h1 { font-size: clamp(20px, 2.6vw, 28px); }
+h2 { font-size: clamp(17px, 2vw, 20px); color: var(--gold); }
+h3 { font-size: 16px; }
+h4 { font-size: 14px; color: var(--gold); }
+p { margin: 0 0 8px 0; }
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--gold);
+  font-size: 11px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 4px;
+}
+.note { color: var(--muted); font-size: 13px; line-height: 1.5; }
+.lore {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: #d4cbb8;
+  border-left: 2px solid var(--edge-gold);
+  padding: 6px 12px;
+  background: rgba(216, 181, 114, 0.04);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  margin: 8px 0;
+}
+
+/* =========================================================================
+   ICONOS VECTORIALES MONOCROMÁTICOS (ESTILO GOOGLE MATERIAL SYMBOLS OUTLINED)
+   ========================================================================= */
+.ms-icon {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: -0.18em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.85;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+.ms-icon.lg { width: 22px; height: 22px; }
+.ms-icon.xl { width: 28px; height: 28px; stroke-width: 1.65; }
+.ms-icon.gold { color: var(--gold); }
+.ms-icon.red { color: var(--red); }
+.ms-icon.green { color: var(--green); }
+.ms-icon.blue { color: var(--blue); }
+.ms-icon.purple { color: var(--purple); }
+.ms-icon.muted { color: var(--muted); }
+
+/* =========================================================================
+   TARJETAS DE CONTENIDO SELLADO / BLOQUEADO (SANTOS APÓCRIFOS Y RELIQUIAS)
+   ========================================================================= */
+.card.locked-card {
+  background: repeating-linear-gradient(
+    -45deg,
+    #131615,
+    #131615 10px,
+    #161a18 10px,
+    #161a18 20px
+  );
+  border: 1px dashed #4a4333;
+  position: relative;
+}
+.seal-requirement-box {
+  background: rgba(15, 17, 16, 0.82);
+  border: 1px solid var(--edge-gold);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  margin: 4px 0;
+}
+.seal-requirement-box .seal-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+.redacted-line {
+  font-size: 12.5px;
+  color: #6f7771;
+  font-style: italic;
+  padding: 6px 10px;
+  border-left: 2px solid #3a423d;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+/* =========================================================================
+   PANTALLA DE INICIO MINIMALISTA (SPLASH SCREEN)
+   ========================================================================= */
+.splash-screen {
+  min-height: 100dvh;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 16px;
+}
+.splash-screen[hidden] { display: none !important; }
+.splash-card {
+  max-width: 820px;
+  width: 100%;
+  background: var(--panel);
+  border: 1px solid var(--edge);
+  border-radius: var(--radius-lg);
+  padding: clamp(20px, 4vw, 36px);
+  text-align: center;
+}
+.splash-emblem {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 14px auto;
+  border-radius: 14px;
+  background: var(--bg-alt);
+  border: 1px solid var(--edge-gold);
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.splash-pillars {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: 10px;
+  margin: 20px 0;
+  text-align: left;
+}
+.splash-pillar {
+  background: var(--bg-alt);
+  border: 1px solid var(--edge);
+  border-radius: var(--radius-md);
+  padding: 14px;
+}
+.splash-pillar strong {
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+  font-size: 14px;
+}
+.splash-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 16px;
+}
+.btn-splash-primary {
+  background: var(--gold);
+  color: #111312;
+  border: 1px solid var(--gold);
+  padding: 11px 20px;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-splash-primary:hover { background: #e5c687; }
+
+/* =========================================================================
+   BARRA SUPERIOR Y NAVEGACIÓN (OPTIMIZADA PARA PC Y MÓVIL)
+   ========================================================================= */
+.topbar {
+  background: rgba(15, 17, 16, 0.94);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--edge);
+  padding: 10px 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.brand-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.brand-cross {
+  color: var(--gold);
+  border: 1px solid var(--edge-gold);
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  background: var(--panel);
+}
+.brand-title {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+}
+.brand-sub {
+  font-size: 11.5px;
+  color: var(--muted);
+}
+.mode-switch {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  overflow-x: auto;
+  max-width: 100%;
+  padding-bottom: 2px;
+  scrollbar-width: none;
+}
+.mode-switch::-webkit-scrollbar { display: none; }
+.mode-btn {
+  background: var(--panel);
+  color: var(--muted);
+  border: 1px solid var(--edge);
+  padding: 7px 12px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13px;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.15s;
+}
+.mode-btn:hover { background: var(--panel-hi); color: var(--ink); }
+.mode-btn.active {
+  background: var(--gold);
+  color: #111312;
+  border-color: var(--gold);
+}
+
+/* Submenú de Jugar (Jugador vs Director) */
+.play-instance-bar {
+  background: var(--panel);
+  border: 1px solid var(--edge);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  margin-bottom: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+}
+.instance-pills {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  max-width: 100%;
+}
+.instance-pill {
+  background: var(--bg-alt);
+  color: var(--muted);
+  border: 1px solid var(--edge);
+  padding: 7px 13px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 13px;
+  white-space: nowrap;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.instance-pill.active {
+  background: var(--gold);
+  color: #111312;
+  border-color: var(--gold);
+}
+
+/* Toast Banner */
+#toast-bar {
+  background: var(--green-bg);
+  border-bottom: 1px solid var(--green);
+  color: var(--ink);
+  padding: 9px 16px;
+  font-size: 13.5px;
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+#toast-bar.error {
+  background: var(--red-bg);
+  border-color: var(--red);
+}
+
+main {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: clamp(12px, 2.5vw, 22px);
+}
+
+/* Panels & Cards Minimalistas */
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--edge);
+  border-radius: var(--radius-md);
+  padding: clamp(14px, 2vw, 18px);
+  margin-bottom: 14px;
+}
+.panel-gold {
+  border-color: var(--edge-gold);
+}
+.panel-danger {
+  border-color: var(--red);
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 310px), 1fr));
+  gap: 12px;
+}
+.two-col {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: 16px;
+}
+@media (max-width: 920px) {
+  .two-col { grid-template-columns: 1fr; }
+}
+.card {
+  background: var(--bg-alt);
+  border: 1px solid var(--edge);
+  border-radius: var(--radius-md);
+  padding: 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.card.selected {
+  border-color: var(--gold);
+}
+
+/* =========================================================================
+   HOJA DE PERSONAJE MINIMALISTA Y LANZAMIENTO DIRECTO AL PULSAR NOMBRES
+   ========================================================================= */
+.sheet-slot-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--panel);
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--edge);
+  margin-bottom: 12px;
+}
+#player-sheet-slots-bar {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  max-width: 100%;
+  padding-bottom: 2px;
+  scrollbar-width: none;
+}
+#player-sheet-slots-bar::-webkit-scrollbar { display: none; }
+.sheet-slot-btn {
+  padding: 6px 11px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--edge);
+  background: var(--bg-alt);
+  color: var(--muted);
+  font-size: 12.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.sheet-slot-btn.active {
+  background: var(--gold);
+  color: #111312;
+  border-color: var(--gold);
+}
+.character-sheet-folio {
+  background: var(--panel);
+  border: 1px solid var(--edge);
+  border-radius: var(--radius-lg);
+  padding: clamp(14px, 2.2vw, 22px);
+  margin-bottom: 16px;
+}
+.sheet-header-banner {
+  border-bottom: 1px solid var(--edge);
+  padding-bottom: 14px;
+  margin-bottom: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+}
+.sheet-seal-emblem {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--edge-gold);
+  background: var(--bg-alt);
+  color: var(--gold);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Medallones de Atributos: Al pulsar p.ej. "ACERO +2" se lanza el dado directamente */
+.attr-medallions {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin: 10px 0 14px 0;
+}
+@media (max-width: 680px) {
+  .attr-medallions { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.attr-medallion {
+  background: var(--bg-alt);
+  border: 1px solid var(--edge);
+  border-radius: var(--radius-md);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: border-color 0.18s, transform 0.14s, background 0.18s;
+}
+.attr-medallion:hover {
+  border-color: var(--edge-gold);
+}
+.attr-roll-trigger {
+  width: 100%;
+  background: linear-gradient(180deg, rgba(216,181,114,0.12) 0%, rgba(216,181,114,0.03) 100%);
+  border: 1px solid var(--edge-gold);
+  border-radius: var(--radius-sm);
+  padding: 10px 8px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  text-align: center;
+  transition: all 0.16s ease;
+}
+.attr-roll-trigger:hover {
+  background: rgba(216, 181, 114, 0.22);
+  border-color: var(--gold);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+.attr-roll-trigger:active {
+  transform: translateY(0) scale(0.98);
+}
+.attr-roll-label {
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--gold);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.attr-roll-hint {
+  font-size: 11px;
+  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.attr-edit-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  font-size: 11.5px;
+  color: var(--muted);
+  padding: 2px 4px 0 4px;
+}
+.attr-edit-row select {
+  padding: 2px 6px;
+  min-height: 26px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+/* Nombres clicables de Armas y Objetos (lanzan dados al pulsar el nombre) */
+.starting-gear-card {
+  background: var(--bg-alt);
+  border: 1px solid var(--edge-gold);
+  border-radius: var(--radius-md);
+  padding: 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.rollable-name {
+  appearance: none;
+  background: rgba(216, 181, 114, 0.08);
+  border: 1px solid rgba(216, 181, 114, 0.35);
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 15px;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  text-align: left;
+  transition: all 0.16s ease;
+}
+.rollable-name:hover {
+  background: rgba(216, 181, 114, 0.2);
+  border-color: var(--gold);
+  color: #fff6e0;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+}
+.rollable-name:active {
+  transform: translateY(0) scale(0.99);
+}
+.rollable-name .roll-chip {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--ink);
+  background: rgba(15, 17, 16, 0.65);
+  border: 1px solid var(--edge-gold);
+  padding: 2px 7px;
+  border-radius: 99px;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* =========================================================================
+   BANDEJA DE DADOS CON ANIMACIÓN 3D / TUMBLE MEJORADA
+   ========================================================================= */
+.dice-stage {
+  background: linear-gradient(135deg, #161b18 0%, #101311 100%);
+  border: 1px solid var(--edge-gold);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  margin-bottom: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+.dice-stage.is-rolling {
+  border-color: var(--gold);
+  box-shadow: 0 0 22px rgba(216, 181, 114, 0.22);
+}
+.dice-stage.is-crit {
+  border-color: #f5d376;
+  box-shadow: 0 0 26px rgba(245, 211, 118, 0.35);
+}
+.dice-stage.is-fumble {
+  border-color: var(--red);
+  box-shadow: 0 0 24px rgba(224, 108, 98, 0.3);
+}
+.dice-cubes-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.die-cube {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  background: linear-gradient(145deg, #252c28 0%, #151917 100%);
+  border: 1.5px solid var(--gold);
+  color: var(--ink);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  font-weight: 800;
+  font-size: 19px;
+  user-select: none;
+}
+.die-cube.die-weapon {
+  border-color: var(--blue);
+  background: linear-gradient(145deg, #1b2730 0%, #12191f 100%);
+  color: #d4eeff;
+}
+.die-cube .die-tag {
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  line-height: 1;
+  margin-top: 2px;
+}
+.die-cube.rolling {
+  animation: dieTumble 0.52s cubic-bezier(0.22, 0.8, 0.32, 1);
+}
+.die-cube.settle-pop {
+  animation: diePop 0.24s ease-out;
+}
+@keyframes dieTumble {
+  0%   { transform: translateY(0) rotate(0deg) scale(0.92); filter: brightness(1.3); }
+  20%  { transform: translateY(-9px) rotate(-18deg) scale(1.08); }
+  45%  { transform: translateY(4px) rotate(16deg) scale(0.96); }
+  70%  { transform: translateY(-5px) rotate(-10deg) scale(1.04); }
+  100% { transform: translateY(0) rotate(0deg) scale(1); filter: brightness(1); }
+}
+@keyframes diePop {
+  0%   { transform: scale(1.16); }
+  100% { transform: scale(1); }
+}
+.dice-formula-info {
+  flex: 1;
+  min-width: 210px;
+}
+.dice-total-pill {
+  background: var(--bg);
+  border: 1px solid var(--edge-gold);
+  border-radius: var(--radius-md);
+  padding: 8px 14px;
+  text-align: center;
+  min-width: 112px;
+}
+.dice-total-pill .total-num {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--gold);
+  line-height: 1.1;
+  display: block;
+}
+.dice-total-pill .total-lbl {
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+.reader-summary-box {
+  background: rgba(216, 181, 114, 0.06);
+  border: 1px solid rgba(216, 181, 114, 0.25);
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  font-size: 13px;
+  color: var(--ink);
+}
+
+/* Controls & Inputs (Touch-Friendly para Móvil y Escritorio) */
+input, select, textarea, button {
+  font: inherit;
+  background: var(--bg);
+  color: var(--ink);
+  border: 1px solid var(--edge);
+  border-radius: var(--radius-sm);
+  padding: 7px 11px;
+  min-height: 36px;
+}
+input:focus, select:focus, textarea:focus, button:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 1px;
+}
+button {
+  cursor: pointer;
+  background: var(--panel-hi);
+  border-color: #38423c;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: background 0.15s, border-color 0.15s;
+}
+button:hover:not(:disabled) { background: #2b332e; border-color: var(--gold-dim); }
+button:disabled { opacity: 0.45; cursor: not-allowed; }
+.btn-gold {
+  background: var(--gold);
+  color: #111312;
+  border-color: var(--gold);
+  font-weight: 700;
+}
+.btn-gold:hover:not(:disabled) { background: #e5c687; }
+.btn-danger {
+  background: var(--red-bg);
+  border-color: var(--red);
+  color: #ffd5d1;
+}
+.btn-danger:hover:not(:disabled) { background: #422220; }
+.btn-sm { padding: 5px 9px; font-size: 12px; min-height: 32px; }
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+.between {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+}
+label.field {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.badge {
+  font-size: 12px;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--edge);
+  background: var(--bg);
+  color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.badge.gold { border-color: var(--edge-gold); color: var(--gold); }
+.badge.red { border-color: var(--red); color: #ffb3ac; }
+.badge.green { border-color: var(--green); color: #b5f0c5; }
+.badge.blue { border-color: var(--blue); color: #b8e2fa; }
+
+/* Sub-tabs con scroll táctil en teléfono */
+.subnav {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--edge);
+  padding-bottom: 10px;
+  overflow-x: auto;
+  max-width: 100%;
+  scrollbar-width: none;
+}
+.subnav::-webkit-scrollbar { display: none; }
+.subtab {
+  background: var(--bg-alt);
+  border: 1px solid var(--edge);
+  color: var(--muted);
+  padding: 7px 12px;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  font-size: 13px;
+}
+.subtab.active {
+  background: var(--panel-hi);
+  color: var(--gold);
+  border-color: var(--gold);
+  font-weight: 600;
+}
+
+/* Progress bars */
+.bar-wrap {
+  width: 100%;
+  height: 8px;
+  background: var(--bg);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.bar-fill {
+  height: 100%;
+  transition: width 0.2s;
+}
+.bar-hp { background: var(--red); }
+.bar-stigma { background: var(--purple); }
+
+/* =========================================================================
+   CUADRÍCULA 10x10 RESPONSIVA (ESCRITORIO Y MÓVIL SIN ZOOM FORZADO)
+   ========================================================================= */
+.grid-board-wrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.grid-10x10 {
+  display: grid;
+  grid-template-columns: repeat(10, minmax(26px, 44px));
+  gap: 3px;
+  background: var(--bg);
+  padding: 6px;
+  border: 1px solid var(--edge);
+  border-radius: var(--radius-md);
+  user-select: none;
+  width: 100%;
+  max-width: 470px;
+}
+.cell-10 {
+  aspect-ratio: 1 / 1;
+  border-radius: 4px;
+  border: 1px solid #242b27;
+  background: var(--bg-alt);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(10px, 2.4vw, 12px);
+  font-weight: 700;
+  cursor: pointer;
+  position: relative;
+}
+.cell-10:hover {
+  border-color: var(--gold);
+  z-index: 2;
+}
+.cell-10.selected-cell {
+  outline: 2px solid var(--gold);
+  z-index: 3;
+}
+.cell-10 .coord {
+  position: absolute;
+  top: 1px;
+  left: 2px;
+  font-size: 7.5px;
+  color: #5b665e;
+  font-weight: normal;
+  line-height: 1;
+}
+@media (max-width: 480px) {
+  .cell-10 .coord { display: none; }
+  .topbar { padding: 8px 12px; }
+  .brand-sub { display: none; }
+  .sheet-header-banner input[type="text"],
+  .sheet-header-banner select {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+}
+.cell-muro { background: #2d3330; border-color: #464f4a; color: #9aa39c; }
+.cell-cobertura { background: #332c1d; border-color: #78653b; color: var(--gold); }
+.cell-trampa { background: #381d1c; border-color: #8c3f3b; color: var(--red); }
+.cell-salida { background: #192f3d; border-color: #3f7a9c; color: var(--blue); }
+.token-p {
+  background: #1b4d2e;
+  color: #dcffe6;
+  border: 1px solid #5ad484;
+  padding: 1px 3px;
+  border-radius: 3px;
+  font-size: clamp(9px, 2.2vw, 11px);
+  line-height: 1.1;
+}
+.token-p.dead {
+  background: #421e1e;
+  color: #ffadad;
+  border-color: #bf5252;
+}
+.token-e {
+  background: #59201c;
+  color: #ffe399;
+  border: 1px solid #e08b46;
+  padding: 1px 3px;
+  border-radius: 3px;
+  font-size: clamp(9px, 2.2vw, 11px);
+  line-height: 1.1;
+}
+
+details {
+  border-top: 1px solid var(--edge);
+  padding-top: 8px;
+  margin-top: 4px;
+}
+summary {
+  cursor: pointer;
+  color: var(--gold);
+  font-weight: 600;
+  font-size: 12.5px;
+}
+.code-box {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 12px;
+  background: var(--bg);
+  border: 1px solid var(--edge);
+  color: var(--gold);
+  padding: 10px;
+  border-radius: var(--radius-sm);
+  word-break: break-all;
+  width: 100%;
+}
+</style>
+</head>
+<body>
+
+<!-- =====================================================================
+     PANTALLA DE INICIO MINIMALISTA (ANTES DE ENTRAR A LOS MENÚS)
+     ===================================================================== -->
+<section id="splash-screen" class="splash-screen" aria-label="Pantalla de Inicio de Deus Absens">
+  <div class="splash-card">
+    <div class="splash-emblem" aria-hidden="true">
+      <svg class="ms-icon xl" viewBox="0 0 24 24"><path d="M12 2v20M7 7h10M5 22h14"/></svg>
+    </div>
+    <span class="eyebrow">Juego de Mesa Roguelite · 4 a 6 Penitentes</span>
+    <h1 style="font-size:clamp(26px, 4vw, 40px); margin-bottom:4px;">DEUS ABSENS</h1>
+    <p style="color:var(--gold); font-size:15px; font-weight:600; margin-bottom:10px;">Los Años de las Sirenas · El Trono ha quedado en Silencio</p>
+    <p class="note" style="max-width:640px; margin:0 auto;">
+      Forma una expedición de <b>4, 5 o 6 personajes</b>, consulta el <b>Lore y el Códice</b> con información oculta para los <b>3 Santos Apócrifos bloqueados</b> hasta romper su sello,
+      y lleva tu <b>Hoja de Personaje</b> pulsando directamente tus atributos o armas para lanzar los dados.
+    </p>
+
+    <div class="splash-pillars">
+      <div class="splash-pillar">
+        <span class="eyebrow">1. Primer Menú</span>
+        <strong>
+          <svg class="ms-icon gold" viewBox="0 0 24 24"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg>
+          Lore y Áreas
+        </strong>
+        <span class="note">Resumen en 1 minuto para jugadores, historia del mundo y las 3 Áreas recomendadas.</span>
+      </div>
+      <div class="splash-pillar">
+        <span class="eyebrow">2. Códice y Sellos</span>
+        <strong>
+          <svg class="ms-icon gold" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          7 Santos + 3 Apócrifos Sellados
+        </strong>
+        <span class="note">Los 3 Santos bloqueados y las reliquias selladas ocultan sus secretos y muestran su requisito de desbloqueo.</span>
+      </div>
+      <div class="splash-pillar">
+        <span class="eyebrow">3. Mesa de Juego</span>
+        <strong>
+          <svg class="ms-icon gold" viewBox="0 0 24 24"><path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M9.5 17.5L21 6V3h-3L6.5 14.5"/><path d="M11 19l-6-6"/><path d="M8 16l-4 4"/></svg>
+          Hojas y Director
+        </strong>
+        <span class="note">Hojas de Personaje con dados directos al pulsar atributos/armas, tienda cada 2 batallas y mapa 10×10.</span>
+      </div>
+    </div>
+
+    <div class="splash-actions">
+      <button type="button" id="btn-enter-lore" class="btn-splash-primary">
+        <svg class="ms-icon" viewBox="0 0 24 24"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/></svg>
+        Entrar al Santuario · Abrir Lore y Áreas
+      </button>
+      <button type="button" id="btn-enter-codex" class="mode-btn">
+        <svg class="ms-icon gold" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        Ir directo al Códice (Santos y Objetos)
+      </button>
+      <button type="button" id="btn-enter-jugar" class="mode-btn">
+        <svg class="ms-icon gold" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.4" fill="currentColor"/><circle cx="15.5" cy="15.5" r="1.4" fill="currentColor"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/></svg>
+        Ir directo a Jugar (Hojas de Personaje / Director)
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     BARRA SUPERIOR DE MENÚS (PRIMER MENÚ ACTIVO POR DEFECTO: LORE Y ÁREAS)
+     ===================================================================== -->
+<header class="topbar">
+  <div class="brand-wrap">
+    <span class="brand-cross" aria-hidden="true">
+      <svg class="ms-icon lg" viewBox="0 0 24 24"><path d="M12 2v20M7 7h10M5 22h14"/></svg>
+    </span>
+    <div>
+      <div class="brand-title">DEUS ABSENS</div>
+      <div class="brand-sub">7 Santos Iniciales + 3 Apócrifos Sellados · 141 Reliquias · 64 Criaturas</div>
+    </div>
+  </div>
+  <nav class="mode-switch" aria-label="Menú principal">
+    <button type="button" class="mode-btn active" id="nav-lore" data-main-menu="lore">
+      <svg class="ms-icon" viewBox="0 0 24 24"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/></svg>
+      1. Lore y Áreas
+    </button>
+    <button type="button" class="mode-btn" id="nav-codex" data-main-menu="codex">
+      <svg class="ms-icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      2. Códice
+    </button>
+    <button type="button" class="mode-btn" id="nav-jugar" data-main-menu="jugar">
+      <svg class="ms-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.4" fill="currentColor"/><circle cx="15.5" cy="15.5" r="1.4" fill="currentColor"/></svg>
+      3. Jugar (Hojas y Director)
+    </button>
+    <button type="button" class="mode-btn" id="nav-creditos" data-main-menu="creditos">
+      <svg class="ms-icon" viewBox="0 0 24 24"><circle cx="12" cy="8" r="5"/><path d="M8.5 13l-1.5 8 5-3 5 3-1.5-8"/></svg>
+      4. Créditos
+    </button>
+    <button type="button" class="btn-sm" id="btn-show-splash" title="Volver a la Pantalla de Inicio">
+      <svg class="ms-icon" viewBox="0 0 24 24"><path d="M3 10l9-7 9 7v11a1 1 0 0 1-1 1h-6v-7h-4v7H4a1 1 0 0 1-1-1z"/></svg>
+      Portada
+    </button>
+  </nav>
+</header>
+
+<div id="toast-bar" role="status" aria-live="polite">
+  <span id="toast-msg"></span>
+  <button type="button" class="btn-sm" id="toast-close">Cerrar</button>
+</div>
+
+<main>
+  <!-- =================================================================
+       MENÚ 1 (ABIERTO POR DEFECTO): LORE Y ÁREAS RECOMENDADAS
+       ================================================================= -->
+  <section id="view-lore">
+    <div class="panel panel-gold">
+      <div class="between">
+        <div>
+          <span class="eyebrow">1. Lore y Áreas · Guía Sencilla para Jugadores</span>
+          <h1>Lore del Mundo y Áreas Recomendadas</h1>
+          <p class="note">Resumen claro para empezar a jugar en pocos minutos, seguido de las 3 Áreas recomendadas para la expedición.</p>
+        </div>
+      </div>
+      <div class="subnav" style="margin-top:10px;margin-bottom:0;">
+        <button type="button" class="subtab active" data-lore-tab="areas">1. Resumen para Jugadores y Áreas Recomendadas</button>
+        <button type="button" class="subtab" data-lore-tab="mundo">2. Los Años de las Sirenas (Historia y Mundo)</button>
+        <button type="button" class="subtab" data-lore-tab="eventos">3. Eventos de Ruta y Finales (12 Eventos)</button>
+      </div>
+    </div>
+
+    <!-- Sub-pestaña Lore 1: Guía rápida + Áreas Recomendadas -->
+    <div id="lore-pane-areas" class="lore-pane">
+      <div class="panel">
+        <span class="eyebrow">Guía Rápida en 1 Minuto</span>
+        <h2>¿Cómo funciona DEUS ABSENS?</h2>
+        <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); margin-top:10px;">
+          <div class="card">
+            <span class="eyebrow">1. El Mundo</span>
+            <h3>El Día que Dios Calló</h3>
+            <p class="note">En una época inspirada en los <b>años 1940</b>, entre sirenas antiaéreas y apagones, el Cielo quedó vacío. En los templos y estaciones abandonadas surgieron las <b>Ausencias</b> (64 criaturas).</p>
+          </div>
+          <div class="card">
+            <span class="eyebrow">2. Santos y Sellos</span>
+            <h3>7 Iniciales + 3 Apócrifos Bloqueados</h3>
+            <p class="note">Comienzas con <b>7 Santos disponibles</b>. Hay <b>3 Santos Apócrifos sellados</b> cuya información, armas y facultades permanecen ocultas hasta cumplir su requisito de desbloqueo.</p>
+          </div>
+          <div class="card">
+            <span class="eyebrow">3. Dados Directos</span>
+            <h3>Pulsa el Atributo o Arma</h3>
+            <p class="note">Repartes <b>+3, +2, +1 y +0</b> en <b>ACERO</b>, <b>CENIZA</b>, <b>SANGRE</b> y <b>DOGMA</b>. Pulsa directamente p. ej. <b>ACERO +3</b> o el <b>nombre de tu arma/objeto</b> para lanzar los dados con animación.</p>
+          </div>
+          <div class="card">
+            <span class="eyebrow">4. Progresión y Muerte</span>
+            <h3>Tienda cada 2 Batallas y Legado 50%</h3>
+            <p class="note">Cada batalla da <b>Ecos</b>. Cada <b>2 batallas</b> se abre tu <b>Tienda Aleatoria</b> (pagas con Ecos o Vida). Al morir se genera tu código <b>DA-LEGADO</b> con el <b>50% de tus Ecos</b> y tus desbloqueos (incluidos Santos).</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="lore-areas-content"></div>
+    </div>
+
+    <!-- Sub-pestaña Lore 2: Mundo y Cronología -->
+    <div id="lore-pane-mundo" class="lore-pane" hidden>
+      <div id="lore-mundo-content"></div>
+    </div>
+
+    <!-- Sub-pestaña Lore 3: Eventos y Finales -->
+    <div id="lore-pane-eventos" class="lore-pane" hidden>
+      <div id="lore-eventos-content"></div>
+    </div>
+  </section>
+
+  <!-- =================================================================
+       MENÚ 2: CÓDICE SENCILLO DE LEER (CON OCULTACIÓN DE BLOQUEADOS)
+       ================================================================= -->
+  <section id="view-codex" hidden>
+    <div class="panel panel-gold">
+      <div class="between">
+        <div>
+          <span class="eyebrow">2. Códice · Archivo y Sellos del Santuario</span>
+          <h1>Códice de DEUS ABSENS</h1>
+          <p class="note">Los <b>3 Santos Apócrifos bloqueados</b> y los objetos aún no descubiertos mantienen su información sellada y muestran su <b>requisito de desbloqueo</b>.</p>
+        </div>
+        <div class="badges">
+          <span class="badge gold" id="codex-saints-progress-badge">7 / 10 Santos Desbloqueados</span>
+          <span class="badge blue" id="codex-items-progress-badge">14 / 141 Objetos Desbloqueados</span>
+        </div>
+      </div>
+      <div class="subnav" style="margin-top:10px;margin-bottom:0;">
+        <button type="button" class="subtab active" data-codex-tab="santos">1. Los 10 Santos (7 Disponibles · 3 Apócrifos Sellados)</button>
+        <button type="button" class="subtab" data-codex-tab="armas-inicio">2. Las 20 Armas y Equipos de Inicio</button>
+        <button type="button" class="subtab" data-codex-tab="objetos">3. Los 141 Objetos del Relicario</button>
+        <button type="button" class="subtab" data-codex-tab="bestiario">4. Las 64 Criaturas del Bestiario</button>
+      </div>
+    </div>
+
+    <!-- Códice Pestaña 1: 10 Santos (Ocultando información de los 3 bloqueados) -->
+    <div id="codex-santos" class="codex-pane">
+      <div id="codex-santos-grid" class="grid"></div>
+    </div>
+
+    <!-- Códice Pestaña 2: Los 20 Objetos de Inicio (Ocultando armas de Santos bloqueados) -->
+    <div id="codex-armas-inicio" class="codex-pane" hidden>
+      <div class="panel">
+        <div class="between">
+          <div>
+            <span class="eyebrow">Archivo Original · Dotación Sagrada de los Santos</span>
+            <h2>Los 20 Objetos y Armas de Inicio + 13 Reliquias Propias</h2>
+            <p class="note">El armamento de los Santos Apócrifos bloqueados permanece clasificado hasta romper su sello.</p>
+          </div>
+          <select id="codex-starter-saint-filter">
+            <option value="">Ver todos los 10 Santos (20 Armas + Reliquias)</option>
+          </select>
+        </div>
+      </div>
+      <div id="codex-starters-grid" class="grid"></div>
+    </div>
+
+    <!-- Códice Pestaña 3: 141 Objetos del Relicario -->
+    <div id="codex-objetos" class="codex-pane" hidden>
+      <div class="panel">
+        <div class="row">
+          <input type="search" id="codex-item-search" placeholder="Buscar reliquia o suministro por nombre..." style="flex:1;min-width:200px;">
+          <select id="codex-item-type">
+            <option value="">Todos los objetos (141)</option>
+            <option value="desbloqueado">Solo Desbloqueados por mí</option>
+            <option value="bloqueado">Solo Sellados / Por Desbloquear</option>
+            <option value="propio">Reliquias Propias de Inicio de los Santos (13)</option>
+            <option value="pasivo">Pasivos</option>
+            <option value="activo">Activos</option>
+            <option value="consumible">Consumibles</option>
+            <option value="sacrificio">Sacrificios</option>
+          </select>
+          <span class="badge gold" id="codex-item-count">141 objetos</span>
+        </div>
+      </div>
+      <div id="codex-objetos-grid" class="grid"></div>
+    </div>
+
+    <!-- Códice Pestaña 4: 64 Criaturas del Bestiario -->
+    <div id="codex-bestiario" class="codex-pane" hidden>
+      <div class="panel">
+        <div class="row">
+          <input type="search" id="codex-enemy-search" placeholder="Buscar criatura por nombre, grado o facultad..." style="flex:1;min-width:200px;">
+          <select id="codex-enemy-grade">
+            <option value="">Todos los grados (64)</option>
+            <option value="Murmullo">1. Murmullo — Tropas básicas (16)</option>
+            <option value="Presagio">2. Presagio — Especialistas (18)</option>
+            <option value="Flagelo">3. Flagelo — Élites (14)</option>
+            <option value="Anatema">4. Anatema — Campeones (11)</option>
+            <option value="Silencio">5. Silencio — Jefes de Altar (5)</option>
+          </select>
+          <span class="badge gold" id="codex-enemy-count">64 criaturas</span>
+        </div>
+      </div>
+      <div id="codex-bestiario-grid" class="grid"></div>
+    </div>
+  </section>
+
+  <!-- =================================================================
+       MENÚ 3: JUGAR (HOJAS DE PERSONAJE PARA JUGADORES + DIRECTOR 10x10)
+       ================================================================= -->
+  <div id="menu-jugar" hidden>
+    <div class="play-instance-bar">
+      <div>
+        <span class="eyebrow">3. Menú Jugar · Instancias de Partida</span>
+        <strong>Expedición de 4 a 6 Personajes</strong>
+      </div>
+      <div class="instance-pills" role="tablist" aria-label="Submenú de Jugar">
+        <button type="button" class="instance-pill active" id="nav-jugador" data-switch-mode="jugador">1. Hojas de Personaje (Jugadores)</button>
+        <button type="button" class="instance-pill" id="nav-director" data-switch-mode="director">2. Director de Juego (Cuadrícula 10×10)</button>
+      </div>
+    </div>
+
+    <!-- SUB-INSTANCIA 3A: HOJAS DE PERSONAJE DE LOS JUGADORES -->
+    <section id="view-jugador">
+      <div class="sheet-slot-bar">
+        <div id="player-sheet-slots-bar"></div>
+        <div class="row">
+          <label class="field" style="flex-direction:row;align-items:center;gap:6px;">
+            <span>Grupo:</span>
+            <select id="player-exp-size" style="padding:4px 8px;">
+              <option value="4">4 Personajes</option>
+              <option value="5">5 Personajes</option>
+              <option value="6">6 Personajes</option>
+            </select>
+          </label>
+          <button type="button" id="btn-player-reset-run" class="btn-sm">Nueva Run en esta Hoja</button>
+        </div>
+      </div>
+
+      <div class="subnav" role="tablist">
+        <button type="button" class="subtab active" data-player-tab="hoja">1. Hoja de Personaje (Atributos, Vida y Objetos)</button>
+        <button type="button" class="subtab" data-player-tab="tienda">2. Tienda Aleatoria cada 2 Batallas (<span id="player-battle-badge">Batalla 0</span>)</button>
+        <button type="button" class="subtab" data-player-tab="desbloqueos">3. Desbloqueables: Santos, Objetos y Mejoras (<span id="player-unlock-badge">7/10 · 14/141</span>)</button>
+        <button type="button" class="subtab" data-player-tab="legado">4. Muerte y Código de Legado (50% Ecos)</button>
+      </div>
+
+      <!-- PESTAÑA JUGADOR 1: LA HOJA DE PERSONAJE MINIMALISTA -->
+      <div id="ptab-hoja" class="player-tab-pane">
+        <div class="character-sheet-folio">
+          <!-- Cabecera de la Hoja -->
+          <div class="sheet-header-banner">
+            <div class="row" style="gap:12px;flex:1;">
+              <div class="sheet-seal-emblem" id="sheet-saint-icon"></div>
+              <div style="flex:1;min-width:220px;">
+                <span class="eyebrow" id="sheet-header-eyebrow">HOJA DE PERSONAJE · JUGADOR 1</span>
+                <div class="row" style="gap:8px;">
+                  <input type="text" id="player-name-input" value="Penitente 1" maxlength="50" style="font-size:16px;font-weight:700;color:var(--gold);width:190px;" aria-label="Nombre del Personaje">
+                  <select id="player-saint-select" style="font-weight:600;flex:1;min-width:210px;" aria-label="Santo Patrono"></select>
+                </div>
+                <p class="note" id="sheet-saint-subtitle" style="margin:4px 0 0 0;"></p>
+              </div>
+            </div>
+            <div class="row">
+              <span class="badge gold" id="player-locked-status">En preparación</span>
+              <span class="badge green" id="player-alive-badge">VIVO</span>
+              <button type="button" id="btn-seal-character" class="btn-gold">Sellar Hoja y Recibir Objetos de Inicio</button>
+              <button type="button" id="btn-reopen-character" class="btn-sm">Editar Santo/Atributos</button>
+            </div>
+          </div>
+
+          <!-- Bloque I: Atributos con Lanzamiento Directo al Pulsar p. ej. "ACERO +3" -->
+          <div class="between">
+            <span class="eyebrow">I. Atributos (+3, +2, +1 y +0) · Pulsa el Atributo para Lanzar 2d6</span>
+            <span class="note">Toca directamente <b>ACERO +3</b>, <b>CENIZA +2</b> o el <b>nombre de cualquier arma u objeto</b> para tirar</span>
+          </div>
+
+          <div class="attr-medallions">
+            <!-- ACERO -->
+            <div class="attr-medallion">
+              <button type="button" class="attr-roll-trigger" data-roll-attr="ACERO" title="Pulsa para lanzar 2d6 + ACERO">
+                <span class="attr-roll-label" id="attr-label-acero">ACERO +3</span>
+                <span class="attr-roll-hint">Fuerza / Cuerpo a cuerpo · Toca para lanzar</span>
+              </button>
+              <div class="attr-edit-row" id="attr-edit-wrap-acero">
+                <span>Reparto:</span>
+                <select id="attr-acero" data-attr-select="ACERO" aria-label="Valor de ACERO">
+                  <option value="3">+3</option><option value="2">+2</option><option value="1">+1</option><option value="0">+0</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- CENIZA -->
+            <div class="attr-medallion">
+              <button type="button" class="attr-roll-trigger" data-roll-attr="CENIZA" title="Pulsa para lanzar 2d6 + CENIZA">
+                <span class="attr-roll-label" id="attr-label-ceniza">CENIZA +2</span>
+                <span class="attr-roll-hint">Puntería / DEF / MOV · Toca para lanzar</span>
+              </button>
+              <div class="attr-edit-row" id="attr-edit-wrap-ceniza">
+                <span>Reparto:</span>
+                <select id="attr-ceniza" data-attr-select="CENIZA" aria-label="Valor de CENIZA">
+                  <option value="3">+3</option><option value="2">+2</option><option value="1">+1</option><option value="0">+0</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- SANGRE -->
+            <div class="attr-medallion">
+              <button type="button" class="attr-roll-trigger" data-roll-attr="SANGRE" title="Pulsa para lanzar 2d6 + SANGRE">
+                <span class="attr-roll-label" id="attr-label-sangre">SANGRE +1</span>
+                <span class="attr-roll-hint">Vitalidad (12 + 3×SANGRE) · Toca para lanzar</span>
+              </button>
+              <div class="attr-edit-row" id="attr-edit-wrap-sangre">
+                <span>Reparto:</span>
+                <select id="attr-sangre" data-attr-select="SANGRE" aria-label="Valor de SANGRE">
+                  <option value="3">+3</option><option value="2">+2</option><option value="1">+1</option><option value="0">+0</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- DOGMA -->
+            <div class="attr-medallion">
+              <button type="button" class="attr-roll-trigger" data-roll-attr="DOGMA" title="Pulsa para lanzar 2d6 + DOGMA">
+                <span class="attr-roll-label" id="attr-label-dogma">DOGMA +0</span>
+                <span class="attr-roll-hint">Ocultismo / Estigma · Toca para lanzar</span>
+              </button>
+              <div class="attr-edit-row" id="attr-edit-wrap-dogma">
+                <span>Reparto:</span>
+                <select id="attr-dogma" data-attr-select="DOGMA" aria-label="Valor de DOGMA">
+                  <option value="3">+3</option><option value="2">+2</option><option value="1">+1</option><option value="0">+0</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Estadísticas Derivadas -->
+          <div class="badges" id="player-derived-badges" style="margin-bottom:12px;"></div>
+
+          <!-- BANDEJA DE DADOS ANIMADA (CUBOS 3D + CÁLCULO DE ATAQUE Y DAÑO) -->
+          <div id="sheet-dice-result" class="dice-stage" aria-live="polite">
+            <div class="dice-cubes-wrap" id="dice-cubes-container">
+              <div class="die-cube" id="die-cube-1"><span>6</span><span class="die-tag">1d6</span></div>
+              <div class="die-cube" id="die-cube-2"><span>6</span><span class="die-tag">1d6</span></div>
+            </div>
+            <div class="dice-formula-info" id="dice-formula-text">
+              <span class="eyebrow">Cámara Litúrgica de Dados</span>
+              <strong>Pulsa cualquier atributo (p. ej. ACERO +3) o el nombre de un arma/objeto para lanzar</strong>
+              <p class="note" style="margin:2px 0 0 0;">Las armas lanzan simultáneamente tu tirada de ataque (2d6 + Atributo) y su dado de daño.</p>
+            </div>
+            <div class="dice-total-pill" id="dice-total-box">
+              <span class="total-num" id="dice-total-num">—</span>
+              <span class="total-lbl" id="dice-total-lbl">Resultado</span>
+            </div>
+          </div>
+
+          <!-- Bloque II: Contadores Vitales -->
+          <span class="eyebrow">II. Contadores de Mesa (Vida, Estigma, Ecos y Batallas)</span>
+          <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); margin-bottom:16px;">
+            <!-- Vida (PV) -->
+            <div class="card">
+              <div class="between">
+                <span class="eyebrow">Puntos de Vida (PV)</span>
+                <strong id="player-hp-text" style="font-size:18px;color:var(--red);">18 / 18</strong>
+              </div>
+              <div class="bar-wrap"><div id="player-hp-bar" class="bar-fill bar-hp" style="width:100%"></div></div>
+              <div class="row" style="margin-top:4px;">
+                <button type="button" class="btn-sm btn-danger" data-hp-delta="-1">-1 PV</button>
+                <button type="button" class="btn-sm btn-danger" data-hp-delta="-3">-3 PV</button>
+                <button type="button" class="btn-sm" data-hp-delta="1">+1 PV</button>
+                <button type="button" class="btn-sm" data-hp-delta="3">+3 PV</button>
+                <button type="button" class="btn-sm" id="btn-hp-full">Máx</button>
+              </div>
+            </div>
+
+            <!-- Estigma -->
+            <div class="card">
+              <div class="between">
+                <span class="eyebrow">Estigma</span>
+                <strong id="player-stigma-text" style="font-size:18px;color:var(--purple);">0 / 10</strong>
+              </div>
+              <div class="bar-wrap"><div id="player-stigma-bar" class="bar-fill bar-stigma" style="width:0%"></div></div>
+              <div class="row" style="margin-top:4px;">
+                <button type="button" class="btn-sm" data-stigma-delta="-1">-1 Est</button>
+                <button type="button" class="btn-sm" data-stigma-delta="1">+1 Est</button>
+                <button type="button" class="btn-sm" data-stigma-delta="2">+2 Est</button>
+                <button type="button" class="btn-sm" id="btn-stigma-zero">Limpiar</button>
+              </div>
+            </div>
+
+            <!-- Ecos y Batallas -->
+            <div class="card">
+              <div class="between">
+                <span class="eyebrow">Ecos Actuales</span>
+                <strong id="player-ecos-text" style="font-size:18px;color:var(--gold);">0 Ecos</strong>
+              </div>
+              <div class="row" style="margin-top:4px;">
+                <button type="button" class="btn-sm" data-ecos-delta="5">+5 Ecos</button>
+                <button type="button" class="btn-sm" data-ecos-delta="10">+10 Ecos</button>
+                <button type="button" class="btn-sm" data-ecos-delta="-5">-5 Ecos</button>
+                <input type="number" id="custom-ecos-input" value="8" style="width:58px;padding:3px 6px;">
+                <button type="button" class="btn-sm" id="btn-add-custom-ecos">Sumar</button>
+              </div>
+              <div class="between" style="margin-top:6px;padding-top:6px;border-top:1px solid var(--edge);">
+                <span class="note">Batallas: <b id="player-battles-count">0</b></span>
+                <button type="button" class="btn-sm btn-gold" id="btn-complete-battle">+ Completar Batalla</button>
+              </div>
+            </div>
+
+            <!-- Martirio y Acciones -->
+            <div class="card">
+              <div class="between">
+                <span class="eyebrow">Martirio y Código</span>
+                <span class="badge gold">Cargas: <b id="player-martyr-count">1</b></span>
+              </div>
+              <div class="row" style="margin-top:4px;">
+                <button type="button" class="btn-sm" id="btn-spend-martyr">Activar Martirio</button>
+                <button type="button" class="btn-sm" id="btn-restore-martyr">Restaurar</button>
+              </div>
+              <div class="row" style="margin-top:auto;padding-top:6px;border-top:1px solid var(--edge);">
+                <button type="button" class="btn-sm" id="btn-export-to-director">Copiar Ficha (Director)</button>
+                <button type="button" class="btn-sm btn-danger" id="btn-declare-death">Morir (Código 50%)</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bloque III y IV: Objetos de Inicio del Santo + Mochila de Reliquias -->
+          <div class="two-col">
+            <div id="player-saint-detail-panel"></div>
+
+            <div>
+              <div class="panel" style="margin-bottom:0;">
+                <div class="between">
+                  <div>
+                    <span class="eyebrow">IV. Reliquias y Suministros en tu Hoja · Pulsa el Nombre para Lanzar/Activar</span>
+                    <h2>Inventario Activo</h2>
+                  </div>
+                  <span class="badge gold" id="player-inv-count">0 objetos</span>
+                </div>
+                <p class="note">Capacidad: <b>3 Pasivos</b>, <b>1 Activo</b> y <b>2 Consumibles/Sacrificios</b>. Toca el <b>nombre de cualquier reliquia o suministro</b> para tirar su dado o resolver su efecto.</p>
+                <div id="player-inventory-list" style="margin-top:10px;"></div>
+
+                <details style="margin-top:12px;">
+                  <summary>+ Añadir objeto ganado en caso especial de batalla</summary>
+                  <div class="row" style="margin-top:8px;">
+                    <select id="player-special-reward-select" style="flex:1;min-width:180px;"></select>
+                    <button type="button" id="btn-add-special-reward" class="btn-sm btn-gold">Añadir a la Hoja y Desbloquear</button>
+                  </div>
+                </details>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PESTAÑA JUGADOR 2: TIENDA ALEATORIA CADA 2 BATALLAS -->
+      <div id="ptab-tienda" class="player-tab-pane" hidden>
+        <div class="panel panel-gold">
+          <div class="between">
+            <div>
+              <span class="eyebrow">Paso 5 · Mercader del Umbral</span>
+              <h2>Tienda Aleatoria Personal (Cada 2 Batallas)</h2>
+              <p class="note">Cada <b>2 batallas completadas</b> se abre tu tienda aleatoria con objetos de tus <b>desbloqueos personales</b>. Elige pagar con <b>Ecos</b> o con <b>Vida (PV)</b>.</p>
+            </div>
+            <div class="badges">
+              <span class="badge gold">Batallas: <b id="shop-battles-num">0</b></span>
+              <span class="badge gold">Ecos: <b id="shop-ecos-num">0</b></span>
+              <span class="badge red">Vida: <b id="shop-hp-num">18/18 PV</b></span>
+            </div>
+          </div>
+          <div class="row" style="margin-top:10px;">
+            <button type="button" id="btn-shop-win-battle" class="btn-gold">+ Registrar Batalla Ganada (+Ecos)</button>
+            <button type="button" id="btn-shop-reroll" class="btn-sm">Generar / Refrescar Tienda Aleatoria (4 Ofertas de tus Desbloqueos)</button>
+          </div>
+        </div>
+
+        <div id="shop-status-banner" class="panel"></div>
+        <div id="shop-offers-grid" class="grid"></div>
+      </div>
+
+      <!-- PESTAÑA JUGADOR 3: SISTEMA DE DESBLOQUEABLES (3 SANTOS APÓCRIFOS + 141 OBJETOS + 20 MEJORAS) -->
+      <div id="ptab-desbloqueos" class="player-tab-pane" hidden>
+        <!-- Bloque Superior: Los 3 Santos Apócrifos Bloqueados -->
+        <div class="panel panel-gold">
+          <div class="between">
+            <div>
+              <span class="eyebrow">Basílica del Santuario · Sellos de los Santos Apócrifos</span>
+              <h2>Santos Desbloqueables (7 Iniciales + 3 Apócrifos Sellados)</h2>
+              <p class="note">Mientras un Santo Apócrifo esté sellado, su identidad táctica, atributos, armas iniciales, pasiva, martirio e historia permanecen ocultos. Rompe su sello con <b>Ecos</b> o al cumplir su <b>requisito de campaña</b> para habilitarlo en tu Hoja y en tu código de legado.</p>
+            </div>
+            <div class="badges">
+              <span class="badge gold" id="saints-unlock-summary-badge">7 / 10 Santos Disponibles</span>
+              <span class="badge gold">Ecos disponibles: <b id="saints-unlock-ecos-num">0</b></span>
+            </div>
+          </div>
+          <div id="player-secret-saints-grid" class="grid" style="margin-top:12px;"></div>
+        </div>
+
+        <div class="two-col">
+          <div class="panel">
+            <span class="eyebrow">Progresión entre Runs</span>
+            <h2>Mejoras Permanentes (20 Entrenamientos)</h2>
+            <p class="note">Cada entrenamiento indica su requisito de desbloqueo y coste en Ecos.</p>
+            <div id="player-upgrades-list" style="margin-top:10px;"></div>
+          </div>
+
+          <div class="panel">
+            <span class="eyebrow">Colección Personal (141 Objetos)</span>
+            <h2>Relicario y Requisitos de Desbloqueo</h2>
+            <p class="note">Los objetos aún no descubiertos ocultan su efecto y muestran su requisito de desbloqueo. Al desbloquearlos entran en tus Tiendas Aleatorias y en tu código al morir.</p>
+            <div class="row" style="margin:10px 0;">
+              <input type="search" id="unlock-search-input" placeholder="Buscar por nombre o requisito de desbloqueo..." style="flex:1;min-width:180px;">
+              <select id="unlock-filter-select">
+                <option value="all">Todos (141)</option>
+                <option value="locked">Sellados / Por desbloquear</option>
+                <option value="unlocked">Desbloqueados por mí</option>
+              </select>
+            </div>
+            <div id="player-unlocks-catalog" style="max-height:540px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PESTAÑA JUGADOR 4: MUERTE Y CÓDIGO DE LEGADO (PASOS 6 Y 7) -->
+      <div id="ptab-legado" class="player-tab-pane" hidden>
+        <div class="two-col">
+          <div class="panel panel-danger">
+            <span class="eyebrow">Paso 6 · Al Morir en la Expedición</span>
+            <h2>Generar Código de Muerte y Legado (50% Ecos)</h2>
+            <p class="note">Al morir se genera tu código personal <b>DA-LEGADO</b> con <b>la mitad de tus Ecos actuales</b> (<code>floor(Ecos / 2)</code>), tus <b>Santos Apócrifos desbloqueados</b>, tus objetos descubiertos y tus mejoras.</p>
+            <div class="badges" style="margin:10px 0;">
+              <span class="badge gold">Ecos Actuales: <b id="leg-current-ecos">0</b></span>
+              <span class="badge green">Conservarás (50%): <b id="leg-half-ecos">0</b></span>
+              <span class="badge gold">Santos: <b id="leg-unlocked-saints">7</b> / 10</span>
+              <span class="badge blue">Objetos: <b id="leg-unlocked-count">14</b> / 141</span>
+            </div>
+            <div class="row" style="margin-bottom:10px;">
+              <button type="button" id="btn-generate-death-code" class="btn-danger">Morir y Generar Código (Conservar 50% de Ecos)</button>
+              <button type="button" id="btn-copy-death-code" class="btn-sm">Copiar Código</button>
+            </div>
+            <textarea id="generated-death-code" class="code-box" rows="4" readonly placeholder="Aquí aparecerá tu código DA-LEGADO al morir..."></textarea>
+          </div>
+
+          <div class="panel panel-gold">
+            <span class="eyebrow">Paso 7 · Inicio de la Siguiente Run</span>
+            <h2>Cargar Código de Legado para Nueva Run</h2>
+            <p class="note">Pega aquí el código <b>DA-LEGADO</b> de tu run anterior para restaurar tu 50% de Ecos, tus <b>Santos desbloqueados</b>, tus objetos y tus mejoras.</p>
+            <textarea id="import-legacy-code-input" class="code-box" rows="4" placeholder="Pega aquí tu código DA-LEGADO.v1..."></textarea>
+            <div class="row" style="margin-top:10px;">
+              <button type="button" id="btn-apply-legacy-code" class="btn-gold">Aplicar Código e Iniciar Siguiente Run</button>
+            </div>
+            <div id="legacy-import-preview" style="margin-top:10px;"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUB-INSTANCIA 3B: DIRECTOR DE JUEGO -->
+    <section id="view-director" hidden>
+      <div class="panel panel-gold">
+        <div class="between">
+          <div>
+            <span class="eyebrow">Jugar · Instancia de Director de Juego</span>
+            <h1>Mesa del Director (Cuadrícula 10×10)</h1>
+            <p class="note">Supervisa a los <b>4, 5 o 6 personajes</b> (vida, Ecos y objetos), genera encuentros procedurales en la cuadrícula 10×10 basados en el bestiario y entrega recompensas tras cada batalla.</p>
+          </div>
+          <div class="row">
+            <label class="field">Expedición
+              <select id="dm-party-size">
+                <option value="4">4 Personajes</option>
+                <option value="5">5 Personajes</option>
+                <option value="6">6 Personajes</option>
+              </select>
+            </label>
+            <label class="field">Batalla Nº
+              <input type="number" id="dm-battle-number" min="1" max="50" value="1" style="width:70px;">
+            </label>
+            <button type="button" id="btn-dm-generate-encounter" class="btn-gold">Generar Encuentro 10×10 Procedural</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <!-- Columna Izquierda: Cuadrícula Procedural 10x10 -->
+        <div>
+          <div class="panel">
+            <div class="between">
+              <div>
+                <span class="eyebrow">Tablero Táctico Procedural (64 Criaturas)</span>
+                <h2 id="dm-encounter-title">Cuadrícula Táctica 10×10 · Batalla 1</h2>
+              </div>
+              <div class="badges" id="dm-threat-badges"></div>
+            </div>
+
+            <div class="row" style="margin: 10px 0; justify-content: space-between;">
+              <div class="row">
+                <label class="field">Perfil de Reto
+                  <select id="dm-challenge-mode">
+                    <option value="progresivo">Progresivo Automático (Según Nº de Batalla)</option>
+                    <option value="escaramuza">Escaramuza (Murmullos y Presagios)</option>
+                    <option value="elite">Asalto Severo (Flagelos y Anatema)</option>
+                    <option value="jefe">Altar de Silencio (Jefe Silencio + Escolta)</option>
+                  </select>
+                </label>
+                <button type="button" id="btn-dm-reroll-map" class="btn-sm btn-gold">Regenerar Mapa y Enemigos</button>
+              </div>
+              <div class="row">
+                <label class="field">Herramienta al Pulsar Casilla
+                  <select id="dm-grid-tool">
+                    <option value="inspect">Mover / Seleccionar Actor</option>
+                    <option value="muro">▪ Pintar/Quitar Muro</option>
+                    <option value="cobertura">⛨ Pintar/Quitar Cobertura (+1 DEF)</option>
+                    <option value="trampa">△ Pintar/Quitar Trampa</option>
+                    <option value="salida">⬡ Pintar/Quitar Salida</option>
+                  </select>
+                </label>
+              </div>
+            </div>
+
+            <div class="grid-board-wrap">
+              <div id="dm-grid-10x10" class="grid-10x10" role="grid" aria-label="Cuadrícula táctica de 10 por 10"></div>
+            </div>
+
+            <div class="badges" style="margin-top:10px; justify-content:center;">
+              <span class="badge green">P1–P6: Penitentes</span>
+              <span class="badge red">E1–E6: Enemigos</span>
+              <span class="badge">▪ Muro</span>
+              <span class="badge gold">⛨ Cobertura (+1 DEF)</span>
+              <span class="badge red">△ Trampa</span>
+              <span class="badge blue">⬡ Salida</span>
+            </div>
+            <p class="note" id="dm-cell-status" style="text-align:center;margin-top:6px;">Toca un Penitente (P1–P6) o Enemigo (E1–E6) y luego toca otra casilla libre para moverlo.</p>
+          </div>
+
+          <!-- Enemigos Activos en la Cuadrícula -->
+          <div class="panel">
+            <div class="between">
+              <h2>Criaturas en la Cuadrícula</h2>
+              <div class="row">
+                <select id="dm-add-enemy-select" style="max-width:210px;"></select>
+                <button type="button" id="btn-dm-add-enemy" class="btn-sm">+ Añadir al Mapa</button>
+              </div>
+            </div>
+            <div id="dm-enemies-list" class="grid" style="margin-top:10px;"></div>
+          </div>
+        </div>
+
+        <!-- Columna Derecha: Grupo de 4 a 6 Personajes y Resolución -->
+        <div>
+          <div class="panel panel-gold">
+            <div class="between">
+              <div>
+                <span class="eyebrow">Cierre de Batalla y Tiendas</span>
+                <h2>Completar Batalla y Dar Ecos</h2>
+              </div>
+              <button type="button" id="btn-dm-complete-battle" class="btn-gold">Completar Batalla Actual (+Ecos a Vivos)</button>
+            </div>
+            <p class="note" style="margin-top:6px;">Entrega Ecos a todos los Penitentes vivos. Cada <b>2 batallas completadas</b> se habilita la <b>Tienda Aleatoria</b> en el menú de cada jugador.</p>
+            <div id="dm-battle-summary-banner" style="margin-top:8px;"></div>
+          </div>
+
+          <div class="panel">
+            <div class="between">
+              <h2>Grupo de Expedición (<span id="dm-roster-count-label">4</span> Personajes)</h2>
+              <button type="button" id="btn-dm-import-player-modal" class="btn-sm">Importar Código de Jugador</button>
+            </div>
+            <div id="dm-import-box" hidden style="margin:10px 0;padding:10px;border:1px solid var(--edge-gold);border-radius:var(--radius-sm);">
+              <p class="note">Pega el código <code>DA-FICHA</code> o <code>DA-LEGADO</code> de un jugador para sincronizar su ranura:</p>
+              <div class="row">
+                <select id="dm-import-slot-select"></select>
+                <input type="text" id="dm-import-code-text" placeholder="Código DA-FICHA o DA-LEGADO..." style="flex:1;min-width:160px;">
+                <button type="button" id="btn-dm-apply-import" class="btn-sm btn-gold">Sincronizar</button>
+              </div>
+            </div>
+
+            <div id="dm-party-list" style="display:flex;flex-direction:column;gap:10px;margin-top:10px;"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- =================================================================
+       MENÚ 4: CRÉDITOS
+       ================================================================= -->
+  <section id="view-creditos" hidden>
+    <div class="panel panel-gold">
+      <span class="eyebrow">4. Créditos · Arquitectura y Contenido Íntegro</span>
+      <h1>Créditos de DEUS ABSENS</h1>
+      <p class="lore">«MEMENTO FINIS · El cielo ha quedado vacío, pero el silencio también es una respuesta.»</p>
+    </div>
+
+    <div class="two-col">
+      <div class="panel">
+        <span class="eyebrow">Autoría y Diseño</span>
+        <h2>Dirección Creativa y Sistema</h2>
+        <div class="card" style="margin-bottom:10px;">
+          <h3>Creador y Director del Proyecto</h3>
+          <p class="note">Concepto original de <b>DEUS ABSENS — Los Años de las Sirenas</b>, dirección creativa, progresión roguelite para grupos de 4 a 6 personajes, tiendas aleatorias cada dos batallas y sistema de legado al morir (50% de Ecos).</p>
+        </div>
+        <div class="card" style="margin-bottom:10px;">
+          <h3>Universo Narrativo y Catálogos</h3>
+          <p class="note">Ambientación de Los Años de las Sirenas, los <b>10 Santos Penitentes</b> (7 iniciales y 3 Apócrifos sellados), las <b>20 armas y equipos iniciales</b>, las <b>141 reliquias y suministros</b> y las <b>64 criaturas del Bestiario</b>.</p>
+        </div>
+        <div class="card">
+          <h3>Edición Minimalista Multiplataforma</h3>
+          <p class="note">Interfaz minimalista con iconografía geométrica monocroma acorde al tono litúrgico, ocultación de contenido bloqueado con requisitos de desbloqueo, dados interactivos al pulsar atributos o nombres de armas y objetos, y cuadrícula táctica 10×10 responsiva.</p>
+        </div>
+      </div>
+
+      <div class="panel">
+        <span class="eyebrow">Resumen del Archivo</span>
+        <h2>Contenido Íntegro Conservado</h2>
+        <div class="grid" style="grid-template-columns: repeat(2, minmax(0, 1fr));">
+          <div class="card">
+            <span class="eyebrow">Santos</span>
+            <h3 style="color:var(--gold);font-size:22px;">7 + 3</h3>
+            <p class="note">7 Santos capitales iniciales + 3 Santos Apócrifos desbloqueables.</p>
+          </div>
+          <div class="card">
+            <span class="eyebrow">Objetos</span>
+            <h3 style="color:var(--gold);font-size:22px;">141 + 20</h3>
+            <p class="note">141 reliquias del Relicario + 20 armas/equipos iniciales.</p>
+          </div>
+          <div class="card">
+            <span class="eyebrow">Bestiario</span>
+            <h3 style="color:var(--gold);font-size:22px;">64 Criaturas</h3>
+            <p class="note">Murmullos, Presagios, Flagelos, Anatemas y Jefes Silencio.</p>
+          </div>
+          <div class="card">
+            <span class="eyebrow">Campaña</span>
+            <h3 style="color:var(--gold);font-size:22px;">3 Áreas · 12 Salas</h3>
+            <p class="note">20 entrenamientos, 10 redenciones, 12 eventos y 3 finales.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(async function(){
+  'use strict';
+
+  // La base de datos se carga desde el JSON externo, sin duplicarla en el HTML.
+  // Si se abre el HTML directamente desde disco (file://), el navegador puede
+  // bloquear fetch por seguridad; en ese caso permitimos seleccionar el mismo JSON.
+  async function cargarCatalogo() {
+    const ruta = './deus_absens_datos.json';
+    try {
+      const respuesta = await fetch(ruta, { cache: 'no-store' });
+      if (!respuesta.ok) throw new Error(`HTTP ${respuesta.status}`);
+      const datos = await respuesta.json();
+      if (!Array.isArray(datos.santos) || !Array.isArray(datos.objetos) || !Array.isArray(datos.enemigos)) {
+        throw new Error('El JSON no contiene los catálogos esperados.');
+      }
+      return datos;
+    } catch (error) {
+      const splashCard = document.querySelector('#splash-screen .splash-card');
+      if (!splashCard) throw error;
+
+      const aviso = document.createElement('div');
+      aviso.className = 'seal-requirement-box';
+      aviso.style.textAlign = 'left';
+      aviso.style.marginBottom = '16px';
+      const titulo = document.createElement('strong');
+      titulo.textContent = 'Base de datos externa';
+      const mensaje = document.createElement('p');
+      mensaje.className = 'note';
+      mensaje.style.margin = '6px 0';
+      aviso.append(titulo, mensaje);
+      splashCard.prepend(aviso);
+
+      if (window.location.protocol !== 'file:') {
+        mensaje.textContent = 'No se pudo cargar deus_absens_datos.json. Comprueba que ambos archivos estén en la misma carpeta y que el servidor publique el JSON. Detalle: ' + error.message;
+        return null;
+      }
+
+      mensaje.textContent = 'Para abrir esta página desde una carpeta local, selecciona el archivo deus_absens_datos.json que viene junto al HTML. En un servidor web se carga automáticamente.';
+      const elegir = document.createElement('button');
+      elegir.type = 'button';
+      elegir.className = 'btn-gold';
+      elegir.textContent = 'Seleccionar JSON del juego';
+      const archivo = document.createElement('input');
+      archivo.type = 'file';
+      archivo.accept = '.json,application/json';
+      archivo.hidden = true;
+      aviso.append(elegir, archivo);
+      elegir.addEventListener('click', () => archivo.click());
+      return new Promise(resolve => {
+        archivo.addEventListener('change', async () => {
+          if (!archivo.files || !archivo.files[0]) return;
+          try {
+            const datos = JSON.parse(await archivo.files[0].text());
+            if (!Array.isArray(datos.santos) || !Array.isArray(datos.objetos) || !Array.isArray(datos.enemigos)) {
+              throw new Error('Faltan las colecciones principales de datos.');
+            }
+            aviso.remove();
+            resolve(datos);
+          } catch (err) {
+            mensaje.textContent = 'No se pudo leer el JSON seleccionado: ' + err.message;
+            archivo.value = '';
+          }
+        });
+      });
+    }
+  }
+
+  const CATALOG = await cargarCatalogo();
+  if (!CATALOG) return;
+  const SAINTS_BY_ID = Object.fromEntries(CATALOG.santos.map(s => [s.id, s]));
+  const ITEMS_BY_ID = Object.fromEntries(CATALOG.objetos.map(i => [i.id, i]));
+  const ENEMIES_BY_ID = Object.fromEntries(CATALOG.enemigos.map(e => [e.id, e]));
+  const UPGRADES_BY_ID = Object.fromEntries(CATALOG.mejoras.map(m => [m.id, m]));
+
+  const INITIAL_UNLOCKED_ITEMS = CATALOG.objetos.filter(i => i.inicial && !i.propietarioSanto).map(i => i.id);
+  const INITIAL_UNLOCKED_SAINTS = CATALOG.santos.filter(s => !s.secret).map(s => s.id);
+
+  const STORAGE_SHEETS_KEY = 'da_simplified_sheets_v3';
+  const STORAGE_DM_KEY = 'da_simplified_dm_v3';
+
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+  // Biblioteca de Iconos Vectoriales Monocromos (Estilo Google Material Symbols Outlined)
+  const SVG_ICONS = {
+    'san-longinos': '<svg class="ms-icon gold" viewBox="0 0 24 24"><path d="M14.5 4.5L19.5 9.5M4 20L16.5 7.5M15 4l5 5-3.5 3.5-5-5L15 4z"/></svg>',
+    'santa-lucia': '<svg class="ms-icon gold" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>',
+    'san-erasmo': '<svg class="ms-icon gold" viewBox="0 0 24 24"><path d="M12 3l8 3.5v5.5c0 5-3.5 8.8-8 10-4.5-1.2-8-5-8-10V6.5L12 3z"/><path d="M12 8v8M9 11h6"/></svg>',
+    'santa-magdalena': '<svg class="ms-icon gold" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3c2.5 3 4 5.2 4 7.5a4 4 0 0 1-8 0C8 8.2 9.5 6 12 3z"/></svg>',
+    'san-lorenzo': '<svg class="ms-icon gold" viewBox="0 0 24 24"><path d="M12 3c3 3.5 5 6.5 5 10a5 5 0 0 1-10 0c0-2.5 1.2-4.8 3-7 0 2 1 3 2 3 0-2.2 0-4.2 0-6z"/></svg>',
+    'san-bartolome': '<svg class="ms-icon gold" viewBox="0 0 24 24"><path d="M4 20L20 4M14 4h6v6M5 14l5 5"/></svg>',
+    'san-simeon': '<svg class="ms-icon gold" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>',
+    'san-judas-tadeo': '<svg class="ms-icon gold" viewBox="0 0 24 24"><circle cx="12" cy="10" r="7"/><path d="M9 16v4h6v-4"/><circle cx="9.5" cy="10" r="1.2" fill="currentColor"/><circle cx="14.5" cy="10" r="1.2" fill="currentColor"/></svg>',
+    'santa-juana': '<svg class="ms-icon gold" viewBox="0 0 24 24"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8L12 2z"/></svg>',
+    'san-lazaro': '<svg class="ms-icon gold" viewBox="0 0 24 24"><path d="M9 3h6M10 3v5l-5 8.5A2 2 0 0 0 6.7 19.5h10.6A2 2 0 0 0 19 16.5L14 8V3"/><path d="M8 14h8"/></svg>',
+    'ACERO': '<svg class="ms-icon gold" viewBox="0 0 24 24"><path d="M14.5 17.5L3 6V3h3l11.5 11.5M13 19l6-6M16 16l4 4"/></svg>',
+    'CENIZA': '<svg class="ms-icon gold" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>',
+    'SANGRE': '<svg class="ms-icon red" viewBox="0 0 24 24"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>',
+    'DOGMA': '<svg class="ms-icon purple" viewBox="0 0 24 24"><path d="M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4L12 2z"/></svg>',
+    'die': '<svg class="ms-icon gold" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.4" fill="currentColor"/><circle cx="15.5" cy="15.5" r="1.4" fill="currentColor"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/></svg>',
+    'sword': '<svg class="ms-icon gold" viewBox="0 0 24 24"><path d="M14.5 17.5L3 6V3h3l11.5 11.5M13 19l6-6M16 16l4 4"/></svg>',
+    'shield': '<svg class="ms-icon blue" viewBox="0 0 24 24"><path d="M12 3l8 3.5v5.5c0 5-3.5 8.8-8 10-4.5-1.2-8-5-8-10V6.5L12 3z"/></svg>',
+    'relic': '<svg class="ms-icon gold" viewBox="0 0 24 24"><polygon points="12 2 19 9 12 22 5 9"/></svg>',
+    'coin': '<svg class="ms-icon gold" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v10M9.5 9.5h5M9.5 14.5h5"/></svg>',
+    'skull': '<svg class="ms-icon red" viewBox="0 0 24 24"><circle cx="12" cy="10" r="7"/><path d="M9 16v4h6v-4"/></svg>',
+    'lock': '<svg class="ms-icon muted" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>',
+    'unlock': '<svg class="ms-icon green" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 7.5-1.8"/></svg>'
+  };
+
+  function iconSvg(key) {
+    return SVG_ICONS[key] || SVG_ICONS.relic;
+  }
+
+  function toast(msg, isError = false) {
+    const bar = $('toast-bar');
+    const txt = $('toast-msg');
+    if (!bar || !txt) return;
+    txt.textContent = msg;
+    bar.className = isError ? 'error' : '';
+    bar.style.display = 'flex';
+  }
+  $('toast-close').addEventListener('click', () => { $('toast-bar').style.display = 'none'; });
+
+  // Checksum & Base64 helpers for codes
+  function checksum(str) {
+    let h = 2166136261;
+    for (let i = 0; i < str.length; i++) {
+      h = Math.imul(h ^ str.charCodeAt(i), 16777619) >>> 0;
+    }
+    return h.toString(16).padStart(8, '0');
+  }
+  function encodeCode(prefix, obj) {
+    const raw = JSON.stringify(obj);
+    const u8 = new TextEncoder().encode(raw);
+    let bin = '';
+    for (const b of u8) bin += String.fromCharCode(b);
+    const b64 = btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+    return prefix + '.' + b64 + '.' + checksum(raw);
+  }
+  function decodeCode(codeStr) {
+    const clean = String(codeStr || '').trim();
+    const parts = clean.split('.');
+    if (parts.length !== 3) throw new Error('Formato de código inválido. Debe tener prefijo, datos y suma de verificación.');
+    const [prefix, b64, sum] = parts;
+    const pad = b64.replace(/-/g, '+').replace(/_/g, '/') + '='.repeat((4 - b64.length % 4) % 4);
+    const bin = atob(pad);
+    const raw = new TextDecoder('utf-8').decode(Uint8Array.from(bin, c => c.charCodeAt(0)));
+    if (checksum(raw) !== sum) throw new Error('El código está incompleto o alterado (suma de verificación no coincide).');
+    return { prefix, data: JSON.parse(raw) };
+  }
+
+  function calcMaxHp(attrs) { return 12 + 3 * (Number(attrs?.SANGRE) || 0); }
+  function calcMaxStigma(attrs) { return 10 + (Number(attrs?.DOGMA) || 0); }
+  function calcDef(attrs) { return 8 + Math.ceil((Number(attrs?.CENIZA) || 0) / 2); }
+  function calcMov(attrs) { return 2 + (Number(attrs?.CENIZA) || 0); }
+
+  function copyText(text, successMsg) {
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => toast(successMsg)).catch(() => fallbackCopy(text, successMsg));
+      } else {
+        fallbackCopy(text, successMsg);
+      }
+    } catch (_) {
+      fallbackCopy(text, successMsg);
+    }
+  }
+  function fallbackCopy(text, successMsg) {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); toast(successMsg); } catch (_) { toast('Copia manualmente el texto del recuadro.'); }
+    document.body.removeChild(ta);
+  }
+
+  // =========================================================================
+  // PANTALLA DE INICIO (SPLASH SCREEN) Y NAVEGACIÓN PRINCIPAL
+  // =========================================================================
+  function closeSplashAndOpenMenu(menuName) {
+    $('splash-screen').hidden = true;
+    switchMainMenu(menuName);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  $('btn-enter-lore').addEventListener('click', () => closeSplashAndOpenMenu('lore'));
+  $('btn-enter-codex').addEventListener('click', () => closeSplashAndOpenMenu('codex'));
+  $('btn-enter-jugar').addEventListener('click', () => closeSplashAndOpenMenu('jugar'));
+  $('btn-show-splash').addEventListener('click', () => {
+    $('splash-screen').hidden = false;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  function switchMainMenu(menuName) {
+    $('splash-screen').hidden = true;
+    document.querySelectorAll('[data-main-menu]').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.mainMenu === menuName);
+    });
+    $('view-lore').hidden = (menuName !== 'lore');
+    $('view-codex').hidden = (menuName !== 'codex');
+    $('menu-jugar').hidden = (menuName !== 'jugar');
+    $('view-creditos').hidden = (menuName !== 'creditos');
+    if (menuName === 'codex') renderCodex();
+  }
+
+  document.querySelectorAll('[data-main-menu]').forEach(btn => {
+    btn.addEventListener('click', () => switchMainMenu(btn.dataset.mainMenu));
+  });
+
+  function switchPlaySubmode(submode) {
+    document.querySelectorAll('[data-switch-mode]').forEach(b => {
+      b.classList.toggle('active', b.dataset.switchMode === submode);
+    });
+    $('view-jugador').hidden = (submode !== 'jugador');
+    $('view-director').hidden = (submode !== 'director');
+  }
+
+  document.querySelectorAll('[data-switch-mode]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      switchMainMenu('jugar');
+      switchPlaySubmode(btn.dataset.switchMode);
+    });
+  });
+
+  // =========================================================================
+  // GESTIÓN DE LAS HOJAS DE PERSONAJE DE LOS JUGADORES (SOLO SANTOS DESBLOQUEADOS POR DEFECTO)
+  // =========================================================================
+  const AVAILABLE_START_SAINTS = CATALOG.santos.filter(s => !s.secret);
+
+  function createDefaultSheet(slotIdx) {
+    const defaultSaint = AVAILABLE_START_SAINTS[slotIdx % AVAILABLE_START_SAINTS.length];
+    const attrs = { ...defaultSaint.atributosPiloto };
+    const sheet = {
+      slotIndex: slotIdx,
+      runNumber: 1,
+      name: `Penitente ${slotIdx + 1}`,
+      saintId: defaultSaint.id,
+      attrs: attrs,
+      sealed: false,
+      alive: true,
+      hp: calcMaxHp(attrs),
+      stigma: 0,
+      ecos: 0,
+      martyrCharges: defaultSaint.maxCargasMartirio || 1,
+      battlesCompleted: 0,
+      inventory: [],
+      unlockedItems: [...INITIAL_UNLOCKED_ITEMS],
+      unlockedSaints: [...INITIAL_UNLOCKED_SAINTS],
+      ownedUpgrades: [],
+      shopOffers: [],
+      shopGeneratedForBattle: -1,
+      lastDeathCode: ''
+    };
+    deliverStartingKitToSheet(sheet);
+    return sheet;
+  }
+
+  function deliverStartingKitToSheet(sheet) {
+    const saint = SAINTS_BY_ID[sheet.saintId] || AVAILABLE_START_SAINTS[0];
+    const kit = saint.kit || {};
+    const items = [];
+    if (kit.passive && ITEMS_BY_ID[kit.passive]) {
+      items.push({ uid: 'own-pass-' + kit.passive, id: kit.passive, origin: 'Reliquia Propia de Inicio' });
+    } else {
+      items.push({ uid: 'init-astilla', id: 'astilla', origin: 'Reliquia Inicial' });
+    }
+    if (kit.active && ITEMS_BY_ID[kit.active]) {
+      const cap = ITEMS_BY_ID[kit.active].cargas?.capacidad || 2;
+      items.push({ uid: 'own-act-' + kit.active, id: kit.active, origin: 'Reliquia Propia de Inicio', charges: cap });
+    } else {
+      items.push({ uid: 'init-campana', id: 'campana', origin: 'Reliquia Inicial' });
+    }
+    items.push({ uid: 'init-vendaje-' + Date.now(), id: 'vendaje-campana', origin: 'Suministro Inicial' });
+    sheet.inventory = items;
+  }
+
+  let sheetsBundle = {
+    expeditionSize: 4,
+    activeSlot: 0,
+    sheets: [0, 1, 2, 3, 4, 5].map(i => createDefaultSheet(i))
+  };
+
+  try {
+    const saved = localStorage.getItem(STORAGE_SHEETS_KEY);
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      if (parsed && Array.isArray(parsed.sheets) && parsed.sheets.length === 6) {
+        sheetsBundle = parsed;
+      }
+    }
+  } catch (_) {}
+
+  let pState = sheetsBundle.sheets[sheetsBundle.activeSlot] || sheetsBundle.sheets[0];
+
+  function isSaintUnlockedForPlayer(saintId, sheetObj = pState) {
+    const s = SAINTS_BY_ID[saintId];
+    if (!s) return false;
+    if (!s.secret) return true;
+    return Array.isArray(sheetObj?.unlockedSaints) && sheetObj.unlockedSaints.includes(saintId);
+  }
+
+  // Garantizar que ninguna hoja activa tenga equipado un Santo bloqueado sin haberlo desbloqueado
+  sheetsBundle.sheets.forEach((sh, idx) => {
+    if (!Array.isArray(sh.unlockedSaints)) sh.unlockedSaints = [...INITIAL_UNLOCKED_SAINTS];
+    if (!isSaintUnlockedForPlayer(sh.saintId, sh)) {
+      const fallback = AVAILABLE_START_SAINTS[idx % AVAILABLE_START_SAINTS.length];
+      sh.saintId = fallback.id;
+      sh.attrs = { ...fallback.atributosPiloto };
+      sh.hp = calcMaxHp(sh.attrs);
+      deliverStartingKitToSheet(sh);
+    }
+  });
+
+  function savePlayerState() {
+    sheetsBundle.sheets[sheetsBundle.activeSlot] = pState;
+    try { localStorage.setItem(STORAGE_SHEETS_KEY, JSON.stringify(sheetsBundle)); } catch (_) {}
+  }
+
+  function unlockSecretSaintForAllSheets(saintId, payEcosCost = 0) {
+    const s = SAINTS_BY_ID[saintId];
+    if (!s) return;
+    if (payEcosCost > 0) {
+      if (pState.ecos < payEcosCost) {
+        toast(`Necesitas ${payEcosCost} Ecos para romper el sello de ${s.name} en la Basílica (tienes ${pState.ecos} Ecos).`, true);
+        return;
+      }
+      pState.ecos -= payEcosCost;
+    }
+    sheetsBundle.sheets.forEach(sh => {
+      if (!Array.isArray(sh.unlockedSaints)) sh.unlockedSaints = [...INITIAL_UNLOCKED_SAINTS];
+      if (!sh.unlockedSaints.includes(saintId)) sh.unlockedSaints.push(saintId);
+    });
+    savePlayerState();
+    renderPlayerInstance();
+    renderCodex();
+    renderDmInstance();
+    toast(`¡Sello roto! ${s.name} (${s.titulo}) ha sido desbloqueado y su información ya es visible.`);
+  }
+
+  function relockSecretSaintForAllSheets(saintId) {
+    const s = SAINTS_BY_ID[saintId];
+    if (!s || !s.secret) return;
+    sheetsBundle.sheets.forEach((sh, idx) => {
+      sh.unlockedSaints = (sh.unlockedSaints || []).filter(id => id !== saintId);
+      if (sh.saintId === saintId) {
+        const fallback = AVAILABLE_START_SAINTS[idx % AVAILABLE_START_SAINTS.length];
+        sh.saintId = fallback.id;
+        sh.attrs = { ...fallback.atributosPiloto };
+        sh.hp = calcMaxHp(sh.attrs);
+        deliverStartingKitToSheet(sh);
+      }
+    });
+    savePlayerState();
+    renderPlayerInstance();
+    renderCodex();
+    renderDmInstance();
+    toast(`El sello de ${s.name} se ha vuelto a cerrar y su información ha quedado oculta.`);
+  }
+
+  function switchActivePlayerSheet(slotIdx) {
+    sheetsBundle.activeSlot = Math.max(0, Math.min(5, slotIdx));
+    pState = sheetsBundle.sheets[sheetsBundle.activeSlot];
+    savePlayerState();
+    renderPlayerInstance();
+  }
+
+  function deliverInitialEquipment() {
+    deliverStartingKitToSheet(pState);
+  }
+
+  function generatePlayerShopOffers() {
+    const unlockedPool = CATALOG.objetos.filter(i =>
+      pState.unlockedItems.includes(i.id) &&
+      !i.propietarioSanto
+    );
+    const pool = unlockedPool.length >= 4 ? unlockedPool.slice() : CATALOG.objetos.filter(i => !i.propietarioSanto);
+    const chosen = [];
+    while (pool.length > 0 && chosen.length < 4) {
+      const idx = Math.floor(Math.random() * pool.length);
+      const item = pool.splice(idx, 1)[0];
+      const baseEcos = Math.max(6, Number(item.precioReserva) || 16);
+      const battleBonus = Math.floor(pState.battlesCompleted * 1.5);
+      const ecosCost = baseEcos + battleBonus;
+      const hpCost = Math.max(2, Math.min(8, Math.ceil(baseEcos / 6)));
+      chosen.push({
+        offerId: 'of-' + item.id + '-' + Math.floor(Math.random() * 10000),
+        itemId: item.id,
+        ecosCost,
+        hpCost,
+        bought: false
+      });
+    }
+    pState.shopOffers = chosen;
+    pState.shopGeneratedForBattle = pState.battlesCompleted;
+  }
+
+  // =========================================================================
+  // MOTOR DE LANZAMIENTO DE DADOS CON ANIMACIÓN MEJORADA
+  // =========================================================================
+  let diceAnimTimer = null;
+  let diceStopTimer = null;
+
+  function parseDiceSpec(text) {
+    const m = String(text || '').match(/(\d+)d(\d+)/i);
+    if (!m) return null;
+    return { count: Math.min(6, Math.max(1, Number(m[1]))), sides: Math.max(2, Number(m[2])), raw: m[0].toLowerCase() };
+  }
+
+  function animateDiceRoll(config) {
+    const stage = $('sheet-dice-result');
+    const cubesWrap = $('dice-cubes-container');
+    const formulaText = $('dice-formula-text');
+    const totalNum = $('dice-total-num');
+    const totalLbl = $('dice-total-lbl');
+    if (!stage || !cubesWrap) return;
+
+    if (diceAnimTimer) clearInterval(diceAnimTimer);
+    if (diceStopTimer) clearTimeout(diceStopTimer);
+
+    const has2d6 = config.roll2d6 !== false;
+    const dmgSpec = config.damageSpec ? parseDiceSpec(config.damageSpec) : null;
+
+    const finalD1 = Math.floor(Math.random() * 6) + 1;
+    const finalD2 = Math.floor(Math.random() * 6) + 1;
+    const bonus = Number(config.bonusVal || 0);
+    const finalAttackSum = finalD1 + finalD2 + bonus;
+    const isCrit = has2d6 && finalD1 === 6 && finalD2 === 6;
+    const isFumble = has2d6 && finalD1 === 1 && finalD2 === 1;
+
+    const finalDmgRolls = [];
+    if (dmgSpec) {
+      for (let i = 0; i < dmgSpec.count; i++) {
+        finalDmgRolls.push(Math.floor(Math.random() * dmgSpec.sides) + 1);
+      }
+    }
+    const finalDmgTotal = finalDmgRolls.reduce((a, b) => a + b, 0);
+
+    stage.classList.remove('is-crit', 'is-fumble');
+    stage.classList.add('is-rolling');
+
+    let cubesHtml = '';
+    if (has2d6) {
+      cubesHtml += `
+        <div class="die-cube rolling" id="anim-d1"><span class="die-val">?</span><span class="die-tag">1d6</span></div>
+        <div class="die-cube rolling" id="anim-d2"><span class="die-val">?</span><span class="die-tag">1d6</span></div>
+      `;
+    }
+    if (dmgSpec) {
+      for (let i = 0; i < dmgSpec.count; i++) {
+        cubesHtml += `
+          <div class="die-cube die-weapon rolling" id="anim-dmg-${i}"><span class="die-val">?</span><span class="die-tag">1d${dmgSpec.sides}</span></div>
+        `;
+      }
+    }
+    cubesWrap.innerHTML = cubesHtml;
+    totalNum.textContent = '…';
+    totalLbl.textContent = 'Lanzando';
+    formulaText.innerHTML = `
+      <span class="eyebrow">Dados en el Aire…</span>
+      <strong>${esc(config.label)}</strong>
+      <p class="note" style="margin:2px 0 0 0;">Resolviendo tirada en mesa…</p>
+    `;
+
+    diceAnimTimer = setInterval(() => {
+      if (has2d6) {
+        const d1El = document.querySelector('#anim-d1 .die-val');
+        const d2El = document.querySelector('#anim-d2 .die-val');
+        if (d1El) d1El.textContent = String(Math.floor(Math.random() * 6) + 1);
+        if (d2El) d2El.textContent = String(Math.floor(Math.random() * 6) + 1);
+      }
+      if (dmgSpec) {
+        for (let i = 0; i < dmgSpec.count; i++) {
+          const el = document.querySelector(`#anim-dmg-${i} .die-val`);
+          if (el) el.textContent = String(Math.floor(Math.random() * dmgSpec.sides) + 1);
+        }
+      }
+    }, 65);
+
+    diceStopTimer = setTimeout(() => {
+      clearInterval(diceAnimTimer);
+      stage.classList.remove('is-rolling');
+      if (isCrit) stage.classList.add('is-crit');
+      if (isFumble) stage.classList.add('is-fumble');
+
+      if (has2d6) {
+        const c1 = $('anim-d1');
+        const c2 = $('anim-d2');
+        if (c1) { c1.classList.remove('rolling'); c1.classList.add('settle-pop'); c1.querySelector('.die-val').textContent = String(finalD1); }
+        if (c2) { c2.classList.remove('rolling'); c2.classList.add('settle-pop'); c2.querySelector('.die-val').textContent = String(finalD2); }
+      }
+      if (dmgSpec) {
+        for (let i = 0; i < dmgSpec.count; i++) {
+          const cd = $(`anim-dmg-${i}`);
+          if (cd) {
+            cd.classList.remove('rolling');
+            cd.classList.add('settle-pop');
+            cd.querySelector('.die-val').textContent = String(finalDmgRolls[i]);
+          }
+        }
+      }
+
+      const critBadge = isCrit ? ' · <b style="color:#f5d376;">¡CRÍTICO 6+6!</b>' : isFumble ? ' · <b style="color:var(--red);">¡PIFIA 1+1!</b>' : '';
+      if (has2d6 && dmgSpec) {
+        totalNum.textContent = `${finalAttackSum} | ${finalDmgTotal}`;
+        totalLbl.textContent = `Ataque | Daño (${dmgSpec.raw})`;
+        formulaText.innerHTML = `
+          <span class="eyebrow">${esc(config.attrName)} +${bonus} · Tirada de Arma</span>
+          <strong>${esc(config.label)}${critBadge}</strong>
+          <p class="note" style="margin:2px 0 0 0;">
+            Ataque: <b>[${finalD1} + ${finalD2}] + ${bonus} (${esc(config.attrName)}) = ${finalAttackSum}</b> ·
+            Daño (${esc(dmgSpec.raw)}): <b>[${finalDmgRolls.join(' + ')}] = ${finalDmgTotal}</b>
+            ${config.extraNote ? ` · ${esc(config.extraNote)}` : ''}
+          </p>
+        `;
+        toast(`${config.label}: Ataque ${finalAttackSum} ([${finalD1}+${finalD2}]+${bonus}) · Daño ${finalDmgTotal} (${dmgSpec.raw})`);
+      } else if (has2d6) {
+        totalNum.textContent = String(finalAttackSum);
+        totalLbl.textContent = `Total 2d6 + ${config.attrName}`;
+        formulaText.innerHTML = `
+          <span class="eyebrow">Tirada Directa · ${esc(config.attrName)} +${bonus}</span>
+          <strong>${esc(config.label)}${critBadge}</strong>
+          <p class="note" style="margin:2px 0 0 0;">
+            Dados: <b>[${finalD1} + ${finalD2}] + ${bonus} (${esc(config.attrName)}) = ${finalAttackSum}</b>
+            ${config.extraNote ? ` · ${esc(config.extraNote)}` : ''}
+          </p>
+        `;
+        toast(`${config.label}: [${finalD1}+${finalD2}] + ${bonus} = ${finalAttackSum}`);
+      } else if (dmgSpec) {
+        totalNum.textContent = String(finalDmgTotal);
+        totalLbl.textContent = `Dado (${dmgSpec.raw})`;
+        formulaText.innerHTML = `
+          <span class="eyebrow">Tirada de Objeto (${esc(dmgSpec.raw)})</span>
+          <strong>${esc(config.label)}</strong>
+          <p class="note" style="margin:2px 0 0 0;">
+            Resultado: <b>[${finalDmgRolls.join(' + ')}] = ${finalDmgTotal}</b>
+            ${config.extraNote ? ` · ${esc(config.extraNote)}` : ''}
+          </p>
+        `;
+        toast(`${config.label}: [${finalDmgRolls.join('+')}] = ${finalDmgTotal}`);
+      }
+    }, 480);
+  }
+
+  function renderPlayerInstance() {
+    const expSize = sheetsBundle.expeditionSize || 4;
+    $('player-exp-size').value = String(expSize);
+
+    if (!isSaintUnlockedForPlayer(pState.saintId, pState)) {
+      const fallback = AVAILABLE_START_SAINTS[sheetsBundle.activeSlot % AVAILABLE_START_SAINTS.length];
+      pState.saintId = fallback.id;
+      pState.attrs = { ...fallback.atributosPiloto };
+      pState.hp = calcMaxHp(pState.attrs);
+      deliverStartingKitToSheet(pState);
+    }
+
+    const slotsBar = $('player-sheet-slots-bar');
+    let slotsHtml = '';
+    for (let i = 0; i < expSize; i++) {
+      const sh = sheetsBundle.sheets[i];
+      const st = SAINTS_BY_ID[sh.saintId] || AVAILABLE_START_SAINTS[0];
+      const isAct = (i === sheetsBundle.activeSlot);
+      slotsHtml += `<button type="button" class="sheet-slot-btn ${isAct ? 'active' : ''}" data-select-sheet="${i}">${iconSvg(st.id)} Hoja ${i + 1}: ${esc(sh.name)}</button>`;
+    }
+    slotsBar.innerHTML = slotsHtml;
+
+    const saint = SAINTS_BY_ID[pState.saintId] || AVAILABLE_START_SAINTS[0];
+    $('sheet-saint-icon').innerHTML = iconSvg(saint.id);
+    $('sheet-header-eyebrow').textContent = `HOJA DE PERSONAJE · JUGADOR ${sheetsBundle.activeSlot + 1} DE ${expSize} · RUN #${pState.runNumber}`;
+    $('sheet-saint-subtitle').innerHTML = `<b>${esc(saint.titulo)}</b> · Pecado: <b>${esc(saint.sin)}</b> · Rol: <b>${esc(saint.rolCompleto)}</b>`;
+
+    $('player-name-input').value = pState.name;
+
+    // En el selector de Santo: los 3 Santos Apócrifos bloqueados aparecen deshabilitados y sin revelar su rol secreto
+    const saintSel = $('player-saint-select');
+    saintSel.innerHTML = CATALOG.santos.map(s => {
+      const isUnlocked = isSaintUnlockedForPlayer(s.id, pState);
+      if (!isUnlocked) {
+        return `<option value="${esc(s.id)}" disabled>🔒 ${esc(s.name)} — [Apócrifo Bloqueado · Requisito en Desbloqueables]</option>`;
+      }
+      return `<option value="${esc(s.id)}" ${s.id === pState.saintId ? 'selected' : ''}>${esc(s.icon)} ${esc(s.name)} — ${esc(s.role)}${s.secret ? ' (Apócrifo Desbloqueado)' : ''}</option>`;
+    }).join('');
+    saintSel.disabled = pState.sealed;
+    $('player-name-input').disabled = pState.sealed;
+
+    const attrs = pState.attrs || { ACERO: 3, CENIZA: 1, SANGRE: 2, DOGMA: 0 };
+    ['ACERO', 'CENIZA', 'SANGRE', 'DOGMA'].forEach(k => {
+      const val = Number(attrs[k] ?? 0);
+      const signVal = val >= 0 ? `+${val}` : String(val);
+      const lbl = $('attr-label-' + k.toLowerCase());
+      if (lbl) {
+        lbl.innerHTML = `${iconSvg(k)} ${k} ${signVal}`;
+      }
+      const sel = $('attr-' + k.toLowerCase());
+      if (sel) {
+        sel.value = String(val);
+        sel.disabled = pState.sealed;
+      }
+      const editWrap = $('attr-edit-wrap-' + k.toLowerCase());
+      if (editWrap) {
+        editWrap.style.display = pState.sealed ? 'none' : 'flex';
+      }
+    });
+
+    const maxHp = calcMaxHp(attrs);
+    const maxStigma = calcMaxStigma(attrs);
+    const def = calcDef(attrs);
+    const mov = calcMov(attrs);
+
+    $('player-derived-badges').innerHTML = `
+      <span class="badge gold">${iconSvg('SANGRE')} PV Máx: <b>${maxHp}</b></span>
+      <span class="badge blue">${iconSvg('shield')} DEF Base: <b>${def}</b></span>
+      <span class="badge green">◈ MOV: <b>${mov} casillas</b></span>
+      <span class="badge">${iconSvg('DOGMA')} Estigma Máx: <b>${maxStigma}</b></span>
+      <span class="badge gold">✦ Martirio: <b>${pState.martyrCharges}/${saint.maxCargasMartirio || 1}</b></span>
+    `;
+
+    $('player-locked-status').textContent = pState.sealed ? 'Hoja Sellada' : 'En preparación';
+    $('btn-seal-character').disabled = pState.sealed;
+    $('btn-reopen-character').disabled = !pState.sealed;
+
+    pState.hp = Math.max(0, Math.min(maxHp, pState.hp));
+    pState.stigma = Math.max(0, Math.min(maxStigma, pState.stigma));
+    if (pState.hp === 0) pState.alive = false;
+
+    const hpPct = Math.round((pState.hp / maxHp) * 100);
+    const stPct = Math.round((pState.stigma / maxStigma) * 100);
+    $('player-hp-text').textContent = `${pState.hp} / ${maxHp}`;
+    $('player-hp-bar').style.width = `${hpPct}%`;
+    $('player-stigma-text').textContent = `${pState.stigma} / ${maxStigma}`;
+    $('player-stigma-bar').style.width = `${stPct}%`;
+
+    const aliveBadge = $('player-alive-badge');
+    aliveBadge.textContent = pState.alive && pState.hp > 0 ? 'VIVO' : 'CAÍDO (0 PV)';
+    aliveBadge.className = 'badge ' + (pState.alive && pState.hp > 0 ? 'green' : 'red');
+
+    $('player-ecos-text').textContent = `${pState.ecos} Ecos`;
+    $('player-battles-count').textContent = String(pState.battlesCompleted);
+    $('player-martyr-count').textContent = String(pState.martyrCharges);
+
+    const unlockedSaintsCount = CATALOG.santos.filter(s => isSaintUnlockedForPlayer(s.id, pState)).length;
+    const shopAvailable = pState.battlesCompleted > 0 && pState.battlesCompleted % 2 === 0;
+    $('player-battle-badge').textContent = `Batalla ${pState.battlesCompleted}${shopAvailable ? ' · ¡TIENDA!' : ''}`;
+    $('player-unlock-badge').textContent = `${unlockedSaintsCount}/10 Santos · ${pState.unlockedItems.length}/141 Obj`;
+
+    // BLOQUE III DE LA HOJA: OBJETOS DE INICIO DEL SANTO
+    $('player-saint-detail-panel').innerHTML = `
+      <div class="panel" style="margin-bottom:0;">
+        <span class="eyebrow">III. Objetos de Inicio y Facultades de ${esc(saint.name)}</span>
+        <h2>${iconSvg(saint.id)} Dotación de Inicio del Santo</h2>
+        <p class="lore">«${esc(saint.lema || saint.desc)}»</p>
+
+        <h3 style="margin-top:10px;color:var(--gold);">1. Armas y Equipo de Inicio (Pulsa el nombre para lanzar)</h3>
+        <div style="display:grid;grid-template-columns:1fr;gap:8px;margin-top:6px;">
+          ${saint.equipoPiloto.map((w, wIdx) => {
+            const attrKey = w.atributo || 'ACERO';
+            const attrBonus = Number(pState.attrs?.[attrKey] ?? 0);
+            const dmgLabel = w.damageCorto || w.danioBase || '';
+            return `
+              <div class="starting-gear-card">
+                <div class="between">
+                  <span class="eyebrow">Arma/Equipo #${wIdx + 1} · ${esc(w.atributo || 'DOGMA')} · Alcance: ${w.alcance ?? 'Personal'}</span>
+                  <span class="badge gold">Daño/Bono: <b>${esc(dmgLabel)}</b></span>
+                </div>
+                <button type="button" class="rollable-name" data-roll-weapon="${wIdx}" title="Pulsa el nombre para lanzar 2d6 + ${esc(attrKey)} y daño">
+                  <span>${iconSvg('sword')} ${esc(w.nombre)}</span>
+                  <span class="roll-chip">${iconSvg('die')} 2d6+${attrBonus} (${esc(attrKey)}) · ${esc(dmgLabel)}</span>
+                </button>
+                <div class="reader-summary-box">
+                  <b>Efecto rápido:</b> ${esc(w.efectoCorto || w.regla)}
+                </div>
+                ${w.contextoHistorico ? `<p class="note" style="margin:2px 0;"><i>${esc(w.contextoHistorico)}</i></p>` : ''}
+                <details>
+                  <summary>Ver regla táctica completa</summary>
+                  <p class="note" style="margin-top:4px;">${esc(w.regla)}</p>
+                </details>
+              </div>
+            `;
+          }).join('')}
+        </div>
+
+        <h3 style="margin-top:14px;color:var(--gold);">2. Reliquias y Suministros Iniciales (Pulsa su nombre para tirar)</h3>
+        <div style="display:grid;grid-template-columns:1fr;gap:8px;margin-top:6px;">
+          ${(saint.dotacionReliquias || []).map((r, rIdx) => `
+            <div class="card" style="padding:10px;">
+              <div class="between">
+                <span class="eyebrow">${esc(r.rolInicio)}</span>
+                <span class="badge ${r.esPropiaDelSanto ? 'gold' : 'green'}">${r.esPropiaDelSanto ? 'Propia del Santo' : 'Dotación Base'}</span>
+              </div>
+              <button type="button" class="rollable-name" data-roll-saint-relic="${rIdx}" title="Pulsa el nombre para lanzar o activar ${esc(r.nombre)}">
+                <span>${iconSvg('relic')} ${esc(r.nombre)}</span>
+                <span class="roll-chip">${iconSvg('die')} Lanzar / Usar</span>
+              </button>
+              <p class="note">${esc(r.efecto)}</p>
+            </div>
+          `).join('')}
+        </div>
+
+        <h3 style="margin-top:14px;color:var(--gold);">3. Rasgo Pasivo y Martirio</h3>
+        <div style="display:grid;grid-template-columns:1fr;gap:8px;margin-top:6px;">
+          ${saint.habilidadesPiloto.map(h => `
+            <div class="card" style="padding:10px;">
+              <span class="eyebrow">${h.type === 'pasiva' ? 'Pasiva Permanente' : 'Facultad de Martirio'}</span>
+              <h4>${esc(h.name)}</h4>
+              <p class="note">${esc(h.description)}</p>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+
+    // BLOQUE IV: INVENTARIO EQUIPADO EN LA HOJA
+    const passCount = pState.inventory.filter(e => ITEMS_BY_ID[e.id]?.tipo === 'pasivo').length;
+    const actCount = pState.inventory.filter(e => ITEMS_BY_ID[e.id]?.tipo === 'activo').length;
+    const consCount = pState.inventory.filter(e => ['consumible', 'sacrificio'].includes(ITEMS_BY_ID[e.id]?.tipo)).length;
+
+    $('player-inv-count').textContent = `${pState.inventory.length} objetos (Pasivos ${passCount}/3 · Activos ${actCount}/1 · Consumibles ${consCount}/2)`;
+    if (pState.inventory.length === 0) {
+      $('player-inventory-list').innerHTML = `<p class="note">Pulsa «Sellar Hoja y Recibir Objetos de Inicio» para colocar las reliquias iniciales de tu Santo en tu hoja.</p>`;
+    } else {
+      $('player-inventory-list').innerHTML = `<div class="grid" style="grid-template-columns:1fr;">` + pState.inventory.map((entry, idx) => {
+        const item = ITEMS_BY_ID[entry.id];
+        if (!item) return '';
+        const itemDice = parseDiceSpec(item.efecto);
+        const chipLabel = itemDice ? `Tirar ${itemDice.raw}` : 'Tirar 2d6+DOGMA';
+        return `
+          <div class="card">
+            <div class="between">
+              <span class="eyebrow">${esc(item.tipo.toUpperCase())} · ${esc(item.rareza)}</span>
+              <span class="badge gold">${esc(entry.origin || 'Hallazgo')}</span>
+            </div>
+            <button type="button" class="rollable-name" data-roll-inv="${idx}" title="Pulsa el nombre para lanzar dados de ${esc(item.nombre)}">
+              <span>${iconSvg('relic')} ${esc(item.nombre)}</span>
+              <span class="roll-chip">${iconSvg('die')} ${esc(chipLabel)}</span>
+            </button>
+            <p class="note">${esc(item.efecto)}</p>
+            ${item.cargas ? `<div class="between"><span class="badge gold">Cargas: ${entry.charges ?? item.cargas.capacidad}/${item.cargas.capacidad}</span><button type="button" class="btn-sm" data-inv-charge="${idx}">Gastar/Recargar</button></div>` : ''}
+            <div class="row" style="margin-top:4px;">
+              ${item.destruible ? `<button type="button" class="btn-sm btn-gold" data-inv-consume="${idx}">Consumir y Aplicar</button>` : ''}
+              <button type="button" class="btn-sm btn-danger" data-inv-remove="${idx}">Quitar</button>
+            </div>
+          </div>
+        `;
+      }).join('') + `</div>`;
+    }
+
+    const spSel = $('player-special-reward-select');
+    if (spSel && !spSel.options.length) {
+      spSel.innerHTML = CATALOG.objetos.filter(i => !i.propietarioSanto).map(i =>
+        `<option value="${esc(i.id)}">${esc(i.nombre)} (${esc(i.tipo)} · ${esc(i.rareza)})</option>`
+      ).join('');
+    }
+
+    renderPlayerShop();
+    renderPlayerUnlocksAndUpgrades();
+    renderPlayerLegacyTab();
+  }
+
+  function renderPlayerShop() {
+    const attrs = pState.attrs || { SANGRE: 2 };
+    const maxHp = calcMaxHp(attrs);
+    $('shop-battles-num').textContent = String(pState.battlesCompleted);
+    $('shop-ecos-num').textContent = `${pState.ecos} Ecos`;
+    $('shop-hp-num').textContent = `${pState.hp}/${maxHp} PV`;
+
+    const isShopMilestone = pState.battlesCompleted > 0 && pState.battlesCompleted % 2 === 0;
+    const banner = $('shop-status-banner');
+    if (isShopMilestone) {
+      if (pState.shopGeneratedForBattle !== pState.battlesCompleted || pState.shopOffers.length === 0) {
+        generatePlayerShopOffers();
+      }
+      banner.className = 'panel panel-gold';
+      banner.innerHTML = `
+        <div class="between">
+          <div>
+            <span class="eyebrow">¡Tienda Abierta en Batalla ${pState.battlesCompleted}!</span>
+            <h3>Mercader de las Ausencias Disponible</h3>
+            <p class="note">Objetos sorteados de tus <b>${pState.unlockedItems.length} desbloqueos personales</b>. Puedes pagar con <b>Ecos</b> o con <b>Vida (PV)</b>.</p>
+          </div>
+          <span class="badge green">TIENDA ACTIVA</span>
+        </div>
+      `;
+    } else {
+      const remaining = pState.battlesCompleted % 2 === 0 ? 2 : 1;
+      banner.className = 'panel';
+      banner.innerHTML = `
+        <div class="between">
+          <div>
+            <span class="eyebrow">Tienda en Espera</span>
+            <h3>Falta(n) ${remaining} batalla(s) para el próximo Mercader</h3>
+            <p class="note">Se abre cada 2 batallas superadas (Batallas 2, 4, 6, 8...). También puedes generar ofertas manualmente con el botón superior.</p>
+          </div>
+          <span class="badge">Batalla actual: ${pState.battlesCompleted}</span>
+        </div>
+      `;
+    }
+
+    const grid = $('shop-offers-grid');
+    if (!pState.shopOffers || pState.shopOffers.length === 0) {
+      grid.innerHTML = `<div class="card"><p class="note">Completa 2 batallas o pulsa «Generar / Refrescar Tienda Aleatoria» para ver ofertas.</p></div>`;
+      return;
+    }
+
+    grid.innerHTML = pState.shopOffers.map((off, idx) => {
+      const item = ITEMS_BY_ID[off.itemId];
+      if (!item) return '';
+      const canPayEcos = !off.bought && pState.ecos >= off.ecosCost;
+      const canPayHp = !off.bought && pState.hp > off.hpCost;
+      return `
+        <article class="card ${off.bought ? 'selected' : ''}">
+          <div class="between">
+            <span class="eyebrow">${esc(item.tipo)} · ${esc(item.rareza)}</span>
+            <span class="badge ${off.bought ? 'green' : 'gold'}">${off.bought ? 'ADQUIRIDO' : 'En oferta'}</span>
+          </div>
+          <h3>${esc(item.nombre)}</h3>
+          <p class="note">${esc(item.efecto)}</p>
+          <div class="badges" style="margin:4px 0;">
+            <span class="badge gold">Ecos: <b>${off.ecosCost}</b></span>
+            <span class="badge red">Vida: <b>${off.hpCost} PV</b></span>
+          </div>
+          <div class="row" style="margin-top:auto;padding-top:6px;">
+            <button type="button" class="btn-gold btn-sm" data-buy-ecos="${idx}" ${canPayEcos ? '' : 'disabled'}>Comprar (${off.ecosCost} Ecos)</button>
+            <button type="button" class="btn-danger btn-sm" data-buy-hp="${idx}" ${canPayHp ? '' : 'disabled'}>Pagar (${off.hpCost} PV)</button>
+          </div>
+        </article>
+      `;
+    }).join('');
+  }
+
+  // Renderizado de tarjeta de Santo (oculta toda su información si está bloqueado y muestra su requisito)
+  function buildSaintCardHtml(s, contextMode = 'codex') {
+    const unlocked = isSaintUnlockedForPlayer(s.id, pState);
+    const desb = s.desbloqueo || {};
+    const costEcos = Number(desb.costeEcos || 30);
+
+    if (!unlocked) {
+      const canAffordEcos = pState.ecos >= costEcos;
+      return `
+        <article class="card locked-card">
+          <div class="between">
+            <span class="eyebrow">${iconSvg('lock')} APÓCRIFO SELLADO · PECADO DE ${esc((s.sin || '').toUpperCase())}</span>
+            <span class="badge red">SELLO INTACTO</span>
+          </div>
+          <div class="between">
+            <h3>${iconSvg('lock')} ${esc(s.name)}</h3>
+            <span class="badge gold">${esc(desb.lugar || 'Basílica')}</span>
+          </div>
+          <p class="redacted-line">«Expediente litúrgico sellado en la Basílica. Sus atributos, rol táctico, armas de inicio, reliquias propias, pasiva, martirio y crónica están ocultos hasta romper su sello.»</p>
+          <div class="seal-requirement-box">
+            <span class="seal-title">${iconSvg('lock')} Requisito de Desbloqueo</span>
+            <p class="note" style="color:var(--ink);margin-bottom:4px;"><b>Condición en campaña:</b> ${esc(desb.condicionLogro || desb.requisito)}</p>
+            <p class="note" style="margin:0;"><b>Ofrenda en la Basílica:</b> Romper el sello pagando <b>${costEcos} Ecos</b>.</p>
+          </div>
+          <div class="row" style="margin-top:auto;padding-top:6px;">
+            <button type="button" class="btn-sm btn-gold" data-unlock-saint-ecos="${esc(s.id)}:${costEcos}" ${canAffordEcos ? '' : 'disabled'} title="${canAffordEcos ? 'Romper sello con Ecos' : 'Necesitas ' + costEcos + ' Ecos'}">
+              ${iconSvg('coin')} Romper Sello (${costEcos} Ecos)
+            </button>
+            <button type="button" class="btn-sm" data-unlock-saint-feat="${esc(s.id)}">
+              ${iconSvg('unlock')} Registrar Requisito Cumplido
+            </button>
+          </div>
+        </article>
+      `;
+    }
+
+    const a = s.atributosPiloto || {};
+    return `
+      <article class="card ${s.secret ? 'selected' : ''}">
+        <div class="between">
+          <span class="eyebrow">${esc(s.titulo)} · Pecado: ${esc(s.sin)}</span>
+          <span class="badge ${s.secret ? 'green' : 'gold'}">${s.secret ? 'Apócrifo Desbloqueado' : 'Disponible de Inicio'}</span>
+        </div>
+        <div class="between">
+          <h3>${iconSvg(s.id)} ${esc(s.name)}</h3>
+          <div class="row">
+            <button type="button" class="btn-sm btn-gold" data-pick-saint-from-codex="${esc(s.id)}">Elegir en mi Hoja</button>
+            ${s.secret && contextMode === 'unlocks' ? `<button type="button" class="btn-sm btn-danger" data-relock-saint="${esc(s.id)}" title="Volver a sellar para ocultar su información">Volver a Sellar</button>` : ''}
+          </div>
+        </div>
+        <div class="reader-summary-box">
+          <b>Rol:</b> ${esc(s.rolCompleto)}<br>
+          <b>Atributos base:</b> ACERO +${a.ACERO ?? 0} · CENIZA +${a.CENIZA ?? 0} · SANGRE +${a.SANGRE ?? 0} · DOGMA +${a.DOGMA ?? 0}
+        </div>
+        <p class="lore">«${esc(s.lema || s.desc)}»</p>
+
+        <div style="background:var(--bg);border:1px solid var(--edge);border-radius:var(--radius-sm);padding:10px;">
+          <span class="eyebrow">Objetos de Inicio de ${esc(s.name)}</span>
+          ${s.equipoPiloto.map(w => `
+            <div style="padding:5px 0;border-bottom:1px dashed var(--edge);">
+              <div class="between">
+                <strong>${esc(w.nombre)}</strong>
+                <span class="badge gold">${esc(w.damageCorto || w.danioBase)} · ${esc(w.atributo || 'Equipo')}</span>
+              </div>
+              <p class="note" style="margin:2px 0 0 0;">${esc(w.efectoCorto || w.regla)}</p>
+            </div>
+          `).join('')}
+          <div style="padding-top:6px;">
+            <span class="note"><b>Reliquias Iniciales:</b> ${(s.dotacionReliquias || []).map(r => `${esc(r.nombre)}`).join(' · ')}</span>
+          </div>
+        </div>
+
+        <details>
+          <summary>Ver Pasiva, Martirio e Historia</summary>
+          ${s.habilidadesPiloto.map(h => `<p class="note" style="margin-top:6px;"><b>${esc(h.type === 'pasiva' ? 'Pasiva' : 'Martirio')} — ${esc(h.name)}:</b> ${esc(h.description)}</p>`).join('')}
+          <p class="lore">${esc(s.trasfondo)}</p>
+        </details>
+      </article>
+    `;
+  }
+
+  function renderPlayerUnlocksAndUpgrades() {
+    // 1. Renderizar los 3 Santos Apócrifos en la pestaña Desbloqueables
+    const unlockedSaintsCount = CATALOG.santos.filter(s => isSaintUnlockedForPlayer(s.id, pState)).length;
+    if ($('saints-unlock-summary-badge')) {
+      $('saints-unlock-summary-badge').textContent = `${unlockedSaintsCount} / 10 Santos Disponibles`;
+    }
+    if ($('saints-unlock-ecos-num')) {
+      $('saints-unlock-ecos-num').textContent = `${pState.ecos} Ecos`;
+    }
+    const secretGrid = $('player-secret-saints-grid');
+    if (secretGrid) {
+      const secretSaints = CATALOG.santos.filter(s => s.secret);
+      secretGrid.innerHTML = secretSaints.map(s => buildSaintCardHtml(s, 'unlocks')).join('');
+    }
+
+    // 2. Renderizar las 20 Mejoras Permanentes con su requisito de desbloqueo
+    const upgContainer = $('player-upgrades-list');
+    upgContainer.innerHTML = `<div class="grid">` + CATALOG.mejoras.map(m => {
+      const owned = pState.ownedUpgrades.includes(m.id);
+      const canBuy = !owned && pState.ecos >= m.precioReserva;
+      return `
+        <div class="card ${owned ? 'selected' : ''}">
+          <div class="between">
+            <span class="eyebrow">Entrenamiento</span>
+            <span class="badge ${owned ? 'green' : 'gold'}">${owned ? 'Activo' : m.precioReserva + ' Ecos'}</span>
+          </div>
+          <h4>${esc(m.nombre)}</h4>
+          <p class="note">${esc(m.efecto)}</p>
+          <p class="note" style="margin:2px 0;color:var(--gold);"><b>Requisito:</b> ${esc(m.desbloqueo || 'Disponible en el Santuario')}</p>
+          <div class="row" style="margin-top:auto;">
+            <button type="button" class="btn-sm ${owned ? '' : 'btn-gold'}" data-buy-upgrade="${esc(m.id)}" ${canBuy ? '' : 'disabled'}>${owned ? 'Mejora Activa' : 'Comprar por ' + m.precioReserva + ' Ecos'}</button>
+          </div>
+        </div>
+      `;
+    }).join('') + `</div>`;
+
+    // 3. Renderizar los 141 Objetos (ocultando información si están bloqueados y mostrando su requisito)
+    const q = ($('unlock-search-input').value || '').trim().toLowerCase();
+    const filter = $('unlock-filter-select').value;
+    const list = CATALOG.objetos.filter(i => {
+      const isSaintRelic = !!i.propietarioSanto;
+      const saintOwnerUnlocked = isSaintRelic ? isSaintUnlockedForPlayer(i.propietarioSanto, pState) : true;
+      const isUnl = isSaintRelic ? saintOwnerUnlocked : pState.unlockedItems.includes(i.id);
+      if (filter === 'unlocked' && !isUnl) return false;
+      if (filter === 'locked' && isUnl) return false;
+      if (q) {
+        const hay = `${i.nombre} ${i.desbloqueo || ''} ${isUnl ? i.efecto : ''}`.toLowerCase();
+        if (!hay.includes(q)) return false;
+      }
+      return true;
+    });
+
+    $('player-unlocks-catalog').innerHTML = list.map(i => {
+      const isSaintRelic = !!i.propietarioSanto;
+      const ownerSaint = isSaintRelic ? SAINTS_BY_ID[i.propietarioSanto] : null;
+      const isUnl = isSaintRelic ? isSaintUnlockedForPlayer(i.propietarioSanto, pState) : pState.unlockedItems.includes(i.id);
+
+      if (!isUnl) {
+        return `
+          <div class="card locked-card" style="padding:10px;">
+            <div class="between">
+              <div>
+                <strong>${iconSvg('lock')} ${esc(i.nombre)}</strong> <span class="note">(${esc(i.tipo)} · ${esc(i.rareza)})</span>
+              </div>
+              ${isSaintRelic ? `<span class="badge red">Sello de ${esc(ownerSaint?.name || 'Santo Apócrifo')}</span>` : `
+                <button type="button" class="btn-sm btn-gold" data-toggle-unlock="${esc(i.id)}">
+                  ${iconSvg('unlock')} Registrar Desbloqueo
+                </button>
+              `}
+            </div>
+            <p class="redacted-line" style="margin:4px 0;">Propiedades y efecto ocultos hasta cumplir su condición de descubrimiento.</p>
+            <div class="seal-requirement-box" style="padding:6px 10px;">
+              <span class="seal-title">${iconSvg('lock')} Requisito de Desbloqueo</span>
+              <p class="note" style="color:var(--ink);margin:0;">${esc(isSaintRelic ? `Desbloquea primero a ${ownerSaint?.name || 'su Santo Patrono'}.` : i.desbloqueo)}</p>
+            </div>
+          </div>
+        `;
+      }
+
+      return `
+        <div class="card" style="padding:10px;">
+          <div class="between">
+            <div>
+              <strong>${esc(i.nombre)}</strong> <span class="note">(${esc(i.tipo)} · ${esc(i.rareza)})</span>
+            </div>
+            <button type="button" class="btn-sm" data-toggle-unlock="${esc(i.id)}" ${isSaintRelic ? 'disabled' : ''}>
+              ${isSaintRelic ? `Propia de ${esc(ownerSaint?.name || 'Santo')}` : 'Desbloqueado (Bloquear)'}
+            </button>
+          </div>
+          <p class="note" style="margin:4px 0 0 0;">${esc(i.efecto)}</p>
+          <p class="note" style="margin:2px 0 0 0;color:var(--gold);"><b>Requisito cumplido:</b> ${esc(i.desbloqueo)}</p>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function renderPlayerLegacyTab() {
+    const half = Math.floor(pState.ecos / 2);
+    const unlockedSaintsCount = CATALOG.santos.filter(s => isSaintUnlockedForPlayer(s.id, pState)).length;
+    $('leg-current-ecos').textContent = `${pState.ecos} Ecos`;
+    $('leg-half-ecos').textContent = `${half} Ecos`;
+    if ($('leg-unlocked-saints')) $('leg-unlocked-saints').textContent = String(unlockedSaintsCount);
+    $('leg-unlocked-count').textContent = String(pState.unlockedItems.length);
+    $('generated-death-code').value = pState.lastDeathCode || '';
+  }
+
+  function generateDeathCodeNow() {
+    const halfEcos = Math.floor((Number(pState.ecos) || 0) / 2);
+    const payload = {
+      v: 1,
+      playerName: pState.name,
+      lastSaint: pState.saintId,
+      runCompleted: pState.runNumber,
+      battlesReached: pState.battlesCompleted,
+      ecosBeforeDeath: pState.ecos,
+      ecosSaved: halfEcos,
+      unlockedItems: [...new Set(pState.unlockedItems)],
+      unlockedSaints: [...new Set(pState.unlockedSaints)],
+      ownedUpgrades: [...new Set(pState.ownedUpgrades)],
+      timestamp: new Date().toISOString()
+    };
+    const code = encodeCode('DA-LEGADO', payload);
+    pState.lastDeathCode = code;
+    pState.alive = false;
+    pState.hp = 0;
+    savePlayerState();
+    renderPlayerInstance();
+    return { code, payload };
+  }
+
+  // =========================================================================
+  // EVENTOS DE LA HOJA DE PERSONAJE Y DESBLOQUEO DE SANTOS
+  // =========================================================================
+  $('player-sheet-slots-bar').addEventListener('click', e => {
+    const btn = e.target.closest('[data-select-sheet]');
+    if (!btn) return;
+    switchActivePlayerSheet(Number(btn.dataset.selectSheet));
+  });
+
+  // Delegación global para botones de desbloqueo de Santos Apócrifos (tanto en Códice como en Desbloqueables)
+  document.addEventListener('click', e => {
+    const btnEcos = e.target.closest('[data-unlock-saint-ecos]');
+    if (btnEcos) {
+      const [sid, costStr] = btnEcos.dataset.unlockSaintEcos.split(':');
+      unlockSecretSaintForAllSheets(sid, Number(costStr) || 30);
+      return;
+    }
+    const btnFeat = e.target.closest('[data-unlock-saint-feat]');
+    if (btnFeat) {
+      const sid = btnFeat.dataset.unlockSaintFeat;
+      unlockSecretSaintForAllSheets(sid, 0);
+      return;
+    }
+    const btnRelock = e.target.closest('[data-relock-saint]');
+    if (btnRelock) {
+      const sid = btnRelock.dataset.relockSaint;
+      relockSecretSaintForAllSheets(sid);
+      return;
+    }
+  });
+
+  // 1. Al pulsar directamente "ACERO +3", "CENIZA +2", etc. se lanza el dado
+  document.querySelectorAll('[data-roll-attr]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const attr = btn.dataset.rollAttr;
+      const val = Number(pState.attrs?.[attr] ?? 0);
+      animateDiceRoll({
+        label: `Prueba de ${attr}`,
+        attrName: attr,
+        bonusVal: val,
+        roll2d6: true,
+        damageSpec: null,
+        extraNote: 'Tirada directa de atributo'
+      });
+    });
+  });
+
+  // 2. Al pulsar el nombre de un arma de inicio o reliquia inicial del Santo se lanza el dado
+  $('player-saint-detail-panel').addEventListener('click', e => {
+    const wBtn = e.target.closest('[data-roll-weapon]');
+    if (wBtn) {
+      const wIdx = Number(wBtn.dataset.rollWeapon);
+      const saint = SAINTS_BY_ID[pState.saintId] || AVAILABLE_START_SAINTS[0];
+      const w = saint.equipoPiloto?.[wIdx];
+      if (!w) return;
+      const attrKey = w.atributo || 'DOGMA';
+      const bonus = Number(pState.attrs?.[attrKey] ?? 0);
+      const dmgText = w.damageCorto || w.danioBase || '';
+      animateDiceRoll({
+        label: w.nombre,
+        attrName: attrKey,
+        bonusVal: bonus,
+        roll2d6: true,
+        damageSpec: dmgText,
+        extraNote: w.efectoCorto || w.regla
+      });
+      return;
+    }
+
+    const rBtn = e.target.closest('[data-roll-saint-relic]');
+    if (rBtn) {
+      const rIdx = Number(rBtn.dataset.rollSaintRelic);
+      const saint = SAINTS_BY_ID[pState.saintId] || AVAILABLE_START_SAINTS[0];
+      const rel = saint.dotacionReliquias?.[rIdx];
+      if (!rel) return;
+      const dogmaBonus = Number(pState.attrs?.DOGMA ?? 0);
+      const spec = parseDiceSpec(rel.efecto);
+      animateDiceRoll({
+        label: rel.nombre,
+        attrName: 'DOGMA',
+        bonusVal: dogmaBonus,
+        roll2d6: true,
+        damageSpec: spec ? spec.raw : null,
+        extraNote: rel.efecto
+      });
+    }
+  });
+
+  // 3. Al pulsar el nombre de un objeto del inventario activo se lanza su dado
+  $('player-inventory-list').addEventListener('click', e => {
+    const rollInvBtn = e.target.closest('[data-roll-inv]');
+    if (rollInvBtn) {
+      const idx = Number(rollInvBtn.dataset.rollInv);
+      const entry = pState.inventory[idx];
+      const item = ITEMS_BY_ID[entry?.id];
+      if (!item) return;
+      const dogmaBonus = Number(pState.attrs?.DOGMA ?? 0);
+      const spec = parseDiceSpec(item.efecto);
+      animateDiceRoll({
+        label: item.nombre,
+        attrName: 'DOGMA',
+        bonusVal: dogmaBonus,
+        roll2d6: true,
+        damageSpec: spec ? spec.raw : null,
+        extraNote: item.efecto
+      });
+      return;
+    }
+
+    const btnConsume = e.target.closest('[data-inv-consume]');
+    const btnRemove = e.target.closest('[data-inv-remove]');
+    const btnCharge = e.target.closest('[data-inv-charge]');
+    if (btnConsume) {
+      const idx = Number(btnConsume.dataset.invConsume);
+      const entry = pState.inventory[idx];
+      if (!entry) return;
+      const item = ITEMS_BY_ID[entry.id];
+      if (entry.id === 'vendaje-campana') {
+        const heal = Math.floor(Math.random() * 6) + 1;
+        pState.hp = Math.min(calcMaxHp(pState.attrs), pState.hp + heal);
+        animateDiceRoll({
+          label: `${item?.nombre || 'Vendaje'} (+${heal} PV)`,
+          attrName: 'SANGRE',
+          bonusVal: Number(pState.attrs?.SANGRE ?? 0),
+          roll2d6: false,
+          damageSpec: '1d6',
+          extraNote: 'Curación inmediata aplicada a tus PV'
+        });
+      } else if (entry.id === 'agua-vigilia') {
+        pState.stigma = Math.max(0, pState.stigma - 3);
+        toast('Agua de vigilia usada (-3 Estigma).');
+      } else {
+        toast(`Consumiste ${item?.nombre || 'objeto'}.`);
+      }
+      pState.inventory.splice(idx, 1);
+      savePlayerState();
+      renderPlayerInstance();
+    } else if (btnRemove) {
+      const idx = Number(btnRemove.dataset.invRemove);
+      pState.inventory.splice(idx, 1);
+      savePlayerState();
+      renderPlayerInstance();
+    } else if (btnCharge) {
+      const idx = Number(btnCharge.dataset.invCharge);
+      const entry = pState.inventory[idx];
+      const cap = ITEMS_BY_ID[entry?.id]?.cargas?.capacidad || 2;
+      entry.charges = ((entry.charges ?? cap) > 0) ? 0 : cap;
+      savePlayerState();
+      renderPlayerInstance();
+    }
+  });
+
+  document.querySelectorAll('[data-player-tab]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-player-tab]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const target = btn.dataset.playerTab;
+      ['hoja', 'tienda', 'desbloqueos', 'legado'].forEach(t => {
+        $('ptab-' + t).hidden = (t !== target);
+      });
+    });
+  });
+
+  $('player-exp-size').addEventListener('change', e => {
+    sheetsBundle.expeditionSize = Number(e.target.value) || 4;
+    if (sheetsBundle.activeSlot >= sheetsBundle.expeditionSize) {
+      sheetsBundle.activeSlot = 0;
+      pState = sheetsBundle.sheets[0];
+    }
+    savePlayerState();
+    dmState.partySize = sheetsBundle.expeditionSize;
+    ensureDmPartySize();
+    saveDmState();
+    renderPlayerInstance();
+    renderDmInstance();
+    toast(`Tamaño de expedición ajustado a ${sheetsBundle.expeditionSize} hojas de personaje.`);
+  });
+
+  $('player-name-input').addEventListener('input', e => {
+    pState.name = e.target.value;
+    savePlayerState();
+    renderPlayerInstance();
+  });
+
+  $('player-saint-select').addEventListener('change', e => {
+    if (pState.sealed) return;
+    const id = e.target.value;
+    const s = SAINTS_BY_ID[id];
+    if (!s) return;
+    if (!isSaintUnlockedForPlayer(id, pState)) {
+      toast(`${s.name} está sellado. Revisa su requisito de desbloqueo en el Códice o en la pestaña Desbloqueables.`, true);
+      e.target.value = pState.saintId;
+      return;
+    }
+    pState.saintId = id;
+    pState.attrs = { ...s.atributosPiloto };
+    pState.hp = calcMaxHp(pState.attrs);
+    pState.stigma = 0;
+    pState.martyrCharges = s.maxCargasMartirio || 1;
+    deliverInitialEquipment();
+    savePlayerState();
+    renderPlayerInstance();
+  });
+
+  document.querySelectorAll('[data-attr-select]').forEach(sel => {
+    sel.addEventListener('change', e => {
+      if (pState.sealed) return;
+      const attrName = e.target.dataset.attrSelect;
+      const newVal = Number(e.target.value);
+      const oldVal = pState.attrs[attrName];
+      if (newVal === oldVal) return;
+      const otherKey = ['ACERO', 'CENIZA', 'SANGRE', 'DOGMA'].find(k => k !== attrName && pState.attrs[k] === newVal);
+      pState.attrs[attrName] = newVal;
+      if (otherKey) pState.attrs[otherKey] = oldVal;
+      pState.hp = calcMaxHp(pState.attrs);
+      pState.stigma = Math.min(pState.stigma, calcMaxStigma(pState.attrs));
+      savePlayerState();
+      renderPlayerInstance();
+    });
+  });
+
+  $('btn-seal-character').addEventListener('click', () => {
+    const vals = Object.values(pState.attrs).slice().sort((a,b) => b - a);
+    if (JSON.stringify(vals) !== '[3,2,1,0]') {
+      toast('Los atributos deben ser +3, +2, +1 y +0.', true);
+      return;
+    }
+    pState.sealed = true;
+    pState.alive = true;
+    pState.hp = calcMaxHp(pState.attrs);
+    if (pState.inventory.length === 0) {
+      deliverInitialEquipment();
+    }
+    savePlayerState();
+    renderPlayerInstance();
+    toast(`Hoja de ${pState.name} (${SAINTS_BY_ID[pState.saintId].name}) sellada.`);
+  });
+
+  $('btn-reopen-character').addEventListener('click', () => {
+    pState.sealed = false;
+    savePlayerState();
+    renderPlayerInstance();
+    toast('Edición de Santo y atributos habilitada.');
+  });
+
+  document.querySelectorAll('[data-hp-delta]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const d = Number(btn.dataset.hpDelta);
+      const maxHp = calcMaxHp(pState.attrs);
+      pState.hp = Math.max(0, Math.min(maxHp, pState.hp + d));
+      if (pState.hp === 0) {
+        pState.alive = false;
+        const { payload } = generateDeathCodeNow();
+        toast(`Has caído a 0 PV. Código de legado generado con ${payload.ecosSaved} Ecos (50%).`, true);
+      } else {
+        pState.alive = true;
+        savePlayerState();
+        renderPlayerInstance();
+      }
+    });
+  });
+
+  $('btn-hp-full').addEventListener('click', () => {
+    pState.hp = calcMaxHp(pState.attrs);
+    pState.alive = true;
+    savePlayerState();
+    renderPlayerInstance();
+  });
+
+  document.querySelectorAll('[data-stigma-delta]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const d = Number(btn.dataset.stigmaDelta);
+      const maxSt = calcMaxStigma(pState.attrs);
+      pState.stigma = Math.max(0, Math.min(maxSt, pState.stigma + d));
+      savePlayerState();
+      renderPlayerInstance();
+    });
+  });
+
+  $('btn-stigma-zero').addEventListener('click', () => {
+    pState.stigma = 0;
+    savePlayerState();
+    renderPlayerInstance();
+  });
+
+  document.querySelectorAll('[data-ecos-delta]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const d = Number(btn.dataset.ecosDelta);
+      pState.ecos = Math.max(0, pState.ecos + d);
+      savePlayerState();
+      renderPlayerInstance();
+    });
+  });
+
+  $('btn-add-custom-ecos').addEventListener('click', () => {
+    const val = Number($('custom-ecos-input').value) || 0;
+    pState.ecos = Math.max(0, pState.ecos + val);
+    savePlayerState();
+    renderPlayerInstance();
+    toast(`Ecos actualizados: ${pState.ecos} Ecos.`);
+  });
+
+  function completePlayerBattle() {
+    pState.battlesCompleted += 1;
+    const baseGain = 6 + pState.battlesCompleted * 2;
+    const gain = pState.saintId === 'san-lorenzo' ? Math.floor(baseGain * 1.25) : baseGain;
+    pState.ecos += gain;
+    if (pState.battlesCompleted % 2 === 0) {
+      generatePlayerShopOffers();
+      toast(`¡Batalla ${pState.battlesCompleted} completada! +${gain} Ecos y Tienda Aleatoria abierta.`);
+    } else {
+      toast(`Batalla ${pState.battlesCompleted} completada (+${gain} Ecos). Tienda en 1 batalla más.`);
+    }
+    savePlayerState();
+    renderPlayerInstance();
+  }
+
+  $('btn-complete-battle').addEventListener('click', completePlayerBattle);
+  $('btn-shop-win-battle').addEventListener('click', completePlayerBattle);
+
+  $('btn-shop-reroll').addEventListener('click', () => {
+    generatePlayerShopOffers();
+    savePlayerState();
+    renderPlayerInstance();
+    toast('Tienda Aleatoria actualizada con 4 objetos de tus desbloqueos.');
+  });
+
+  $('btn-spend-martyr').addEventListener('click', () => {
+    if (pState.martyrCharges <= 0) {
+      toast('No te quedan cargas de Martirio en esta expedición.', true);
+      return;
+    }
+    pState.martyrCharges -= 1;
+    savePlayerState();
+    renderPlayerInstance();
+    toast('Has activado el Martirio de tu Santo.');
+  });
+
+  $('btn-restore-martyr').addEventListener('click', () => {
+    const s = SAINTS_BY_ID[pState.saintId];
+    pState.martyrCharges = s?.maxCargasMartirio || 1;
+    savePlayerState();
+    renderPlayerInstance();
+  });
+
+  $('btn-add-special-reward').addEventListener('click', () => {
+    const itemId = $('player-special-reward-select').value;
+    const item = ITEMS_BY_ID[itemId];
+    if (!item) return;
+    if (!pState.unlockedItems.includes(itemId)) {
+      pState.unlockedItems.push(itemId);
+    }
+    pState.inventory.push({
+      uid: 'spec-' + itemId + '-' + Date.now(),
+      id: itemId,
+      origin: 'Recompensa Especial',
+      charges: item.cargas?.capacidad
+    });
+    savePlayerState();
+    renderPlayerInstance();
+    renderCodex();
+    toast(`Objeto añadido y desbloqueado: ${item.nombre}.`);
+  });
+
+  $('shop-offers-grid').addEventListener('click', e => {
+    const buyEcos = e.target.closest('[data-buy-ecos]');
+    const buyHp = e.target.closest('[data-buy-hp]');
+    if (buyEcos) {
+      const idx = Number(buyEcos.dataset.buyEcos);
+      const off = pState.shopOffers[idx];
+      if (!off || off.bought || pState.ecos < off.ecosCost) return;
+      pState.ecos -= off.ecosCost;
+      off.bought = true;
+      const item = ITEMS_BY_ID[off.itemId];
+      pState.inventory.push({ uid: 'shop-' + off.itemId + '-' + Date.now(), id: off.itemId, origin: 'Tienda (Ecos)', charges: item.cargas?.capacidad });
+      savePlayerState();
+      renderPlayerInstance();
+      toast(`Compraste ${item.nombre} por ${off.ecosCost} Ecos.`);
+    } else if (buyHp) {
+      const idx = Number(buyHp.dataset.buyHp);
+      const off = pState.shopOffers[idx];
+      if (!off || off.bought || pState.hp <= off.hpCost) return;
+      pState.hp -= off.hpCost;
+      off.bought = true;
+      const item = ITEMS_BY_ID[off.itemId];
+      pState.inventory.push({ uid: 'shop-hp-' + off.itemId + '-' + Date.now(), id: off.itemId, origin: 'Pacto de Vida', charges: item.cargas?.capacidad });
+      savePlayerState();
+      renderPlayerInstance();
+      toast(`Adquiriste ${item.nombre} pagando ${off.hpCost} PV.`);
+    }
+  });
+
+  $('player-upgrades-list').addEventListener('click', e => {
+    const btn = e.target.closest('[data-buy-upgrade]');
+    if (!btn) return;
+    const id = btn.dataset.buyUpgrade;
+    const upg = UPGRADES_BY_ID[id];
+    if (!upg || pState.ownedUpgrades.includes(id) || pState.ecos < upg.precioReserva) return;
+    pState.ecos -= upg.precioReserva;
+    pState.ownedUpgrades.push(id);
+    savePlayerState();
+    renderPlayerInstance();
+    toast(`Mejora adquirida: ${upg.nombre}.`);
+  });
+
+  $('player-unlocks-catalog').addEventListener('click', e => {
+    const btn = e.target.closest('[data-toggle-unlock]');
+    if (!btn) return;
+    const id = btn.dataset.toggleUnlock;
+    if (pState.unlockedItems.includes(id)) {
+      pState.unlockedItems = pState.unlockedItems.filter(x => x !== id);
+    } else {
+      pState.unlockedItems.push(id);
+    }
+    savePlayerState();
+    renderPlayerInstance();
+    renderCodex();
+  });
+
+  $('unlock-search-input').addEventListener('input', renderPlayerUnlocksAndUpgrades);
+  $('unlock-filter-select').addEventListener('change', renderPlayerUnlocksAndUpgrades);
+
+  $('btn-export-to-director').addEventListener('click', () => {
+    const code = encodeCode('DA-FICHA', {
+      name: pState.name,
+      saintId: pState.saintId,
+      attrs: pState.attrs,
+      hp: pState.hp,
+      maxHp: calcMaxHp(pState.attrs),
+      stigma: pState.stigma,
+      ecos: pState.ecos,
+      inventory: pState.inventory.map(x => x.id),
+      unlockedItems: pState.unlockedItems,
+      unlockedSaints: pState.unlockedSaints,
+      ownedUpgrades: pState.ownedUpgrades
+    });
+    copyText(code, 'Código DA-FICHA copiado para el Director.');
+  });
+
+  $('btn-declare-death').addEventListener('click', () => {
+    const { payload } = generateDeathCodeNow();
+    document.querySelector('[data-player-tab="legado"]').click();
+    toast(`Personaje caído. Código DA-LEGADO generado con ${payload.ecosSaved} Ecos (50%).`);
+  });
+
+  $('btn-generate-death-code').addEventListener('click', () => {
+    const { payload } = generateDeathCodeNow();
+    toast(`Código de Muerte generado: conservas ${payload.ecosSaved} Ecos (50%), ${payload.unlockedSaints.length}/10 Santos y ${payload.unlockedItems.length} objetos.`);
+  });
+
+  $('btn-copy-death-code').addEventListener('click', () => {
+    const val = $('generated-death-code').value;
+    if (!val) {
+      toast('Primero genera el código de muerte.', true);
+      return;
+    }
+    copyText(val, 'Código DA-LEGADO copiado.');
+  });
+
+  $('btn-apply-legacy-code').addEventListener('click', () => {
+    const raw = $('import-legacy-code-input').value;
+    try {
+      const { prefix, data } = decodeCode(raw);
+      if (prefix !== 'DA-LEGADO') throw new Error('El código debe ser un código de muerte/legado (DA-LEGADO).');
+      pState.runNumber = (Number(data.runCompleted) || pState.runNumber) + 1;
+      pState.ecos = Number(data.ecosSaved) || 0;
+      pState.unlockedItems = [...new Set([...INITIAL_UNLOCKED_ITEMS, ...(data.unlockedItems || [])])];
+      pState.unlockedSaints = [...new Set([...INITIAL_UNLOCKED_SAINTS, ...(data.unlockedSaints || [])])];
+      sheetsBundle.sheets.forEach(sh => {
+        sh.unlockedSaints = [...new Set([...(sh.unlockedSaints || INITIAL_UNLOCKED_SAINTS), ...pState.unlockedSaints])];
+      });
+      pState.ownedUpgrades = [...new Set([...pState.ownedUpgrades, ...(data.ownedUpgrades || [])])];
+      pState.battlesCompleted = 0;
+      pState.sealed = false;
+      pState.alive = true;
+      pState.stigma = 0;
+      pState.hp = calcMaxHp(pState.attrs);
+      deliverInitialEquipment();
+      pState.shopOffers = [];
+      savePlayerState();
+      renderPlayerInstance();
+      renderCodex();
+      $('legacy-import-preview').innerHTML = `
+        <div class="card selected">
+          <span class="eyebrow">Legado Aplicado</span>
+          <h4>Iniciando Run #${pState.runNumber} (${esc(pState.name)})</h4>
+          <p class="note">Restaurados <b>${pState.ecos} Ecos</b> (50%), <b>${pState.unlockedSaints.length}/10 Santos desbloqueados</b>, <b>${pState.unlockedItems.length} objetos</b> y <b>${pState.ownedUpgrades.length} mejoras</b>.</p>
+        </div>
+      `;
+      toast(`Código aplicado. Run #${pState.runNumber} con ${pState.ecos} Ecos.`);
+    } catch (err) {
+      toast(err.message, true);
+    }
+  });
+
+  $('btn-player-reset-run').addEventListener('click', () => {
+    pState.runNumber += 1;
+    pState.battlesCompleted = 0;
+    pState.sealed = false;
+    pState.alive = true;
+    pState.stigma = 0;
+    pState.hp = calcMaxHp(pState.attrs);
+    deliverInitialEquipment();
+    pState.shopOffers = [];
+    savePlayerState();
+    renderPlayerInstance();
+    toast(`Nueva Run #${pState.runNumber} lista en la Hoja de ${pState.name}.`);
+  });
+
+  // =========================================================================
+  // ESTADO Y LÓGICA DE LA INSTANCIA DE DIRECTOR (CUADRÍCULA 10x10 PROCEDURAL)
+  // =========================================================================
+  function createDmPlayerSlot(index) {
+    const saint = AVAILABLE_START_SAINTS[index % AVAILABLE_START_SAINTS.length];
+    const attrs = { ...saint.atributosPiloto };
+    const maxHp = calcMaxHp(attrs);
+    return {
+      slot: index + 1,
+      id: 'P' + (index + 1),
+      name: 'Penitente ' + (index + 1),
+      saintId: saint.id,
+      attrs,
+      hp: maxHp,
+      maxHp,
+      stigma: 0,
+      ecos: 0,
+      alive: true,
+      pos: [1, Math.min(9, index + 2)],
+      unlockedItems: [...INITIAL_UNLOCKED_ITEMS],
+      inventory: [saint.kit?.passive || 'astilla', saint.kit?.active || 'campana', 'vendaje-campana'].filter(Boolean),
+      deathCode: ''
+    };
+  }
+
+  let dmState = {
+    partySize: 4,
+    battleNumber: 1,
+    challengeMode: 'progresivo',
+    areaName: '',
+    party: [createDmPlayerSlot(0), createDmPlayerSlot(1), createDmPlayerSlot(2), createDmPlayerSlot(3)],
+    gridTerrain: {},
+    enemies: [],
+    selectedToken: null
+  };
+
+  try {
+    const savedDm = localStorage.getItem(STORAGE_DM_KEY);
+    if (savedDm) {
+      const parsed = JSON.parse(savedDm);
+      dmState = { ...dmState, ...parsed };
+    }
+  } catch (_) {}
+
+  function saveDmState() {
+    try { localStorage.setItem(STORAGE_DM_KEY, JSON.stringify(dmState)); } catch (_) {}
+  }
+
+  function ensureDmPartySize() {
+    const target = Math.max(4, Math.min(6, Number(dmState.partySize) || 4));
+    dmState.partySize = target;
+    while (dmState.party.length < target) {
+      dmState.party.push(createDmPlayerSlot(dmState.party.length));
+    }
+    if (dmState.party.length > target) {
+      dmState.party = dmState.party.slice(0, target);
+    }
+  }
+
+  function generateProceduralEncounter(presetEnemyIds = null, customTitle = '') {
+    ensureDmPartySize();
+    const partyCount = dmState.party.length;
+    const battle = Math.max(1, Number(dmState.battleNumber) || 1);
+    const mode = $('dm-challenge-mode')?.value || dmState.challengeMode || 'progresivo';
+    dmState.challengeMode = mode;
+    dmState.areaName = customTitle || '';
+
+    const terrain = {};
+    terrain['9,4'] = 'salida';
+    terrain['9,5'] = 'salida';
+
+    const wallCount = 8 + (battle % 5);
+    let placedWalls = 0;
+    let attempts = 0;
+    while (placedWalls < wallCount && attempts < 120) {
+      attempts++;
+      const x = 2 + Math.floor(Math.random() * 6);
+      const y = 1 + Math.floor(Math.random() * 8);
+      const key = `${x},${y}`;
+      if (!terrain[key]) {
+        terrain[key] = 'muro';
+        placedWalls++;
+      }
+    }
+
+    let placedCover = 0;
+    attempts = 0;
+    while (placedCover < 7 && attempts < 100) {
+      attempts++;
+      const x = 1 + Math.floor(Math.random() * 8);
+      const y = Math.floor(Math.random() * 10);
+      const key = `${x},${y}`;
+      if (!terrain[key]) {
+        terrain[key] = 'cobertura';
+        placedCover++;
+      }
+    }
+
+    const trapCount = Math.min(6, 2 + Math.floor(battle / 2));
+    let placedTraps = 0;
+    attempts = 0;
+    while (placedTraps < trapCount && attempts < 100) {
+      attempts++;
+      const x = 3 + Math.floor(Math.random() * 5);
+      const y = Math.floor(Math.random() * 10);
+      const key = `${x},${y}`;
+      if (!terrain[key]) {
+        terrain[key] = 'trampa';
+        placedTraps++;
+      }
+    }
+    dmState.gridTerrain = terrain;
+
+    const startRows = [1, 3, 5, 7, 2, 8];
+    dmState.party.forEach((p, idx) => {
+      p.pos = [idx < 4 ? 0 : 1, startRows[idx % startRows.length]];
+    });
+
+    let chosenEnemies = [];
+    if (Array.isArray(presetEnemyIds) && presetEnemyIds.length > 0) {
+      chosenEnemies = presetEnemyIds.map(id => ENEMIES_BY_ID[id]).filter(Boolean);
+    } else {
+      let targetThreat = Math.round(partyCount * (1.2 + battle * 0.75));
+      let allowedGrades = ['Murmullo', 'Presagio'];
+      if (mode === 'escaramuza') {
+        allowedGrades = ['Murmullo', 'Presagio'];
+      } else if (mode === 'elite') {
+        allowedGrades = ['Presagio', 'Flagelo', 'Anatema'];
+        targetThreat = Math.max(targetThreat, partyCount * 3);
+      } else if (mode === 'jefe' || (mode === 'progresivo' && battle % 5 === 0)) {
+        allowedGrades = ['Silencio', 'Presagio', 'Murmullo'];
+        targetThreat = Math.max(12, targetThreat);
+      } else {
+        if (battle >= 2) allowedGrades.push('Flagelo');
+        if (battle >= 4) allowedGrades.push('Anatema');
+        if (battle >= 6) allowedGrades.push('Silencio');
+      }
+
+      const candidatePool = CATALOG.enemigos.filter(e => allowedGrades.includes(e.grado));
+      let spentThreat = 0;
+
+      if (mode === 'jefe' || (mode === 'progresivo' && battle % 5 === 0)) {
+        const bosses = CATALOG.enemigos.filter(e => e.grado === 'Silencio');
+        const boss = bosses[Math.floor(Math.random() * bosses.length)];
+        if (boss) {
+          chosenEnemies.push(boss);
+          spentThreat += (boss.aparicion?.costeAmenaza || 10);
+        }
+      }
+
+      let safety = 0;
+      while (chosenEnemies.length < 6 && spentThreat < targetThreat && safety < 80) {
+        safety++;
+        const pick = candidatePool[Math.floor(Math.random() * candidatePool.length)];
+        if (!pick) break;
+        const cost = pick.aparicion?.costeAmenaza || 1;
+        const sameCount = chosenEnemies.filter(x => x.id === pick.id).length;
+        const maxAllowed = pick.aparicion?.maximoPorEncuentro || 2;
+        if (sameCount >= maxAllowed) continue;
+        if (pick.grado === 'Silencio' && chosenEnemies.some(x => x.grado === 'Silencio')) continue;
+        chosenEnemies.push(pick);
+        spentThreat += cost;
+      }
+    }
+
+    if (chosenEnemies.length === 0) {
+      chosenEnemies.push(CATALOG.enemigos[0], CATALOG.enemigos[1]);
+    }
+
+    const partyMultiplier = partyCount === 4 ? 1 : partyCount === 5 ? 1.15 : 1.3;
+    const battleScale = 1 + Math.max(0, battle - 1) * 0.1;
+
+    const usedCoords = new Set(dmState.party.map(p => `${p.pos[0]},${p.pos[1]}`));
+    dmState.enemies = chosenEnemies.map((base, idx) => {
+      let ex = 7 + (idx % 3);
+      let ey = (idx * 2 + 1) % 10;
+      for (let tries = 0; tries < 50; tries++) {
+        const tx = 6 + Math.floor(Math.random() * 4);
+        const ty = Math.floor(Math.random() * 10);
+        const k = `${tx},${ty}`;
+        if (terrain[k] !== 'muro' && !usedCoords.has(k)) {
+          ex = tx;
+          ey = ty;
+          usedCoords.add(k);
+          break;
+        }
+      }
+      const scaledHp = Math.max(base.stats.pv, Math.round(base.stats.pv * partyMultiplier * battleScale));
+      return {
+        uid: 'E' + (idx + 1),
+        enemyId: base.id,
+        hp: scaledHp,
+        maxHp: scaledHp,
+        pos: [ex, ey],
+        weakPoints: (base.puntosDebiles || []).map(wp => ({
+          id: wp.id,
+          nombre: wp.nombre,
+          revealed: false,
+          progress: 0,
+          maxProgress: wp.resistenciaImpactos || 1
+        }))
+      };
+    });
+
+    dmState.selectedToken = null;
+    saveDmState();
+    renderDmInstance();
+  }
+
+  function renderDmInstance() {
+    ensureDmPartySize();
+    $('dm-party-size').value = String(dmState.partySize);
+    $('dm-battle-number').value = String(dmState.battleNumber);
+    $('dm-challenge-mode').value = dmState.challengeMode || 'progresivo';
+    $('dm-roster-count-label').textContent = String(dmState.party.length);
+    const titleSuffix = dmState.areaName ? ` · ${dmState.areaName}` : '';
+    $('dm-encounter-title').textContent = `Cuadrícula Táctica 10×10 · Batalla ${dmState.battleNumber}${titleSuffix}`;
+
+    const totalThreat = dmState.enemies.reduce((acc, e) => acc + (ENEMIES_BY_ID[e.enemyId]?.aparicion?.costeAmenaza || 1), 0);
+    const totalEcosReward = dmState.enemies.reduce((acc, e) => acc + (ENEMIES_BY_ID[e.enemyId]?.ecos?.base || 5), 0);
+    const nextIsShop = dmState.battleNumber % 2 === 0;
+
+    $('dm-threat-badges').innerHTML = `
+      <span class="badge red">◈ ${dmState.enemies.filter(e => e.hp > 0).length}/${dmState.enemies.length} Activas</span>
+      <span class="badge gold">✦ Amenaza: ${totalThreat}</span>
+      <span class="badge green">${iconSvg('coin')} +${totalEcosReward} Ecos/jugador</span>
+      ${nextIsShop ? `<span class="badge blue">¡Abre Tienda al vencer!</span>` : ''}
+    `;
+
+    const addSel = $('dm-add-enemy-select');
+    if (addSel && !addSel.options.length) {
+      addSel.innerHTML = CATALOG.enemigos.map(e =>
+        `<option value="${esc(e.id)}">[${esc(e.grado)}] ${esc(e.nombre)} (PV ${e.stats.pv})</option>`
+      ).join('');
+    }
+
+    const gridEl = $('dm-grid-10x10');
+    let cellsHtml = '';
+    for (let y = 0; y < 10; y++) {
+      for (let x = 0; x < 10; x++) {
+        const key = `${x},${y}`;
+        const terr = dmState.gridTerrain[key] || '';
+        const pToken = dmState.party.find(p => p.pos && p.pos[0] === x && p.pos[1] === y);
+        const eToken = dmState.enemies.find(e => e.hp > 0 && e.pos && e.pos[0] === x && e.pos[1] === y);
+        const isSelected = dmState.selectedToken &&
+          ((dmState.selectedToken.kind === 'player' && pToken?.id === dmState.selectedToken.id) ||
+           (dmState.selectedToken.kind === 'enemy' && eToken?.uid === dmState.selectedToken.id));
+
+        let cellClass = 'cell-10';
+        if (terr === 'muro') cellClass += ' cell-muro';
+        else if (terr === 'cobertura') cellClass += ' cell-cobertura';
+        else if (terr === 'trampa') cellClass += ' cell-trampa';
+        else if (terr === 'salida') cellClass += ' cell-salida';
+        if (isSelected) cellClass += ' selected-cell';
+
+        let inner = `<span class="coord">${x},${y}</span>`;
+        if (pToken) {
+          inner += `<span class="token-p ${pToken.hp <= 0 ? 'dead' : ''}" title="${esc(pToken.name)} (${pToken.hp}/${pToken.maxHp} PV)">${esc(pToken.id)}</span>`;
+        } else if (eToken) {
+          const base = ENEMIES_BY_ID[eToken.enemyId];
+          inner += `<span class="token-e" title="${esc(base?.nombre)} (${eToken.hp}/${eToken.maxHp} PV)">${esc(eToken.uid)}</span>`;
+        } else if (terr === 'muro') {
+          inner += `<span>▪</span>`;
+        } else if (terr === 'cobertura') {
+          inner += `<span>⛨</span>`;
+        } else if (terr === 'trampa') {
+          inner += `<span>△</span>`;
+        } else if (terr === 'salida') {
+          inner += `<span>⬡</span>`;
+        }
+
+        cellsHtml += `<div class="${cellClass}" data-grid-x="${x}" data-grid-y="${y}">${inner}</div>`;
+      }
+    }
+    gridEl.innerHTML = cellsHtml;
+
+    $('dm-enemies-list').innerHTML = dmState.enemies.map((inst, idx) => {
+      const base = ENEMIES_BY_ID[inst.enemyId];
+      if (!base) return '';
+      const pct = Math.round((inst.hp / inst.maxHp) * 100);
+      return `
+        <article class="card ${inst.hp <= 0 ? 'panel-danger' : ''}">
+          <div class="between">
+            <span class="eyebrow">${esc(inst.uid)} · ${esc(base.grado)} · ${esc(base.linaje)}</span>
+            <span class="badge ${inst.hp > 0 ? 'gold' : 'red'}">${inst.hp > 0 ? `(${inst.pos[0]},${inst.pos[1]})` : 'ABATIDO'}</span>
+          </div>
+          <div class="between">
+            <h3>${esc(base.nombre)}</h3>
+            <strong>PV ${inst.hp}/${inst.maxHp}</strong>
+          </div>
+          <div class="bar-wrap"><div class="bar-fill bar-hp" style="width:${pct}%"></div></div>
+          <div class="badges" style="margin-top:4px;">
+            <span class="badge">DEF ${base.stats.def}</span>
+            <span class="badge">Blindaje ${base.stats.blindaje}</span>
+            <span class="badge">MOV ${base.stats.mov}</span>
+            <span class="badge gold">+${base.ecos.base} Ecos</span>
+          </div>
+          <p class="note" style="margin-top:4px;"><b>Ataques:</b> ${(base.ataques || []).map(a => `${esc(a.nombre)} (${esc(a.tirada)}+${a.bono}, daño ${esc(a.danio)}, alc. ${a.alcance})`).join(' · ')}</p>
+          <details>
+            <summary>Facultad y Puntos Débiles (${(base.puntosDebiles || []).length})</summary>
+            <p class="note"><b>${esc(base.facultad?.nombre)}:</b> ${esc(base.facultad?.resolucion)}</p>
+            ${(inst.weakPoints || []).map((wp, widx) => {
+              const wpBase = (base.puntosDebiles || []).find(x => x.id === wp.id) || {};
+              return `
+                <div style="border-top:1px dashed var(--edge);padding-top:4px;margin-top:4px;">
+                  <div class="between">
+                    <span><b>◎ ${esc(wp.nombre)}</b> (${esc(wpBase.atributoBusqueda)} CD ${wpBase.cdBusqueda})</span>
+                    <button type="button" class="btn-sm" data-dm-wp-hit="${idx}:${widx}">Impacto PD (${wp.progress}/${wp.maxProgress})</button>
+                  </div>
+                  <p class="note">${esc(wpBase.alDestruir)}</p>
+                </div>
+              `;
+            }).join('')}
+          </details>
+          <div class="row" style="margin-top:auto;padding-top:6px;">
+            <button type="button" class="btn-sm btn-danger" data-dm-ehp="${idx}:-1">-1 PV</button>
+            <button type="button" class="btn-sm btn-danger" data-dm-ehp="${idx}:-5">-5 PV</button>
+            <button type="button" class="btn-sm" data-dm-ehp="${idx}:1">+1 PV</button>
+            <button type="button" class="btn-sm" data-dm-eremove="${idx}">Quitar</button>
+          </div>
+        </article>
+      `;
+    }).join('');
+
+    $('dm-import-slot-select').innerHTML = dmState.party.map((p, i) =>
+      `<option value="${i}">Ranura ${p.id}: ${esc(p.name)}</option>`
+    ).join('');
+
+    $('dm-party-list').innerHTML = dmState.party.map((p, idx) => {
+      const hpPct = Math.round((p.hp / p.maxHp) * 100);
+      const st = SAINTS_BY_ID[p.saintId] || AVAILABLE_START_SAINTS[0];
+      const weaponsSummary = (st.equipoPiloto || []).map(w => `${w.nombre} (${w.damageCorto || w.danioBase})`).join(' · ');
+      return `
+        <div class="card">
+          <div class="between">
+            <div class="row">
+              <span class="badge green">${esc(p.id)} · (${p.pos[0]},${p.pos[1]})</span>
+              <input type="text" value="${esc(p.name)}" data-dm-pname="${idx}" style="width:135px;padding:4px 7px;">
+              <select data-dm-psaint="${idx}" style="padding:4px 7px;">
+                ${CATALOG.santos.map(s => {
+                  const unl = isSaintUnlockedForPlayer(s.id, pState);
+                  if (!unl && s.id !== p.saintId) {
+                    return `<option value="${esc(s.id)}" disabled>🔒 ${esc(s.name)} (Sellado)</option>`;
+                  }
+                  return `<option value="${esc(s.id)}" ${s.id === p.saintId ? 'selected' : ''}>${esc(s.icon)} ${esc(s.name)}</option>`;
+                }).join('')}
+              </select>
+            </div>
+            <div class="badges">
+              <span class="badge ${p.hp > 0 ? 'green' : 'red'}">${p.hp > 0 ? 'VIVO' : 'MUERTO'}</span>
+              <span class="badge gold">${iconSvg('coin')} <b>${p.ecos}</b></span>
+            </div>
+          </div>
+
+          <div class="row" style="margin-top:6px;">
+            <div style="flex:1;min-width:170px;">
+              <div class="between"><span class="note">PV: <b>${p.hp}/${p.maxHp}</b></span><span class="note">Estigma: <b>${p.stigma}</b></span></div>
+              <div class="bar-wrap"><div class="bar-fill bar-hp" style="width:${hpPct}%"></div></div>
+            </div>
+            <div class="row">
+              <button type="button" class="btn-sm btn-danger" data-dm-php="${idx}:-1">-1 PV</button>
+              <button type="button" class="btn-sm btn-danger" data-dm-php="${idx}:-3">-3 PV</button>
+              <button type="button" class="btn-sm" data-dm-php="${idx}:2">+2 PV</button>
+              <button type="button" class="btn-sm" data-dm-pecos="${idx}:5">+5 Ecos</button>
+              <button type="button" class="btn-sm btn-danger" data-dm-pkill="${idx}">Morir (50%)</button>
+            </div>
+          </div>
+
+          <p class="note" style="margin:4px 0 0 0;"><b>Armas (${esc(st.name)}):</b> ${esc(weaponsSummary)}</p>
+
+          <div class="between" style="margin-top:4px;">
+            <span class="note"><b>Reliquias:</b> ${(p.inventory || []).map(id => ITEMS_BY_ID[id]?.nombre || id).join(', ')}</span>
+            <div class="row">
+              <select id="dm-grant-item-${idx}" style="max-width:170px;padding:3px 6px;font-size:12px;">
+                ${CATALOG.objetos.filter(i => !i.propietarioSanto).map(i => `<option value="${esc(i.id)}">${esc(i.nombre)}</option>`).join('')}
+              </select>
+              <button type="button" class="btn-sm" data-dm-grant="${idx}">+ Dar Objeto</button>
+            </div>
+          </div>
+
+          ${p.deathCode ? `
+            <div style="margin-top:6px;">
+              <span class="eyebrow">Código de Muerte (50% Ecos Conservados):</span>
+              <input type="text" class="code-box" value="${esc(p.deathCode)}" readonly onclick="this.select()">
+            </div>
+          ` : ''}
+        </div>
+      `;
+    }).join('');
+  }
+
+  $('dm-party-size').addEventListener('change', e => {
+    dmState.partySize = Number(e.target.value) || 4;
+    sheetsBundle.expeditionSize = dmState.partySize;
+    savePlayerState();
+    generateProceduralEncounter();
+    renderPlayerInstance();
+    toast(`Grupo ajustado a ${dmState.partySize} Penitentes.`);
+  });
+
+  $('dm-battle-number').addEventListener('change', e => {
+    dmState.battleNumber = Math.max(1, Number(e.target.value) || 1);
+    saveDmState();
+    renderDmInstance();
+  });
+
+  $('btn-dm-generate-encounter').addEventListener('click', () => {
+    generateProceduralEncounter();
+    toast(`Encuentro 10×10 generado para Batalla ${dmState.battleNumber}.`);
+  });
+
+  $('btn-dm-reroll-map').addEventListener('click', () => {
+    generateProceduralEncounter();
+    toast('Cuadrícula 10×10 regenerada.');
+  });
+
+  $('dm-grid-10x10').addEventListener('click', e => {
+    const cell = e.target.closest('[data-grid-x]');
+    if (!cell) return;
+    const x = Number(cell.dataset.gridX);
+    const y = Number(cell.dataset.gridY);
+    const key = `${x},${y}`;
+    const tool = $('dm-grid-tool').value;
+
+    if (tool !== 'inspect') {
+      if (dmState.gridTerrain[key] === tool) {
+        delete dmState.gridTerrain[key];
+      } else {
+        dmState.gridTerrain[key] = tool;
+      }
+      saveDmState();
+      renderDmInstance();
+      return;
+    }
+
+    const pToken = dmState.party.find(p => p.pos && p.pos[0] === x && p.pos[1] === y);
+    const eToken = dmState.enemies.find(en => en.hp > 0 && en.pos && en.pos[0] === x && en.pos[1] === y);
+
+    if (pToken) {
+      dmState.selectedToken = { kind: 'player', id: pToken.id };
+      $('dm-cell-status').textContent = `Seleccionado ${pToken.id} (${pToken.name}). Toca una casilla libre para moverlo.`;
+      renderDmInstance();
+    } else if (eToken) {
+      const base = ENEMIES_BY_ID[eToken.enemyId];
+      dmState.selectedToken = { kind: 'enemy', id: eToken.uid };
+      $('dm-cell-status').textContent = `Seleccionado ${eToken.uid} (${base?.nombre}). Toca una casilla libre para moverlo.`;
+      renderDmInstance();
+    } else if (dmState.selectedToken) {
+      if (dmState.gridTerrain[key] === 'muro') {
+        toast('No puedes colocar un actor sobre un muro.', true);
+        return;
+      }
+      if (dmState.selectedToken.kind === 'player') {
+        const p = dmState.party.find(z => z.id === dmState.selectedToken.id);
+        if (p) p.pos = [x, y];
+      } else {
+        const en = dmState.enemies.find(z => z.uid === dmState.selectedToken.id);
+        if (en) en.pos = [x, y];
+      }
+      dmState.selectedToken = null;
+      saveDmState();
+      renderDmInstance();
+    }
+  });
+
+  $('btn-dm-add-enemy').addEventListener('click', () => {
+    const id = $('dm-add-enemy-select').value;
+    const base = ENEMIES_BY_ID[id];
+    if (!base) return;
+    const uid = 'E' + (dmState.enemies.length + 1);
+    dmState.enemies.push({
+      uid,
+      enemyId: base.id,
+      hp: base.stats.pv,
+      maxHp: base.stats.pv,
+      pos: [8, dmState.enemies.length % 10],
+      weakPoints: (base.puntosDebiles || []).map(wp => ({
+        id: wp.id,
+        nombre: wp.nombre,
+        revealed: false,
+        progress: 0,
+        maxProgress: wp.resistenciaImpactos || 1
+      }))
+    });
+    saveDmState();
+    renderDmInstance();
+    toast(`${base.nombre} añadido a la cuadrícula 10×10.`);
+  });
+
+  $('dm-enemies-list').addEventListener('click', e => {
+    const hpBtn = e.target.closest('[data-dm-ehp]');
+    const remBtn = e.target.closest('[data-dm-eremove]');
+    const wpBtn = e.target.closest('[data-dm-wp-hit]');
+    if (hpBtn) {
+      const [idxStr, deltaStr] = hpBtn.dataset.dmEhp.split(':');
+      const inst = dmState.enemies[Number(idxStr)];
+      if (!inst) return;
+      inst.hp = Math.max(0, Math.min(inst.maxHp, inst.hp + Number(deltaStr)));
+      saveDmState();
+      renderDmInstance();
+    } else if (remBtn) {
+      const idx = Number(remBtn.dataset.dmEremove);
+      dmState.enemies.splice(idx, 1);
+      saveDmState();
+      renderDmInstance();
+    } else if (wpBtn) {
+      const [eIdx, wIdx] = wpBtn.dataset.dmWpHit.split(':').map(Number);
+      const wp = dmState.enemies[eIdx]?.weakPoints?.[wIdx];
+      if (!wp) return;
+      wp.revealed = true;
+      wp.progress = Math.min(wp.maxProgress, wp.progress + 1);
+      saveDmState();
+      renderDmInstance();
+      if (wp.progress === wp.maxProgress) {
+        toast(`¡Punto Débil «${wp.nombre}» destruido!`);
+      }
+    }
+  });
+
+  $('dm-party-list').addEventListener('click', e => {
+    const hpBtn = e.target.closest('[data-dm-php]');
+    const ecosBtn = e.target.closest('[data-dm-pecos]');
+    const killBtn = e.target.closest('[data-dm-pkill]');
+    const grantBtn = e.target.closest('[data-dm-grant]');
+
+    if (hpBtn) {
+      const [idxStr, dStr] = hpBtn.dataset.dmPhp.split(':');
+      const p = dmState.party[Number(idxStr)];
+      if (!p) return;
+      p.hp = Math.max(0, Math.min(p.maxHp, p.hp + Number(dStr)));
+      p.alive = p.hp > 0;
+      if (p.hp === 0) {
+        const savedEcos = Math.floor(p.ecos / 2);
+        p.deathCode = encodeCode('DA-LEGADO', {
+          v: 1,
+          playerName: p.name,
+          lastSaint: p.saintId,
+          runCompleted: 1,
+          battlesReached: dmState.battleNumber,
+          ecosBeforeDeath: p.ecos,
+          ecosSaved: savedEcos,
+          unlockedItems: p.unlockedItems || INITIAL_UNLOCKED_ITEMS,
+          unlockedSaints: pState.unlockedSaints || INITIAL_UNLOCKED_SAINTS,
+          ownedUpgrades: []
+        });
+        toast(`${p.name} ha muerto. Código DA-LEGADO generado con ${savedEcos} Ecos (50%).`, true);
+      }
+      saveDmState();
+      renderDmInstance();
+    } else if (ecosBtn) {
+      const [idxStr, dStr] = ecosBtn.dataset.dmPecos.split(':');
+      const p = dmState.party[Number(idxStr)];
+      if (!p) return;
+      p.ecos = Math.max(0, p.ecos + Number(dStr));
+      saveDmState();
+      renderDmInstance();
+    } else if (killBtn) {
+      const idx = Number(killBtn.dataset.dmPkill);
+      const p = dmState.party[idx];
+      if (!p) return;
+      p.hp = 0;
+      p.alive = false;
+      const savedEcos = Math.floor(p.ecos / 2);
+      p.deathCode = encodeCode('DA-LEGADO', {
+        v: 1,
+        playerName: p.name,
+        lastSaint: p.saintId,
+        runCompleted: 1,
+        battlesReached: dmState.battleNumber,
+        ecosBeforeDeath: p.ecos,
+        ecosSaved: savedEcos,
+        unlockedItems: p.unlockedItems || INITIAL_UNLOCKED_ITEMS,
+        unlockedSaints: pState.unlockedSaints || INITIAL_UNLOCKED_SAINTS,
+        ownedUpgrades: []
+      });
+      saveDmState();
+      renderDmInstance();
+      toast(`${p.name} declarado muerto. Código con ${savedEcos} Ecos (50%).`, true);
+    } else if (grantBtn) {
+      const idx = Number(grantBtn.dataset.dmGrant);
+      const p = dmState.party[idx];
+      const itemId = $('dm-grant-item-' + idx)?.value;
+      if (!p || !itemId) return;
+      p.inventory.push(itemId);
+      if (!p.unlockedItems.includes(itemId)) p.unlockedItems.push(itemId);
+      saveDmState();
+      renderDmInstance();
+      toast(`Entregado ${ITEMS_BY_ID[itemId]?.nombre} a ${p.name}.`);
+    }
+  });
+
+  $('dm-party-list').addEventListener('change', e => {
+    const nameInp = e.target.closest('[data-dm-pname]');
+    const saintSel = e.target.closest('[data-dm-psaint]');
+    if (nameInp) {
+      const idx = Number(nameInp.dataset.dmPname);
+      dmState.party[idx].name = nameInp.value;
+      saveDmState();
+    } else if (saintSel) {
+      const idx = Number(saintSel.dataset.dmPsaint);
+      const p = dmState.party[idx];
+      const s = SAINTS_BY_ID[saintSel.value];
+      if (p && s && isSaintUnlockedForPlayer(s.id, pState)) {
+        p.saintId = s.id;
+        p.attrs = { ...s.atributosPiloto };
+        p.maxHp = calcMaxHp(p.attrs);
+        p.hp = p.maxHp;
+        p.inventory = [s.kit?.passive || 'astilla', s.kit?.active || 'campana', 'vendaje-campana'].filter(Boolean);
+        saveDmState();
+        renderDmInstance();
+      }
+    }
+  });
+
+  $('btn-dm-complete-battle').addEventListener('click', () => {
+    const baseReward = Math.max(6, dmState.enemies.reduce((acc, e) => acc + (ENEMIES_BY_ID[e.enemyId]?.ecos?.base || 5), 0));
+    dmState.party.forEach(p => {
+      if (p.hp > 0) {
+        const gain = p.saintId === 'san-lorenzo' ? Math.floor(baseReward * 1.25) : baseReward;
+        p.ecos += gain;
+      }
+    });
+    const completedBattle = dmState.battleNumber;
+    const isShopNow = completedBattle % 2 === 0;
+    $('dm-battle-summary-banner').innerHTML = `
+      <div class="card selected">
+        <span class="eyebrow">Batalla ${completedBattle} Completada</span>
+        <h4>Recompensa: +${baseReward} Ecos a cada Penitente vivo</h4>
+        <p class="note">${isShopNow ? '<b>¡TIENDA ALEATORIA HABILITADA!</b> Al haber completado ' + completedBattle + ' batallas (cada 2 batallas), todos los jugadores acceden ahora a la Tienda Aleatoria en su menú personal.' : 'Siguiente tienda aleatoria al completar la batalla ' + (completedBattle + 1) + '.'}</p>
+      </div>
+    `;
+    dmState.battleNumber += 1;
+    generateProceduralEncounter();
+    toast(`Batalla ${completedBattle} completada (+${baseReward} Ecos).`);
+  });
+
+  $('btn-dm-import-player-modal').addEventListener('click', () => {
+    const box = $('dm-import-box');
+    box.hidden = !box.hidden;
+  });
+
+  $('btn-dm-apply-import').addEventListener('click', () => {
+    const slotIdx = Number($('dm-import-slot-select').value) || 0;
+    const raw = $('dm-import-code-text').value;
+    try {
+      const { prefix, data } = decodeCode(raw);
+      const p = dmState.party[slotIdx];
+      if (!p) return;
+      if (prefix === 'DA-FICHA') {
+        p.name = data.name || p.name;
+        p.saintId = data.saintId || p.saintId;
+        p.attrs = data.attrs || p.attrs;
+        p.maxHp = data.maxHp || calcMaxHp(p.attrs);
+        p.hp = data.hp ?? p.maxHp;
+        p.stigma = data.stigma || 0;
+        p.ecos = data.ecos || 0;
+        p.inventory = data.inventory || p.inventory;
+        p.unlockedItems = data.unlockedItems || p.unlockedItems;
+      } else if (prefix === 'DA-LEGADO') {
+        p.name = data.playerName || p.name;
+        p.saintId = data.lastSaint || p.saintId;
+        p.ecos = data.ecosSaved || 0;
+        p.unlockedItems = data.unlockedItems || p.unlockedItems;
+      }
+      saveDmState();
+      renderDmInstance();
+      toast(`Ficha sincronizada en ${p.id} (${p.name}).`);
+    } catch (err) {
+      toast(err.message, true);
+    }
+  });
+
+  // =========================================================================
+  // MENÚ 2: CÓDICE SENCILLO DE LEER (RESPETANDO SELLOS Y OCULTACIÓN)
+  // =========================================================================
+  function renderCodex() {
+    const unlockedSaintsCount = CATALOG.santos.filter(s => isSaintUnlockedForPlayer(s.id, pState)).length;
+    if ($('codex-saints-progress-badge')) {
+      $('codex-saints-progress-badge').textContent = `${unlockedSaintsCount} / 10 Santos Desbloqueados`;
+    }
+    if ($('codex-items-progress-badge')) {
+      $('codex-items-progress-badge').textContent = `${pState.unlockedItems.length} / 141 Objetos Desbloqueados`;
+    }
+
+    $('codex-santos-grid').innerHTML = CATALOG.santos.map(s => buildSaintCardHtml(s, 'codex')).join('');
+
+    const stFilter = $('codex-starter-saint-filter');
+    if (stFilter) {
+      const prevVal = stFilter.value;
+      stFilter.innerHTML = `<option value="">Ver todos los 10 Santos (20 Armas + Reliquias de Inicio)</option>` +
+        CATALOG.santos.map(s => {
+          const unl = isSaintUnlockedForPlayer(s.id, pState);
+          return `<option value="${esc(s.id)}">${unl ? esc(s.icon) : '🔒'} ${esc(s.name)}${unl ? '' : ' (Sellado)'}</option>`;
+        }).join('');
+      stFilter.value = prevVal;
+    }
+    renderCodexStarters();
+    filterCodexItems();
+    filterCodexEnemies();
+  }
+
+  function renderCodexStarters() {
+    const f = $('codex-starter-saint-filter')?.value || '';
+    const saintsList = f ? CATALOG.santos.filter(s => s.id === f) : CATALOG.santos;
+    const cards = [];
+    saintsList.forEach(s => {
+      const unl = isSaintUnlockedForPlayer(s.id, pState);
+      if (!unl) {
+        const desb = s.desbloqueo || {};
+        const costEcos = Number(desb.costeEcos || 30);
+        cards.push(`
+          <article class="card locked-card">
+            <div class="between">
+              <span class="eyebrow">${iconSvg('lock')} ${esc(s.name)} · Dotación Sellada</span>
+              <span class="badge red">2 Armas + Reliquias Ocultas</span>
+            </div>
+            <h3>${iconSvg('lock')} Armamento Clasificado de ${esc(s.name)}</h3>
+            <p class="redacted-line">«Las 2 armas iniciales y las reliquias propias de este Santo Apócrifo están selladas. Desbloquéalo primero para consultar sus estadísticas y reglas.»</p>
+            <div class="seal-requirement-box">
+              <span class="seal-title">${iconSvg('lock')} Requisito para Desbloquear a ${esc(s.name)}</span>
+              <p class="note" style="color:var(--ink);margin-bottom:4px;"><b>Condición:</b> ${esc(desb.condicionLogro || desb.requisito)}</p>
+              <p class="note" style="margin:0;"><b>Basílica:</b> ${costEcos} Ecos.</p>
+            </div>
+            <div class="row" style="margin-top:auto;padding-top:6px;">
+              <button type="button" class="btn-sm btn-gold" data-unlock-saint-ecos="${esc(s.id)}:${costEcos}" ${pState.ecos >= costEcos ? '' : 'disabled'}>${iconSvg('coin')} Romper Sello (${costEcos} Ecos)</button>
+              <button type="button" class="btn-sm" data-unlock-saint-feat="${esc(s.id)}">${iconSvg('unlock')} Registrar Requisito Cumplido</button>
+            </div>
+          </article>
+        `);
+        return;
+      }
+
+      s.equipoPiloto.forEach((w, idx) => {
+        cards.push(`
+          <article class="starting-gear-card">
+            <div class="between">
+              <span class="eyebrow">${iconSvg(s.id)} ${esc(s.name)} · Objeto Inicial #${idx + 1}</span>
+              <span class="badge gold">${esc(w.damageCorto || w.danioBase)}</span>
+            </div>
+            <h3>${esc(w.nombre)}</h3>
+            <div class="badges">
+              <span class="badge">Atributo: <b>${esc(w.atributo || 'Equipo')}</b></span>
+              <span class="badge">Alcance: <b>${w.alcance ?? 'Personal'}</b></span>
+              <span class="badge">Tipo: <b>${esc(w.tipoDanio)}</b></span>
+            </div>
+            <div class="reader-summary-box">
+              <b>Resumen:</b> ${esc(w.efectoCorto || w.regla)}
+            </div>
+            ${w.contextoHistorico ? `<p class="lore">${esc(w.contextoHistorico)}</p>` : ''}
+            <details>
+              <summary>Ver regla completa de mesa</summary>
+              <p class="note" style="margin-top:4px;">${esc(w.regla)}</p>
+            </details>
+          </article>
+        `);
+      });
+      (s.dotacionReliquias || []).filter(r => r.esPropiaDelSanto).forEach(r => {
+        cards.push(`
+          <article class="card">
+            <div class="between">
+              <span class="eyebrow">${iconSvg(s.id)} ${esc(s.name)} · ${esc(r.rolInicio)}</span>
+              <span class="badge gold">Reliquia Propia</span>
+            </div>
+            <h3>${esc(r.nombre)}</h3>
+            <div class="reader-summary-box">
+              <b>Efecto:</b> ${esc(r.efecto)}
+            </div>
+            <p class="lore">${esc(r.historia)}</p>
+          </article>
+        `);
+      });
+    });
+    $('codex-starters-grid').innerHTML = cards.join('');
+  }
+
+  function filterCodexItems() {
+    const q = ($('codex-item-search').value || '').trim().toLowerCase();
+    const t = $('codex-item-type').value;
+    const filtered = CATALOG.objetos.filter(i => {
+      const isSaintRelic = !!i.propietarioSanto;
+      const isUnlocked = isSaintRelic ? isSaintUnlockedForPlayer(i.propietarioSanto, pState) : pState.unlockedItems.includes(i.id);
+      if (t === 'desbloqueado' && !isUnlocked) return false;
+      else if (t === 'bloqueado' && isUnlocked) return false;
+      else if (t === 'propio' && !isSaintRelic) return false;
+      else if (t && !['desbloqueado', 'bloqueado', 'propio'].includes(t) && i.tipo !== t) return false;
+      if (q) {
+        const saintOwner = i.propietarioSanto ? (SAINTS_BY_ID[i.propietarioSanto]?.name || '') : '';
+        const hay = `${i.nombre} ${i.desbloqueo || ''} ${isUnlocked ? i.efecto + ' ' + (i.historia || '') + ' ' + saintOwner : ''}`.toLowerCase();
+        if (!hay.includes(q)) return false;
+      }
+      return true;
+    });
+    $('codex-item-count').textContent = `${filtered.length} / 141 objetos`;
+    $('codex-objetos-grid').innerHTML = filtered.map(i => {
+      const isSaintRelic = !!i.propietarioSanto;
+      const ownerSaint = isSaintRelic ? SAINTS_BY_ID[i.propietarioSanto] : null;
+      const isUnlocked = isSaintRelic ? isSaintUnlockedForPlayer(i.propietarioSanto, pState) : pState.unlockedItems.includes(i.id);
+
+      if (!isUnlocked) {
+        return `
+          <article class="card locked-card">
+            <div class="between">
+              <span class="eyebrow">${iconSvg('lock')} ${esc(i.tipo.toUpperCase())} · ${esc(i.rareza)}</span>
+              <span class="badge red">SELLADO</span>
+            </div>
+            <h3>${iconSvg('lock')} ${esc(i.nombre)}</h3>
+            <p class="redacted-line">Efecto e historia ocultos hasta desbloquear este objeto en campaña.</p>
+            <div class="seal-requirement-box">
+              <span class="seal-title">${iconSvg('lock')} Requisito de Desbloqueo</span>
+              <p class="note" style="color:var(--ink);margin:0;">${esc(isSaintRelic ? `Desbloquea primero al Santo Apócrifo ${ownerSaint?.name || ''}.` : i.desbloqueo)}</p>
+            </div>
+          </article>
+        `;
+      }
+
+      const ownerName = ownerSaint ? ownerSaint.name : null;
+      return `
+        <article class="card">
+          <div class="between">
+            <span class="eyebrow">${esc(i.tipo.toUpperCase())} · ${esc(i.rareza)}</span>
+            <span class="badge ${ownerName ? 'gold' : i.inicial ? 'green' : 'gold'}">${ownerName ? `Propia: ${esc(ownerName)}` : i.inicial ? `Inicial (${i.precioReserva} Ecos)` : `${i.precioReserva} Ecos`}</span>
+          </div>
+          <h3>${esc(i.nombre)}</h3>
+          <div class="reader-summary-box">
+            ${esc(i.efecto)}
+          </div>
+          ${i.historia ? `<p class="lore">${esc(i.historia)}</p>` : ''}
+          <p class="note" style="margin-top:auto;"><b>Desbloqueo:</b> ${esc(i.desbloqueo)}</p>
+        </article>
+      `;
+    }).join('');
+  }
+
+  function filterCodexEnemies() {
+    const q = ($('codex-enemy-search').value || '').trim().toLowerCase();
+    const g = $('codex-enemy-grade').value;
+    const filtered = CATALOG.enemigos.filter(e => {
+      if (g && e.grado !== g) return false;
+      if (q && !(e.nombre.toLowerCase().includes(q) || e.grado.toLowerCase().includes(q) || (e.facultad?.nombre || '').toLowerCase().includes(q))) return false;
+      return true;
+    });
+    $('codex-enemy-count').textContent = `${filtered.length} / 64 criaturas`;
+    $('codex-bestiario-grid').innerHTML = filtered.map(e => `
+      <article class="card">
+        <div class="between">
+          <span class="eyebrow">${esc(e.grado)} · ${esc(e.linaje)} · ${esc(e.funcionTactica)}</span>
+          <span class="badge gold">+${e.ecos.base} Ecos</span>
+        </div>
+        <h3>${esc(e.nombre)}</h3>
+        <div class="badges">
+          <span class="badge red">PV ${e.stats.pv}</span>
+          <span class="badge blue">DEF ${e.stats.def}</span>
+          <span class="badge">Blindaje ${e.stats.blindaje}</span>
+          <span class="badge green">MOV ${e.stats.mov}</span>
+          <span class="badge">Amenaza ${e.aparicion.costeAmenaza}</span>
+        </div>
+        <div class="reader-summary-box">
+          <b>${esc(e.facultad.nombre)}:</b> ${esc(e.facultad.resolucion)}
+          ${e.facultad.contrajuego ? `<br><span class="note"><b>Contrajuego:</b> ${esc(e.facultad.contrajuego)}</span>` : ''}
+        </div>
+        <p class="note"><b>Ataques:</b> ${e.ataques.map(a => `${esc(a.nombre)} (${esc(a.tirada)}+${a.bono}, daño ${esc(a.danio)}, alc. ${a.alcance})`).join(' · ')}</p>
+        <details>
+          <summary>Puntos Débiles (${e.puntosDebiles.length}) y Relato</summary>
+          ${e.puntosDebiles.map(p => `<p class="note" style="margin-top:4px;"><b>◎ ${esc(p.nombre)} (${esc(p.atributoBusqueda)} CD ${p.cdBusqueda}):</b> ${esc(p.alDestruir)}</p>`).join('')}
+          <p class="lore">${esc(e.relato)}</p>
+        </details>
+      </article>
+    `).join('');
+  }
+
+  $('codex-santos-grid').addEventListener('click', e => {
+    const btn = e.target.closest('[data-pick-saint-from-codex]');
+    if (!btn) return;
+    const sid = btn.dataset.pickSaintFromCodex;
+    const s = SAINTS_BY_ID[sid];
+    if (!s || !isSaintUnlockedForPlayer(sid, pState)) return;
+    pState.sealed = false;
+    pState.saintId = sid;
+    pState.attrs = { ...s.atributosPiloto };
+    pState.hp = calcMaxHp(pState.attrs);
+    pState.stigma = 0;
+    pState.martyrCharges = s.maxCargasMartirio || 1;
+    deliverInitialEquipment();
+    savePlayerState();
+    renderPlayerInstance();
+    switchMainMenu('jugar');
+    switchPlaySubmode('jugador');
+    toast(`${s.name} cargado en tu Hoja de Personaje.`);
+  });
+
+  $('codex-starter-saint-filter').addEventListener('change', renderCodexStarters);
+  $('codex-item-search').addEventListener('input', filterCodexItems);
+  $('codex-item-type').addEventListener('change', filterCodexItems);
+  $('codex-enemy-search').addEventListener('input', filterCodexEnemies);
+  $('codex-enemy-grade').addEventListener('change', filterCodexEnemies);
+
+  document.querySelectorAll('[data-codex-tab]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-codex-tab]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const target = btn.dataset.codexTab;
+      ['santos', 'armas-inicio', 'objetos', 'bestiario'].forEach(k => {
+        $('codex-' + k).hidden = (k !== target);
+      });
+    });
+  });
+
+  // =========================================================================
+  // MENÚ 1: LORE Y ÁREAS RECOMENDADAS
+  // =========================================================================
+  function renderLoreAndAreas() {
+    const lore = CATALOG.lore || {};
+    const amb = lore.ambientacion || {};
+    const zonas = lore.zonas || [];
+    const params = lore.zonasParametros || [];
+    const rutas = lore.rutas || [];
+    const eventos = lore.eventos || [];
+    const finales = lore.finales || [];
+
+    const recommendedHtml = rutas.map((ruta, idx) => {
+      const zInfo = zonas[idx] || {};
+      const zParam = params[idx]?.generacion || {};
+      const bossObj = ENEMIES_BY_ID[zInfo.jefe];
+      const recommendedBattles = idx === 0 ? 'Batallas 1 a 3 (Inicio)' : idx === 1 ? 'Batallas 4 a 6 (Intermedio)' : 'Batallas 7+ (Final)';
+      return `
+        <div class="panel">
+          <div class="between">
+            <div>
+              <span class="eyebrow">Área Recomendada ${ruta.acto} · ${recommendedBattles}</span>
+              <h2>Acto ${ruta.acto}: ${esc(ruta.nombre)}</h2>
+              <p class="lore">${esc(zInfo.texto || '')}</p>
+              <div class="reader-summary-box">
+                <b>Objetivo:</b> ${esc(zInfo.objetivo || '')} · <b>Jefe de Área:</b> ${esc(bossObj?.nombre || zInfo.jefe || '')}
+              </div>
+            </div>
+            <div class="badges">
+              <span class="badge gold">Amenaza Base: ${zParam.encuentro?.presupuestoAmenaza || (5 + idx * 4)}</span>
+              <span class="badge blue">Tablero: 10×10</span>
+              <span class="badge red">Criaturas: ${zParam.encuentro?.cantidadBase || (3 + idx)} ± ${zParam.encuentro?.variacionCantidad || 1}</span>
+            </div>
+          </div>
+
+          <div class="grid" style="margin-top:12px;">
+            ${ruta.salas.map((sala, sIdx) => {
+              const eList = (dmState.partySize >= 6 ? sala.enemigos6 : sala.enemigos4) || sala.enemigos4 || [];
+              const eNames = eList.map(id => ENEMIES_BY_ID[id]?.nombre || id).join(', ');
+              return `
+                <article class="card">
+                  <div class="between">
+                    <span class="eyebrow">${sala.obligatoria ? 'Sala Principal' : 'Desvío Opcional'}</span>
+                    <span class="badge ${sala.id === 'jefe' ? 'red' : 'gold'}">${sala.id === 'jefe' ? 'Jefe Silencio' : 'Sala ' + (sIdx + 1)}</span>
+                  </div>
+                  <h3>${esc(sala.nombre)}</h3>
+                  <p class="lore">${esc(sala.entrada)}</p>
+                  <p class="note"><b>Criaturas:</b> ${esc(eNames)}</p>
+                  <div class="row" style="margin-top:auto;padding-top:6px;">
+                    <button type="button" class="btn-sm btn-gold" data-load-recommended-room="${ruta.acto}:${sala.id}">Enviar Sala a la Cuadrícula 10×10 del Director</button>
+                  </div>
+                </article>
+              `;
+            }).join('')}
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    $('lore-areas-content').innerHTML = recommendedHtml;
+
+    $('lore-mundo-content').innerHTML = `
+      <div class="two-col">
+        <div class="panel">
+          <span class="eyebrow">${esc(amb.equivalenciaHistorica || 'Década de 1940')}</span>
+          <h2>${esc(amb.titulo || 'Los Años de las Sirenas')}</h2>
+          <div class="reader-summary-box" style="margin-bottom:12px;">
+            ${esc(amb.advertencia || '')}
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            ${(amb.principios || []).map(p => `
+              <div class="card">
+                <span class="eyebrow">${esc(p.subtitulo)}</span>
+                <h3>${esc(p.titulo)}</h3>
+                <p class="note">${esc(p.texto)}</p>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <div>
+          <div class="panel">
+            <span class="eyebrow">Paso a Paso</span>
+            <h2>Cronología del Silencio</h2>
+            <div style="display:flex;flex-direction:column;gap:10px;margin-top:10px;">
+              ${(amb.cronologia || []).map((c, i) => `
+                <div class="card">
+                  <span class="eyebrow">Etapa 0${i + 1}</span>
+                  <h4>${esc(c.fase)}</h4>
+                  <p class="note">${esc(c.detalle)}</p>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <div class="panel">
+            <span class="eyebrow">Escenarios y Objetos</span>
+            <h2>Lugares y Cultura Material</h2>
+            <ul class="note" style="padding-left:18px;margin:8px 0;">
+              ${(amb.lugaresPropuestos || []).map(l => `<li style="margin-bottom:6px;">${esc(l)}</li>`).join('')}
+            </ul>
+            <h4>Objetos de la Expedición</h4>
+            <ul class="note" style="padding-left:18px;margin:8px 0;">
+              ${(amb.culturaMaterial || []).map(cm => `<li style="margin-bottom:6px;">${esc(cm)}</li>`).join('')}
+            </ul>
+          </div>
+        </div>
+      </div>
+    `;
+
+    $('lore-eventos-content').innerHTML = `
+      <div class="panel">
+        <span class="eyebrow">Encuentros entre Batallas</span>
+        <h2>Los 12 Eventos del Camino</h2>
+        <div class="grid" style="margin-top:10px;">
+          ${eventos.map(ev => `
+            <article class="card">
+              <div class="between">
+                <span class="eyebrow">${esc(ev.zonaId.toUpperCase())}</span>
+                <span class="badge gold">Evento</span>
+              </div>
+              <h3>${esc(ev.nombre)}</h3>
+              <p class="lore">${esc(ev.relato)}</p>
+              <div class="reader-summary-box">
+                <b>Decisión:</b> ${esc(ev.decision)}
+              </div>
+              <p class="note"><b>Límite:</b> ${esc(ev.limite)}</p>
+            </article>
+          `).join('')}
+        </div>
+      </div>
+
+      <div class="panel panel-gold">
+        <span class="eyebrow">Desenlace</span>
+        <h2>Los 3 Finales del Altar</h2>
+        <div class="grid" style="margin-top:10px;">
+          ${finales.map(f => `
+            <article class="card">
+              <span class="eyebrow">Final: ${esc(f.id.toUpperCase())}</span>
+              <h3>${esc(f.nombre)}</h3>
+              <div class="reader-summary-box"><b>Requisito:</b> ${esc(f.requisito)}</div>
+              <p class="lore">${esc(f.texto)}</p>
+            </article>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }
+
+  document.querySelectorAll('[data-lore-tab]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-lore-tab]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const target = btn.dataset.loreTab;
+      ['areas', 'mundo', 'eventos'].forEach(k => {
+        $('lore-pane-' + k).hidden = (k !== target);
+      });
+    });
+  });
+
+  $('lore-areas-content').addEventListener('click', e => {
+    const btn = e.target.closest('[data-load-recommended-room]');
+    if (!btn) return;
+    const [actStr, roomId] = btn.dataset.loadRecommendedRoom.split(':');
+    const actNum = Number(actStr);
+    const ruta = (CATALOG.lore?.rutas || []).find(r => r.acto === actNum);
+    const sala = ruta?.salas?.find(s => s.id === roomId);
+    if (!sala) return;
+
+    const enemyList = (dmState.partySize >= 6 ? sala.enemigos6 : sala.enemigos4) || sala.enemigos4 || [];
+    dmState.battleNumber = (actNum - 1) * 3 + (roomId === 'umbral' ? 1 : roomId === 'coro' ? 2 : 3);
+    generateProceduralEncounter(enemyList, `${sala.nombre} (Acto ${actNum})`);
+    switchMainMenu('jugar');
+    switchPlaySubmode('director');
+    toast(`Sala cargada en la cuadrícula 10×10: ${sala.nombre}.`);
+  });
+
+  // Initial Boot
+  if (pState.inventory.length === 0) {
+    deliverInitialEquipment();
+  }
+  if (dmState.enemies.length === 0) {
+    generateProceduralEncounter();
+  } else {
+    renderDmInstance();
+  }
+  renderPlayerInstance();
+  renderCodex();
+  renderLoreAndAreas();
+})();
+</script>
+</body>
+</html>

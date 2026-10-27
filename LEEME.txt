@@ -1,0 +1,36 @@
+DEUS ABSENS - Los Años de las Sirenas
+====================================
+
+CONTENIDO
+- deus_absens_los_anos_de_las_sirenas.html: web original sin la base de datos incrustada.
+- deus_absens_datos.json: toda la información original del juego.
+
+INSTALACIÓN Y USO
+Mantén el HTML y el JSON juntos en la misma carpeta.
+
+OPCIÓN A: Si publicas la web en un servidor, abre el HTML normalmente.
+La web leerá automáticamente deus_absens_datos.json sin intervención.
+
+OPCIÓN B: Si abres el HTML con doble clic desde tu PC, algunos navegadores
+bloquean la lectura directa del JSON por seguridad. Aparecerá el botón
+"Seleccionar JSON del juego": elige deus_absens_datos.json y continúa.
+
+OPCIÓN C: Con Python instalado, abre una terminal en esta carpeta, ejecuta
+    python -m http.server 8000
+y visita en el navegador:
+    http://localhost:8000/deus_absens_los_anos_de_las_sirenas.html
+Así también se carga el JSON automáticamente sin elegir ningún archivo.
+
+DATOS EXTRAÍDOS SIN CAMBIOS
+- 10 santos (7 iniciales, 3 apócrifos)
+- 141 objetos
+- 20 piezas de equipamiento inicial de santos
+- 64 enemigos
+- 20 mejoras
+- 10 redenciones
+- 12 milagros
+- lore completo, áreas, eventos y finales
+
+Solo se modificó el arranque del JavaScript para cargar la base de datos
+externa. Se conservan el HTML visual, los estilos, el resto de JavaScript
+y las claves de almacenamiento de partidas existentes.
